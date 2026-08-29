@@ -9,7 +9,7 @@ TOPIC BRAINSTORMING
 
 ## *Nama Perangkat Lunak*
 
-### Untuk: *[Nama Asisten]*
+### Untuk: Angel
 
 Dipersiapkan oleh:
 | Informasi | Keterangan |
