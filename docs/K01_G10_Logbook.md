@@ -33,7 +33,7 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| *04-05-2026* | *[Nama Mahasiswa]* | *[Jelaskan Pekerjaan secara Singkat]* | *[Durasi Pengerjaan]* | *[On Progress/Done]* | [Kendala yang dialami, jika tidak ada cukup tandai "-"] | 
+| 29-08-2006 | Bayu Palamarta Wirawan | Menambahkan identitas anggota kelompok dan nama asisten pada dokumen milestone dan form asistensi| 10 menit | Done | - | 
 | *05-05-2026* | *John Doe* | *Mendesain diagram kelas* | *3* | *Done* | *-* | 
 | | | | | | | |
 
