@@ -56,9 +56,9 @@ Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan s
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Kasir* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab untuk memproses transaksi harian dan melayani pembayaran pelanggan. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat bertransaksi.* |
-| ... | ... |
-
+| *Restoran* | *Pengguna ini bertindak sebagai pihak yang mendaftarkan diri dalam daftar restoran viral serta menerima informasi pelanggan-pelanggan yang melakukan booking pada restoran dan nomor antrian saat ini. Karakteristik dari pengguna ini adalah mengutamakan keakuratan saat bertransaksi.* |
+| *Pelanggan* | *Pengguna ini bertindak sebagai pihak yang mencari salah satu restoran yang viral dan melakukan booking di restoran tersebut. Karakteristik dari pengguna ini adalah mengutamakan keakuratan saat booking.* |
+| *Admin* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam memasukan restoran dalam daftar restoran dan mengatasi permasalahan yang terjadi. Karakteristik dari pengguna ini adalah mengutamakan keakuratan dan ketelitian dalam memperhatikan galat atau restoran-restoran yang mendaftar dalam website.* |
 
 ## 3.2 Kebutuhan Pengguna Awal
 Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
