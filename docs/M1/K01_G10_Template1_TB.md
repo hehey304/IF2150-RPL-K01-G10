@@ -14,16 +14,16 @@ TOPIC BRAINSTORMING
 Dipersiapkan oleh:
 | Informasi | Keterangan |
 | --- | --- |
-| Kelas | *\[Kelas\]* |
-| Kelompok | *\[Nomor Kelompok\]*  |
+| Kelas | 01 |
+| Kelompok | 10  |
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| 13525145 | Muhammad Nur Fikri Hariyawan |
+| 13525085 | Bayu Palamarta Wirawan |
+| 13525133 | Chatima Anandakhorita |
+| 13525148 | Athallah Nanda Andita |
+| 13525091 | Muhammad Fauzi Muharam |
 ---
 
 <br>
