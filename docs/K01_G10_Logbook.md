@@ -4,20 +4,20 @@
 
 | Informasi | Keterangan |
 |---|---|
-| Kelas | *[Kelas]* |
-| Nomor Kelompok | *[Nomor Kelompok]* |
-| Nama Kelompok | *[Nama Kelompok]* |
+| Kelas | 01 |
+| Nomor Kelompok | 10 |
+| Nama Kelompok | Ducklings |
 | Nama Perangkat Lunak | *[Nama P/L]* |
 
 **Anggota Kelompok:**
 
 | NIM | Nama |
 |---|---|
-| *[NIM 1]* | *[Nama Anggota 1]* |
-| *[NIM 2]* | *[Nama Anggota 2]* |
-| *[NIM 3]* | *[Nama Anggota 3]* |
-| *[NIM 4]* | *[Nama Anggota 4]* |
-| *[NIM 5]* | *[Nama Anggota 5]* |
+| 13525145 | Muhammad Nur Fikri Hariyawan |
+| 13525085 | Bayu Palamarta Wirawan |
+| 13525133 | Chatima Anandakhorita |
+| 13525148 | Athallah Nanda Andita |
+| 13525091 | Muhammad Fauzi Muharam |
 
 ---
 
