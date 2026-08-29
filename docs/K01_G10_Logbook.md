@@ -34,6 +34,7 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *29-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan identitas anggota kelompok dan nama asisten pada dokumen milestone dan form asistensi* | *0,1* | *Done* | *-* | 
+| *29-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan bagian bab 3 bagian 1* | *0,5* | *Done* | *-* | 
 | *05-05-2026* | *John Doe* | *Mendesain diagram kelas* | *3* | *Done* | *-* | 
 | | | | | | | |
 
