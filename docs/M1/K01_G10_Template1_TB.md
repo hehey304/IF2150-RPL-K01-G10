@@ -92,7 +92,21 @@ Platform yang kami pilih adalah web-based application sehingga dapat diakses den
 Nilai unik dari aplikasi antrean online milik kami di banding dengan aplikasi lain yang serupa adalah kami memiliki sistem live kuota meja yang tersedia ketika pengguna memutuskan untuk makan di tempat. Selain itu, agar terorganisir dengan baik, kami memisah antrean untuk pengguna takeaway dan pengguna dine-in. Jika kuota meja untuk dine-in sedang penuh, maka antrean untuk dine-in akan dibatasi agar pengguna tidak menunggu terlalu lama.
 
 ## 2.2 Asumsi dan Batasan
-Definisikan secara tegas asumsi (baik teknis maupun dari sisi pengguna) yang menjadi dasar pengembangan. Tuliskan batasan seperti regulasi/hukum, keterbatasan sumber daya, dan ruang lingkup solusi.
+asumsi pengguna:
+    - Konsumen memiliki hp dengan kondisi storage yang berbeda beda dan memiliki web browser (Chrome, safari, dll) dan koneksi internet
+    - menampilkan estimasi waktu kedatangan yang mereka booking melalui web.
+
+asumsi teknis:
+    - pengelola resto viral menyediakan minimal 1 gedget (hp, laptop, atau tablet) dan konesi internet yang stabil untuk menerima pesanan secara live.
+    - menetapkan kapasitas yang mampu dibikin oleh restoran berdasarkan bahan masakan dan juga pekerja
+
+batasan hukum:
+    - Sistem wajib memenuhi UU No 27 tahun 2022 tentang Pelindungan Data Pribadi
+    - pemrosesan pembayaran penuh tunduk pada regulasi Bank Indonesia terkait standar keamanan transaksi QRIS
+
+batasan sumber daya:
+    - hanya sebatas menerima pesanan
+    - kapasitas server yang terbatas
 
 ---
 
