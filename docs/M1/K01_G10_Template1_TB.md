@@ -94,21 +94,34 @@ Platform yang kami pilih adalah web-based application sehingga dapat diakses den
 Nilai unik dari aplikasi antrean online milik kami di banding dengan aplikasi lain yang serupa adalah kami memiliki sistem live kuota meja yang tersedia ketika pengguna memutuskan untuk makan di tempat. Selain itu, agar terorganisir dengan baik, kami memisah antrean untuk pengguna takeaway dan pengguna dine-in. Jika kuota meja untuk dine-in sedang penuh, maka antrean untuk dine-in akan dibatasi agar pengguna tidak menunggu terlalu lama.
 
 ## 2.2 Asumsi dan Batasan
-asumsi pengguna:
-    - Konsumen memiliki hp dengan kondisi storage yang berbeda beda dan memiliki web browser (Chrome, safari, dll) dan koneksi internet
-    - menampilkan estimasi waktu kedatangan yang mereka booking melalui web.
+1. Asumsi Pengguna
 
-asumsi teknis:
-    - pengelola resto viral menyediakan minimal 1 gedget (hp, laptop, atau tablet) dan konesi internet yang stabil untuk menerima pesanan secara live.
-    - menetapkan kapasitas yang mampu dibikin oleh restoran berdasarkan bahan masakan dan juga pekerja
+- Pengguna memiliki perangkat smartphone dengan spesifikasi penyimpanan yang bervariasi, telah terpasang peramban web modern (Google Chrome, Safari, Mozilla Firefox, dll.), serta memiliki akses koneksi internet aktif.
 
-batasan hukum:
-    - Sistem wajib memenuhi UU No 27 tahun 2022 tentang Pelindungan Data Pribadi
-    - pemrosesan pembayaran penuh tunduk pada regulasi Bank Indonesia terkait standar keamanan transaksi QRIS
+- Pengguna memahami dan bersedia mematuhi estimasi waktu kedatangan yang diperoleh saat melakukan pemesanan nomor antrean melalui platform web.
 
-batasan sumber daya:
-    - hanya sebatas menerima pesanan
-    - kapasitas server yang terbatas
+2. Asumsi Teknis
+
+- Pengelola restoran menyediakan minimal satu perangkat operasional (smartphone, tablet, atau laptop) dengan koneksi internet yang stabil untuk mengelola dan memproses antrean secara real-time.
+
+- Pengelola restoran telah menentukan parameter kapasitas batas antrean/pesanan yang dapat ditangani berdasarkan ketersediaan bahan baku dan kapasitas tenaga kerja operasional.
+
+3. Batasan Hukum dan Regulasi
+
+- Sistem wajib mematuhi ketentuan Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan Data Pribadi (UU PDP) dalam hal pemrosesan, penyimpanan, dan pengelolaan data pengguna.
+
+- Pemrosesan transaksi pembayaran digital tunduk sepenuhnya pada regulasi Bank Indonesia terkait standar operasional dan keamanan transaksi QRIS.
+
+4. Batasan Sumber Daya
+
+- Cakupan sistem terbatas pada penerimaan pesanan secara digital melalui aplikasi web, tanpa integrasi langsung ke mesin pencetak struk fisik.
+
+- Kapasitas infrastruktur server bersifat terbatas, sehingga performa sistem dapat terpengaruh saat terjadi lonjakan akses (peak traffic) yang melebihi kuota beban server.
+
+5. Batasan Lingkup Solusi
+- Sistem memverifikasi status transaksi secara real-time.
+
+- Fitur pembayaran dibatasi pada metode Dynamic QRIS pada antarmuka web untuk mencegah ketidaksesuaian nominal transaksi yang diinput oleh pengguna.
 
 ---
 
