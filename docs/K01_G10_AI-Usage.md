@@ -7,7 +7,7 @@
 | Kelas | 01 |
 | Nomor Kelompok | 10 |
 | Nama Kelompok | Ducklings |
-| Nama Perangkat Lunak | *[Nama P/L]* |
+| Nama Perangkat Lunak | *antri.in* |
 
 **Anggota Kelompok:**
 
