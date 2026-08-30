@@ -154,11 +154,34 @@ Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja p
 <br>
 
 <p align="center">
-<img alt="Contoh Activity Diagram" src="./assets/diagram/diagram-act-1.avif" width="70%">
+<img alt="Restaurant Registration Diagram" src="./assets/diagram/Restaurant-Registration.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 1. Contoh Activity Diagram</i>
+<i>Gambar 1. Restaurant Registration Diagram</i>
 </p>
+
+<p align="center">
+<img alt="Costumer Booking Diagram" src="./assets/diagram/Costumer-Booking.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 2. Costumer Booking Diagram</i>
+</p>
+
+<p align="center">
+<img alt="Queue Status Checking Diagram" src="./assets/diagram/Queue-Status-Checking.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 3. Queue Status Checking Diagram</i>
+</p>
+
+<p align="center">
+<img alt="Customer Dequeue Diagram" src="./assets/diagram/Customer-Dequeue.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 4. Customer Dequeue Diagram</i>
+</p>
+
+
 
 <br>
 
