@@ -34,8 +34,8 @@
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
 | *29-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan identitas anggota kelompok dan nama asisten pada dokumen milestone dan form asistensi* | *0,1* | *Done* | *-* | 
-| *29-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan bagian bab 3 bagian 1* | *0,5* | *Done* | *-* | 
-| *30-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan bagian bab 3 bagian 2* | *1* | *Done* | *-* | 
+| *29-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan bagian bab 3 bagian 1* | *0,5* | *Done* | *Saya cukup kesulitan menentukan apakah pihak restoran sebaiknya dibagi lagi menjadi beberapa aktor lainnya* | 
+| *30-08-2006* | *Bayu Palamarta Wirawan* | *Menambahkan bagian bab 3 bagian 2* | *1* | *Done* | *Saya merasa bahwa sulit untuk merangkum hanya 1 tujuan/nilai untuk masing-masing user sehingga saya membuat beberapa tujuan/nilai* | 
 | *05-05-2026* | *John Doe* | *Mendesain diagram kelas* | *3* | *Done* | *-* | 
 | | | | | | | |
 
