@@ -161,10 +161,10 @@ Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja p
 </p>
 
 <p align="center">
-<img alt="Costumer Booking Diagram" src="./assets/diagram/Customer-Booking.png" width="70%">
+<img alt="Customer Booking Diagram" src="./assets/diagram/Customer-Booking.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 2. Costumer Booking Diagram</i>
+<i>Gambar 2. Customer Booking Diagram</i>
 </p>
 
 <p align="center">
