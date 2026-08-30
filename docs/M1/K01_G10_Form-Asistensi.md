@@ -9,7 +9,7 @@
 | **Kelas** | 01 |
 | **Nomor Kelompok** | 10 |
 | **Nama Kelompok** | Ducklings  |
-| **Nama Perangkat Lunak** | *\[Nama P/L\]*  |
+| **Nama Perangkat Lunak** | antri.in  |
 | **Dokumen** | K01_G10_Form-Asistensi.md  |
 
 ### Anggota Kelompok
@@ -26,10 +26,12 @@
 
 | Catatan |
 | --- |
-| 1. *\[Berikan catatan hasil asistensi\]*  |
-| 2. ... |
-| 3. ... |
-| 4. ... |
+| 1. Perlu ditambahkan data pendukung yang jelas untuk memperkuat alasan pembuatan perangkat lunak.  |
+| 2. Rapikan format draft secara keseluruhan terutama bagian analisis kondisi agar lebih terstruktur dan mudah dibaca. |
+| 3. Kelompokkan asumsi dan batasan ke dalam kategori pengguna dan teknis, kemudian batasan hukum, sumber daya, dan ruang lingkup. |
+| 4. Gunakan nomor urut biasa berdasarkan aktivitas untuk setiap ID User Story, bukan berdasarkan aktor. |
+| 5. Pastikan fitur atau solusi yang diajukan menjawab seluruh masalah yang dibahas. |
+| 6. Buat diagram proses bisnis secara terpisah untuk setiap alur aktivitas. |
 
 **Notes for this section:**  
 *Catatan dapat dituliskan dalam bentuk paragraf atau poin-poin, disesuaikan saja.* 
@@ -38,7 +40,7 @@
 
 <!-- ![](./assets/foto-asistensi.jpg) -->
 <p align="center">
-  <img src="./assets/foto-asistensi.jpg" width="100%">
+  <img src="./assets/foto-asistensi.jpeg" width="100%">
 </p>
 
 <p align="center">
