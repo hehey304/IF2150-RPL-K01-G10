@@ -119,9 +119,9 @@ Buatlah daftar seluruh aktor (pengguna) yang akan berinteraksi langsung dengan s
 
 | Aktor | Deskripsi |
 | :--- | :--- |
-| *Restoran* | *Pengguna ini bertindak sebagai pihak yang mendaftarkan diri dalam daftar restoran viral serta menerima informasi pelanggan-pelanggan yang melakukan booking pada restoran dan nomor antrian saat ini. Karakteristik dari pengguna ini adalah mengutamakan keakuratan saat bertransaksi.* |
-| *Pelanggan* | *Pengguna ini bertindak sebagai pihak yang mencari salah satu restoran yang viral dan melakukan booking di restoran tersebut. Karakteristik dari pengguna ini adalah mengutamakan keakuratan saat booking.* |
-| *Admin* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam memasukan restoran dalam daftar restoran dan mengatasi permasalahan yang terjadi. Karakteristik dari pengguna ini adalah mengutamakan keakuratan dan ketelitian dalam memperhatikan galat atau restoran-restoran yang mendaftar dalam website.* |
+| *Restoran* | *Pengguna ini bertindak sebagai pihak yang mendaftarkan diri dalam daftar restoran viral, menerima informasi pelanggan yang akan datang, dan urutan antrian atau kedatangan pelanggan. Karakteristik dari pengguna ini adalah mengutamakan keakuratan dan sistem antrian yang terkendali.* |
+| *Pelanggan* | *Pengguna ini bertindak sebagai pihak yang mencari salah satu restoran yang viral dan melakukan booking di restoran tersebut. Karakteristik dari pengguna ini adalah mengutamakan kecepatan dan keakuratan saat booking.* |
+| *Admin* | *Pengguna ini bertindak sebagai pihak yang bertanggung jawab dalam memasukan restoran dalam daftar restoran. Karakteristik dari pengguna ini adalah mengutamakan keakuratan dan ketelitian dalam memperhatikan restoran-restoran yang mendaftar dalam website.* |
 
 ## 3.2 Kebutuhan Pengguna Awal
 Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dalam format *User Story* (Sebagai [Aktor], saya ingin [Aktivitas/Kebutuhan], sehingga [Tujuan/Nilai]). Pastikan kalian berfokus pada "apa yang ingin dilakukan pengguna".
@@ -129,12 +129,12 @@ Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dal
 | ID | Aktor | Kebutuhan / Aktivitas | Tujuan / Nilai |
 | :--- | :--- | :--- | :--- |
 | US-01 | *Restoran* |  *Mendaftarkan restoran dalam daftar restoran viral* | *Bisa ditemukan oleh pelanggan* |
-| US-01 | *Restoran* | *Mendapatkan nomor antrian saat ini dan daftar pelanggan* | *Bisa mengetahui urutan antrian dan mengatur penempatan pelanggan lebih cepat* |
-| US-02 | *Pelanggan* | *Mencari daftar restoran viral* | *Bisa menemukan restoran dan masuk dalam antrian* |
-| US-02 | *Pelanggan* | *Melakukan booking dalam restoran* | *Masuk dalam antrian dan mendapatkan nomor antrian* |
-| US-02 | *Pelanggan* | *Melihat status antrian* | *Mengetahui kapan waktu untuk ke restoran viral untuk makan sesuai antrian* |
-| US-03 | *Admin* | *Memeriksa data restoran yang mendaftar* | *Tidak ada restoran palsu yang memasuki website* |
-| US-03 | *Admin* | *Menambahkan restoran dalam daftar restoran viral* | *Restoran bisa dicari oleh pelanggan* |
+| US-02 | *Restoran* | *Mendapatkan nomor antrian saat ini dan daftar pelanggan* | *Bisa mengetahui urutan antrian dan mengatur penempatan pelanggan lebih cepat* |
+| US-03 | *Pelanggan* | *Mencari daftar restoran viral* | *Bisa menemukan restoran dan masuk dalam antrian* |
+| US-04 | *Pelanggan* | *Melakukan booking dalam restoran* | *Masuk dalam antrian dan mendapatkan nomor antrian* |
+| US-05 | *Pelanggan* | *Melihat status antrian* | *Mengetahui kapan waktu untuk ke restoran viral untuk makan sesuai antrian* |
+| US-06 | *Admin* | *Memeriksa data restoran yang mendaftar* | *Tidak ada restoran palsu yang memasuki website* |
+| US-07 | *Admin* | *Menambahkan restoran dalam daftar restoran viral* | *Restoran bisa dicari oleh pelanggan* |
 
 ## 3.3 Model Proses Bisnis
 Buatlah *Activity Diagram* atau *Swimlane Diagram* yang menunjukkan alur kerja proses bisnis dari sistem solusi. Diagram ini harus memvisualisasikan bagaimana alur operasional di dunia nyata berjalan lebih efisien dengan adanya interaksi antara aktor (yang didefinisikan pada poin 3.1) dan sistem perangkat lunak. Perhatikan notasi yang digunakan dalam pembuatannya.
