@@ -42,7 +42,7 @@ Ketidaksiapan sistemik ini menyebabkan panjang antrean yang tidak wajar. Bahkan,
 | :---: | :---: |
 | ![Bukti Keluhan Antrean 1](../assets/keluhan/keluhan1.png) | ![Bukti Keluhan Antrean 2](../assets/keluhan/keluhan2.jpeg) |
 | *Gambar 1.1: Keluhan antre 3 jam.* | *Gambar 1.2: Keluhan antre 3 jam.* |
-| ![Bukti Keluhan Antrean 3](../assets/tweets/keluhan3.png) | ![Bukti Keluhan Antrean 4](./assets/tweets/tweet-4.png) |
+| ![Bukti Keluhan Antrean 3](../assets/tweets/keluhan3.jpeg) | ![Bukti Keluhan Antrean 4](./assets/tweets/tweet-4.png) |
 | *Gambar 1.3: Keluhan kehabisan stok setelah mengantre lama.* | *Gambar 1.4: Keluhan inefisiensi alur pemesanan di kasir.* |
 
 Permasalahan ini berakar dari minimnya infrastruktur teknologi manajemen layanan antre pada sektor UMKM kuliner. Oleh karena itu, pengembangan perangkat lunak antri.in dirancang secara spesifik berlandaskan Tujuan Pembangunan Berkelanjutan / Sustainable Development Goals (SDGs) 9: Industri, Inovasi, dan Infrastruktur, khususnya:
