@@ -7,7 +7,7 @@ TOPIC BRAINSTORMING
 </h1>
 <br>
 
-## *Nama Perangkat Lunak*
+## *antri.in*
 
 ### Untuk: Angel
 
@@ -34,10 +34,53 @@ Dipersiapkan oleh:
 ## 1.1 Latar Belakang Masalah
 Tuliskan deskripsi permasalahan yang kalian pilih secara naratif dan spesifik. Tambahkan keterkaitan permasalahan tersebut dengan Tujuan Pembangunan Berkelanjutan (SDGs) yang telah disepakati. Dukung argumen kalian dengan data yang kredibel, serta jelaskan urgensi mengapa masalah ini perlu dan layak untuk segera diselesaikan.
 
+Akhir-akhir ini, industri Food and Business (F&B) sedang digemparkan dengan fenomena "makanan viral Bandung" yang memicu lonjakan konsumen secara instan dan masif yang disebabkan oleh dorongan algoritma media sosial seperti TikTok, Instagram, dan X. Sayangnya, lonjakan konsumen ini tidak diimbangi oleh kesiapan kapasitas operasional dan manajemen antrean dari pihak merchant.
+
+Ketidaksiapan sistemik ini menyebabkan panjang antrean yang tidak wajar. Bahkan, mengutip dari laporan media sosial (datanya harusnya banyak, tapi belum nemu yang pas buat jadi referensi), rata-rata konsumen menghabiskan waktu sekitar 2 jam hanya untuk mengantre.
+
+Permasalahan ini berakar dari minimnya infrastruktur teknologi manajemen layanan antre pada sektor UMKM kuliner. Oleh karena itu, pengembangan perangkat lunak antri.in dirancang secara spesifik berlandaskan Tujuan Pembangunan Berkelanjutan / Sustainable Development Goals (SDGs) 9: Industri, Inovasi, dan Infrastruktur, khususnya:
+
+Modernisasi Infrastruktur Industri F&B: Meningkatkan efisiensi dan kapasitas operasional UMKM kuliner mikro-menengah melalui adopsi teknologi digital yang ramah pengguna. antri.in memodernisasi infrastruktur manajemen layanan fisik konvensional menjadi infrastruktur berbasis digital.
+
+Aksesibilitas Teknologi Informasi dan Komunikasi: Menyediakan solusi platform digital yang inklusif, terjangkau, dan mudah diakses baik oleh pemilik merchant F&B skala kecil maupun masyarakat luas melalui peranti seluler (mobile-web).
+
+Krisis antrean makanan viral bukan lagi sebatas fenomena dinamika tren gaya hidup, melainkan bentuk kegagalan sistem manajemen rantai layanan (service supply chain failure). Pengembangan antri.in hadir sebagai bentuk inovasi infrastruktur lunak yang mendesak untuk mengubah antrean fisik (physical queueing) menjadi sistem manajemen antrean terorganisasi secara real-time. Langkah ini penting demi memperjuangkan waktu konsumen yang berharga dan mengoptimalkan daya tampung operasional UMKM tanpa memerlukan perluasan area fisik kedai.
+
+
+
 ## 1.2 Analisis Kondisi Saat Ini
 Lakukan analisis terhadap proses yang berjalan saat ini di dunia nyata, baik itu sistem lama ataupun solusi yang sudah ada. Soroti kesenjangan atau celah dari kondisi tersebut yang nantinya akan diselesaikan oleh perangkat lunak kalian.
 
----
+1. Sistem Antrean Konvensional / Fisik (Sistem Manual)
+Mekanisme: Konsumen datang langsung ke lokasi merchant, mengambil kertas nomor antrean, dan menunggu namanya dipanggil melalui pengeras suara atau panggilan verbal.
+
+Kelemahan & Celah:
+
+Terikat Lokasi (Geographical Lock-in): Konsumen tidak berani meninggalkan area kedai karena risiko nomor antreannya terlewati (missed call).
+
+Ketiadaan Transparansi (Zero Visibility): Tidak ada visualisasi atau perhitungan otomatis mengenai berapa lama durasi pemrosesan tiap pesanan secara akurat.
+
+Kemacetan di Kasir (Point of Sale Bottleneck): Proses penentuan menu dan pembayaran baru terjadi di kasir, memakan waktu 2–5 menit per transaksi yang terakumulasi menjadi jam penungguan.
+
+2. Platform Pesan-Antar (GoFood, GrabFood, ShopeeFood)
+Mekanisme: Sistem dirancang khusus untuk pemesanan jarak jauh dengan pengantaran oleh kurir atau pengambilan cepat (takeaway).
+
+Kelemahan & Celah pada Fenomena Makanan Viral:
+
+Orientasi Pengantaran, Bukan Alur Konsumen di Lokasi (In-Person Flow): Platform on-demand tidak dibekali mekanisme untuk mengantarkan dan mengontrol kedatangan konsumen yang ingin makan di tempat (dine-in) atau membeli langsung secara teratur.
+
+Ketidakmampuan Mengontrol Kapasitas Waktu (Slot Time Control): Platform saat ini hanya menyediakan opsi toko "Buka" atau "Tutup". Tidak ada pembatasan jumlah transaksi berdasarkan kuota per rentang waktu (misal: maksimum 20 transaksi per 15 menit). Akibatnya, ketika pesanan online membludak bersamaan dengan kedatangan konsumen fisik, dapur merchant mengalami kemacetan total (kitchen jam).
+
+| Parameter Evaluasi | Sistem Fisik Konvensional | Platform On-Demand Saat Ini | Perangkat Lunak Solusi (antri.in) |
+|                    |                           |                             |                                   |
+| Lokasi Pemantauan  | Wajib berada di lokasi merchant | Aplikasi pemesanan antar | Bebas memantau dari mana saja secara real-time |
+| Kontrol Kedatangan | Tanpa kontrol (Massa menumpuk sekaligus) | Tanpa pembatasan slot waktu kedatangan | Pengaturan Slot Waktu Kedatangan (Time-Slot Arrival) |
+| Proses Pemesanan & Pembayaran | Dilakukan langsung di kasir (Bikin macet) | Sebelum makanan dibuat (Aplikasi) | Pemesanan & Pembayaran Awal (Mandatory Pre-Order & Pre-Payment) |
+| Sistem Pembaruan Antrean | Panggilan suara / Papan manual | Status kurir jalan | Sistem Antrean Virtual Real-Time (WebSockets / SSE) |
+
+Berdasarkan analisis kesenjangan di atas, celah utama yang belum terselesaikan adalah ketiadaan integrasi antara Pemantauan Antrean Digital Real-Time (Virtual Live Queueing), Pengaturan Slot Waktu (Time-Slot Scheduling), dan Pemesanan & Pembayaran Awal (Pre-ordering & Pre-payment).
+
+Perangkat lunak antri.in dirancang untuk menyelesaikan kesenjangan tersebut dengan menghapus waktu berpikir di depan kasir melalui pemesanan awal, meratakan kurva kedatangan massa (flattening the queue curve) berbasis kuota jam, serta memberikan kebebasan mobilitas bagi konsumen selama masa penungguan antrean.
 
 # BAB 2: Analisis Solusi
 
