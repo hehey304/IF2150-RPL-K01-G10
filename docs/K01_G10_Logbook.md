@@ -40,6 +40,8 @@
 | *30-08-2026* | *Muhammad Fauzi Muharram* | *Menambahkan bab 1 bagian 1.1 dan 1.2* | *1* | *Done* | *-* | 
 | *30-08-2026* | *Muhammad Fauzi Muharram* | *Merapihkan dan mencari data untuk bab 1* | *1* | *Done* | *-* |
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambahkan bab 2 bagian 2.2* | *1* | *Done* | *Terdapat kendala dalam mencari referensi* |
+| *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki lampiran data* | *0.2* | *Done* | *-* |
+| *30-08-2026* | *Chatima Anandakhorita* | *Menambahkan penjelasan bab 2 bagian 2.2* | *0.5* | *Done* | *-* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
