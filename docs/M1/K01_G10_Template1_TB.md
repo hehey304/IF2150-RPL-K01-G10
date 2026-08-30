@@ -34,7 +34,16 @@ Dipersiapkan oleh:
 ## 1.1 Latar Belakang Masalah
 Akhir-akhir ini, industri Food and Business (F&B) digemparkan dengan fenomena "makanan viral Bandung" yang memicu lonjakan konsumen secara instan dan masif yang disebabkan oleh dorongan algoritma media sosial seperti TikTok, Instagram, dan X. Sayangnya, lonjakan konsumen ini tidak diimbangi oleh kesiapan kapasitas operasional dan manajemen antrean dari pihak merchant.
 
-Ketidaksiapan sistemik ini menyebabkan panjang antrean yang tidak wajar. Bahkan, mengutip dari laporan media sosial (datanya harusnya banyak, tapi belum nemu yang pas buat jadi referensi), rata-rata konsumen menghabiskan waktu sekitar 2 jam hanya untuk mengantre.
+Ketidaksiapan sistemik ini menyebabkan panjang antrean yang tidak wajar. Bahkan, berdasarkan pengamatan fenomena "kuliner viral Bandung" di beberapa platform media sosial, mayoritas konsumen menghabiskan waktu sekitar 1,5 sampai 3 jam hanya untuk mengantri membeli makan.
+
+#### Lampiran Bukti Data
+
+| | |
+| :---: | :---: |
+| ![Bukti Keluhan Antrean 1](..\assets\keluhan\keluhan1.png) | ![Bukti Keluhan Antrean 2](../assets/keluhan/keluhan2.jpeg) |
+| *Gambar 1.1: Keluhan antre 3 jam.* | *Gambar 1.2: Keluhan antre 3 jam.* |
+| ![Bukti Keluhan Antrean 3](./assets/tweets/tweet-3.png) | ![Bukti Keluhan Antrean 4](./assets/tweets/tweet-4.png) |
+| *Gambar 1.3: Keluhan kehabisan stok setelah mengantre lama.* | *Gambar 1.4: Keluhan inefisiensi alur pemesanan di kasir.* |
 
 Permasalahan ini berakar dari minimnya infrastruktur teknologi manajemen layanan antre pada sektor UMKM kuliner. Oleh karena itu, pengembangan perangkat lunak antri.in dirancang secara spesifik berlandaskan Tujuan Pembangunan Berkelanjutan / Sustainable Development Goals (SDGs) 9: Industri, Inovasi, dan Infrastruktur, khususnya:
 
