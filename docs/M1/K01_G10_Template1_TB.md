@@ -170,11 +170,12 @@ Definisikan apa yang ingin dicapai oleh pengguna saat menggunakan sistem ini dal
 Buatlah daftar seluruh aktivitas yang terdapat dalam sistem solusi, lengkap dengan ID dan penjelasan. Telusuri hubungan aktivitas tersebut dengan _user story_ yang sudah dituliskan sebelumnya. Bisa dibuat dalam bentuk tabel.
 | ID | Aktivitas | Penjelasan | ID User Story |
 | :--- | :--- | :--- | :--- |
-| A01 | _Menampilkan list restoran_ | _Sistem menampilkan list restoran-restoran yang tersedia dalam database._ | _US-01_ |
-| A02 | _Menampilkan virtual queue_ | _Sistem menampilkan dashboard antrean saat ini dan antrean yang terakhir diproses._ | _US-02_|
-| A03 | _Proses pemesanan_ | _Sistem menyiapkan detail pesanan makanan sesuai dengan keinginan pelanggan._ | _US-03_|
+| A01 | _Menampilkan list restoran_ | _Sistem menampilkan list restoran-restoran yang tersedia dalam database._ | _US-03_ |
+| A02 | _Menampilkan virtual queue_ | _Sistem menampilkan dashboard antrean saat ini dan antrean yang terakhir diproses._ | _US-02, US-05_|
+| A03 | _Proses pemesanan_ | _Sistem menyiapkan detail pesanan makanan sesuai dengan keinginan pelanggan._ | _US-04_|
 | A04 | _Proses pembayaran_ | _Sistem memproses pembayaran oleh pengguna dengan metode yang tersedia._ | _US-04_|
-| A05 | _Memasukkan pesanan ke dalam sistem antrean yang sudah ada(integrasi sistem antrean)_ | _Sistem memasukkan pesanan pengguna ke dalam list antrean restoran._ | _US-05_|
+| A05 | _Memasukkan pesanan ke dalam sistem antrean yang sudah ada(integrasi sistem antrean)_ | _Sistem memasukkan pesanan pengguna ke dalam list antrean restoran._ | _US-04_|
+| A06 | _Mendaftarkan restoran dalam daftar restoran viral_ | _Sistem menerima informasi mengenai berbagai restoran dan menunggu admin untuk menerima mereka dan memasukan restoran dalam daftar restoran viral._ | _US-01, US-06, US-07_|
 
 ## 3.4 Model Proses Bisnis
 
