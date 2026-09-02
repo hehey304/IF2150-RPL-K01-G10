@@ -35,8 +35,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 ### Milestone 1
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
-| *[Nama AI]* | *[Sertakan Tujuan Penggunaan]* | *[Tuliskan Prompt Utama]* | *[Tuliskan Keputusan Hasil Validasi]* |
-| *Gemini* | *Mengecek relasi antar class* | *"Apakah relasi antara class User dan Order dalam UML ini seharusnya composition atau aggregation?"* | *AI menyarankan composition, tapi setelah dicek kembali ke requirement, kami menggunakan aggregation karena Order masih bisa eksis di history.* |
+| *Gemini* | *Mencari tahu cara menuangkan data di laporan* | *"Katanya boleh pakai curhatan warga X, gimana cara bikin album twit tertentu"* | *AI menyarankan untuk menyajikan data dalam tabel. saya terima saran dari AI dan saya sesuaikan dengan data saya.* |
 | | | | | |
 
 ### Milestone 2
@@ -52,8 +51,8 @@ Kami yang bertanda tangan di bawah ini menyatakan bahwa seluruh log penggunaan A
 
 | Tanda Tangan | Nama Anggota |
 | :---: | :--- |
-| <img src="./assets/ttd-anggota1.png" width="100"> | **[NIM - Nama Anggota 1]** |
-| <img src="./assets/ttd-anggota2.png" width="100"> | **[NIM - Nama Anggota 2]** |
-| <img src="./assets/ttd-anggota3.png" width="100"> | **[NIM - Nama Anggota 3]** |
-| <img src="./assets/ttd-anggota4.png" width="100"> | **[NIM - Nama Anggota 4]** |
-| <img src="./assets/ttd-anggota5.png" width="100"> | **[NIM - Nama Anggota 5]** |
+| <img src="./assets/tanda_tangan_anggota/ttd-anggota1.jpeg" width="100"> | **[13525145 - Muhammad Nur Fikri Hariyawan]** |
+| <img src="./assets/tanda_tangan_anggota/ttd-anggota2.jpeg" width="100"> | **[13525085 - Bayu Palamarta Wirawan]** |
+| <img src="./assets/tanda_tangan_anggota/ttd-anggota3.jpeg" width="100"> | **[13525133 - Chatima Anandakhorita]** |
+| <img src="./assets/tanda_tangan_anggota/ttd-anggota4.jpg" width="100"> | **[13525148 - Athallah Nanda Andita]** |
+| <img src="./assets/tanda_tangan_anggota/ttd-anggota5.jpeg" width="100"> | **[13525091 - Muhammad Fauzi Muharam]** |

@@ -43,7 +43,13 @@
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki lampiran data* | *0.2* | *Done* | *-* |
 | *30-08-2026* | *Chatima Anandakhorita* | *Menambahkan penjelasan bab 2 bagian 2.2* | *0.5* | *Done* | *-* |
 | *31-08-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram 1,2, dan 4* | *2.5* | *Done* | *Saya cukup kesulitan waktu menentukan alurnya* |
+| *31-08-2026* | *Athallah Nanda Andita* | *Berdiskusi dan menambahkan bab 3 bagian 3.3* | *0.5* | *Done* | *-* |
+| *31-08-2026* | *Muhammad Fauzi Muharram* | *Berdiskusi dan menambahkan bab 3 bagian 3.3* | *0.5* | *Done* | *-* |
+| *31-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Berdiskusi dan menambahkan bab 3 bagian 3.3* | *0.5* | *Done* | *-* |
 | *02-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki ID User Story bagian 3.3* | *0.5* | *Done* | *-* |
+| *02-09-2026* | *Athallah Nanda Andita* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
+| *02-09-2026* | *Athallah Nanda Andita* | *Menambahkan tanta tangan anggota ke assets* | *0.25* | *Done* | *-* |
+| *02-09-2026* | *Muhammad Fauzi Muharram* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
