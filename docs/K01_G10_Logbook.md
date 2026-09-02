@@ -42,6 +42,7 @@
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambahkan bab 2 bagian 2.2* | *1* | *Done* | *Terdapat kendala dalam mencari referensi* |
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki lampiran data* | *0.2* | *Done* | *-* |
 | *30-08-2026* | *Chatima Anandakhorita* | *Menambahkan penjelasan bab 2 bagian 2.2* | *0.5* | *Done* | *-* |
+| *02-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki ID User Story bagian 3.3* | *0.5* | *Done* | *-* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
