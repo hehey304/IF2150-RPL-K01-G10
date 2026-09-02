@@ -29,7 +29,7 @@
 ---
 
 ### Milestone 1
-**Periode:** [Tanggal Mulai] - [Tanggal Selesai]
+**Periode:** 27-08-2026 - 02-09-2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
@@ -42,6 +42,7 @@
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambahkan bab 2 bagian 2.2* | *1* | *Done* | *Terdapat kendala dalam mencari referensi* |
 | *30-08-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki lampiran data* | *0.2* | *Done* | *-* |
 | *30-08-2026* | *Chatima Anandakhorita* | *Menambahkan penjelasan bab 2 bagian 2.2* | *0.5* | *Done* | *-* |
+| *31-08-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram 1,2, dan 4* | *2.5* | *Done* | *Saya cukup kesulitan waktu menentukan alurnya* |
 | *02-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki ID User Story bagian 3.3* | *0.5* | *Done* | *-* |
 | | | | | | | |
 
