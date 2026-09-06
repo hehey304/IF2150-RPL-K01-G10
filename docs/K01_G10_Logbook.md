@@ -50,6 +50,9 @@
 | *02-09-2026* | *Athallah Nanda Andita* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
 | *02-09-2026* | *Athallah Nanda Andita* | *Menambahkan tanta tangan anggota ke assets* | *0.25* | *Done* | *-* |
 | *02-09-2026* | *Muhammad Fauzi Muharram* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
+| *03-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 2* | *0.25* | *Done* | *-* |
+| *04-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.2, 2.1, 2.2, dan bagian 2.3* | *1* | *Done* | *-* |
+| *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
