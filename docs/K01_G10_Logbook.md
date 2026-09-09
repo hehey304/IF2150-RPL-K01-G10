@@ -55,7 +55,7 @@
 | *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
 | *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
 | *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
-| | | | | | | |
+|*09-09-2026* |Muhammad Fauzi Muharam |Melengkapi bab 1.1,  fix A08, add KNF13 | 2|Done | | |
 
 **Catatan/Evaluasi Milestone 1:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
