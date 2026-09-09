@@ -23,6 +23,7 @@
 
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
+* [Milestone 2](#milestone-2)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 
@@ -59,6 +60,22 @@
 
 **Catatan/Evaluasi Milestone 1:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+
+
+### Milestone 2
+**Periode:** 02-09-2026 09-09-2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *06-09-2026* | *Chatima Anandakhorita* | *Menambahkan pemetaan kebutuhan, bagian 2.3, untuk setiap Deskripsi Aktivitas pada bagian 2.2* | *1* | *Done* | *-* | 
+| *08-09-2026* | *Chatima Anandakhorita* | *Memperbaiki kesalahan pada bagian 2.3 setelah diberikan masukan oleh asisten, terutama menambahkan pemetaan kebutuhan berupa aturan hukum yang berlaku pada bisnis dan kebutuhan yang sebelumnya lupa untuk ditambahkan* | *1* | *Done* | *-* | 
+
+
+**Catatan/Evaluasi Milestone 1:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+
+
+
 
 ---
 
