@@ -53,6 +53,8 @@
 | *03-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 2* | *0.25* | *Done* | *-* |
 | *04-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.2, 2.1, 2.2, dan bagian 2.3* | *1* | *Done* | *-* |
 | *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
+| *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
+| *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
 | | | | | | | |
 
 **Catatan/Evaluasi Milestone 1:**
