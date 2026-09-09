@@ -70,6 +70,8 @@
 | *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
 | *09-09-2026* | *Athallah Nanda Andita* | *Memperbaiki kesalahan penomoran pada bagian 2.3, 2.4, dan 2.5* | *1* | *Done* | *-* |
 |*09-09-2026* |*Muhammad Fauzi Muharam* |*Melengkapi bab 1.1,  fix A08, add KNF13* | *2*|*Done* | | |
+|*09-09-2026* |*Muhammad Nur Fikri Hariyawan* |*Mengisi form asistensi* | *1.5*| *Done* | *-* |
+|*09-09-2026* |*Muhammad Nur Fikri Hariyawan* |*Menambahkan kebutuhan fungsional* | *0.5*| *Done* | *-* |
 
 
 **Catatan/Evaluasi Milestone 2:**
