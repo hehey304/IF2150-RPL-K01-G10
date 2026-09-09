@@ -4,23 +4,23 @@
 
 | Informasi | Keterangan |
 | --- | --- |
-| **Hari** | Rabu |
-| **Tanggal** | 08/09/2026 |
+| **Hari** | Senin |
+| **Tanggal** | 07/09/2026 |
 | **Kelas** | 01 |
 | **Nomor Kelompok** | 10 |
 | **Nama Kelompok** | Ducklings  |
 | **Nama Perangkat Lunak** | Antri.in  |
-| **Dokumen** | *\[Nama Dokumen yang diasistensikan\]*  |
+| **Dokumen** | K01_G10_RG |
 
 ### Anggota Kelompok
 
 | NIM | Nama |
 | --- | --- |
-| *\13525145* | Muhammad Nur Fikri Hariyawan |
-| *\13525085* | Bayu Palamarta Wirawan |
-| *\13525133* | Chatima Anandakhorita |
-| *\13525148* | Athallah Nanda Andita |
-| *\13525091* | Muhammad Fauzi Muharam |
+| 13525145 | Muhammad Nur Fikri Hariyawan |
+| 13525085 | Bayu Palamarta Wirawan |
+| 13525133 | Chatima Anandakhorita |
+| 13525148 | Athallah Nanda Andita |
+| 13525091 | Muhammad Fauzi Muharam |
 
 ### Catatan
 
@@ -33,6 +33,18 @@
 | 5. Menampilkan informasi penting seperti, rating resto, sneak peak resto, review resto. |
 | 6. Semakin dekat memesan tempat dengan hari yang dituju, semakin besar pula fee-nya |
 | 7. Fitur booking dari jauh hari tergantung dari restorannya |
+| 8. Kuota restoran ditentukan oleh restoran dan dapat diupdate kapan saja |
+| 9. Queue dapat di dequeue oleh restoran |
+| 10. Menggunakan konsep EARS pada 2.4 dan 2.5 |
+| 11. Pada kategori business biasanya "Tidak", R17 sebagai System, R11 dan R08 bukan sebagai P/L |
+| 12. Take away + dine in sebagai business |
+| 13. Kebutuhan untuk fitur booking dari jauh hari |
+| 14. Antrian harus dapat ditampilkan dan diperbarui dalam waktu cepat (kurang lebih 1 menit) |
+| 15. "Tidak bisa double charge (pembayaran konsisten)" merupakan bagian dari KNF  |
+| 16. Penyampaian solusi |
+| 17. A08 perlu diperbaiki |
+| 18. Untuk penjelasan KNF tidak perlu bertele-tele |
+| 19. Availability: tambahan |
 
 **Notes for this section:**  
 *Catatan dapat dituliskan dalam bentuk paragraf atau poin-poin, disesuaikan saja.* 
@@ -41,7 +53,7 @@
 
 <!-- ![](./assets/foto-asistensi.jpg) -->
 <p align="center">
-  <img src="./assets/foto-asistensi.jpg" width="100%">
+  <img src="./assets/foto-asistensi.jpeg" width="100%">
 </p>
 
 <p align="center">
