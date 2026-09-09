@@ -51,12 +51,6 @@
 | *02-09-2026* | *Athallah Nanda Andita* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
 | *02-09-2026* | *Athallah Nanda Andita* | *Menambahkan tanta tangan anggota ke assets* | *0.25* | *Done* | *-* |
 | *02-09-2026* | *Muhammad Fauzi Muharram* | *Berdiskusi dan menambahkan form AI usage* | *0.25* | *Done* | *-* |
-| *03-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 2* | *0.25* | *Done* | *-* |
-| *04-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.2, 2.1, 2.2, dan bagian 2.3* | *1* | *Done* | *-* |
-| *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
-| *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
-| *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
-|*09-09-2026* |Muhammad Fauzi Muharam |Melengkapi bab 1.1,  fix A08, add KNF13 | 2|Done | | |
 
 **Catatan/Evaluasi Milestone 1:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
@@ -67,11 +61,17 @@
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| *06-09-2026* | *Chatima Anandakhorita* | *Menambahkan pemetaan kebutuhan, bagian 2.3, untuk setiap Deskripsi Aktivitas pada bagian 2.2* | *1* | *Done* | *-* | 
+| *03-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 2* | *0.25* | *Done* | *-* |
+| *04-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.2, 2.1, 2.2, dan bagian 2.3* | *1* | *Done* | *-* |
+| *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
+| *06-09-2026* | *Chatima Anandakhorita* | *Menambahkan pemetaan kebutuhan, bagian 2.3, untuk setiap Deskripsi Aktivitas pada bagian 2.2* | *1* | *Done* | *-* |
+| *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
 | *08-09-2026* | *Chatima Anandakhorita* | *Memperbaiki kesalahan pada bagian 2.3 setelah diberikan masukan oleh asisten, terutama menambahkan pemetaan kebutuhan berupa aturan hukum yang berlaku pada bisnis dan kebutuhan yang sebelumnya lupa untuk ditambahkan* | *1* | *Done* | *-* | 
+| *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
+|*09-09-2026* |*Muhammad Fauzi Muharam* |*Melengkapi bab 1.1,  fix A08, add KNF13* | *2*|*Done* | | |
 
 
-**Catatan/Evaluasi Milestone 1:**
+**Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
