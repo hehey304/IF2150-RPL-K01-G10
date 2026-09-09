@@ -68,6 +68,7 @@
 | *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
 | *08-09-2026* | *Chatima Anandakhorita* | *Memperbaiki kesalahan pada bagian 2.3 setelah diberikan masukan oleh asisten, terutama menambahkan pemetaan kebutuhan berupa aturan hukum yang berlaku pada bisnis dan kebutuhan yang sebelumnya lupa untuk ditambahkan* | *1* | *Done* | *-* | 
 | *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
+| *09-09-2026* | *Athallah Nanda Andita* | *Memperbaiki kesalahan penomoran pada bagian 2.3, 2.4, dan 2.5* | *1* | *Done* | *-* |
 |*09-09-2026* |*Muhammad Fauzi Muharam* |*Melengkapi bab 1.1,  fix A08, add KNF13* | *2*|*Done* | | |
 
 
