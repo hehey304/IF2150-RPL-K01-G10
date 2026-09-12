@@ -169,5 +169,64 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | :--- | :--- | :--- |
 | 1 | *Kasir memasukkan ID Pesanan yang salah/tidak ada* | *Sistem menampilkan pesan "ID Pesanan tidak ditemukan" dan meminta kasir memasukkan ulang* |
 
+### 3.4.6 Skenario UC06
+
+**Nama Use Case:** *Mengelola Antrian (Proses Dequeue)*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran memilih fitur dequeue* | *Sistem menampilkan pesan konfirmasi untuk melakukan dequeue pada restorannya* |
+| 3 | *Restoran mengonfirmasi dequeue* | *Sistem menghapus pelanggan terdepan pada antrian dan memperbarui antrian* |
+<br>
+
+  **Skenario Alternatif 1: Restoran membatalkan dequeue**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih pilihan "batal" pada konfirmasi dequeue* | *Sistem menutup pesan konfirmasi* |
+
+  **Skenario Alternatif 2: Pelanggan tidak hadir**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih untuk dequeue lebih awal* | *Sistem menghapus pelanggan terdepan pada antrian dan memperbarui antrian* |
+| 2 | *Restoran memilih untuk menunggu* | *Sistem menunggu 30 menit sebelum melakukan dequeue secara otomatis* |
+
+### 3.4.8 Skenario UC08
+
+**Nama Use Case:** *Mengelola Stok dan Menu Makanan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih salah satu menu* | *Sistem menampilkan detail dari menu dan ketersedian menu* |
+| 3 | *Restoran mengubah informasi stok atau menu* | *Sistem memperbarui informasi pada database dan website pelanggan* |
+<br>
+
+  **Skenario Alternatif 1: Restoran menambahkan menu baru**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur tambah menu* | *Sistem menampilkan formulir menu* |
+| 2 | *Restoran mengisi formulir dan klik Simpan* | *Sistem menyimpan data-data dalam database* |
+
+  **Skenario Alternatif 2: Restoran menghapus salah satu menu**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur hapus menu* | *Sistem menampilkan data seluruh menu* |
+| 2 | *Restoran menghapus salah satu menu* | *Sistem menghapus data menu tersebut dari database* |
+
+  **Skenario Alternatif 3: Stok makanan tidak cukup**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran mengubah jumlah stok menjadi 0* | *Sistem segera menyimpan data pada database dan memperbarui informasi pada website pelanggan* |
+
 
 <sub>*Lanjutkanlah pola 3.4.x ini untuk setiap ID UC yang telah diidentifikasi pada 3.2, sampai seluruh use case memiliki skenario normal dan skenario alternatif (tidak usah dibuat jika use case tersebut memang tidak memiliki skenario alternatif).*<sub>
