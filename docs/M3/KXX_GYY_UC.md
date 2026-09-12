@@ -98,7 +98,9 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor Terlibat | ID KF Terkait |
 | :--- | :--- | :--- | :--- | :--- |
 | *UC01* | *Mencari dan filter resto.* | *Pelanggan melakukan pencarian atau penyaringan restoran viral berdasarkan nama, jenis makanan, atau rating untuk melihat detail informasi restoran.* | *Pelanggan* | *KF01, KF02* |
+| *UC04* | *Pendaftaran Mitra Restoran Baru.* | *Pihak restoran mengajukan berkas pendaftaran sebagai mitra baru dengan mengisikan data restoran ke dalam sistem aplikasi agar dapat diverifikasi oleh admin.* | *Restoran* | *KF14* |
 | *UC05* | *Memverifikasi Pendaftaran Restoran.* | *Admin meninjau berkas pendaftaran mitra restoran baru, lalu menyetujui atau menolak pengajuan serta memicu pengiriman notifikasi email ke pihak restoran.* | *Admin* | *KF15, KF16* |
+| *UC07* | *Mengatur Kuota Antrean & Meja.* | *Pihak restoran memperbarui atau menyesuaikan batas/jumlah kuota antrean dan ketersediaan meja, pembaruan tersebut secara otomatis akan ditampilkan kepada pelanggan.* | *Restoran* | *KF17, KF18* |
 | *...* | *...* | *...* | *...* | *...* |
 
 ## 3.3 Use Case Diagram
@@ -149,6 +151,25 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 1 | *Pelanggan memasukkan kata kunci nama restoran atau memilih filter pencarian yang tidak tersedia di sistem* | *Sistem memproses kriteria pencarian tetapi tidak menemukan data yang cocok, lalu menampilkan pesan "Restoran tidak ditemukan" dan menampilkan restoran lain secara default (diurutkan berdasarkan yang paling viral)* |
 | 2 | *Pelanggan mengubah kata kunci atau mereset filter pencarian* | *Sistem kembali ke langkah 1 skenario normal* |
 
+### 3.4.4 Skenario UC04
+
+**Nama Use Case:** *Pendaftaran Mitra Restoran Baru*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih fitur pendaftaran mitra baru pada aplikasi* | *Sistem menampilkan formulir registrasi mitra baru yang mencakup data serta profil restoran, dokumen perizinan, dan daftar menu yang akan diajukan* |
+| 2 | *Admin memilih menu peninjauan pendaftaran restoran dan membuka detail berkas pengajuan mitra baru* | *Sistem memvalidasi kelengkapan data, menyimpan formulir registrasi dengan status "Menunggu Verifikasi" ke dalam database, serta menampilkan pesan konfirmasi bawha pendaftaran berhasil* |
+<br>
+
+**Skenario Alternatif 1: Data Form Tidak Lengkap atau Format Tidak Sesuai**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran mengisikan formulir pendaftaran secara tidak lengkap atau mengunggah format dokumen yang tidak valid, lalu menekan tombol "Daftar"* | *Sistem menolak menyimpan formulir ke database, memberi tanda pada bagian yang bermasalah serta apa masalahnya, dan menampilkan pesan peringatan untuk segera memperbaiki/melengkapi data* |
+| 2 | *Pihak restoran memperbaiki atau melengkapi data yang bermasalah* | *Sistem kembali ke langkah 2 skenario normal* |
+
 ### 3.4.5 Skenario UC05
 
 **Nama Use Case:** *Memverifikasi Status Pembayaran*
@@ -195,6 +216,31 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | :--- | :--- | :--- |
 | 1 | *Restoran memilih untuk dequeue lebih awal* | *Sistem menghapus pelanggan terdepan pada antrian dan memperbarui antrian* |
 | 2 | *Restoran memilih untuk menunggu* | *Sistem menunggu 30 menit sebelum melakukan dequeue secara otomatis* |
+
+### 3.4.7 Skenario UC07
+
+**Nama Use Case:** *Mengatur Kuota Antrean & Meja*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih menu pengaturan kuota antrean dan kapasitas meja* | *Sistem menampilkan kuota antrean dan kapasitas meja yang tersedia saat ini* |
+| 2 | *Pihak restoran mengubah batas maksimum kuota antrean atau jumlah ketersediaan meja, lalu menekan tombol "Simpan Pengaturan"* | *Sistem langsung menyimpan informasi ke dalam database dan memperbarui tampilan kuota antrean dan kapasitas meja yang tersedia* |
+<br>
+
+**Skenario Alternatif 1: Input Tidak Valid**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran menginput nilai kuota berupa angka negatif atau format bukan angka, lalu menekan tombol "Simpan Pengaturan"* | *Sistem menolak pembaruan dan menampilkan pesan peringatan agar pihak restoran memperbaiki jumlah kuota yang dimasukkan dengan format yang valid* |
+| 2 | *Pihak restoran memperbaiki nilai kuota dengan format yang benar* | *Sistem kembali ke langkah 2 skenario normal* |
+
+  **Skenario Alternatif 2: Restoran Menutup Antrean Sementara**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memasukkan 0 (nol) sebagai kuota antrean yang baru jika ingin menutup antrean sementara* | *Sistem memperbaru dan mengubah tampilan kuota antrean yang tersedia menjadi pesan "Antrean penuh/Ditutup". Tidak ada antrean atau pesanan baru yang bisa masuk ketika kuota ditutup* |
 
 ### 3.4.8 Skenario UC08
 
