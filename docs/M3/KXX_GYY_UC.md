@@ -152,7 +152,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 1 | *Pelanggan memasukkan kata kunci nama restoran atau memilih filter pencarian yang tidak tersedia di sistem* | *Sistem memproses kriteria pencarian tetapi tidak menemukan data yang cocok, lalu menampilkan pesan "Restoran tidak ditemukan" dan menampilkan restoran lain secara default (diurutkan berdasarkan yang paling viral)* |
 | 2 | *Pelanggan mengubah kata kunci atau mereset filter pencarian* | *Sistem kembali ke langkah 1 skenario normal* |
 
-### 3.4.1 Skenario UC02
+### 3.4.2 Skenario UC02
 
 **Nama Use Case:** *Melakukan pemesanan dan pembayaran digital*
 
@@ -176,6 +176,17 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 3 | *Pelanggan melanjutkan transaksi dan menyelesaikan pembayaran via Payment Gateway.* | *Sistem memverifikasi pelunasan tagihan dari Payment Gateway.* |
 | 4 | *-* | *Sistem mencatat transaksi ke basis data dan menerbitkan ID pesanan antrean.* |
 | 5 | *-* | *Sistem menampilkan bukti pembayaran dan nomor panggilan pengambilan pesanan kepada pelanggan.* |
+<br>
+
+**Skenario Alternatif 2: Booking tempat**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
+| 2 | *Pelanggan memilih tanggal kedatangan (maksimal 7 hari ke depan) dan kapasitas kursi/rombongan* | *Sistem memvalidasi rentang tanggal ($\le 7$ hari) dan ketersediaan kuota reservasi meja pada jadwal tersebut.* |
+| 3 | *Pelanggan memilih menu makanan yang ingin dipesan.* | *Sistem memverifikasi ketersediaan dan mencatat draf reservasi beserta rincian pesanan.* |
+| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *pembayaran tagihan/deposit melalui metode digital (KF11, KF12).	Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway.* |
+| 5 | *-* | *Sistem mengunci kuota meja pada jadwal tersebut, menerbitkan ID booking resmi, dan menyimpannya ke basis data.* |
+| 5 | *-* | *Sistem menampilkan tanda bukti reservasi jadwal beserta rincian pesanan kepada pelanggan.* |
 <br>
 
 
