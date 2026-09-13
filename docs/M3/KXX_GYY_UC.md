@@ -182,11 +182,35 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
 | 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
-| 2 | *Pelanggan memilih tanggal kedatangan (maksimal 7 hari ke depan) dan kapasitas kursi/rombongan* | *Sistem memvalidasi rentang tanggal ($\le 7$ hari) dan ketersediaan kuota reservasi meja pada jadwal tersebut.* |
+| 2 | *Pelanggan memilih tanggal kedatangan (maksimal 7 hari ke depan) dan kapasitas kursi/rombongan* | *Sistem memvalidasi rentang tanggal (<= hari ke depan) dan ketersediaan kuota reservasi meja pada jadwal tersebut.* |
 | 3 | *Pelanggan memilih menu makanan yang ingin dipesan.* | *Sistem memverifikasi ketersediaan dan mencatat draf reservasi beserta rincian pesanan.* |
-| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *pembayaran tagihan/deposit melalui metode digital (KF11, KF12).	Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway.* |
+| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *pembayaran tagihan/deposit melalui metode digital.	Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway.* |
 | 5 | *-* | *Sistem mengunci kuota meja pada jadwal tersebut, menerbitkan ID booking resmi, dan menyimpannya ke basis data.* |
-| 5 | *-* | *Sistem menampilkan tanda bukti reservasi jadwal beserta rincian pesanan kepada pelanggan.* |
+| 6 | *-* | *Sistem menampilkan tanda bukti reservasi jadwal beserta rincian pesanan kepada pelanggan.* |
+<br>
+
+**Skenario Alternatif 3: Stok Menu Habis**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mendeteksi stok menu tertentu di dapur restoran sudah tidak mencukupi.* |
+| 2 | *-* | *Sistem menolak proses checkout, memberi tanda pada menu yang habis, dan menampilkan notifikasi: "Mohon maaf, terdapat menu pilihan yang telah habis".* |
+| 3 | *Pelanggan menghapus atau mengganti menu yang habis.* | *Sistem memperbarui total tagihan dan kembali ke Langkah 2 Skenario Normal atau Langkah 3 alternatif 2 jika dilakukan booking.* |
+<br>
+
+**Skenario Alternatif 4: Batas Waktu Pembayaran Habis (Timeout) / Pembayaran Gagal**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan tidak menyelesaikan pembayaran hingga durasi pembayaran kedaluwarsa.* | *Payment Gateway mendeteksi masa berlaku transaksi habis dan mengirimkan notifikasi failed/expired ke sistem.* |
+| 2 | *-* | *Sistem tidak melakukan penahanan slot kuota meja/antrean, membatalkan pesanan, dan menampilkan pesan: "Batas waktu pembayaran habis. Transaksi dibatalkan".* |
+| 3 | *Pelanggan menutup notifikasi.* | *Alur berakhir tanpa pembuatan tiket antrean maupun ID pesanan.* |
+<br>
+
+**Skenario Alternatif 5: Tanggal Booking Tidak Valid atau Kuota Jadwal Penuh**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
+| 2 | *Pelanggan memilih tanggal kedatangan lebih dari 7 hari ke depan atau memilih slot meja yang sudah penuh.* | *Sistem menolak pemilihan jadwal dan menampilkan pesan: "Reservasi hanya dapat dilakukan maksimal 7 hari sebelum kedatangan atau kuota meja pada jam tersebut telah penuh".* |
+| 3 | *Pelanggan memilih kembali tanggal/jam lain yang tersedia.* | *Sistem kembali ke Langkah 2 Skenario Alternatif 2.* |
 <br>
 
 
