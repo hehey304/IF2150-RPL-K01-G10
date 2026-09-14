@@ -101,8 +101,10 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 | *UC02* | *Melakukan pemesanan dan pembayaran digital* | *Pelanggan memilih mode pemesanan (dine-in, takeaway, atau booking), memilih menu makanan, menyelesaikan pembayaran digital, dan menerima tiket antrean resmi beserta ringkasan pesanan.* | *Pelanggan* | *KF05, KF06, KF07, KF08, KF09, KF10, KF11, KF12, KF13* |
 | *UC04* | *Pendaftaran Mitra Restoran Baru.* | *Pihak restoran mengajukan berkas pendaftaran sebagai mitra baru dengan mengisikan data restoran ke dalam sistem aplikasi agar dapat diverifikasi oleh admin.* | *Restoran* | *KF14* |
 | *UC05* | *Memverifikasi Pendaftaran Restoran.* | *Admin meninjau berkas pendaftaran mitra restoran baru, lalu menyetujui atau menolak pengajuan serta memicu pengiriman notifikasi email ke pihak restoran.* | *Admin* | *KF15, KF16* |
+| *UC06* | *Mengelola Antrian.* | *Restoran bisa melihat status antrian dan melakukan dequeue apabila pelanggan terdepan sudah datang.* | *Restoran* | *KF04* |
 | *UC07* | *Mengatur Kuota Antrean & Meja.* | *Pihak restoran memperbarui atau menyesuaikan batas/jumlah kuota antrean dan ketersediaan meja, pembaruan tersebut secara otomatis akan ditampilkan kepada pelanggan.* | *Restoran* | *KF17, KF18* |
-| *...* | *...* | *...* | *...* | *...* |
+| *UC08* | *Mengelola Stok dan Menu Makanan.* | *Restoran bisa mengatur stok dari setiap menu yang disediakan oleh restoran tersebut.* | *Restoran* | *KF07* |
+
 
 ## 3.3 Use Case Diagram
 Buatlah **satu** use case diagram yang mencakup seluruh aktor dan use case. Sertakan relasi *include*/*extend* apabila ada use case yang saling bergantung.
