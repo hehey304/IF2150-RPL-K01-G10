@@ -113,7 +113,7 @@ Buatlah **satu** use case diagram yang mencakup seluruh aktor dan use case. Sert
 <img alt="Contoh Activity Diagram" src="./assets/diagram/uc.drawio.png" width="70%">
 </p>
 <p align="center">
-<i>Gambar 1. Contoh Use Case Diagram</i>
+<i>Gambar 1. Use Case Diagram</i>
 </p>
 <br>
 
