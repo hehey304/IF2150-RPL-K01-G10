@@ -291,14 +291,16 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Restoran memilih pilihan "batal" pada konfirmasi dequeue* | *Sistem menutup pesan konfirmasi* |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran memilih fitur dequeue* | *Sistem menampilkan pesan konfirmasi untuk melakukan dequeue pada restorannya* |
+| 3 | *Restoran memilih pilihan "batal" pada konfirmasi dequeue* | *Sistem menutup pesan konfirmasi* |
 
   **Skenario Alternatif 2: Pelanggan tidak hadir**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Restoran memilih untuk dequeue lebih awal* | *Sistem menghapus pelanggan terdepan pada antrian dan memperbarui antrian* |
-| 2 | *Restoran memilih untuk menunggu* | *Sistem menunggu 30 menit sebelum melakukan dequeue secara otomatis* |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran mengamati pelanggan terdepan belum datang dan memilih untuk menunggu* | *Sistem menunggu 30 menit sebelum melakukan dequeue secara otomatis* |
 
 ### 3.4.7 Skenario UC07
 
@@ -342,21 +344,25 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Restoran memilih fitur tambah menu* | *Sistem menampilkan formulir menu* |
-| 2 | *Restoran mengisi formulir dan klik Simpan* | *Sistem menyimpan data-data dalam database* |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih fitur tambah menu* | *Sistem menampilkan formulir menu* |
+| 3 | *Restoran mengisi formulir dan klik Simpan* | *Sistem menyimpan data-data dalam database* |
 
   **Skenario Alternatif 2: Restoran menghapus salah satu menu**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Restoran memilih fitur hapus menu* | *Sistem menampilkan data seluruh menu* |
-| 2 | *Restoran menghapus salah satu menu* | *Sistem menghapus data menu tersebut dari database* |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih fitur hapus menu* | *Sistem menampilkan data seluruh menu* |
+| 3 | *Restoran menghapus salah satu menu* | *Sistem menghapus data menu tersebut dari database* |
 
   **Skenario Alternatif 3: Stok makanan tidak cukup**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Restoran mengubah jumlah stok menjadi 0* | *Sistem segera menyimpan data pada database dan memperbarui informasi pada website pelanggan* |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih salah satu menu* | *Sistem menampilkan detail dari menu dan ketersedian menu* |
+| 3 | *Restoran mengubah jumlah stok menjadi 0* | *Sistem segera menyimpan data pada database dan memperbarui informasi pada website pelanggan* |
 
 ### 3.4.9 Skenario UC09
 
