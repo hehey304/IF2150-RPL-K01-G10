@@ -257,7 +257,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 
 ### 3.4.5 Skenario UC05
 
-**Nama Use Case:** *Memverifikasi Status Pembayaran*
+**Nama Use Case:** *Memverifikasi Pendaftaran Restoran.*
 
 **Skenario Normal**
 
@@ -278,7 +278,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 
 ### 3.4.6 Skenario UC06
 
-**Nama Use Case:** *Memverifikasi Pendaftaran Restoran*
+**Nama Use Case:** *Mengelola Antrean*
 
 **Skenario Normal**
 
