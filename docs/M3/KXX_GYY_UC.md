@@ -401,7 +401,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 2 | *Pengguna mengonfirmasi keluar akun dengan memilih tombol "Ya" pada pesan konfirmasi* | *Sistem menghapus token/sesi login pengguna saat ini, lalu mengarahkan tampilan kembali ke halaman login* |
 <br>
 
-***Skenario Alternatif 1: Aktor Membatalkan Keluar Akun**
+**Skenario Alternatif 1: Aktor Membatalkan Keluar Akun**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
