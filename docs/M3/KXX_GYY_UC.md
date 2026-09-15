@@ -172,9 +172,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 2 | *Pelanggan memilih opsi layanan Dine-In dan memasukkan jumlah rombongan.* | *Sistem memverifikasi stok menu dan memeriksa ketersediaan kuota meja makan restoran terkini.* |
 | 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital (QRIS, Virtual Account).* |
 | 4 | *Pelanggan memilih metode pembayaran dan menekan tombol bayar.* | *Sistem memicu pembuatan transaksi ke Payment Gateway serta menampilkan tagihan dan batas waktu pembayaran.* |
-| 5 | *Pelanggan menyelesaikan transfer/pembayaran melalui aplikasi perbankan/e-wallet.* | *Sistem menerima verifikasi pelunasan secara otomatis dari Payment Gateway.* |
-| 6 | *-* | *Sistem memotong kuota meja, menetapkan ID pesanan dan nomor urut antrean dine-in, lalu menyimpannya ke basis data.* |
-| 7 | *-* | *Sistem menampilkan halaman konfirmasi berisi ID tiket antrean meja, status pembayaran, dan rincian pesanan makanan.* |
+| 5 | *Pelanggan menyelesaikan transfer/pembayaran melalui aplikasi perbankan/e-wallet.* | *Sistem menerima verifikasi pelunasan dari Payment Gateway, memotong kuota meja, menerbitkan ID pesanan dan nomor antrean resmi ke basis data, lalu menampilkan halaman konfirmasi tiket antrean beserta rincian pesanan.* |
 <br>
 
 **Skenario Alternatif 1: Pre-Order Takeaway**
@@ -182,9 +180,7 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | :--- | :--- | :--- |
 | 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf pesanan.* |
 | 2 | *Pelanggan memilih opsi layanan Takeaway.* | *Sistem memverifikasi stok menu dan mengabaikan pengecekan kuota meja makan.* |
-| 3 | *Pelanggan melanjutkan transaksi dan menyelesaikan pembayaran via Payment Gateway.* | *Sistem memverifikasi pelunasan tagihan dari Payment Gateway.* |
-| 4 | *-* | *Sistem mencatat transaksi ke basis data dan menerbitkan ID pesanan antrean.* |
-| 5 | *-* | *Sistem menampilkan bukti pembayaran dan nomor panggilan pengambilan pesanan kepada pelanggan.* |
+| 3 | *Pelanggan melanjutkan transaksi dan menyelesaikan pembayaran via Payment Gateway.* | *Sistem menerima verifikasi pelunasan dari Payment Gateway, mencatat transaksi ke basis data, menerbitkan ID pesanan khusus antrean dapur, dan menampilkan nomor panggilan pengambilan pesanan beserta bukti pembayaran.* |
 <br>
 
 **Skenario Alternatif 2: Booking tempat**
@@ -193,25 +189,21 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
 | 2 | *Pelanggan memilih tanggal kedatangan (maksimal 7 hari ke depan) dan kapasitas kursi/rombongan* | *Sistem memvalidasi rentang tanggal (<= hari ke depan) dan ketersediaan kuota reservasi meja pada jadwal tersebut.* |
 | 3 | *Pelanggan memilih menu makanan yang ingin dipesan.* | *Sistem memverifikasi ketersediaan dan mencatat draf reservasi beserta rincian pesanan.* |
-| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *pembayaran tagihan/deposit melalui metode digital.	Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway.* |
-| 5 | *-* | *Sistem mengunci kuota meja pada jadwal tersebut, menerbitkan ID booking resmi, dan menyimpannya ke basis data.* |
-| 6 | *-* | *Sistem menampilkan tanda bukti reservasi jadwal beserta rincian pesanan kepada pelanggan.* |
+| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway, mengunci kuota meja pada jadwal tersebut, menerbitkan ID booking resmi ke basis data, dan menampilkan tanda bukti reservasi beserta rincian pesanan.* |
 <br>
 
 **Skenario Alternatif 3: Stok Menu Habis**
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mendeteksi stok menu tertentu di dapur restoran sudah tidak mencukupi.* |
-| 2 | *-* | *Sistem menolak proses checkout, memberi tanda pada menu yang habis, dan menampilkan notifikasi: "Mohon maaf, terdapat menu pilihan yang telah habis".* |
-| 3 | *Pelanggan menghapus atau mengganti menu yang habis.* | *Sistem memperbarui total tagihan dan kembali ke Langkah 2 Skenario Normal atau Langkah 3 alternatif 2 jika dilakukan booking.* |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menekan tombol konfirmasi/lanjutkan pesanan.* | *Sistem mendeteksi stok menu tertentu di dapur restoran sudah tidak mencukupi, menolak proses checkout, memberi tanda pada menu yang habis, dan menampilkan notifikasi: "Mohon maaf, terdapat menu pilihan yang telah habis".* |
+| 2 | *Pelanggan menghapus atau mengganti menu yang habis dari keranjang pesanan.* | *Sistem memperbarui total tagihan dan kembali ke Langkah 2 Skenario Normal (atau Langkah 3 Skenario Alternatif 2 jika melakukan reservasi booking).* |
 <br>
 
 **Skenario Alternatif 4: Batas Waktu Pembayaran Habis (Timeout) / Pembayaran Gagal**
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan tidak menyelesaikan pembayaran hingga durasi pembayaran kedaluwarsa.* | *Payment Gateway mendeteksi masa berlaku transaksi habis dan mengirimkan notifikasi failed/expired ke sistem.* |
-| 2 | *-* | *Sistem tidak melakukan penahanan slot kuota meja/antrean, membatalkan pesanan, dan menampilkan pesan: "Batas waktu pembayaran habis. Transaksi dibatalkan".* |
-| 3 | *Pelanggan menutup notifikasi.* | *Alur berakhir tanpa pembuatan tiket antrean maupun ID pesanan.* |
+| 1 | *Pelanggan tidak menyelesaikan pembayaran hingga durasi waktu pembayaran kedaluwarsa.* | *Sistem menerima notifikasi status transaksi expired/failed dari Payment Gateway, membatalkan penahanan slot kuota meja/antrean, membatalkan pesanan, dan menampilkan pesan: "Batas waktu pembayaran habis. Transaksi dibatalkan".* |
+| 2 | *Pelanggan menutup notifikasi pembatalan.* | *Sistem mengarahkan kembali ke halaman beranda/restoran dan alur berakhir tanpa penerbitan tiket antrean maupun ID pesanan.* |
 <br>
 
 **Skenario Alternatif 5: Tanggal Booking Tidak Valid atau Kuota Jadwal Penuh**
