@@ -85,7 +85,7 @@
 | *11-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 3* | *0.25* | *Done* | *-* |
 | *12-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan UC06, UC08, dan membuat diagram awal* | *2* | *Done* | *-* |
 | *14-09-2026* | *Bayu Palamarta Wirawan* | *Melengkapi UC06 dan UC08, melengkapi peran admin, dan memperbaiki diagram* | *2* | *Done* | *Sempat kesulitan untuk menentukan cara menyusun diagram* |
-| *15-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram final* | *1* | *Done* | *Sempat kesulitan karena beberapa garis di diagram overlap* |
+| *15-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram final* | *1* | *Done* | *Sempat kesulitan karena beberapa garis di diagram overlap. Namun diagram akhir ditetapkan berdasarkan pertimbangan kelompok dan asisten* |
 
 **Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
