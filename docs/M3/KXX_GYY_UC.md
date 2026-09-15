@@ -106,6 +106,8 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 | *UC07* | *Mengatur Kuota Antrean & Meja.* | *Pihak restoran memperbarui atau menyesuaikan batas/jumlah kuota antrean dan ketersediaan meja, pembaruan tersebut secara otomatis akan ditampilkan kepada pelanggan.* | *Restoran* | *KF17, KF18* |
 | *UC08* | *Mengelola Stok dan Menu Makanan.* | *Restoran bisa mengatur stok dari setiap menu yang disediakan oleh restoran tersebut.* | *Restoran* | *KF07* |
 | *UC09* | *Menampilkan Dashboard Antrean Restoran.* | *Restoran dapat melihat status antrean beserta dengan detail pemesanan.* | *Restoran* | *...* |
+| *UC12* | *Keluar Akun.* | *Pengguna mengakhiri sesi login dengan menggunakan menu log out pada sistem.* | *Pelanggan, Restoran, Admin* | *-* |
+| *UC15* | *Penghapusan Restoran.* | *Admin menghapus data restoran dari sistem karena pelanggaran aturan aplikasi, laporan keluhan pelanggan, atau permintaan dari pihak restoran. Restoran tidak lagi ditampilkan pada aplikasi.* | *Pelanggan, Restoran, Admin* | *-* |
 
 
 ## 3.3 Use Case Diagram
@@ -387,6 +389,25 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 1 | *Staff resto membuka fitur antrean* | *Sistem tidak menemukan data antrean dari data base, menampilkan pesan "Belum ada antrean saat ini"*|
 <br>
 
+### 3.4.12 Skenario UC12
+
+**Nama Use Case:** *Keluar Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih tombol atau menu "Keluar"/"Log Out" pada profil akun* | *Sistem menampilkan pesan konfirmasi untuk keluar dari akun* |
+| 2 | *Pengguna mengonfirmasi keluar akun dengan memilih tombol "Ya" pada pesan konfirmasi* | *Sistem menghapus token/sesi login pengguna saat ini, lalu mengarahkan tampilan kembali ke halaman login* |
+<br>
+
+***Skenario Alternatif 1: Aktor Membatalkan Keluar Akun**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih tombol "Batal" pada pesan konfirmasi keluar akun* | *Sistem menutup pesan konfirmasi dan mempertahankan sesi login pengguna pada halaman sebelumnya* |
+<br>
+
 ### 3.4.13 Skenario UC13
 
 **Nama Use Case:** *Penyampaian Keluhan Pelanggan*
@@ -408,6 +429,26 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
 | 1 | *Admin membuka fitur keluhan* | *Sistem menampilkan daftar keluhan yang dikirim oleh semua pelanggan*|
+<br>
+
+### 3.4.15 Skenario UC15
+
+**Nama Use Case:** *Penghapusan Restoran*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih menu kelola restoran pada aplikasi dan memilih salah satu restoran yang akan dihapus* | *Sistem menampilkan detail profil restoran beserta tombol "Hapus Restoran"* |
+| 2 | *Admin menekan tombol "Hapus Restoran"* | *Sistem menampilkan pesan konfirmasi penghapusan restoran* |
+| 3 | *Admin mengonfirmasi penghapusan restoran dengan menekan tombol "Ya" pada pesan konfirmasi* | *Sistem menghapus data restoran dari database, menghapus restoran dari daftar restoran aktif di aplikasi pelanggan, dan menampilkan pesan "Restoran berhasil dihapus"* |
+<br>
+
+**Skenario Alternatif 1: Admin Membatalkan Proses Penghapusan Restoran**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih opsi "Batal" pada pesan konfirmasi* | *Sistem membatalkan proses penghapusan dan menutup pesan konfirmasi* |
 <br>
 
 <sub>*Lanjutkanlah pola 3.4.x ini untuk setiap ID UC yang telah diidentifikasi pada 3.2, sampai seluruh use case memiliki skenario normal dan skenario alternatif (tidak usah dibuat jika use case tersebut memang tidak memiliki skenario alternatif).*<sub>
