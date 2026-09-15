@@ -24,7 +24,7 @@
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
-* Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
+* [Milestone 3](#milestone-3)
 
 
 ---
@@ -57,7 +57,7 @@
 
 
 ### Milestone 2
-**Periode:** 02-09-2026 09-09-2026
+**Periode:** 02-09-2026 - 09-09-2026
 
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
@@ -77,7 +77,18 @@
 **Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
+### Milestone 3
+**Periode:** 09-09-2026 - 16-09-2026
 
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *11-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 3* | *0.25* | *Done* | *-* |
+| *12-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan UC06, UC08, dan membuat diagram awal* | *2* | *Done* | *-* |
+| *14-09-2026* | *Bayu Palamarta Wirawan* | *Melengkapi UC06 dan UC08, melengkapi peran admin, dan memperbaiki diagram* | *2* | *Done* | *Sempat kesulitan untuk menentukan cara menyusun diagram* |
+| *15-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram final* | *1* | *Done* | *Sempat kesulitan karena beberapa garis di diagram overlap* |
+
+**Catatan/Evaluasi Milestone 2:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
 ---
