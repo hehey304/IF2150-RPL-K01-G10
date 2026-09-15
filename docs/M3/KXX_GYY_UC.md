@@ -385,4 +385,27 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | 1 | *Staff resto membuka fitur antrean* | *Sistem tidak menemukan data antrean dari data base, menampilkan pesan "Belum ada antrean saat ini"*|
 <br>
 
+### 3.4.13 Skenario UC13
+
+**Nama Use Case:** *Penyampaian Keluhan Pelanggan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan membuka fitur keluhan* | *Sistem menampilkan formulir untuk mengirimkan keluhan*|
+| 2 | *Pelanggan mengisi formulir dan menekan tombol kirim* | *Sistem akan menyimpan keluhan supaya bisa diperiksa admin nantinya* |
+<br>
+
+### 3.4.14 Skenario UC14
+
+**Nama Use Case:** *Penanggapan Keluhan Pelanggan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin membuka fitur keluhan* | *Sistem daftar keluhan yang dikirim oleh semua pelanggan*|
+<br>
+
 <sub>*Lanjutkanlah pola 3.4.x ini untuk setiap ID UC yang telah diidentifikasi pada 3.2, sampai seluruh use case memiliki skenario normal dan skenario alternatif (tidak usah dibuat jika use case tersebut memang tidak memiliki skenario alternatif).*<sub>
