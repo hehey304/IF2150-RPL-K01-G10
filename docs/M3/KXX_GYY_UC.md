@@ -109,6 +109,8 @@ Identifikasi seluruh use case yang mencakup Kebutuhan Fungsional pada BAB 2. Sat
 | *UC07* | *Mengatur Kuota Antrean & Meja.* | *Pihak restoran memperbarui atau menyesuaikan batas/jumlah kuota antrean dan ketersediaan meja, pembaruan tersebut secara otomatis akan ditampilkan kepada pelanggan.* | *Restoran* | *KF17, KF18* |
 | *UC08* | *Mengelola Stok dan Menu Makanan.* | *Restoran bisa mengatur stok dari setiap menu yang disediakan oleh restoran tersebut.* | *Restoran* | *KF07* |
 | *UC09* | *Menampilkan Dashboard Antrean Restoran.* | *Restoran dapat melihat status antrean beserta dengan detail pemesanan.* | *Restoran* | *...* |
+| *UC10* | *Registrasi Akun* | *Pengguna mendaftarkan data identitas dan kredensial baru ke dalam sistem untuk mendapatkan hak akses akun* | *Pelanggan, Restoran, Admin* | *KF21* |
+| *UC11* | *Login Akun* | *Pengguna melakukan autentikasi menggunakan kredensial terdaftar untuk masuk ke antarmuka sistem* | *Pelanggan, Restoran, Admin* | *KF21* |
 | *UC12* | *Keluar Akun.* | *Pengguna mengakhiri sesi login dengan menggunakan menu log out pada sistem.* | *Pelanggan, Restoran, Admin* | *-* |
 | *UC15* | *Penghapusan Restoran.* | *Admin menghapus data restoran dari sistem karena pelanggaran aturan aplikasi, laporan keluhan pelanggan, atau permintaan dari pihak restoran. Restoran tidak lagi ditampilkan pada aplikasi.* | *Pelanggan, Restoran, Admin* | *-* |
 
@@ -382,6 +384,57 @@ Format tabel skenario: kolom **Aksi Aktor** berisi apa yang dilakukan/diinput ak
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
 | 1 | *Staff resto membuka fitur antrean* | *Sistem tidak menemukan data antrean dari data base, menampilkan pesan "Belum ada antrean saat ini"*|
+<br>
+
+### 3.4.10 Skenario UC10
+
+**Nama Use Case:** *Registrasi Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna mengisi seluruh data formulir dengan valid dan menekan tombol "Daftar".* | *Sistem memvalidasi kelengkapan data, memastikan email belum terdaftar di basis data, mengenkripsi kata sandi, menyimpan akun baru, dan menampilkan notifikasi registrasi berhasil serta mengarahkan pengguna ke halaman login.* |
+<br>
+
+**Skenario Alternatif 1: Email atau Nomor Telepon Sudah Terdaftar**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna mengisi formulir pendaftaran menggunakan email atau nomor telepon yang sudah terdaftar di sistem, lalu menekan tombol "Daftar".* | *Sistem mendeteksi duplikasi data pada basis data, menolak pendaftaran, dan menampilkan pesan: "Email atau nomor telepon sudah terdaftar. Silakan gunakan akun lain atau lakukan login".* |
+| 3 | *Pengguna memilih opsi beralih ke halaman login atau mengganti data email pada formulir.* | *Sistem mengarahkan pengguna ke halaman login atau mereset kolom input formulir pendaftaran.* |
+<br>
+
+**Skenario Alternatif 2: Kata Sandi Tidak Sesuai Kriteria Keamanan atau Konfirmasi Salah**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna memasukkan kata sandi yang tidak memenuhi standar keamanan (misal: kurang dari 8 karakter) atau konfirmasi kata sandi tidak cocok, lalu menekan tombol "Daftar".* | *Sistem memvalidasi format data masukan, menolak pembuatan akun, dan menampilkan pesan error spesifik: "Konfirmasi kata sandi tidak cocok atau kata sandi minimal 8 karakter".* |
+| 3 | *Pengguna memperbaiki isian kata sandi pada kolom formulir.* | *Sistem menghapus tanda pesan error dan menekan kembali tombol "Daftar".* |
+<br>
+
+### 3.4.11 Skenario UC11
+
+**Nama Use Case:** *Login Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna membuka antarmuka login pada sistem.* | *Sistem menampilkan kolom input email/nama pengguna dan kata sandi.*|
+| 2 | *Pengguna memasukkan email dan kata sandi yang valid, lalu menekan tombol "Masuk".* | *Sistem memverifikasi kecocokan kredensial dan status akun di basis data, menerbitkan token sesi akses aktif, lalu mengarahkan pengguna ke halaman utama/dashboard sesuai perannya (Pelanggan, Restoran, atau Admin).* |
+<br>
+
+**Skenario Alternatif 1: Kredensial Salah (Email atau Kata Sandi Tidak Cocok)**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna membuka antarmuka login pada sistem.* | *Sistem menampilkan kolom input email/nama pengguna dan kata sandi.*|
+| 2 | *Pengguna memasukkan email atau kata sandi yang salah/tidak terdaftar, lalu menekan tombol "Masuk".* | *Sistem memverifikasi kredensial, mendeteksi ketidaksesuaian data, menolak akses masuk, dan menampilkan pesan peringatan: "Email atau kata sandi yang Anda masukkan salah".* |
+| 3 | *Pengguna meninjau kembali input dan memasukkan kredensial yang benar.* | *Sistem kembali memproses verifikasi kredensial (Langkah 2 Skenario Normal).* |
 <br>
 
 ### 3.4.12 Skenario UC12
