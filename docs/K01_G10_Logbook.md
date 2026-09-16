@@ -95,7 +95,7 @@
 | *15-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambahkan KF19, KF20, KF21, UC03 dan UC09* | *1.5* | *Done* | *-* |
 | *15-09-2026* | *Chatima Anandakhorita* | *Menambahkan UC10, UC11, beserta skenario masing-masing* | *2* | *Done* | *-* |
 | *16-09-2026* | *Athallah Nanda Andita* | *Memperbaiki UC12 dan UC15 di bagian 3.4* | *0.25* | *Done* | *-* |
-| *16-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki UC3, KF19, dan KF20 pada bagian bab 2 dan bab 3.4.3* | *1.5* | *Done* | *-* |
+| *16-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki UC3, KF19, dan KF20 pada bagian bab 2 dan bab 3.4.3* | *0.25* | *Done* | *-* |
 
 **Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
