@@ -86,11 +86,14 @@
 | *11-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 3* | *0.25* | *Done* | *-* |
 | *12-09-2026* | *Muhammad Fauzi Muharam* | *Membagi tugas dan menambahkan UC01 serta UC05* | *2* | *Done* | *-* |
 | *12-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan UC06, UC08, dan membuat diagram awal* | *2* | *Done* | *-* |
+| *13-09-2026* | *Chatima Anandakhorita* | *Menambahkan UC02 serta skenarionya* | *1,5* | *Done* | *-* |
+| *14-09-2026* | *Chatima Anandakhorita* | *Menambahkan US10, US11, A09, A10, R29, R30, R31, dan R32* | *2* | *Done* | *-* |
 | *14-09-2026* | *Bayu Palamarta Wirawan* | *Melengkapi UC06 dan UC08, melengkapi peran admin, dan memperbaiki diagram* | *2* | *Done* | *Sempat kesulitan untuk menentukan cara menyusun diagram* |
 | *15-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram final* | *1* | *Done* | *Sempat kesulitan karena beberapa garis di diagram overlap. Namun diagram akhir ditetapkan berdasarkan pertimbangan kelompok dan asisten* |
 | *15-09-2026* | *Muhammad Fauzi Muharam* | *Membuat form asistensi dan renaming file* | *0.5* | *Done* | *-* |
 | *15-09-2026* | *Athallah Nanda Andita* | *Menambahkan UC12 dan UC15 di bagian 3.2 dan 3.4* | *1* | *Done* | *Bagian 3.2 untuk KF UC12 dan UC15 sempat kosong karena belum dibuat* |
 | *15-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambahkan KF19, KF20, KF21, UC03 dan UC09* | *1.5* | *Done* | *-* |
+| *15-09-2026* | *Chatima Anandakhorita* | *Menambahkan UC10, UC11, beserta skenario masing-masing* | *2* | *Done* | *-* |
 
 **Catatan/Evaluasi Milestone 2:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
