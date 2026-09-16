@@ -98,7 +98,7 @@
 | *16-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki UC3, KF19, dan KF20 pada bagian bab 2 dan bab 3.4.3* | *0.25* | *Done* | *-* |
 | *16-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki UC2 dan UC4* | *0.5* | *Done* | *-* |
 
-**Catatan/Evaluasi Milestone 2:**
+**Catatan/Evaluasi Milestone 3:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
