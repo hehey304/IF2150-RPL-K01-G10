@@ -24,6 +24,7 @@
 ### Daftar Isi
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
+* [Milestone 3](#milestone-3)
 * Notes: Copy bagian Daftar Isi seperti Milestone 1 untuk Milestone berikutnya, contoh ``* [Milestone 2](#milestone-2)``. Ketika Daftar isi diklik maka akan langsung diarahkan ke bagian bawah sesuai dengan Milestone tujuan.
 
 ---
@@ -45,7 +46,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Gemini* | *Memperbaiki bahasa penulisan yang kurang tepat dan baku* | *"Tolong ubah teks yang telah saya buat sehingga menjadi lebih formal untuk penulisan laporan."* | *AI memberikan hasil parafrase teks yang telah diberikan sehingga lebih cocok untuk dimasukkan ke file-file tugas.* |
 | | | | | |
 
-### Milestone 2
+### Milestone 3
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | *Gemini* | *Memperbaiki bahasa penulisan agar lebih formal* | *"Ubahlah teks berikut menjadi lebih formal demi sebuah laporan"* | *AI memberikan hasil parafrase teks yang telah diberikan sehingga lebih formal.* |
