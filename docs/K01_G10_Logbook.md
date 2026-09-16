@@ -66,6 +66,7 @@
 | *06-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan bagian 1.1, memperbaiki 2.2, dan menambahkan bagian 2.1 serta 2.2 sesuai hasil asistensi* | *1* | *Done* | *-* |
 | *06-09-2026* | *Chatima Anandakhorita* | *Menambahkan pemetaan kebutuhan, bagian 2.3, untuk setiap Deskripsi Aktivitas pada bagian 2.2* | *1* | *Done* | *-* |
 | *07-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan sebagian kebutuhan fungsional* | *1* | *Done* | *-* |
+| *07-09-2026* | *Athallah Nanda Andita* | *Menambahkan bagian 2.5 kebutuhan non fungsional* | *1* | *Done* | *-* |
 | *08-09-2026* | *Chatima Anandakhorita* | *Memperbaiki kesalahan pada bagian 2.3 setelah diberikan masukan oleh asisten, terutama menambahkan pemetaan kebutuhan berupa aturan hukum yang berlaku pada bisnis dan kebutuhan yang sebelumnya lupa untuk ditambahkan* | *1* | *Done* | *-* | 
 | *08-09-2026* | *Bayu Palamarta Wirawan* | *Menambahkan kebutuhan-kebutuhan fungsional lainnya dan memperbaiki format 2.4* | *2* | *Done* | *-* |
 | *09-09-2026* | *Athallah Nanda Andita* | *Memperbaiki kesalahan penomoran pada bagian 2.3, 2.4, dan 2.5* | *1* | *Done* | *-* |
