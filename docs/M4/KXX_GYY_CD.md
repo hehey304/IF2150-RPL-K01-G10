@@ -509,7 +509,6 @@ Pada bagian ini, Anda diperbolehkan untuk menyalin dari dokumen sebelumnya.
 | 2 | *Admin menekan tombol "Hapus Restoran"* | *Sistem menampilkan pesan konfirmasi penghapusan restoran* |
 | 3 | *Admin memilih opsi "Batal" pada pesan konfirmasi* | *Sistem membatalkan proses penghapusan dan menutup pesan konfirmasi* |
 <br>
-<sub>*Lanjutkan pola 3.4.x ini untuk setiap ID UC pada 3.2, sampai seluruh use case tercakup.*<sub>
 
 ---
 
