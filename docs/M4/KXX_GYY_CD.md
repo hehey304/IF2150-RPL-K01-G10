@@ -127,46 +127,364 @@ Pada bagian ini, Anda diperbolehkan untuk menyalin dari dokumen sebelumnya.
 
 ### 3.4.1 Skenario UC01
 
-**Nama Use Case:** *Memesan Produk*
+**Nama Use Case:** *Mencari dan filter resto*
 
 **Skenario Normal**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan memilih produk dari katalog* | *Sistem menampilkan detail produk dan menambahkannya ke keranjang* |
-| 2 | *Pelanggan menekan tombol checkout* | *Sistem membuat pesanan baru dari isi keranjang dan menampilkan ringkasan pesanan* |
-| ... | *...* | *...* |
+| 1 | *Pelanggan memasukkan kata kunci nama restoran atau memilih filter pencarian* | *Sistem memproses kriteria pencarian dan menampilkan daftar restoran viral yang sesuai dengan kata kunci atau filter yang dipilih* |
+| 2 | *Pelanggan memilih salah satu restoran dari daftar hasil pencarian* | *Sistem menampilkan halaman detail restoran lengkap dengan informasi menu, rating, ulasan, serta status antrean saat ini* |
 
-**Skenario Alternatif 1: Produk Tidak Tersedia**
+
+
+<br>
+
+**Skenario Alternatif 1: Hasil Pencarian Tidak Ditemukan**
+
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan memilih produk dari katalog* | *Sistem menampilkan pesan "Produk tidak tersedia" karena stok habis* |
-| 2 | *Pelanggan memilih produk lain* | *Sistem kembali ke langkah 1 skenario normal* |
-| ... | *...* | *...* |
+| 1 | *Pelanggan memasukkan kata kunci nama restoran atau memilih filter pencarian yang tidak tersedia di sistem* | *Sistem memproses kriteria pencarian tetapi tidak menemukan data yang cocok, lalu menampilkan pesan "Restoran tidak ditemukan" dan menampilkan restoran lain secara default (diurutkan berdasarkan yang paling viral)* |
+| 2 | *Pelanggan mengubah kata kunci atau mereset filter pencarian* | *Sistem kembali ke langkah 1 skenario normal* |
+
+### 3.4.2 Skenario UC02
+
+**Nama Use Case:** *Melakukan pemesanan dan pembayaran digital*
+
+**Skenario Normal**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf keranjang pesanan.* |
+| 2 | *Pelanggan memilih opsi layanan Dine-In dan memasukkan jumlah rombongan.* | *Sistem memverifikasi stok menu dan memeriksa ketersediaan kuota meja makan restoran terkini.* |
+| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital (QRIS, Virtual Account).* |
+| 4 | *Pelanggan memilih metode pembayaran dan menekan tombol bayar.* | *Sistem memicu pembuatan transaksi ke Payment Gateway serta menampilkan tagihan dan batas waktu pembayaran.* |
+| 5 | *Pelanggan menyelesaikan transfer/pembayaran melalui aplikasi perbankan/e-wallet.* | *Sistem menerima verifikasi pelunasan dari Payment Gateway, memotong kuota meja, menerbitkan ID pesanan dan nomor antrean resmi ke basis data, lalu menampilkan halaman konfirmasi tiket antrean beserta rincian pesanan.* |
+<br>
+
+**Skenario Alternatif 1: Pre-Order Takeaway**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf pesanan.* |
+| 2 | *Pelanggan memilih opsi layanan Takeaway.* | *Sistem memverifikasi stok menu dan mengabaikan pengecekan kuota meja makan.* |
+| 3 | *Pelanggan melanjutkan transaksi dan menyelesaikan pembayaran via Payment Gateway.* | *Sistem menerima verifikasi pelunasan dari Payment Gateway, mencatat transaksi ke basis data, menerbitkan ID pesanan khusus antrean dapur, dan menampilkan nomor panggilan pengambilan pesanan beserta bukti pembayaran.* |
+<br>
+
+**Skenario Alternatif 2: Booking tempat**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
+| 2 | *Pelanggan memilih tanggal kedatangan (maksimal 7 hari ke depan) dan kapasitas kursi/rombongan* | *Sistem memvalidasi rentang tanggal (<= hari ke depan) dan ketersediaan kuota reservasi meja pada jadwal tersebut.* |
+| 3 | *Pelanggan memilih menu makanan yang ingin dipesan.* | *Sistem memverifikasi ketersediaan dan mencatat draf reservasi beserta rincian pesanan.* |
+| 4 | *Pelanggan menyelesaikan pembayaran tagihan/deposit melalui metode digital* | *Sistem menerima konfirmasi pembayaran lunas dari Payment Gateway, mengunci kuota meja pada jadwal tersebut, menerbitkan ID booking resmi ke basis data, dan menampilkan tanda bukti reservasi beserta rincian pesanan.* |
+<br>
+
+**Skenario Alternatif 3: Stok Menu Habis**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menekan tombol konfirmasi/lanjutkan pesanan.* | *Sistem mendeteksi stok menu tertentu di dapur restoran sudah tidak mencukupi, menolak proses checkout, memberi tanda pada menu yang habis, dan menampilkan notifikasi: "Mohon maaf, terdapat menu pilihan yang telah habis".* |
+| 2 | *Pelanggan menghapus atau mengganti menu yang habis dari keranjang pesanan.* | *Sistem memperbarui total tagihan dan kembali ke Langkah 2 Skenario Normal (atau Langkah 3 Skenario Alternatif 2 jika melakukan reservasi booking).* |
+<br>
+
+**Skenario Alternatif 4: Batas Waktu Pembayaran Habis (Timeout) / Pembayaran Gagal**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf keranjang pesanan.* |
+| 2 | *Pelanggan memilih opsi layanan Dine-In maupun layanan Takeaway.* | *Sistem memverifikasi ketersediaan stok atau meja berdasarkan opsi layanan* |
+| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital (QRIS, Virtual Account).* |
+| 4 | *Pelanggan tidak menyelesaikan pembayaran hingga durasi waktu pembayaran kedaluwarsa.* | *Sistem menerima notifikasi status transaksi expired/failed dari Payment Gateway, membatalkan penahanan slot kuota meja/antrean, membatalkan pesanan, dan menampilkan pesan: "Batas waktu pembayaran habis. Transaksi dibatalkan".* |
+| 5 | *Pelanggan menutup notifikasi pembatalan.* | *Sistem mengarahkan kembali ke halaman beranda/restoran dan alur berakhir tanpa penerbitan tiket antrean maupun ID pesanan.* |
+<br>
+
+**Skenario Alternatif 5: Tanggal Booking Tidak Valid atau Kuota Jadwal Penuh**
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan memilih opsi Booking Tempat.* | *Sistem menampilkan kalender pemilihan tanggal dan slot jam kedatangan.* |
+| 2 | *Pelanggan memilih tanggal kedatangan lebih dari 7 hari ke depan atau memilih slot meja yang sudah penuh.* | *Sistem menolak pemilihan jadwal dan menampilkan pesan: "Reservasi hanya dapat dilakukan maksimal 7 hari sebelum kedatangan atau kuota meja pada jam tersebut telah penuh".* |
+| 3 | *Pelanggan memilih kembali tanggal/jam lain yang tersedia.* | *Sistem kembali ke Langkah 2 Skenario Alternatif 2.* |
+<br>
+
+
 
 ### 3.4.3 Skenario UC03
 
-**Nama Use Case:** *Melakukan Pembayaran*
+**Nama Use Case:** *Memantau Status Antrean (Virtual Queue)*
 
 **Skenario Normal**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan menekan tombol "Bayar" pada ringkasan pesanan* | *Sistem menampilkan pilihan metode pembayaran yang tersedia (mis. Kartu, E-Wallet)* |
-| 2 | *Pelanggan memilih salah satu metode pembayaran* | *Sistem mengirimkan permintaan otorisasi ke payment gateway (dummy) sesuai metode yang dipilih* |
-| 3 | *-* | *Payment gateway (dummy) mengembalikan status pembayaran berhasil; sistem memperbarui status pesanan menjadi "Lunas" dan menampilkan notifikasi pembayaran berhasil* |
-| ... | *...* | *...* |
+| 1 | *Pelanggan memilih fitur antrean* | *Sistem memvalidasi ID antrean pelanggan dan menampilkan informasi antrean saat itu*|
+| 2 | *Pelanggan tetap membuka tampilan antrean* | *Sistem akan memperbarui antrean setiap ada perubahan dan memberikan notifikasi untuk mengambil pesanan jika sudah memasuki antreannya* |
+<br>
 
-**Skenario Alternatif 1: Pembayaran Dummy Gagal**
+### 3.4.4 Skenario UC04
+
+**Nama Use Case:** *Pendaftaran Mitra Restoran Baru*
+
+**Skenario Normal**
 
 | No | Aksi Aktor | Reaksi Perangkat Lunak |
 | :--- | :--- | :--- |
-| 1 | *Pelanggan menekan tombol "Bayar" pada ringkasan pesanan* | *Sistem menampilkan pilihan metode pembayaran yang tersedia* |
-| 2 | *Pelanggan memilih salah satu metode pembayaran* | *Sistem mengirimkan permintaan otorisasi ke payment gateway (dummy), yang mengembalikan status gagal (mis. saldo e-wallet dummy tidak mencukupi)* |
-| 3 | *Pelanggan memilih untuk mencoba lagi atau memilih metode lain* | *Sistem kembali ke langkah 1 skenario normal* |
-| ... | *...* | *...* |
+| 1 | *Pihak restoran memilih fitur pendaftaran mitra baru pada aplikasi* | *Sistem menampilkan formulir registrasi mitra baru yang mencakup data serta profil restoran, dokumen perizinan, dan daftar menu yang akan diajukan* |
+| 2 | *Restoran mengisi formulir pendaftaran mitra baru pada aplikasi* | *Sistem memvalidasi kelengkapan data, menyimpan formulir registrasi dengan status "Menunggu Verifikasi" ke dalam database, serta menampilkan pesan konfirmasi bawha pendaftaran berhasil* |
+<br>
 
+**Skenario Alternatif 1: Data Form Tidak Lengkap atau Format Tidak Sesuai**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih fitur pendaftaran mitra baru pada aplikasi* | *Sistem menampilkan formulir registrasi mitra baru yang mencakup data serta profil restoran, dokumen perizinan, dan daftar menu yang akan diajukan* |
+| 2 | *Pihak restoran mengisikan formulir pendaftaran secara tidak lengkap atau mengunggah format dokumen yang tidak valid, lalu menekan tombol "Daftar"* | *Sistem menolak menyimpan formulir ke database, memberi tanda pada bagian yang bermasalah serta apa masalahnya, dan menampilkan pesan peringatan untuk segera memperbaiki/melengkapi data* |
+| 3 | *Pihak restoran memperbaiki atau melengkapi data yang bermasalah* | *Sistem kembali ke langkah 2 skenario normal* |
+
+### 3.4.5 Skenario UC05
+
+**Nama Use Case:** *Memverifikasi Pendaftaran Restoran.*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih menu peninjauan pendaftaran restoran dan membuka detail berkas pengajuan mitra baru* | *Sistem menampilkan rincian data profil restoran, dokumen verifikasi, dan daftar menu yang diajuka* |
+|2|*Admin menyetujui pengajuan pendaftaran restoran*|*Sistem mengubah status restoran menjadi "Disetujui", menyimpan data ke database publik, dan mengirimkan notifikasi konfirmasi penerimaan ke email restoran*|
+
+
+<br>
+
+**Skenario Alternatif 1: Pengajuan Pendaftaran Ditolak**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih menu peninjauan pendaftaran restoran dan membuka detail berkas pengajuan mitra baru* | *Sistem menampilkan rincian data profil restoran, dokumen verifikasi, dan daftar menu yang diajukan* |
+|2|*Admin menolak pengajuan pendaftaran dan memasukkan alasan penolakan*|*Sistem mengubah status pengajuan menjadi "Ditolak" dan mengirimkan email notifikasi penolakan beserta alasan penolakan ke email restoran*|
+
+### 3.4.6 Skenario UC06
+
+**Nama Use Case:** *Mengelola Antrean*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran memilih fitur dequeue* | *Sistem menampilkan pesan konfirmasi untuk melakukan dequeue pada restorannya* |
+| 3 | *Restoran mengonfirmasi dequeue* | *Sistem menghapus pelanggan terdepan pada antrian dan memperbarui antrian* |
+<br>
+
+  **Skenario Alternatif 1: Restoran membatalkan dequeue**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran memilih fitur dequeue* | *Sistem menampilkan pesan konfirmasi untuk melakukan dequeue pada restorannya* |
+| 3 | *Restoran memilih pilihan "batal" pada konfirmasi dequeue* | *Sistem menutup pesan konfirmasi* |
+
+  **Skenario Alternatif 2: Pelanggan tidak hadir**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola antrian* | *Sistem menampilkan dashboard antrian* |
+| 2 | *Restoran mengamati pelanggan terdepan belum datang dan memilih untuk menunggu* | *Sistem menunggu 30 menit sebelum melakukan dequeue secara otomatis* |
+
+### 3.4.7 Skenario UC07
+
+**Nama Use Case:** *Mengatur Kuota Antrean & Meja*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih menu pengaturan kuota antrean dan kapasitas meja* | *Sistem menampilkan kuota antrean dan kapasitas meja yang tersedia saat ini* |
+| 2 | *Pihak restoran mengubah batas maksimum kuota antrean atau jumlah ketersediaan meja, lalu menekan tombol "Simpan Pengaturan"* | *Sistem langsung menyimpan informasi ke dalam database dan memperbarui tampilan kuota antrean dan kapasitas meja yang tersedia* |
+<br>
+
+**Skenario Alternatif 1: Input Tidak Valid**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih menu pengaturan kuota antrean dan kapasitas meja* | *Sistem menampilkan kuota antrean dan kapasitas meja yang tersedia saat ini* |
+| 2 | *Pihak restoran menginput nilai kuota berupa angka negatif atau format bukan angka, lalu menekan tombol "Simpan Pengaturan"* | *Sistem menolak pembaruan dan menampilkan pesan peringatan agar pihak restoran memperbaiki jumlah kuota yang dimasukkan dengan format yang valid* |
+| 3 | *Pihak restoran memperbaiki nilai kuota dengan format yang benar* | *Sistem kembali ke langkah 2 skenario normal* |
+
+  **Skenario Alternatif 2: Restoran Menutup Antrean Sementara**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pihak restoran memilih menu pengaturan kuota antrean dan kapasitas meja* | *Sistem menampilkan kuota antrean dan kapasitas meja yang tersedia saat ini* |
+| 2 | *Pihak restoran memasukkan 0 (nol) sebagai kuota antrean yang baru jika ingin menutup antrean sementara* | *Sistem memperbaru dan mengubah tampilan kuota antrean yang tersedia menjadi pesan "Antrean penuh/Ditutup". Tidak ada antrean atau pesanan baru yang bisa masuk ketika kuota ditutup* |
+
+### 3.4.8 Skenario UC08
+
+**Nama Use Case:** *Mengelola Stok dan Menu Makanan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih salah satu menu* | *Sistem menampilkan detail dari menu dan ketersedian menu* |
+| 3 | *Restoran mengubah informasi stok atau menu* | *Sistem memperbarui informasi pada database dan website pelanggan* |
+<br>
+
+  **Skenario Alternatif 1: Restoran menambahkan menu baru**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih fitur tambah menu* | *Sistem menampilkan formulir menu* |
+| 3 | *Restoran mengisi formulir dan klik Simpan* | *Sistem menyimpan data-data dalam database* |
+
+  **Skenario Alternatif 2: Restoran menghapus salah satu menu**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih fitur hapus menu* | *Sistem menampilkan data seluruh menu* |
+| 3 | *Restoran menghapus salah satu menu* | *Sistem menghapus data menu tersebut dari database* |
+
+  **Skenario Alternatif 3: Stok makanan tidak cukup**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Restoran memilih fitur untuk mengelola stok dan menu makanan* | *Sistem menampilkan daftar menu, stok, dan harga* |
+| 2 | *Restoran memilih salah satu menu* | *Sistem menampilkan detail dari menu dan ketersedian menu* |
+| 3 | *Restoran mengubah jumlah stok menjadi 0* | *Sistem segera menyimpan data pada database dan memperbarui informasi pada website pelanggan* |
+
+### 3.4.9 Skenario UC09
+
+**Nama Use Case:** *Memantau Dashboard Antrean Restoran*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Staff restoran membuka fitur antrean* | *Sistem menampilkan daftar antrean beserta rincian seperti yang dipesam, no antrean, kapasitas meja yang tersisa dan yang sudah di-booking*|
+| 2 | *Staff terus memantau daftar antrean* | *Sistem akan meng-update antrean setiap ada perubahan tanpa perlu me-reload halaman* |
+<br>
+
+**Skenario Alternatif 1: Antrean Kosong saat Resto Baru Didaftarkan maupun Baru Buka**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Staff resto membuka fitur antrean* | *Sistem tidak menemukan data antrean dari data base, menampilkan pesan "Belum ada antrean saat ini"*|
+<br>
+
+### 3.4.10 Skenario UC10
+
+**Nama Use Case:** *Registrasi Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna mengisi seluruh data formulir dengan valid dan menekan tombol "Daftar".* | *Sistem memvalidasi kelengkapan data, memastikan email belum terdaftar di basis data, mengenkripsi kata sandi, menyimpan akun baru, dan menampilkan notifikasi registrasi berhasil serta mengarahkan pengguna ke halaman login.* |
+<br>
+
+**Skenario Alternatif 1: Email atau Nomor Telepon Sudah Terdaftar**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna mengisi formulir pendaftaran menggunakan email atau nomor telepon yang sudah terdaftar di sistem, lalu menekan tombol "Daftar".* | *Sistem mendeteksi duplikasi data pada basis data, menolak pendaftaran, dan menampilkan pesan: "Email atau nomor telepon sudah terdaftar. Silakan gunakan akun lain atau lakukan login".* |
+| 3 | *Pengguna memilih opsi beralih ke halaman login atau mengganti data email pada formulir.* | *Sistem mengarahkan pengguna ke halaman login atau mereset kolom input formulir pendaftaran.* |
+<br>
+
+**Skenario Alternatif 2: Kata Sandi Tidak Sesuai Kriteria Keamanan atau Konfirmasi Salah**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih menu pendaftaran akun baru pada aplikasi/situs web.* | *Sistem menampilkan formulir registrasi yang meminta data nama lengkap, email, nomor telepon, dan kata sandi.*|
+| 2 | *Pengguna memasukkan kata sandi yang tidak memenuhi standar keamanan (misal: kurang dari 8 karakter) atau konfirmasi kata sandi tidak cocok, lalu menekan tombol "Daftar".* | *Sistem memvalidasi format data masukan, menolak pembuatan akun, dan menampilkan pesan error spesifik: "Konfirmasi kata sandi tidak cocok atau kata sandi minimal 8 karakter".* |
+| 3 | *Pengguna memperbaiki isian kata sandi pada kolom formulir.* | *Sistem menghapus tanda pesan error dan menekan kembali tombol "Daftar".* |
+<br>
+
+### 3.4.11 Skenario UC11
+
+**Nama Use Case:** *Login Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna membuka antarmuka login pada sistem.* | *Sistem menampilkan kolom input email/nama pengguna dan kata sandi.*|
+| 2 | *Pengguna memasukkan email dan kata sandi yang valid, lalu menekan tombol "Masuk".* | *Sistem memverifikasi kecocokan kredensial dan status akun di basis data, menerbitkan token sesi akses aktif, lalu mengarahkan pengguna ke halaman utama/dashboard sesuai perannya (Pelanggan, Restoran, atau Admin).* |
+<br>
+
+**Skenario Alternatif 1: Kredensial Salah (Email atau Kata Sandi Tidak Cocok)**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna membuka antarmuka login pada sistem.* | *Sistem menampilkan kolom input email/nama pengguna dan kata sandi.*|
+| 2 | *Pengguna memasukkan email atau kata sandi yang salah/tidak terdaftar, lalu menekan tombol "Masuk".* | *Sistem memverifikasi kredensial, mendeteksi ketidaksesuaian data, menolak akses masuk, dan menampilkan pesan peringatan: "Email atau kata sandi yang Anda masukkan salah".* |
+| 3 | *Pengguna meninjau kembali input dan memasukkan kredensial yang benar.* | *Sistem kembali memproses verifikasi kredensial (Langkah 2 Skenario Normal).* |
+<br>
+
+### 3.4.12 Skenario UC12
+
+**Nama Use Case:** *Keluar Akun*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih tombol atau menu "Keluar"/"Log Out" pada profil akun* | *Sistem menampilkan pesan konfirmasi untuk keluar dari akun* |
+| 2 | *Pengguna mengonfirmasi keluar akun dengan memilih tombol "Ya" pada pesan konfirmasi* | *Sistem menghapus token/sesi login pengguna saat ini, lalu mengarahkan tampilan kembali ke halaman login* |
+<br>
+
+**Skenario Alternatif 1: Aktor Membatalkan Keluar Akun**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pengguna memilih tombol atau menu "Keluar"/"Log Out" pada profil akun* | *Sistem menampilkan pesan konfirmasi untuk keluar dari akun* |
+| 2 | *Pengguna memilih tombol "Batal" pada pesan konfirmasi keluar akun* | *Sistem menutup pesan konfirmasi dan mempertahankan sesi login pengguna pada halaman sebelumnya* |
+<br>
+
+### 3.4.13 Skenario UC13
+
+**Nama Use Case:** *Penyampaian Keluhan Pelanggan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Pelanggan membuka fitur keluhan* | *Sistem menampilkan formulir untuk mengirimkan keluhan*|
+| 2 | *Pelanggan mengisi formulir dan menekan tombol kirim* | *Sistem akan menyimpan keluhan supaya bisa diperiksa admin nantinya* |
+<br>
+
+### 3.4.14 Skenario UC14
+
+**Nama Use Case:** *Penanggapan Keluhan Pelanggan*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin membuka fitur keluhan* | *Sistem menampilkan daftar keluhan yang dikirim oleh semua pelanggan*|
+<br>
+
+### 3.4.15 Skenario UC15
+
+**Nama Use Case:** *Penghapusan Restoran*
+
+**Skenario Normal**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih menu kelola restoran pada aplikasi dan memilih salah satu restoran yang akan dihapus* | *Sistem menampilkan detail profil restoran beserta tombol "Hapus Restoran"* |
+| 2 | *Admin menekan tombol "Hapus Restoran"* | *Sistem menampilkan pesan konfirmasi penghapusan restoran* |
+| 3 | *Admin mengonfirmasi penghapusan restoran dengan menekan tombol "Ya" pada pesan konfirmasi* | *Sistem menghapus data restoran dari database, menghapus restoran dari daftar restoran aktif di aplikasi pelanggan, dan menampilkan pesan "Restoran berhasil dihapus"* |
+<br>
+
+**Skenario Alternatif 1: Admin Membatalkan Proses Penghapusan Restoran**
+
+| No | Aksi Aktor | Reaksi Perangkat Lunak |
+| :--- | :--- | :--- |
+| 1 | *Admin memilih menu kelola restoran pada aplikasi dan memilih salah satu restoran yang akan dihapus* | *Sistem menampilkan detail profil restoran beserta tombol "Hapus Restoran"* |
+| 2 | *Admin menekan tombol "Hapus Restoran"* | *Sistem menampilkan pesan konfirmasi penghapusan restoran* |
+| 3 | *Admin memilih opsi "Batal" pada pesan konfirmasi* | *Sistem membatalkan proses penghapusan dan menutup pesan konfirmasi* |
+<br>
 <sub>*Lanjutkan pola 3.4.x ini untuk setiap ID UC pada 3.2, sampai seluruh use case tercakup.*<sub>
 
 ---
