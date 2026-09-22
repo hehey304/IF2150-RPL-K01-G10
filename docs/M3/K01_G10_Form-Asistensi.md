@@ -40,7 +40,7 @@
 
 <!-- ![](./assets/foto-asistensi.jpg) -->
 <p align="center">
-  <img width="755" height="396" alt="image" src="https://github.com/user-attachments/assets/008f0d84-59bc-482f-b2df-57e053373423" />
+  <img src="./assets/foto_asistensi.png" width="100%">
 </p>
 
 <p align="center">
