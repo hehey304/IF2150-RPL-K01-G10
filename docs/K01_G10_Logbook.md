@@ -101,6 +101,21 @@
 **Catatan/Evaluasi Milestone 3:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
+### Milestone 4
+**Periode:** 16-09-2026 - 23-09-2026
+
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *20-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan sync fork Milestone 4* | *0.5* | *Done* | *-* |
+| *20-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram kelas UC06, UC07, dan UC08* | *1* | *Done* | *-* |
+| *21-09-2026* | *Bayu Palamarta Wirawan* | *Melengkapi 35 kelas secara keseluruhan* | *1* | *Done* | *-* |
+| *22-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram kelas secara keseluruhan* | *3* | *Done* | *Kesulitan mencari posisi yang tepat supaya tidak bertabrakan* |
+| *22-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki UC06, UC07, UC08* | *1* | *Done* | *-* |
+| *22-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki 4.1* | *1* | *Done* | *-* |
+
+**Catatan/Evaluasi Milestone 3:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+
 
 ---
 
