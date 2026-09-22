@@ -52,6 +52,11 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Gemini* | *Memperbaiki bahasa penulisan agar lebih formal* | *"Ubahlah teks berikut menjadi lebih formal demi sebuah laporan"* | *AI memberikan hasil parafrase teks yang telah diberikan sehingga lebih formal.* |
 | | | | | |
 
+### Milestone 4
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *ChatGPT* | *Merangkum kelas-kelas yang digunakan di berbagai use case* | *"Berdasarkan Bab 4.2 Diagram Kelas per Use Case dan 3.2 Identifikasi Use Case, rangkumlah semua kelas yang terdapat pada perangkat lunak"* | *Saya membaca dan menghapus data-data yang kurang akurat baik dari deskripsi atau lokasi Use Case* |
+| | | | | |
 
 ---
 ### Pernyataan Integritas dan Persetujuan
