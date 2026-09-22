@@ -25,7 +25,7 @@
 * [Milestone 1](#milestone-1)
 * [Milestone 2](#milestone-2)
 * [Milestone 3](#milestone-3)
-
+* [Milestone 4](#milestone-4)
 
 ---
 
@@ -113,7 +113,7 @@
 | *22-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki UC06, UC07, UC08* | *1* | *Done* | *-* |
 | *22-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki 4.1* | *1* | *Done* | *-* |
 
-**Catatan/Evaluasi Milestone 3:**
+**Catatan/Evaluasi Milestone 4:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
