@@ -112,7 +112,9 @@
 | *20-09-2026* | *Chatima Anandakhorita* | *Mendefinisikan kelas untuk UC01 dan UC02 serta membuat diagram kelasnya* | *2* | *Done* | *-* |
 | *20-09-2026* | *Athallah Nanda Andita* | *Membuat dan menambahkan diagram kelas untuk UC03, UC12, serta UC15* | *0.5* | *Done* | *-* |
 | *20-09-2026* | *Athallah Nanda Andita* | *Membuat identifikasi kelas beserta penjelasannya untuk UC03, UC12, dan UC15 serta memperbaiki penomoran* | *1.25* | *Done* | *-* |
+| *20-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambah subbab UC09-UC11* | *1* | *Done* | *-* |
 | *21-09-2026* | *Chatima Anandakhorita* | *Merapikan dan menyerasikan kembali ID dari seluruh kelas yang terdefinisi pada M4* | *1* | *Done* | *-* |
+| *21-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Membuat Diagram dan penjelasan UC09-UC11* | *1* | *Done* | *-* |
 | *21-09-2026* | *Bayu Palamarta Wirawan* | *Melengkapi 35 kelas secara keseluruhan* | *1* | *Done* | *-* |
 | *22-09-2026* | *Bayu Palamarta Wirawan* | *Membuat diagram kelas secara keseluruhan* | *3* | *Done* | *Kesulitan mencari posisi yang tepat supaya tidak bertabrakan* |
 | *22-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki UC06, UC07, UC08* | *1* | *Done* | *-* |
@@ -124,6 +126,7 @@
 | *23-09-2026* | *Athallah Nanda Andita* | *Menambahkan atribut dan metode/operasi untuk diagram kelas keseluruhan* | *1.5* | *Done* | *-* |
 | *23-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki Diagram Kelas Utama* | *0.5* | *Done* | *-* |
 | *23-09-2026* | *Muhammad Fauzi Muharam* | *Membuat Traceability* | *1.5* | *Done* | *-* |
+| *23-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki UC09-UC11* | *1* | *Done* | *-* |
 
 
 
