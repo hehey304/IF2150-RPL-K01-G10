@@ -122,6 +122,7 @@
 | *23-09-2026* | *Athallah Nanda Andita* | *Memperbaiki nama kelas dan diagram kelas UC03, UC12, UC15 agar sesuai camelcase* | *0.5* | *Done* | *-* |
 | *23-09-2026* | *Muhammad Fauzi Muharam* | *Merevisi UC 04, 05, 13, dan 14 sesuai hasil asistensi* | *2.5* | *Done* | *-* |
 | *23-09-2026* | *Athallah Nanda Andita* | *Menambahkan atribut dan metode/operasi untuk diagram kelas keseluruhan* | *1.5* | *Done* | *-* |
+| *23-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki Diagram Kelas Utama* | *0.5* | *Done* | *-* |
 | *23-09-2026* | *Muhammad Fauzi Muharam* | *Membuat Traceability* | *1.5* | *Done* | *-* |
 
 
