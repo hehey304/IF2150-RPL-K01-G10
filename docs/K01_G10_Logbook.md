@@ -120,8 +120,7 @@
 | *22-09-2026* | *Athallah Nanda Andita* | *Memperbaiki diagram dan kelas UC03* | *0.5* | *Done* | *-* |
 | *23-09-2026* | *Athallah Nanda Andita* | *Memperbaiki nama kelas dan diagram kelas UC03, UC12, UC15 agar sesuai camelcase* | *0.5* | *Done* | *-* |
 | *23-09-2026* | *Athallah Nanda Andita* | *Menambahkan atribut dan metode/operasi untuk diagram kelas keseluruhan* | *1.5* | *Done* | *-* |
-
-
+| *23-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki Diagram Kelas Utama* | *0.5* | *Done* | *-* |
 
 **Catatan/Evaluasi Milestone 4:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
