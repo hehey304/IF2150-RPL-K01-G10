@@ -76,7 +76,6 @@ Tabel 1.4. Aturan Penomoran
 | *User Story* | *USXX* | Mulai dari 01, 02, dan seterusnya |
 | *Kebutuhan Fungsional* | *KFXX* | Mulai dari 01, 02, dan seterusnya |
 | *Kebutuhan Non-Fungsional* | *KNFXX* | Mulai dari 01, 02, dan seterusnya |
-| *Kebutuhan Non-Fungsional* | *KNFXX* | Mulai dari 01, 02, dan seterusnya |
 | *Aktivitas* | *AXX* | Mulai dari 01, 02, dan seterusnya |
 | *Use Case* | *UCXX* | Mulai dari 01, 02, dan seterusnya |
 | *Kelas* | *CXX* | Mulai dari 01, 02, dan seterusnya |
