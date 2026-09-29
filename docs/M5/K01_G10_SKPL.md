@@ -186,7 +186,7 @@ Tabel 3.1. Kebutuhan Fungsional
 | *KF08* | *R11* | *Sistem harus menyesuaikan enqueue dengan mode pemesanan* |
 | *KF09* | *R12* | *Ketika pelanggan melakukan reservasi tempat, sistem harus memvalidasi reservasi dengan maksimal pemesanan seminggu sebelum tanggal kedatangan* |
 | *KF10* | *R13, R19* | *Ketika pesanan berhasil dilakukan, sistem harus menyimpan data pesanan dan antrean dengan ID tiket antrean pengguna* |
-| *KF11* | *R14* | *Jika tersedia berbagai metode pembayaran seperti QRIS dan virtual account, sistem harus bisa memproses sistem pembayaran menggunakan metode-metode tersebut* |
+| *KF11* | *R14* | *Jika tersedia berbagai metode pembayaran, sistem harus bisa memproses sistem pembayaran menggunakan metode-metode tersebut* |
 | *KF12* | *R15, R16* | *Ketika pelanggan melakukan pembayaran, sistem harus memverifikasi pembayaran* |
 | *KF13* | *R18* | *Ketika pesanan sudah selesai dilakukan, sistem harus menampillkan data pesanan pada pelanggan dan restoran* |
 | *KF14* | *R21* | *Ketika restoran selesai mendaftar, sistem harus menyimpan data restoran dalam database* |
@@ -308,7 +308,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | :--- | :--- | :--- |
 | 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf keranjang pesanan.* |
 | 2 | *Pelanggan memilih opsi layanan Dine-In dan memasukkan jumlah rombongan.* | *Sistem memverifikasi stok menu dan memeriksa ketersediaan kuota meja makan restoran terkini.* |
-| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital (QRIS, Virtual Account).* |
+| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital.* |
 | 4 | *Pelanggan memilih metode pembayaran dan menekan tombol bayar.* | *Sistem memicu pembuatan transaksi ke Payment Gateway serta menampilkan tagihan dan batas waktu pembayaran.* |
 | 5 | *Pelanggan menyelesaikan transfer/pembayaran melalui aplikasi perbankan/e-wallet.* | *Sistem menerima verifikasi pelunasan dari Payment Gateway, memotong kuota meja, menerbitkan ID pesanan dan nomor antrean resmi ke basis data, lalu menampilkan halaman konfirmasi tiket antrean beserta rincian pesanan.* |
 <br>
@@ -342,7 +342,7 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | :--- | :--- | :--- |
 | 1 | *Pelanggan memilih menu makanan/minuman dan menentukan jumlah pesanan.* | *Sistem mencatat pilihan menu ke dalam draf keranjang pesanan.* |
 | 2 | *Pelanggan memilih opsi layanan Dine-In maupun layanan Takeaway.* | *Sistem memverifikasi ketersediaan stok atau meja berdasarkan opsi layanan* |
-| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital (QRIS, Virtual Account).* |
+| 3 | *Pelanggan mengonfirmasi pesanan dan melanjutkan ke pembayaran.* | *Sistem menghitung total biaya dan menampilkan pilihan metode pembayaran digital.* |
 | 4 | *Pelanggan tidak menyelesaikan pembayaran hingga durasi waktu pembayaran kedaluwarsa.* | *Sistem menerima notifikasi status transaksi expired/failed dari Payment Gateway, membatalkan penahanan slot kuota meja/antrean, membatalkan pesanan, dan menampilkan pesan: "Batas waktu pembayaran habis. Transaksi dibatalkan".* |
 | 5 | *Pelanggan menutup notifikasi pembatalan.* | *Sistem mengarahkan kembali ke halaman beranda/restoran dan alur berakhir tanpa penerbitan tiket antrean maupun ID pesanan.* |
 <br>
