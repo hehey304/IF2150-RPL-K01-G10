@@ -983,7 +983,8 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *C32* | *KonfirmasiHapusRestoran* | *idRestoran, pesanPeringatan* | *setujuiPenghapusan(), batalHapus()* |
 | *C33* | *KelolaDataRestoran* | *idRestoran* | *hapusDataRestoran(), nonaktifkanRelasiMenu()* |
 
-> Lanjutkan pola **5.2.x** untuk setiap use case pada 4.2.
+
+
 
 ## 5.3 Diagram Kelas Keseluruhan
 
