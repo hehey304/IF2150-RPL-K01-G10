@@ -83,7 +83,9 @@ Tabel 1.4. Aturan Penomoran
 | *...* | *...* |
 
 ## 1.5 Referensi
-Dokumentasi P/L yang dirujuk oleh dokumen ini. Referensi dapat berupa buku, panduan, ataupun dokumentasi lain yang dipakai dalam pengembangan P/L ini.
+Pressman, R. S., _Software Engineering: A Practitioner's Approach_, _8th Edition_, McGraw-Hill, 2015. 
+Sommerville, I., _Software Engineering_, _10th Edition_, Pearson, 2016.  
+Larman, C., _Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development_, _3rd Edition_, Prentice Hall, 2004.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
 Dokumen ini disusun dalam enam bab. Bab 1 berisi pendahuluan, mencakup tujuan penulisan dokumen, lingkup masalah, definisi dan istilah yang digunakan, aturan penomoran, referensi, serta ikhtisar dokumen ini sendiri. Bab 2 membahas deskripsi umum perangkat lunak antri.in yang meliputi gambaran proses bisnis, deskripsi umum sistem, pengguna beserta kebutuhannya, batasan perangkat lunak, dan lingkungan operasi yang dibutuhkan. Bab 3 memuat deskripsi kebutuhan perangkat lunak secara rinci, yaitu Kebutuhan Fungsional (KF) dalam format EARS dan Kebutuhan Non-Fungsional (KNF). Bab 4 menjelaskan pemodelan use case, mencakup identifikasi aktor, identifikasi use case, use case diagram, dan skenario dari setiap use case. BAB 5 menjabarkan pemodelan kelas yang terdiri atas identifikasi kelas, diagram kelas per use case, dan diagram kelas keseluruhan. Terakhir, BAB 6 berisi traceability yang memetakan keterkaitan antara kelas, use case, dan kebutuhan fungsional untuk memastikan konsistensi implementasi terhadap kebutuhan yang telah ditetapkan.
