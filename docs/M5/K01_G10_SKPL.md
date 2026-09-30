@@ -45,7 +45,7 @@ Tujuan dokumen ini adalah menjelaskan kebutuhan-kebutuhan dan deskripsi perangka
 ## 1.2 Lingkup Masalah
 Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
 
-Perangkat lunak bernama antri.in yang akan kami kembangkan merupakan sistem pemesanan makanan viral dengan antrean digital berbasis web yang bertujuan agar pengguna tidak perlu mengantri secara langsung pada restoran. Sistem ini memungkinkan pengguna untuk mencari restoran makanan viral, melihat informasi makanan dan restoran, melakukan pemesanan, memantau antrean dan estimasi pesanan akan selesai, serta fitur booking tempat jika pengguna memutuskan untuk dine-in. Cara kerja dari aplikasi berbasis web ini adalah pertama pengguna memilih restoran yang tersedia, kemudian pengguna dapat membaca informasi mengenai makanan yang terdapat di restoran tersebut. Jika sudah, pengguna dapat memilih makanan yang akan dibeli dan lanjut ke proses pembayaran. Pembayaran dilakukan menggunakan qris, ketika pengguna sudah membayar, barulah akan mendapatkan nomor antrian dan estimasi pesanan selesai sehingga pengguna dapat memperkirakan waktu kedatangan.
+Fenomena makanan viral memicu antrean panjang berjam-jam yang membebani pelanggan, karena mereka harus datang lebih awal, menunggu di lokasi, dan mengantre tanpa informasi stok menu maupun estimasi waktu tunggu, ditambah proses pemesanan dan pembayaran di kasir yang memakan waktu 2-5 menit per transaksi. Aplikasi pesan-antar seperti GoFood, GrabFood, dan ShopeeFood pun hanya berfokus pada pengantaran dan tidak membatasi kuota transaksi per rentang waktu, sehingga restoran kewalahan saat pesanan online dan pelanggan fisik datang bersamaan. Celah utamanya adalah belum adanya integrasi antara pemantauan antrean real-time, pengaturan slot waktu, serta pemesanan dan pembayaran awal, sehingga antri.in hadir untuk menghapus waktu berpikir di kasir, meratakan kedatangan pelanggan berbasis kuota jam, dan memberi kebebasan bagi konsumen selama menunggu. Dari fenomena tersebut perangkat lunak bernama antri.in yang akan kami kembangkan merupakan sistem pemesanan makanan viral dengan antrean digital berbasis web yang bertujuan agar pengguna tidak perlu mengantri secara langsung pada restoran. Sistem ini memungkinkan pengguna untuk mencari restoran makanan viral, melihat informasi makanan dan restoran, melakukan pemesanan, memantau antrean dan estimasi pesanan akan selesai, serta fitur booking tempat jika pengguna memutuskan untuk dine-in. Cara kerja dari aplikasi berbasis web ini adalah pertama pengguna memilih restoran yang tersedia, kemudian pengguna dapat membaca informasi mengenai makanan yang terdapat di restoran tersebut. Jika sudah, pengguna dapat memilih makanan yang akan dibeli dan lanjut ke proses pembayaran. Ketika pengguna sudah membayar, barulah akan mendapatkan nomor antrian dan estimasi pesanan selesai sehingga pengguna dapat memperkirakan waktu kedatangan. 
 
 ## 1.3 Definisi, Istilah, dan Singkatan
 Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
@@ -64,6 +64,7 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *UC* | *Singkatan dari Use Case.* |
 | *C* | *Singkatan dari Class.* |
 | *EARS* | *Easy Approach to Requirements Syntax, yaitu pola penulisan kebutuhan agar konsisten dan mudah diuji.* |
+| *AC* | *Singkatan dari Aktor.* |
 | *...* | *...* |
 
 ## 1.4 Aturan Penomoran
@@ -80,6 +81,7 @@ Tabel 1.4. Aturan Penomoran
 | *Use Case* | *UCXX* | Mulai dari 01, 02, dan seterusnya |
 | *Kelas* | *CXX* | Mulai dari 01, 02, dan seterusnya |
 | *Requirement* | *RXX* | Mulai dari 01, 02, dan seterusnya |
+| *Aktor* | *ACXX* | Mulai dari 01, 02, dan seterusnya |
 | *...* | *...* |
 
 ## 1.5 Referensi
@@ -164,7 +166,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | *Client* | *Google Chrome* |
 | *DBMS* | *PostgreSQL 15+* |
 | *OS* | *Windows 11* |
-| *Bahasa Pemrograman* | *Python* |
+| *Bahasa Pemrograman* | *Typescript* |
 | *API* | *REST API* |
 
 ---
@@ -233,16 +235,9 @@ Salin ulang daftar aktor final dari BAB 3.1 dokumen *Use Case & Scenario Use Cas
 
 | ID Aktor | Aktor | Deskripsi |
 | :--- | :--- | :--- |
-| A01 | _Menampilkan list restoran_ | _Sistem menampilkan list restoran-restoran yang tersedia dalam database._ | _US-03_ |
-| A02 | _Menampilkan virtual queue_ | _Sistem menampilkan dashboard antrean saat ini dan antrean yang terakhir diproses._ | _US-02, US-05_|
-| A03 | _Proses pemesanan_ | _Sistem menyiapkan detail pesanan makanan sesuai dengan keinginan pelanggan._ | _US-04_|
-| A04 | _Proses pembayaran_ | _Sistem memproses pembayaran oleh pengguna dengan metode yang tersedia._ | _US-04_|
-| A05 | _Memasukkan pesanan ke dalam sistem antrean yang sudah ada(integrasi sistem antrean)_ | _Sistem memasukkan pesanan pengguna ke dalam list antrean restoran._ | _US-04_|
-| A06 | _Mendaftarkan atau menonaktifkan restoran dalam daftar restoran viral_ | _Sistem menerima informasi mengenai berbagai restoran dan menunggu admin untuk menerima mereka dan memasukan restoran dalam daftar restoran viral._ | _US-01, US-06, US-07_|
-| A07 | _Proses dequeue_ | _Sistem membantu restoran melakukan dequeue ketika pelanggan sudah datang_ | _US-08_|
-| A08 | _Pengaturan Kuota_ | _Sistem menyediakan antarmuka yang memungkinkan pihak restoran untuk mengonfigurasi kuota antrean_ | _US-09_|
-| A09 | _Registrasi dan autentikasi akun_ | _Sistem memproses pendaftaran akun baru serta memverifikasi sesi login pengguna agar data antrean dan riwayat transaksi tersimpan secara aman_ | _US-10_|
-| A10 | _Pengelolaan keluhan pengguna_ | _Sistem menyediakan alur penyampaian keluhan transaksi oleh pelanggan serta memfasilitasi admin platform untuk meninjau dan memberikan tanggapan resmi_ | _US-11_|
+| *AC01* | _Restoran_  | _Pengguna ini bertindak sebagai pihak yang mendaftarkan diri dalam daftar restoran viral, mengelola ketersediaan menu, kuota antean, dan ketersediaan meja, serta menerima informasi pelanggan yang akan datang dan urutan antrian atau kedatangan pelanggan. Karakteristik dari pengguna ini adalah mengutamakan keakuratan informasi dan pengendalian kedatangan pelanggan_ |
+| *AC02* | _Pelanggan_ | _Pengguna ini bertindak sebagai pihak yang mencari salah satu restoran yang viral dan melakukan pemesanan baik dine in, take away, maupun booking table. Karakteristik dari pengguna ini adalah mengutamakan kecepatan booking dan kepastian waktu setelah booking._                                                              |
+| *AC03* | _Admin_ | _Pengguna ini bertindak sebagai pihak yang memverifikasi restoran-restoran yang mendaftarkan diri dalam daftar restoran viral dan menanggapi restoran-restoran yang kurang bertanggung jawab. Karakteristik dari pengguna ini mengutamakan keterbukaan dan ketepatan informasi mengenai restoran yang mendaftarkan diri_ |
 
 ## 4.2 Identifikasi Use Case
 Salin ulang daftar Use Case versi terbaru dari BAB 3.2 dokumen *Class Diagram*, pastikan seluruh ID KF yang dirujuk sudah sesuai dengan tabel pada 3.1.
