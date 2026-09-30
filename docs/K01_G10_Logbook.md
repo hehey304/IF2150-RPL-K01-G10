@@ -129,7 +129,7 @@
 | *23-09-2026* | *Muhammad Fauzi Muharam* | *Membuat Traceability* | *1.5* | *Done* | *-* |
 | *23-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Memperbaiki UC09-UC11* | *1* | *Done* | *-* |
 
-### Milestone 4
+### Milestone 5
 **Periode:** 23-09-2026 - 30-09-2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
@@ -141,7 +141,7 @@
 | *30-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki kelas di Bab 5 dan 6* | *1* | *Done* | *-* |
 | *30-09-2026* | *Bayu Palamarta Wirawan* | *Mengisi Form Asistensi* | *0.5* | *Done* | *-* |
 
-**Catatan/Evaluasi Milestone 4:**
+**Catatan/Evaluasi Milestone 5:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
