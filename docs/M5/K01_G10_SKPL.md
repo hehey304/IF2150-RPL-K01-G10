@@ -43,13 +43,9 @@ Dipersiapkan oleh:
 Tujuan dokumen ini adalah menjelaskan kebutuhan-kebutuhan dan deskripsi perangkat lunak yang akan dikembangkan oleh kelompok Ducklings bernama antri.in. Dokumen ini akan digunakan oleh kelompok Ducklings, asisten dosen, dan dosen.
 
 ## 1.2 Lingkup Masalah
-Tuliskan dengan ringkas nama aplikasi dan deskripsi singkatnya. Bagian ini maksimal berisi satu paragraf, dapat diringkas dari BAB 1 *Analisis Permasalahan* pada dokumen *Topic Brainstorming*.
-
 Fenomena makanan viral memicu antrean panjang berjam-jam yang membebani pelanggan, karena mereka harus datang lebih awal, menunggu di lokasi, dan mengantre tanpa informasi stok menu maupun estimasi waktu tunggu, ditambah proses pemesanan dan pembayaran di kasir yang memakan waktu 2-5 menit per transaksi. Aplikasi pesan-antar seperti GoFood, GrabFood, dan ShopeeFood pun hanya berfokus pada pengantaran dan tidak membatasi kuota transaksi per rentang waktu, sehingga restoran kewalahan saat pesanan online dan pelanggan fisik datang bersamaan. Celah utamanya adalah belum adanya integrasi antara pemantauan antrean real-time, pengaturan slot waktu, serta pemesanan dan pembayaran awal, sehingga antri.in hadir untuk menghapus waktu berpikir di kasir, meratakan kedatangan pelanggan berbasis kuota jam, dan memberi kebebasan bagi konsumen selama menunggu. Dari fenomena tersebut perangkat lunak bernama antri.in yang akan kami kembangkan merupakan sistem pemesanan makanan viral dengan antrean digital berbasis web yang bertujuan agar pengguna tidak perlu mengantri secara langsung pada restoran. Sistem ini memungkinkan pengguna untuk mencari restoran makanan viral, melihat informasi makanan dan restoran, melakukan pemesanan, memantau antrean dan estimasi pesanan akan selesai, serta fitur booking tempat jika pengguna memutuskan untuk dine-in. Cara kerja dari aplikasi berbasis web ini adalah pertama pengguna memilih restoran yang tersedia, kemudian pengguna dapat membaca informasi mengenai makanan yang terdapat di restoran tersebut. Jika sudah, pengguna dapat memilih makanan yang akan dibeli dan lanjut ke proses pembayaran. Ketika pengguna sudah membayar, barulah akan mendapatkan nomor antrian dan estimasi pesanan selesai sehingga pengguna dapat memperkirakan waktu kedatangan. 
 
 ## 1.3 Definisi, Istilah, dan Singkatan
-Semua definisi dan singkatan yang digunakan dalam dokumen ini beserta penjelasannya.
-
 Tabel 1.3. Definisi Istilah dan Singkatan
 
 | Singkatan, Akronim, atau Istilah | Penjelasan |
@@ -68,8 +64,6 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *...* | *...* |
 
 ## 1.4 Aturan Penomoran
-Tuliskan aturan penomoran (ID) yang digunakan dalam dokumen ini. Gunakan pola ID yang **sama** dengan yang sudah dipakai pada dokumen-dokumen sebelumnya, jangan membuat pola baru di dokumen ini.
-
 Tabel 1.4. Aturan Penomoran
 
 | Hal/Bagian | Penomoran | Keterangan |
@@ -97,8 +91,6 @@ Dokumen ini disusun dalam enam bab. Bab 1 berisi pendahuluan, mencakup tujuan pe
 # BAB 2: Deskripsi Perangkat Lunak
 
 ## 2.1 Deskripsi Umum Sistem
-Bagian ini dapat disalin dari BAB 1.1 *Deskripsi Umum Sistem* pada dokumen *Requirement Gathering*, disesuaikan bila ada perubahan alur bisnis. Lengkapi dengan gambaran proses bisnis dalam bentuk *Activity Diagram* (boleh disalin dan diperbarui dari 3.3 *Model Proses Bisnis* pada dokumen *Topic Brainstorming*).
-
 Perangkat lunak yang akan kami kembangkan merupakan sistem pemesanan makanan viral dengan antrean digital berbasis web yang bertujuan agar pengguna tidak perlu mengantre secara langsung pada restoran. Sistem ini memungkinkan pengguna untuk mencari restoran makanan viral, melihat informasi makanan dan restoran, melakukan pemesanan baik **dine in** maupun **take away**, memantau antrean dan estimasi pesanan akan selesai, serta fitur **booking table** jika pengguna telah memutuskan untuk dine-in dari jauh-jauh hari. Cara kerja dari aplikasi berbasis web ini adalah pertama, pihak restoran viral memasukkan data restoran ke web agar dapat ditampilkan di web, lalu, pengguna memilih restoran yang tersedia, kemudian pengguna dapat membaca informasi mengenai makanan yang terdapat di restoran tersebut. Jika sudah, pengguna dapat memilih makanan yang akan dibeli dan lanjut ke proses pembayaran. Ketika pengguna sudah membayar, barulah akan mendapatkan nomor antrian dan estimasi pesanan selesai sehingga pengguna dapat memperkirakan waktu kedatangan.
 
 Platform yang kami pilih adalah web-based application sehingga dapat diakses dengan mudah menggunakan segala jenis perangkat seperti smartphone, tablet, laptop, atau komputer. Platform web dipilih karena memberikan kemudahan akses pada pengguna tanpa harus melakukan download aplikasi tambahan, pengguna hanya perlu membuat akun dengan menggunakan email atau hanya menuliskan nama saja.
@@ -139,7 +131,6 @@ _antri.in_ merupakan aplikasi berbasis web yang menyediakan seluruh alur pemesan
 Untuk fungsi pembayaran, antri.in tidak memproses transaksi secara mandiri, melainkan berinteraksi dengan Payment Gateway eksternal untuk memvalidasi dan mengotorisasi pembayaran digital. Sistem mengirimkan permintaan transaksi ke Payment Gateway setiap kali pelanggan melakukan checkout, kemudian menerima status pelunasan, kegagalan, atau kedaluwarsa transaksi dari Payment Gateway tersebut untuk menentukan apakah tiket antrean dan ID pesanan dapat diterbitkan. Penyedia dan metode pembayaran spesifik belum ditentukan pada tahap ini dan berada di luar cakupan pembahasan dokumen ini, sehingga akan diputuskan lebih lanjut pada tahap implementasi. Selain itu, sistem juga terhubung dengan layanan pengiriman email pihak ketiga untuk mengirimkan notifikasi hasil verifikasi pendaftaran mitra, baik status diterima maupun ditolak, ke alamat email restoran yang bersangkutan. Seluruh data transaksional dan operasional disimpan pada basis data PostgreSQL yang berada di lingkungan sistem sendiri, sehingga Payment Gateway dan layanan email menjadi satu-satunya sistem eksternal yang berada di luar batas tanggung jawab langsung P/L ini.
 
 ## 2.3 Pengguna dan Kebutuhan Pengguna Perangkat Lunak
-Tuliskan seluruh jenis pengguna (*role*/aktor) yang terlibat dalam perangkat lunak (P/L), beserta kebutuhannya secara umum. Bagian ini dapat disalin dari 1.2 *Deskripsi Pengguna Perangkat Lunak* (dokumen Requirement Gathering) atau 3.1 *Identifikasi Aktor* (dokumen Use Case), pastikan sudah konsisten dengan aktor final yang dipakai di BAB 4.
 
 | Pengguna | Kebutuhan |
 | :--- | :--- |
@@ -149,7 +140,6 @@ Tuliskan seluruh jenis pengguna (*role*/aktor) yang terlibat dalam perangkat lun
 | *...* | *...* |
 
 ## 2.4 Batasan Perangkat Lunak
-Batasan yang harus dituliskan, di antaranya:
 1. *P/L harus terdaftar secara resmi sebagai Penyelenggara Sistem Elektronik (PSE) Lingkup Privat di Kementerian Komunikasi dan Digital sesuai PP No. 71 Tahun 2019 (PSTE) sebelum beroperasi secara komersial*
 2. *P/L harus menampilkan restoran yang sudah disetujui oleh admin dengan informasi rating, gambar-gambar lokasi, serta review restoran.*
 3. *P/L harus berfungsi pada platform tertentu (misal: web browser modern, atau desktop Windows dan Linux).*
@@ -158,7 +148,6 @@ Batasan yang harus dituliskan, di antaranya:
 6. *P/L tidak boleh membagikan data pelanggan ke pihak resto atau pihak ketiga tanpa persetujuan tertulis dari pelanggan sesuai UU No. 27 Tahun 2022 (UU PDP)*
 
 ## 2.5 Lingkungan Operasi Perangkat Lunak
-Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroperasi. Bagian ini digunakan untuk memastikan pengguna memiliki spesifikasi yang cukup untuk menjalankan P/L. Misalnya mencakup komponen server, client, OS, DBMS, tetapi tidak menutupi kemungkinan komponen lain.
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
@@ -174,7 +163,6 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 # BAB 3: Deskripsi Kebutuhan Perangkat Lunak
 
 ## 3.1 Kebutuhan Fungsional (KF)
-Salin ulang **seluruh Kebutuhan Fungsional (KF)** versi terbaru dari BAB 2.1 dokumen *Class Diagram* (sudah versi final dan sudah memakai format EARS). Pastikan ID Kebutuhan (kolom "ID Kebutuhan") juga konsisten dengan ID pada tabel Pemetaan Kebutuhan di dokumen *Requirement Gathering*.
 
 Tabel 3.1. Kebutuhan Fungsional
 
@@ -203,7 +191,6 @@ Tabel 3.1. Kebutuhan Fungsional
 | *KF21* | *R31* | *Sistem harus menyediakan fitur registrasi, login, dan logout untuk pelanggan, restoran, dan admin* |
 
 ## 3.2 Kebutuhan Non-Fungsional (KNF)
-Salin ulang Kebutuhan Non-Fungsional dari BAB 2.5 dokumen *Requirement Gathering*, sesuaikan ID Kebutuhan (kolom "ID Kebutuhan") apabila terjadi perubahan penomoran pada BAB 3.1 di atas.
 
 Tabel 3.2. Kebutuhan Non-Fungsional
 
@@ -224,14 +211,11 @@ Tabel 3.2. Kebutuhan Non-Fungsional
 | *KNF13*|*R02, R05*|*Ergonomy*|*Sistem harus memungkinkan pengguna baru untuk mengoperasikan alur pencarian hingga mendapat tiket antrean dan memantau antrean dengan mudah, yakni maksimal 8 menit tanpa memiliki pengetahuan awal tentang aplikasi.*|
 |*KNF14*|*R16*|*Reliability*|*Sistem harus memastikan tidak ada pesanan yang terkena double-charged*|
 
-<sub>*Silakan pilih parameter yang relevan dengan P/L kalian (Availability, Reliability, Ergonomy, Portability, Memory, Response time, Safety, Security, dsb), tidak perlu semua parameter diisi. Lihat kembali dokumen Requirement Gathering untuk penjelasan tiap parameter.*<sub>
-
 ---
 
 # BAB 4: Pemodelan Use Case
 
 ## 4.1 Identifikasi Aktor
-Salin ulang daftar aktor final dari BAB 3.1 dokumen *Use Case & Scenario Use Case* atau *Class Diagram*. Tambahkan ID Aktor mengikuti Aturan Penomoran pada 1.4.
 
 | ID Aktor | Aktor | Deskripsi |
 | :--- | :--- | :--- |
@@ -240,7 +224,6 @@ Salin ulang daftar aktor final dari BAB 3.1 dokumen *Use Case & Scenario Use Cas
 | *AC03* | _Admin_ | _Pengguna ini bertindak sebagai pihak yang memverifikasi restoran-restoran yang mendaftarkan diri dalam daftar restoran viral dan menanggapi restoran-restoran yang kurang bertanggung jawab. Karakteristik dari pengguna ini mengutamakan keterbukaan dan ketepatan informasi mengenai restoran yang mendaftarkan diri_ |
 
 ## 4.2 Identifikasi Use Case
-Salin ulang daftar Use Case versi terbaru dari BAB 3.2 dokumen *Class Diagram*, pastikan seluruh ID KF yang dirujuk sudah sesuai dengan tabel pada 3.1.
 
 | ID UC | Nama Use Case | Deskripsi Singkat | Aktor | ID KF |
 | :--- | :--- | :--- | :--- | :--- |
@@ -261,7 +244,6 @@ Salin ulang daftar Use Case versi terbaru dari BAB 3.2 dokumen *Class Diagram*, 
 | *UC15* | *Penghapusan Restoran.* | *Admin menghapus data restoran dari sistem karena pelanggaran aturan aplikasi, laporan keluhan pelanggan, atau permintaan dari pihak restoran. Restoran tidak lagi ditampilkan pada aplikasi.* | *Pelanggan, Restoran, Admin* | *KF20* |
 
 ## 4.3 Use Case Diagram
-Salin ulang Use Case Diagram dari BAB 3.3 dokumen *Use Case & Scenario Use Case* atau *Class Diagram* (gunakan versi paling akhir/terbaru apabila terdapat perubahan).
 
 <p align="center">
 <img alt="Use Case Diagram" src="../M4/assets/diagram/final.jpeg" width="80%">
@@ -271,7 +253,6 @@ Salin ulang Use Case Diagram dari BAB 3.3 dokumen *Use Case & Scenario Use Case*
 </p>
 
 ## 4.4 Skenario Use Case
-Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari BAB 3.4 dokumen *Use Case & Scenario Use Case*, sesuaikan dengan daftar UC final pada 4.2. Jika use case melibatkan lebih dari satu aktor manusia yang benar-benar berinteraksi langsung (misalnya *Kasir* yang memverifikasi transaksi setelah *Pelanggan* membayar), tambahkan kolom aksi tersendiri untuk aktor tersebut di samping kolom "Reaksi Perangkat Lunak". Sistem eksternal otomatis seperti *payment gateway* **bukan aktor**, sehingga interaksinya cukup dituliskan sebagai bagian dari "Reaksi Perangkat Lunak", bukan kolom aktor terpisah.
 
 ### 4.4.1 Skenario UC01
 
@@ -634,15 +615,11 @@ Salin ulang skenario **setiap** use case (skenario normal dan alternatif) dari B
 | 3 | *Admin memilih opsi "Batal" pada pesan konfirmasi* | *Sistem membatalkan proses penghapusan dan menutup pesan konfirmasi* |
 <br>
 
-<sub>*Lanjutkan pola 4.4.x ini untuk setiap ID UC pada 4.2, sampai seluruh use case memiliki skenarionya masing-masing.*<sub>
-
 ---
 
 # BAB 5: Pemodelan Kelas
 
 ## 5.1 Identifikasi Kelas
-Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class Diagram*.
-
 | ID Kelas | Nama Kelas | Deskripsi Kelas | ID Use Case |
 | :--- | :--- | :--- | :--- |
 | *C01* | *Pelanggan* | *Menyimpan data/identitas pelanggan yang menggunakan sistem, melakukan pemesanan, memantau antrean, dan menyampaikan keluhan. (Entity Class)* | *UC01, UC02, UC03, UC06, UC10, UC13* |
@@ -689,7 +666,6 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 | *C42* | *KeluhanDashboardPage* | *Antarmuka untuk melihat daftar keluhan sebagai admin. (Boundary Class)* | *UC14* |
 
 ## 5.2 Diagram Kelas per Use Case
-Salin ulang diagram kelas untuk setiap use case dari BAB 4.2 dokumen *Class Diagram*, lengkap dengan tabel atribut dan metode/operasinya.
 
 ### 5.2.1 Use Case UC01
 
@@ -702,8 +678,6 @@ Salin ulang diagram kelas untuk setiap use case dari BAB 4.2 dokumen *Class Diag
 <i>Gambar 2. Diagram Kelas Use Case UC01</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
@@ -726,8 +700,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 <i>Gambar 3. Diagram Kelas Use Case UC02</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
@@ -815,8 +787,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 </p>
 <br>
 
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
-
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C01* | *Pelanggan* | *pelangganId, nama, nomorAntrean* | *getDetails()* |
@@ -842,8 +812,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 </p>
 <br>
 
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
-
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C02* | *Restoran* | *restoranId, namaRestoran* | *getPengaturan()* |
@@ -865,8 +833,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 </p>
 <br>
 
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
-
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C02* | *Restoran* | *restoranId, namaRestoran* | *getDaftarMenu()* |
@@ -885,8 +851,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 <i>Gambar 10. Diagram Kelas Use Case UC09</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
@@ -910,8 +874,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 </p>
 <br>
 
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
-
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C01* | *Pelanggan* | *idPelanggan, idPengguna, namaPelanggan, email* | *accountRegister()* |
@@ -934,8 +896,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 <i>Gambar 12. Diagram Kelas Use Case UC11</i>
 </p>
 <br>
-
-Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi milik setiap kelas dapat dituliskan pada tabel di bawah ini. Pastikan hubungan antarkelas menggunakan jenis relasi yang sesuai (asosiasi, agregasi, komposisi, generalisasi, atau dependensi).
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
@@ -1026,7 +986,6 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 > Lanjutkan pola **5.2.x** untuk setiap use case pada 4.2.
 
 ## 5.3 Diagram Kelas Keseluruhan
-Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diagram* menjadi satu diagram kelas keseluruhan. Pastikan tidak ada kelas yang terduplikasi atau tertinggal.
 
 <p align="center">
 <img alt="Class Diagram Keseluruhan" src="./assets/diagram/Keseluruhan.png" width="80%">
@@ -1083,7 +1042,6 @@ Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diag
 ---
 
 # BAB 6: Traceability
-Salin ulang tabel Traceability dari BAB 5 dokumen *Class Diagram*, cocokkan setiap Kebutuhan Fungsional, Use Case, dan Kelas yang saling terkait.
 
 | ID Kelas | ID Use Case | ID KF |
 | :--- | :--- | :--- |
