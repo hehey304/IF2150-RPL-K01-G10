@@ -80,6 +80,7 @@ Tabel 1.4. Aturan Penomoran
 | *Use Case* | *UCXX* | Mulai dari 01, 02, dan seterusnya |
 | *Kelas* | *CXX* | Mulai dari 01, 02, dan seterusnya |
 | *Requirement* | *RXX* | Mulai dari 01, 02, dan seterusnya |
+| *Aktor* | *ACXX* | Mulai dari 01, 02, dan seterusnya |
 | *...* | *...* |
 
 ## 1.5 Referensi
@@ -233,16 +234,9 @@ Salin ulang daftar aktor final dari BAB 3.1 dokumen *Use Case & Scenario Use Cas
 
 | ID Aktor | Aktor | Deskripsi |
 | :--- | :--- | :--- |
-| A01 | _Menampilkan list restoran_ | _Sistem menampilkan list restoran-restoran yang tersedia dalam database._ | _US-03_ |
-| A02 | _Menampilkan virtual queue_ | _Sistem menampilkan dashboard antrean saat ini dan antrean yang terakhir diproses._ | _US-02, US-05_|
-| A03 | _Proses pemesanan_ | _Sistem menyiapkan detail pesanan makanan sesuai dengan keinginan pelanggan._ | _US-04_|
-| A04 | _Proses pembayaran_ | _Sistem memproses pembayaran oleh pengguna dengan metode yang tersedia._ | _US-04_|
-| A05 | _Memasukkan pesanan ke dalam sistem antrean yang sudah ada(integrasi sistem antrean)_ | _Sistem memasukkan pesanan pengguna ke dalam list antrean restoran._ | _US-04_|
-| A06 | _Mendaftarkan atau menonaktifkan restoran dalam daftar restoran viral_ | _Sistem menerima informasi mengenai berbagai restoran dan menunggu admin untuk menerima mereka dan memasukan restoran dalam daftar restoran viral._ | _US-01, US-06, US-07_|
-| A07 | _Proses dequeue_ | _Sistem membantu restoran melakukan dequeue ketika pelanggan sudah datang_ | _US-08_|
-| A08 | _Pengaturan Kuota_ | _Sistem menyediakan antarmuka yang memungkinkan pihak restoran untuk mengonfigurasi kuota antrean_ | _US-09_|
-| A09 | _Registrasi dan autentikasi akun_ | _Sistem memproses pendaftaran akun baru serta memverifikasi sesi login pengguna agar data antrean dan riwayat transaksi tersimpan secara aman_ | _US-10_|
-| A10 | _Pengelolaan keluhan pengguna_ | _Sistem menyediakan alur penyampaian keluhan transaksi oleh pelanggan serta memfasilitasi admin platform untuk meninjau dan memberikan tanggapan resmi_ | _US-11_|
+| *AC01* | _Restoran_  | _Pengguna ini bertindak sebagai pihak yang mendaftarkan diri dalam daftar restoran viral, mengelola ketersediaan menu, kuota antean, dan ketersediaan meja, serta menerima informasi pelanggan yang akan datang dan urutan antrian atau kedatangan pelanggan. Karakteristik dari pengguna ini adalah mengutamakan keakuratan informasi dan pengendalian kedatangan pelanggan_ |
+| *AC02* | _Pelanggan_ | _Pengguna ini bertindak sebagai pihak yang mencari salah satu restoran yang viral dan melakukan pemesanan baik dine in, take away, maupun booking table. Karakteristik dari pengguna ini adalah mengutamakan kecepatan booking dan kepastian waktu setelah booking._                                                              |
+| *AC03* | _Admin_ | _Pengguna ini bertindak sebagai pihak yang memverifikasi restoran-restoran yang mendaftarkan diri dalam daftar restoran viral dan menanggapi restoran-restoran yang kurang bertanggung jawab. Karakteristik dari pengguna ini mengutamakan keterbukaan dan ketepatan informasi mengenai restoran yang mendaftarkan diri_ |
 
 ## 4.2 Identifikasi Use Case
 Salin ulang daftar Use Case versi terbaru dari BAB 3.2 dokumen *Class Diagram*, pastikan seluruh ID KF yang dirujuk sudah sesuai dengan tabel pada 3.1.
