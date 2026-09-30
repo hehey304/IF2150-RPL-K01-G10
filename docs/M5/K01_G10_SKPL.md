@@ -672,7 +672,7 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 | *C22* | *PengaturanKuotaPage* | *Antarmuka untuk menampilkan dan menerima input pengaturan kuota antrean serta kapasitas meja. (Boundary Class)* | *UC07* |
 | *C23* | *PengaturanMenuPage* | *Antarmuka untuk menampilkan daftar menu serta formulir tambah/edit menu. (Boundary Class)* | *UC08* |
 | *C24* | *KelolaMenuController* | *Mengelola logika bisnis pemrosesan data menu dan pembaruan stok. (Controller Class)* | *UC08* |
-| *C25* | *Pengguna* | *Menyimpan kredensial akun berupa username dan password serta hak akses/role pengguna yang sedang login. (Entity Class)* | *UC10, UC11, UC22* |
+| *C25* | *Pengguna* | *Menyimpan kredensial akun berupa username dan password serta hak akses/role pengguna yang sedang login. (Entity Class)* | *UC10, UC11, UC12* |
 | *C26* | *HalamanProfilPage* | *Antarmuka profil pengguna yang menyediakan akses untuk memicu proses logout. (Boundary Class)* | *UC12* |
 | *C27* | *KonfirmasiLogoutPage* | *Dialog konfirmasi untuk memastikan pengguna ingin mengakhiri sesi login. (Boundary Class)* | *UC12* |
 | *C28* | *AutentikasiController* | *Menangani proses logout, pemutusan sesi, dan penghapusan token login pengguna. (Controller Class)* | *UC10, UC11, UC12* |
@@ -920,9 +920,9 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C01* | *Pelanggan* | *idPelanggan, idPengguna, namaPelanggan, email* | *accountRegister()* |
 | *C02* | *Restoran* | *idRestoran, idPengguna, namaRestoran* | *accountRegister()* |
 | *C14* | *Admin* | *idAdmin, idPengguna, namaAdmin* | *accountRegister()* |
+| *C25* | *Pengguna* | *idPengguna, email, role* | *getUserInfo(), saveCredentials()* |
 | *C28* | *AutentikasiController* | *-* | *createAccount(), validation()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *createSession()* |
-| *C25* | *Pengguna* | *idPengguna, email, role* | *getUserInfo(), saveCredentials()* |
 | *C38* | *RegistrasiPage* | *inputUsername, inputEmail, inputPassword* | *renderFormRegistrasi(), onSubmitRegister()* |
 | *...* | *...* | *...* | *...* |
 
@@ -942,9 +942,9 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
+| *C25* | *Pengguna* | *idPengguna, username, password, role* | *getUserInfo(), validatePassword()* |
 | *C28* | *AutentikasiController* | *username, password, tokenManager* | *validation(), processLogin()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *validateSession(), validateToken()* |
-| *C25* | *Pengguna* | *idPengguna, username, password, role* | *getUserInfo(), validatePassword()* |
 | *C39* | *LoginPage* | *inputUsername, inputPassword* | *renderFormLogin(), onSubmitLogin()* |
 | *...* | *...* | *...* | *...* |
 
@@ -962,11 +962,11 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
+| *C25* | *Pengguna* | *idPengguna, email, role* | *logout()* |
 | *C26* | *HalamanProfil* | *idPengguna, namaUser* | *tekanTombolLogout()* |
 | *C27* | *KonfirmasiLogout* | *pesanKonfirmasi* | *konfirmasiYa(), konfirmasiBatal()* |
 | *C28* | *AutentikasiController* | *tokenManager* | *processLogout(), handleSessionDeletion()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *hapusSesi(), validateToken()* |
-| *C25* | *Pengguna* | *idPengguna, email, role* | *logout()* |
 
 ### 5.2.13 Use Case UC13
 
@@ -1064,7 +1064,7 @@ Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diag
 | *C22* | *PengaturanKuotaPage* | *inputKuota, inputMeja* | *handleViewSettings(), handleSaveSettings(), validateInput()* |
 | *C23* | *PengaturanMenuPage* | *menuInput, stokInput, hargaInput* | *displayDaftarMenu(), showFormTambahMenu(), onSaveMenu(), onDeleteMenu()* |
 | *C24* | *KelolaMenuController* | *menuData* | *handleFetchMenu(), handleAddMenu(), handleUpdateMenu(), handleDeleteMenu()* |
-| *C25* | *Akun* | *username, password, idPengguna, email, role* | *validateAccount(), logout()* |
+| *C25* | *Pengguna* | *username, password, idPengguna, email, role* | *validateAccount(), logout(), getUserInfo(), saveCredentials()* |
 | *C26* | *HalamanProfilPage* | *idPengguna, namaUser* | *tekanTombolLogout()* |
 | *C27* | *KonfirmasiLogoutPage* | *pesanKonfirmasi* | *konfirmasiYa(), konfirmasiBatal()* |
 | *C28* | *AutentikasiController* | *akunId, username, password, tokenManager* | *createAccount(), validation(), processLogout(), handleSessionDeletion()* |
@@ -1114,12 +1114,11 @@ Salin ulang tabel Traceability dari BAB 5 dokumen *Class Diagram*, cocokkan seti
 | *C22* | *UC07* | *KF17, KF18* |
 | *C23* | *UC08* | *KF07* |
 | *C24* | *UC08* | *KF07* |
-| *C25* | *UC10, UC11* | *KF21* |
+| *C25* | *UC10, UC11, UC12* | *KF21* |
 | *C26* | *UC12* | *KF21* |
 | *C27* | *UC12* | *KF21* |
 | *C28* | *UC12* | *KF21* |
 | *C29* | *UC12* | *KF21* |
-| *C25* | *UC12* | *KF21* |
 | *C30* | *UC13, UC14* | *KF19* |
 | *C31* | *UC15* | *KF20* |
 | *C32* | *UC15* | *KF20* |
