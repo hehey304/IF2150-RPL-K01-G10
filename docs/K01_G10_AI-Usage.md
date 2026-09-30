@@ -58,6 +58,12 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *ChatGPT* | *Merangkum kelas-kelas yang digunakan di berbagai use case* | *"Berdasarkan Bab 4.2 Diagram Kelas per Use Case dan 3.2 Identifikasi Use Case, rangkumlah semua kelas yang terdapat pada perangkat lunak"* | *Saya membaca dan menghapus data-data yang kurang akurat baik dari deskripsi atau lokasi Use Case* |
 | | | | | |
 
+### Milestone 5
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *Gemini* | *Menambah kata agar kalimat tidak terlalu pendek* | *"tambahkan kata kata agar kalimat tersebut terlihat panjang tanpa menghilangkan inti dari kalimat yang saya berikan"* | *Saya membaca ulang apakah kalimat yang dibikin tidak menyimpang dari inti kalimat yang saya berikan* |
+| | | | | |
+
 ---
 ### Pernyataan Integritas dan Persetujuan
 
