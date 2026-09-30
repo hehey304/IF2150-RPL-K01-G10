@@ -131,6 +131,8 @@
 
 ### Milestone 4
 **Periode:** 23-09-2026 - 30-09-2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
 | *25-09-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 5* | *0.2* | *Done* | *-* |
 | *27-09-2026* | *Bayu Palamarta Wirawan* | *Menyalin data dari Milestone sebelumnya ke Milestone 5* | *2* | *Done* | *-* |
 | *29-09-2026* | *Bayu Palamarta Wirawan* | *Generalisasi sistem pembayaran* | *0.5* | *Done* | *-* |
