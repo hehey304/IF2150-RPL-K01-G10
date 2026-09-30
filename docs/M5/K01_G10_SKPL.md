@@ -672,25 +672,24 @@ Salin ulang seluruh kelas yang telah diidentifikasi dari BAB 4.1 dokumen *Class 
 | *C22* | *PengaturanKuotaPage* | *Antarmuka untuk menampilkan dan menerima input pengaturan kuota antrean serta kapasitas meja. (Boundary Class)* | *UC07* |
 | *C23* | *PengaturanMenuPage* | *Antarmuka untuk menampilkan daftar menu serta formulir tambah/edit menu. (Boundary Class)* | *UC08* |
 | *C24* | *KelolaMenuController* | *Mengelola logika bisnis pemrosesan data menu dan pembaruan stok. (Controller Class)* | *UC08* |
-| *C25* | *Akun* | *Menyimpan kredensial akun berupa username dan password serta menangani validasi akun. (Entity Class)* | *UC10, UC11* |
+| *C25* | *Pengguna* | *Menyimpan kredensial akun berupa username dan password serta hak akses/role pengguna yang sedang login. (Entity Class)* | *UC10, UC11, UC22* |
 | *C26* | *HalamanProfilPage* | *Antarmuka profil pengguna yang menyediakan akses untuk memicu proses logout. (Boundary Class)* | *UC12* |
 | *C27* | *KonfirmasiLogoutPage* | *Dialog konfirmasi untuk memastikan pengguna ingin mengakhiri sesi login. (Boundary Class)* | *UC12* |
 | *C28* | *AutentikasiController* | *Menangani proses logout, pemutusan sesi, dan penghapusan token login pengguna. (Controller Class)* | *UC10, UC11, UC12* |
 | *C29* | *SesiPengguna* | *Menyimpan token autentikasi aktif, status login, dan validasi sesi pengguna. (Entity Class)* | *UC10, UC11, UC12* |
-| *C30* | *Pengguna* | *Menyimpan kredensial serta hak akses/role pengguna yang sedang login. (Entity Class)* | *UC10, UC11, UC12* |
-| *C31* | *Keluhan* | *Menyimpan isi, waktu pengiriman, dan status keluhan pelanggan. (Entity Class)* | *UC13, UC14* |
-| *C32* | *DashboardKelolaRestoranPage* | *Antarmuka admin yang menampilkan daftar restoran mitra yang terdaftar. (Boundary Class)* | *UC15* |
-| *C33* | *KonfirmasiHapusRestoranPage* | *Dialog konfirmasi untuk memastikan keputusan admin sebelum restoran dihapus. (Boundary Class)* | *UC15* |
-| *C34* | *KelolaDataRestoranController* | *Mengelola logika bisnis penonaktifan dan penghapusan data restoran dari database. (Controller Class)* | *UC15* |
-| *C35* | *PencarianRestoPage* | *Antarmuka pengguna (UI) bagi pelanggan untuk memasukkan kata kunci pencarian, memilih filter kategori atau lokasi, serta melihat kartu ringkasan restoran. (Boundary Class)* | *UC01* |
-| *C36* | *PencarianController* | *Mengatur logika eksekusi pencarian, menerapkan filter pencarian, serta memproses dan mengambil data daftar restoran dari entitas. (Controller Class)* | *UC01* |
-| *C37* | *VerifikasiRestoranPage* | *Antarmuka untuk memverifikasi restoran yang mendaftar* | *UC05* |
-| *C38* | *RegistrasiRestoPage* | *Antarmuka bagi restoran untuk mendaftarkan diri dalam daftar restoran viral. (Boundary Class)* | *UC04* |
-| *C39* | *RegistrasiPage* | *Antarmuka untuk melakukan registrasi sebagai pelanggan, restoran, atau admin (Boundary Class)* | *UC10* |
-| *C40* | *LoginPage* | *Antarmuka puntuk masuk sebagai pelanggan, restoran, atau admin (Boundary Class)* | *UC11* |
-| *C41* | *KeluhanFormPage* | *Antarmuka untuk memyimpan keluhan dari pengguna. (Boundary Class)* | *UC13* |
-| *C42* | *KeluhanController* | *Mengatur pengiriman keluhan dan menampilkan keluhan. (Controller Class)* | *UC13,UC14* |
-| *C43* | *KeluhanDashboardPage* | *Antarmuka untuk melihat daftar keluhan sebagai admin. (Boundary Class)* | *UC14* |
+| *C30* | *Keluhan* | *Menyimpan isi, waktu pengiriman, dan status keluhan pelanggan. (Entity Class)* | *UC13, UC14* |
+| *C31* | *DashboardKelolaRestoranPage* | *Antarmuka admin yang menampilkan daftar restoran mitra yang terdaftar. (Boundary Class)* | *UC15* |
+| *C32* | *KonfirmasiHapusRestoranPage* | *Dialog konfirmasi untuk memastikan keputusan admin sebelum restoran dihapus. (Boundary Class)* | *UC15* |
+| *C33* | *KelolaDataRestoranController* | *Mengelola logika bisnis penonaktifan dan penghapusan data restoran dari database. (Controller Class)* | *UC15* |
+| *C34* | *PencarianRestoPage* | *Antarmuka pengguna (UI) bagi pelanggan untuk memasukkan kata kunci pencarian, memilih filter kategori atau lokasi, serta melihat kartu ringkasan restoran. (Boundary Class)* | *UC01* |
+| *C35* | *PencarianController* | *Mengatur logika eksekusi pencarian, menerapkan filter pencarian, serta memproses dan mengambil data daftar restoran dari entitas. (Controller Class)* | *UC01* |
+| *C36* | *VerifikasiRestoranPage* | *Antarmuka untuk memverifikasi restoran yang mendaftar* | *UC05* |
+| *C37* | *RegistrasiRestoPage* | *Antarmuka bagi restoran untuk mendaftarkan diri dalam daftar restoran viral. (Boundary Class)* | *UC04* |
+| *C38* | *RegistrasiPage* | *Antarmuka untuk melakukan registrasi sebagai pelanggan, restoran, atau admin (Boundary Class)* | *UC10* |
+| *C39* | *LoginPage* | *Antarmuka puntuk masuk sebagai pelanggan, restoran, atau admin (Boundary Class)* | *UC11* |
+| *C40* | *KeluhanFormPage* | *Antarmuka untuk memyimpan keluhan dari pengguna. (Boundary Class)* | *UC13* |
+| *C41* | *KeluhanController* | *Mengatur pengiriman keluhan dan menampilkan keluhan. (Controller Class)* | *UC13,UC14* |
+| *C42* | *KeluhanDashboardPage* | *Antarmuka untuk melihat daftar keluhan sebagai admin. (Boundary Class)* | *UC14* |
 
 ## 5.2 Diagram Kelas per Use Case
 Salin ulang diagram kelas untuk setiap use case dari BAB 4.2 dokumen *Class Diagram*, lengkap dengan tabel atribut dan metode/operasinya.
@@ -715,8 +714,8 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C02* | *Restoran* | *restoranId, namaRestoran, kategori, ratingRerata, daftarUlasan* | *getDetailRestoran(), getMenu(), getAntrean()* |
 | *C03* | *Menu* | *menuId, namaMenu, harga, deskripsiMenu, stok* | *getInfoMenu()* |
 | *C04* | *Antrean* | *antreanId, restoranId, nomorDilayani, totalAntrean, estimasiWaktuTunggu* | *getFrontCustomer(), getEstimasiWaktu()* |
-| *C35* | *PencarianRestoPage* | *inputKataKunci, filterKategori, filterLokasi, daftarResto* | *renderHalamanPencarian(),onKetikInput(), onPilihFilter(), onClickTombolCari(), tampilkanDaftarRestoran(), tampilkanPesanKosong()* |
-| *C36* | *PencarianController* | *-* | *cariRestoran(), terapkanFilter(), ambilStatusAntrean(), ambilPreviewMenu()* |
+| *C34* | *PencarianRestoPage* | *inputKataKunci, filterKategori, filterLokasi, daftarResto* | *renderHalamanPencarian(),onKetikInput(), onPilihFilter(), onClickTombolCari(), tampilkanDaftarRestoran(), tampilkanPesanKosong()* |
+| *C35* | *PencarianController* | *-* | *cariRestoran(), terapkanFilter(), ambilStatusAntrean(), ambilPreviewMenu()* |
 | *...* | *...* | *...* | *...* |
 
 ### 5.2.2 Use Case UC02
@@ -783,7 +782,7 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C03* | *Menu* | *idMenu, namaMenu, harga* | *tambahMenu()* |
 | *C12* | *PengajuanMitraController* | *idPengajuan, status, tglPengajuan* | *validasiKelengkapan(), simpanPengajuan()* |
 | *C13* |*DokumenVerifikasi*|*idDokumen, jenisDokumen*|*unggahDokumen(), validasiFormat()*|
-| *C38* |*RegistrasiRestoPage*|*dataFormInput, dokumenInput, menuInput*| *tampilkanForm(), submitPendaftaran()*|
+| *C37* |*RegistrasiRestoPage*|*dataFormInput, dokumenInput, menuInput*| *tampilkanForm(), submitPendaftaran()*|
 
 ### 5.2.5 Use Case UC05
 
@@ -802,7 +801,7 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C12* | *PengajuanMitra* | *status, alasanPenolakan* | *setujui(), tolak(alasan)* |
 | *C14* | *Admin* | *idAdmin, nama, emailAdmin* | *tinjauPengajuan()* |
 | *C15* |*NotifikasiEmail*|*penerima, isiPesan, jenis*|*kirimEmail()*|
-| *C37* |*VerifikasiRestoranPage*|*daftarPengajuan*|*tampilkanDaftarPengajuan(), tampilkanDetailPengajuan()*  |
+| *C36* |*VerifikasiRestoranPage*|*daftarPengajuan*|*tampilkanDaftarPengajuan(), tampilkanDetailPengajuan()*  |
 
 
 ### 5.2.6 Use Case UC06
@@ -923,8 +922,8 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C14* | *Admin* | *idAdmin, idPengguna, namaAdmin* | *accountRegister()* |
 | *C28* | *AutentikasiController* | *-* | *createAccount(), validation()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *createSession()* |
-| *C30* | *Pengguna* | *idPengguna, email, role* | *getUserInfo(), saveCredentials()* |
-| *C39* | *RegistrasiPage* | *inputUsername, inputEmail, inputPassword* | *renderFormRegistrasi(), onSubmitRegister()* |
+| *C25* | *Pengguna* | *idPengguna, email, role* | *getUserInfo(), saveCredentials()* |
+| *C38* | *RegistrasiPage* | *inputUsername, inputEmail, inputPassword* | *renderFormRegistrasi(), onSubmitRegister()* |
 | *...* | *...* | *...* | *...* |
 
 ### 5.2.11 Use Case UC11
@@ -945,8 +944,8 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | :--- | :--- | :--- | :--- |
 | *C28* | *AutentikasiController* | *username, password, tokenManager* | *validation(), processLogin()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *validateSession(), validateToken()* |
-| *C30* | *Pengguna* | *idPengguna, username, password, role* | *getUserInfo(), validatePassword()* |
-| *C40* | *LoginPage* | *inputUsername, inputPassword* | *renderFormLogin(), onSubmitLogin()* |
+| *C25* | *Pengguna* | *idPengguna, username, password, role* | *getUserInfo(), validatePassword()* |
+| *C39* | *LoginPage* | *inputUsername, inputPassword* | *renderFormLogin(), onSubmitLogin()* |
 | *...* | *...* | *...* | *...* |
 
 ### 5.2.12 Use Case UC12
@@ -967,7 +966,7 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | *C27* | *KonfirmasiLogout* | *pesanKonfirmasi* | *konfirmasiYa(), konfirmasiBatal()* |
 | *C28* | *AutentikasiController* | *tokenManager* | *processLogout(), handleSessionDeletion()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *hapusSesi(), validateToken()* |
-| *C30* | *Pengguna* | *idPengguna, email, role* | *logout()* |
+| *C25* | *Pengguna* | *idPengguna, email, role* | *logout()* |
 
 ### 5.2.13 Use Case UC13
 
@@ -984,9 +983,9 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C01* | *Pelanggan* | *idPelanggan, nama, email* | *kirimKeluhan()* |
-| *C31* | *Keluhan* | *idKeluhan, isiKeluhan, waktuKirim, status* | *simpanKeluhan()* |
-|*C41*|*KeluhanFormPage*|*isiKeluhanInput*|*tampilkanFormKeluhan(), submitKeluhan()*|
-|*C42*|*KeluhanController*|*-*|*handleKirimKeluhan()*|
+| *C30* | *Keluhan* | *idKeluhan, isiKeluhan, waktuKirim, status* | *simpanKeluhan()* |
+|*C40*|*KeluhanFormPage*|*isiKeluhanInput*|*tampilkanFormKeluhan(), submitKeluhan()*|
+|*C41*|*KeluhanController*|*-*|*handleKirimKeluhan()*|
 
 ### 5.2.14 Use Case UC14
 
@@ -1003,9 +1002,9 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | ID Kelas | Nama Kelas | Atribut | Metode/Operasi |
 | :--- | :--- | :--- | :--- |
 | *C14* | *Admin* | *idAdmin, nama* |*lihatDaftarKeluhan()*
-| *C31* | *Keluhan* | *status* | *lihatKeluhan()* |
-|*C42*|*KeluhanController*|*-*|*handleLihatDaftarKeluhan()*|
-|*C43*|*KeluhanDashboardPage*|*daftarKeluhan*|*tampilkanDaftarKeluhan()*|
+| *C30* | *Keluhan* | *status* | *lihatKeluhan()* |
+|*C41*|*KeluhanController*|*-*|*handleLihatDaftarKeluhan()*|
+|*C42*|*KeluhanDashboardPage*|*daftarKeluhan*|*tampilkanDaftarKeluhan()*|
 
 ### 5.2.15 Use Case UC15
 
@@ -1023,9 +1022,9 @@ Pada diagram kelas, cukup tampilkan nama kelas saja. Atribut dan metode/operasi 
 | :--- | :--- | :--- | :--- |
 | *C02* | *Restoran* | *idRestoran, namaRestoran, statusAktif* | *setSoftDelete(), purgeData()* |
 | *C14* | *Admin* | *idAdmin, namaAdmin* | *konfirmasiPenghapusan()* |
-| *C32* | *DashboardKelolaRestoran* | *daftarRestoran, kataKunci* | *pilihRestoran(), klikHapusRestoran()* |
-| *C33* | *KonfirmasiHapusRestoran* | *idRestoran, pesanPeringatan* | *setujuiPenghapusan(), batalHapus()* |
-| *C34* | *KelolaDataRestoran* | *idRestoran* | *hapusDataRestoran(), nonaktifkanRelasiMenu()* |
+| *C31* | *DashboardKelolaRestoran* | *daftarRestoran, kataKunci* | *pilihRestoran(), klikHapusRestoran()* |
+| *C32* | *KonfirmasiHapusRestoran* | *idRestoran, pesanPeringatan* | *setujuiPenghapusan(), batalHapus()* |
+| *C33* | *KelolaDataRestoran* | *idRestoran* | *hapusDataRestoran(), nonaktifkanRelasiMenu()* |
 
 > Lanjutkan pola **5.2.x** untuk setiap use case pada 4.2.
 
@@ -1065,25 +1064,24 @@ Gabungkan seluruh kelas dan hubungan antarkelas dari BAB 4.3 dokumen *Class Diag
 | *C22* | *PengaturanKuotaPage* | *inputKuota, inputMeja* | *handleViewSettings(), handleSaveSettings(), validateInput()* |
 | *C23* | *PengaturanMenuPage* | *menuInput, stokInput, hargaInput* | *displayDaftarMenu(), showFormTambahMenu(), onSaveMenu(), onDeleteMenu()* |
 | *C24* | *KelolaMenuController* | *menuData* | *handleFetchMenu(), handleAddMenu(), handleUpdateMenu(), handleDeleteMenu()* |
-| *C25* | *Akun* | *username, password* | *validateAccount()* |
+| *C25* | *Akun* | *username, password, idPengguna, email, role* | *validateAccount(), logout()* |
 | *C26* | *HalamanProfilPage* | *idPengguna, namaUser* | *tekanTombolLogout()* |
 | *C27* | *KonfirmasiLogoutPage* | *pesanKonfirmasi* | *konfirmasiYa(), konfirmasiBatal()* |
 | *C28* | *AutentikasiController* | *akunId, username, password, tokenManager* | *createAccount(), validation(), processLogout(), handleSessionDeletion()* |
 | *C29* | *SesiPengguna* | *idSesi, token, statusAktif* | *validateSession(), hapusSesi(), validateToken()* |
-| *C30* | *Pengguna* | *idPengguna, email, role* | *logout()* |
-| *C31* | *Keluhan* | *idKeluhan, isiKeluhan, waktuKirim, status* | *simpanKeluhan(), updateStatusKeluhan()* |
-| *C32* | *DashboardKelolaRestoranPage* | *daftarRestoran, kataKunci* | *pilihRestoran(), klikHapusRestoran()* |
-| *C33* | *KonfirmasiHapusRestoranPage* | *restoranId, pesanPeringatan* | *setujuiPenghapusan(), batalHapus()* |
-| *C34* | *KelolaDataRestoranController* | *restoranId* | *hapusDataRestoran(), nonaktifkanRelasiMenu()* |
-| *C35* | *PencarianRestoPage* | *inputKataKunci, filterKategori, filterLokasi, daftarResto* | *renderHalamanPencarian(), onKetikInput(), onPilihFilter(), onClickTombolCari(), tampilkanDaftarRestoran(), tampilkanPesanKosong()* |
-| *C36* | *PencarianController* | *kataKunci, filterSelected* | *cariRestoran(), terapkanFilter(), ambilStatusAntrean(), ambilPreviewMenu()* |
-| *C37* | *VerifikasiRestoranPage* | *idPengajuan, berkasMitra* | *tampilkanDetailBerkas(), renderStatusVerifikasi()* |
-| *C38* | *RegistrasiRestoPage* | *formResto, dokumenUpload* | 8renderFormRegistrasi(), onSubmitRegistrasi()* |
-| *C39* | *RegistrasiPage* | *inputUsername, inputEmail, inputPassword* | *renderFormRegistrasi(), onSubmitRegister()* |
-| *C40* | *LoginPage* | *inputUsername, inputPassword* | *renderFormLogin(), onSubmitLogin()* |
-| *C41* | *KeluhanFormPage* | *inputKeluhan, waktuKirim* | *renderFormKeluhan(), onSubmitKeluhan()* |
-| *C42* | *KeluhanController* | *daftarKeluhan* | *kirimKeluhan(), tampilkanKeluhan(), tanggapiKeluhan()* |
-| *C43* | *KeluhanDashboardPage* | *listKeluhanUI* | *displayKeluhanList(), showDetailKeluhan()* |
+| *C30* | *Keluhan* | *idKeluhan, isiKeluhan, waktuKirim, status* | *simpanKeluhan(), updateStatusKeluhan()* |
+| *C31* | *DashboardKelolaRestoranPage* | *daftarRestoran, kataKunci* | *pilihRestoran(), klikHapusRestoran()* |
+| *C32* | *KonfirmasiHapusRestoranPage* | *restoranId, pesanPeringatan* | *setujuiPenghapusan(), batalHapus()* |
+| *C33* | *KelolaDataRestoranController* | *restoranId* | *hapusDataRestoran(), nonaktifkanRelasiMenu()* |
+| *C34* | *PencarianRestoPage* | *inputKataKunci, filterKategori, filterLokasi, daftarResto* | *renderHalamanPencarian(), onKetikInput(), onPilihFilter(), onClickTombolCari(), tampilkanDaftarRestoran(), tampilkanPesanKosong()* |
+| *C35* | *PencarianController* | *kataKunci, filterSelected* | *cariRestoran(), terapkanFilter(), ambilStatusAntrean(), ambilPreviewMenu()* |
+| *C36* | *VerifikasiRestoranPage* | *idPengajuan, berkasMitra* | *tampilkanDetailBerkas(), renderStatusVerifikasi()* |
+| *C37* | *RegistrasiRestoPage* | *formResto, dokumenUpload* | 8renderFormRegistrasi(), onSubmitRegistrasi()* |
+| *C38* | *RegistrasiPage* | *inputUsername, inputEmail, inputPassword* | *renderFormRegistrasi(), onSubmitRegister()* |
+| *C39* | *LoginPage* | *inputUsername, inputPassword* | *renderFormLogin(), onSubmitLogin()* |
+| *C40* | *KeluhanFormPage* | *inputKeluhan, waktuKirim* | *renderFormKeluhan(), onSubmitKeluhan()* |
+| *C41* | *KeluhanController* | *daftarKeluhan* | *kirimKeluhan(), tampilkanKeluhan(), tanggapiKeluhan()* |
+| *C42* | *KeluhanDashboardPage* | *listKeluhanUI* | *displayKeluhanList(), showDetailKeluhan()* |
 
 ---
 
@@ -1121,20 +1119,20 @@ Salin ulang tabel Traceability dari BAB 5 dokumen *Class Diagram*, cocokkan seti
 | *C27* | *UC12* | *KF21* |
 | *C28* | *UC12* | *KF21* |
 | *C29* | *UC12* | *KF21* |
-| *C30* | *UC12* | *KF21* |
-| *C31* | *UC13, UC14* | *KF19* |
+| *C25* | *UC12* | *KF21* |
+| *C30* | *UC13, UC14* | *KF19* |
+| *C31* | *UC15* | *KF20* |
 | *C32* | *UC15* | *KF20* |
 | *C33* | *UC15* | *KF20* |
-| *C34* | *UC15* | *KF20* |
+| *C34* | *UC01* | *KF01, KF02* |
 | *C35* | *UC01* | *KF01, KF02* |
-| *C36* | *UC01* | *KF01, KF02* |
-| *C37* | *UC05* | *KF15, KF16* |
-| *C38* | *UC04* | *KF14* |
-| *C39* | *UC10* | *KF21* |
-| *C40* | *UC11* | *KF21* |
-| *C41* | *UC13* | *KF19* |
-| *C42* | *UC13, UC14* | *KF19* |
-| *C43* | *UC14* | *KF19* |
+| *C36* | *UC05* | *KF15, KF16* |
+| *C37* | *UC04* | *KF14* |
+| *C38* | *UC10* | *KF21* |
+| *C39* | *UC11* | *KF21* |
+| *C40* | *UC13* | *KF19* |
+| *C41* | *UC13, UC14* | *KF19* |
+| *C42* | *UC14* | *KF19* |
 
 ---
 
