@@ -164,7 +164,7 @@ Spesifikasi *operating system* atau lingkungan yang dibutuhkan P/L untuk beroper
 | *Client* | *Google Chrome* |
 | *DBMS* | *PostgreSQL 15+* |
 | *OS* | *Windows 11* |
-| *Bahasa Pemrograman* | *Python* |
+| *Bahasa Pemrograman* | *Typescript* |
 | *API* | *REST API* |
 
 ---
