@@ -64,6 +64,7 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *UC* | *Singkatan dari Use Case.* |
 | *C* | *Singkatan dari Class.* |
 | *EARS* | *Easy Approach to Requirements Syntax, yaitu pola penulisan kebutuhan agar konsisten dan mudah diuji.* |
+| *AC* | *Singkatan dari Aktor.* |
 | *...* | *...* |
 
 ## 1.4 Aturan Penomoran
