@@ -140,7 +140,7 @@
 | *29-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki 1.4* | *0.1* | *Done* | *-* |
 | *30-09-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki kelas di Bab 5 dan 6* | *1* | *Done* | *-* |
 | *30-09-2026* | *Bayu Palamarta Wirawan* | *Mengisi Form Asistensi* | *0.5* | *Done* | *-* |
-
+| *30-09-2026* | *Muhammad Fauzi Muharam* | *Melengkapi ikhtisar dan referensi* | *1* | *Done* | *-* |
 **Catatan/Evaluasi Milestone 5:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
