@@ -48,16 +48,49 @@ Isi bab ini dengan hal-hal berikut:
 2. **Alasan pemilihan** berdasarkan karakteristik P/L Anda, misalnya jenis pengguna, alur proses bisnis, serta KF dan KNF pada dokumen SKPL.
 3. **Gambar style/pattern yang diterapkan pada P/L Anda.** Jangan hanya menyalin Gambar 1. Isi setiap bagian pattern dengan komponen milik P/L Anda. Misalnya, kotak *Controller* berisi daftar *controller* yang ada di aplikasi dan kotak *Model* berisi daftar *model* yang ada di aplikasi.
 
+Style yang dipilih adalah Architectural Style Client-Server. Client berperan dalam meminta layanan tertentu, sedangkan server berperan dalam menyediakan layanan. Keduanya saling berkomunikasi melalui jaringan seperti REST API.
+
+Alasan Pemilihan:
+1. Berdasarkan jenis pengguna: SKPL mengidentifikasi tiga aktor (Pelanggan, Restoran, Admin) yang mengakses sistem yang sama dari perangkat berbeda (smartphone, tablet, laptop). Dengan Client-Server, semua aktor memakai satu server dan satu sumber data. Perbedaan hak akses (role) cukup ditangani di server oleh AutentikasiController, sementara client hanya menampilkan UI sesuai peran.
+
+2. Berdasarkan alur proses bisnis: Data harus terpusat dan digunakan bersama dan perlu sinkronisasi real-time
+
+3. Berdasarkan KF dan KNF:
+- KF07, KF09, KF10: pengecekan stok, validasi booking maksimal 7 hari, dan penerbitan ID tiket unik adalah logika bisnis yang harus dijalankan di server agar tidak bisa dimanipulasi client.
+- KF12, KF11: verifikasi pembayaran dan komunikasi dengan Payment Gateway dilakukan server.
+- KF15, KF16: persetujuan admin dan pengiriman email adalah proses sisi server.
+- KF21: autentikasi dan manajemen sesi (token) lebih aman bila dikelola server.
+- KNF03 dan KNF06: Server sebagai satu titik otoritas dapat menjalankan transaksi database dan locking sehingga tidak terjadi race condition. Ini sulit dijamin bila logika tersebar di client.
+  
+Pattern pendukung yang juga dipilih adalah MVC. Model berperan sebagai representasi data dan aturan bisnis, View sebagai pengatur tampilan, dan Controller berperan sebagai penghubung Model dan View
+
+Alasan Pemilihan:
+1. Berdasarkan jenis pengguna: MVC memungkinkan satu Model dipakai bersama, sementara View dibuat terpisah per peran tanpa menduplikasi logika bisnis.
+
+2. Berdasarkan alur proses bisnis: Data antrean yang sama muncul di HalamanStatusAntrean (pelanggan) dan DashboardAntreanPage (restoran). Dengan MVC, perubahan di Model (misalnya setelah dequeue) dapat memperbarui kedua View sekaligus, sesuai kebutuhan UC03 dan UC09 yang menuntut update tanpa reload.
+
+3. Berdasarkan KF dan KNF:
+- KF01, KF02: PencarianController menerapkan filter ke Model Restoran, hasilnya ditampilkan PencarianRestoPage.
+- KF07, KF09, KF10: aturan ini ditempatkan di Model dan Controller, bukan di View.
+- KF17, KF18: perubahan Model memicu pembaruan View.
+- KF21: AutentikasiController dengan Model Pengguna dan SesiPengguna.
+- KNF03, KNF06:	Aturan keunikan dan penguncian ditempatkan di Model (TiketAntrean, Kuota, Pesanan) sehingga berlaku sama dari View mana pun.
+- KNF04, KNF13: View dapat didesain dan diubah mandiri tanpa menyentuh logika bisnis.
+- KNF10, KNF14:	Logika pembayaran terpusat di MetodePembayaranController dan RiwayatTransaksi, bukan tersebar di halaman.
+- KNF08:	Controller menjadi satu pintu validasi dan otorisasi sebelum Model diakses
+
 Selain *style/pattern*, tuliskan juga lingkungan operasi P/L. Tabel berikut **disalin dari subbab 2.5 *Lingkungan Operasi Perangkat Lunak* pada dokumen SKPL** tanpa perubahan. Setelah tabel, jelaskan kaitan teknologi yang dipakai dengan *style/pattern* yang dipilih. Contohnya, Django (Python) secara bawaan mengikuti pola MVT (*Model-View-Template*), yaitu varian dari MVC.
 
 Tabel 1.1. Lingkungan Operasi Perangkat Lunak
 
 | Komponen | Spesifikasi |
 | :--- | :--- |
-| *Server* | *[contoh: Node.js v20 dengan Next.js, dijalankan secara lokal (localhost)]* |
-| *Client* | *[contoh: Web Browser modern (Chrome, Firefox terbaru)]* |
-| *DBMS* | *[contoh: PostgreSQL 15 pada Supabase sebagai basis data terpusat]* |
-| *OS* | *[contoh: Cross-platform (Windows/Linux/MacOS) melalui browser]* |
+| *Server* | *Lokal (localhost)* |
+| *Client* | *Google Chrome* |
+| *DBMS* | *PostgreSQL 15+* |
+| *OS* | *Windows 11* |
+| *Bahasa Pemrograman* | *Typescript* |
+| *API* | *REST API* |
 | *...* | *...* |
 
 <sub><b><i>Catatan</i></b>: <i>Style/pattern yang dipilih di bab ini menjadi acuan untuk BAB 2 (pengelompokan komponen) dan BAB 3 (model arsitektur). Contoh pada dokumen ini memakai MVC secara konsisten dari BAB 1 sampai BAB 3. Kelompok boleh memakai pattern lain selama alasannya dijelaskan dan BAB 2 serta BAB 3 disesuaikan. Tabel 1.1 harus sama persis dengan subbab 2.5 dokumen SKPL; jangan menambah atau mengubah isinya karena SKPL sudah final.</i></sub>
