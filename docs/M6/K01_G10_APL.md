@@ -163,15 +163,40 @@ Ketentuan pengisian BAB 3:
 6. Beri label pada setiap garis atau panah yang menghubungkan komponen agar hubungan antarkomponen dapat dipahami tanpa penjelasan tambahan.
 7. Jika membuat *Physical View*, gambarkan lingkungan operasi pada Tabel 1.1.
 
-## 3.1 XXX View
+## 3.1 Logical View
 
-Tuliskan secara singkat mengenai model arsitektur perangkat lunak yang Anda pilih dan sertakan alasan mengapa model arsitektur tersebut cocok untuk aplikasi Anda.
+Logical View dipilih karena paling jelas menunjukkan pembagian tanggung jawab antarkomponen pada pattern MVC/ECB yang dipakai antri.in View menangani antarmuka, Controller menjalankan logika bisnis, dan Model menyimpan domain data. View ini juga memperlihatkan titik integrasi dengan Payment Gateway dan layanan email, serta ketergantungan seluruh Model terhadap basis data PostgreSQL. Pembagian ini menjadi acuan implementasi dan memudahkan penelusuran dari use case ke komponen.
+
+Arsitektur aplikasi **antri.in** dibagi menjadi beberapa lapisan utama:
+1. **Layer View (Antarmuka Pengguna)**
+   - Berfungsi untuk menampilkan antarmuka interaktif kepada pengguna, baik untuk pelanggan, pengelola restoran, maupun pihak mitra.
+   - **Komponen**: `AkunView`, `KeluhanView`, `StatusAntreanView`, `KelolaAntreanView`, `PemesananView`, `PencarianView`, `KelolaRestoranView`, `PengaturanView`, dan `MitraView`. Setiap komponen *view* menangani fungsi spesifik seperti melihat status antrean, pemesanan menu, hingga pendaftaran mitra baru.
+
+2. **Layer Controller (Logika Bisnis & Kendali)**
+   - Menerima input dari *View*, memproses alur kerja (*use case*), dan memperbarui data pada *Model*.
+   - **Komponen**: `AutentikasiController`, `KeluhanController`, `PemantauAntreanController`, `KelolaAntreanController`, `PemesananController`, `MetodePembayaranController`, `PencarianController`, `KelolaDataRestoranController`, `PengaturanKuotaController`, `KelolaMenuController`, dan `PengajuanMitraController`.
+
+3. **Layer Model (Domain Data & Aturan Bisnis)**
+   - Mengelola data utama, status aplikasi, serta transaksi bisnis.
+   - **Komponen**: 
+     - `ModelAkun`: Mengelola sesi dan kredensial pengguna.
+     - `ModelKeluhan`: Mengelola catatan keluhan dari pengguna.
+     - `ModelAntrean`: Mengelola siklus antrean, nomor tiket, dan status penerbitan antrean.
+     - `ModelPesanan`: Mengelola rincian transaksi dan pesanan pelanggan.
+     - `ModelRestoran`: Mengelola data restoran, stok menu, kuota meja, dan status kemitraan.
+
+4. **Integrasi Eksternal & Layer Pendukung (Infrastructure/Persistence)**
+   - **Integrasi Eksternal**:
+     - `PaymentGatewayAdapter` yang terhubung ke layanan *Payment Gateway* eksternal untuk pemrosesan transaksi.
+     - `NotifikasiEmail` yang terhubung ke *Layanan Email* eksternal untuk pengiriman pesan notifikasi/konfirmasi.
+   - **Pendukung (Database)**: `BasisDataPostgreSQL` digunakan untuk menyimpan data relasional bagi semua model data aplikasi.
+
 
 <p align="center">
-<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/contoh-logical-view.webp" width="100%">
+<img alt="Contoh Logical View pada P/L E-Commerce" src="./assets/diagram/Logical View Block Diagram.png" width="100%">
 </p>
 <p align="center">
-<i>Gambar 2. Contoh Logical View pada P/L E-Commerce</i>
+<i>Gambar 2. Logical View antri.in</i>
 </p>
 
 Gambar 2 adalah contoh *Logical View* dalam bentuk *block diagram*. Seluruh komponen pada Tabel 2.1 digambarkan dan dikelompokkan sesuai pola MVC (*View*, *Controller*, *Model*), ditambah komponen pendukung dan basis data. Sistem di luar P/L, seperti *Payment Gateway (dummy)*, digambarkan dengan garis putus-putus dan tidak perlu dimasukkan ke Tabel 2.1. Setiap garis diberi label: "Memanggil" untuk *View* yang memanggil *Controller*, "akses" untuk *Controller* yang mengakses *Model*, serta agregasi dan komposisi untuk hubungan antar-*Model*.
