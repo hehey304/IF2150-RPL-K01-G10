@@ -47,37 +47,44 @@ Isi bab ini dengan hal-hal berikut:
 1. **Style/pattern yang dipilih** beserta penjelasan singkat peran setiap bagiannya. Untuk MVC, jelaskan peran *Model*, *View*, dan *Controller*.
 2. **Alasan pemilihan** berdasarkan karakteristik P/L Anda, misalnya jenis pengguna, alur proses bisnis, serta KF dan KNF pada dokumen SKPL.
 3. **Gambar style/pattern yang diterapkan pada P/L Anda.** Jangan hanya menyalin Gambar 1. Isi setiap bagian pattern dengan komponen milik P/L Anda. Misalnya, kotak *Controller* berisi daftar *controller* yang ada di aplikasi dan kotak *Model* berisi daftar *model* yang ada di aplikasi.
-
-Style yang dipilih adalah Architectural Style Client-Server. Client berperan dalam meminta layanan tertentu, sedangkan server berperan dalam menyediakan layanan. Keduanya saling berkomunikasi melalui jaringan seperti REST API.
-
-Alasan Pemilihan:
-1. Berdasarkan jenis pengguna: SKPL mengidentifikasi tiga aktor (Pelanggan, Restoran, Admin) yang mengakses sistem yang sama dari perangkat berbeda (smartphone, tablet, laptop). Dengan Client-Server, semua aktor memakai satu server dan satu sumber data. Perbedaan hak akses (role) cukup ditangani di server oleh AutentikasiController, sementara client hanya menampilkan UI sesuai peran.
-
-2. Berdasarkan alur proses bisnis: Data harus terpusat dan digunakan bersama dan perlu sinkronisasi real-time
-
-3. Berdasarkan KF dan KNF:
-- KF07, KF09, KF10: pengecekan stok, validasi booking maksimal 7 hari, dan penerbitan ID tiket unik adalah logika bisnis yang harus dijalankan di server agar tidak bisa dimanipulasi client.
-- KF12, KF11: verifikasi pembayaran dan komunikasi dengan Payment Gateway dilakukan server.
-- KF15, KF16: persetujuan admin dan pengiriman email adalah proses sisi server.
-- KF21: autentikasi dan manajemen sesi (token) lebih aman bila dikelola server.
-- KNF03 dan KNF06: Server sebagai satu titik otoritas dapat menjalankan transaksi database dan locking sehingga tidak terjadi race condition. Ini sulit dijamin bila logika tersebar di client.
   
-Pattern pendukung yang juga dipilih adalah MVC. Model berperan sebagai representasi data dan aturan bisnis, View sebagai pengatur tampilan, dan Controller berperan sebagai penghubung Model dan View
+Style yang dipilih adalah Architectural Style MVC. Model berperan sebagai representasi data dan aturan bisnis, View sebagai pengatur tampilan, dan Controller berperan sebagai penghubung Model dan View
 
 Alasan Pemilihan:
-1. Berdasarkan jenis pengguna: MVC memungkinkan satu Model dipakai bersama, sementara View dibuat terpisah per peran tanpa menduplikasi logika bisnis.
-
-2. Berdasarkan alur proses bisnis: Data antrean yang sama muncul di HalamanStatusAntrean (pelanggan) dan DashboardAntreanPage (restoran). Dengan MVC, perubahan di Model (misalnya setelah dequeue) dapat memperbarui kedua View sekaligus, sesuai kebutuhan UC03 dan UC09 yang menuntut update tanpa reload.
+1. Berdasarkan jenis pengguna:
+- Pelanggan: Dengan MVC, View pelanggan dapat diperbaiki berulang kali tanpa menyentuh logika pemesanan atau pembayaran. Selain itu, informasi sensitif seperti rekening dan e-wallet hanya diakses lewat Controller, tidak langsung oleh View.
+- Restoran: Karena Model menjadi sumber data tunggal, perubahan dari sisi restoran secara otomatis tersedia untuk View pelanggan tanpa menduplikasi data.
+- Admin: View admin berupa panel kerja yang berbeda dari antarmuka pelanggan, sehingga bisa dikembangkan sendiri.
+  
+2. Berdasarkan alur proses bisnis: Data antrean yang sama muncul di HalamanStatusAntrean (pelanggan) dan DashboardAntreanPage (restoran). Dengan MVC, perubahan di Model (misalnya setelah dequeue) dapat memperbarui kedua View sekaligus.
 
 3. Berdasarkan KF dan KNF:
-- KF01, KF02: PencarianController menerapkan filter ke Model Restoran, hasilnya ditampilkan PencarianRestoPage.
-- KF07, KF09, KF10: aturan ini ditempatkan di Model dan Controller, bukan di View.
-- KF17, KF18: perubahan Model memicu pembaruan View.
-- KF21: AutentikasiController dengan Model Pengguna dan SesiPengguna.
-- KNF03, KNF06:	Aturan keunikan dan penguncian ditempatkan di Model (TiketAntrean, Kuota, Pesanan) sehingga berlaku sama dari View mana pun.
-- KNF04, KNF13: View dapat didesain dan diubah mandiri tanpa menyentuh logika bisnis.
-- KNF10, KNF14:	Logika pembayaran terpusat di MetodePembayaranController dan RiwayatTransaksi, bukan tersebar di halaman.
-- KNF08:	Controller menjadi satu pintu validasi dan otorisasi sebelum Model diakses
+- Pemisahan peran pengguna (KF21, KF15, KF19, KF20)
+Sistem melayani tiga aktor (pelanggan, restoran, admin) dengan fitur yang berbeda. Dalam MVC, setiap aktor dapat dilayani oleh Controller dan View terpisah (misalnya PelangganController, RestoranController, AdminController), sementara Model tetap dipakai bersama. Hal ini mempermudah pengaturan hak akses dan alur registrasi/login/logout.
+
+- Banyak tampilan dari data yang sama (KF01, KF02, KF03, KF13)
+Data restoran, antrean, dan pesanan ditampilkan ke beberapa pihak dan di beberapa halaman. MVC memungkinkan satu Model menyediakan data yang sama untuk View yang berbeda tanpa menduplikasi logika.
+
+- Pembaruan antrean yang saling terhubung (KF04, KF08, KF17, KF18)
+Ketika restoran melakukan dequeue atau mengubah kuota, tampilan pelanggan harus ikut diperbarui. Pola Model sebagai sumber data tunggal dan View yang menyesuaikan diri terhadap perubahan Model cocok untuk menjaga sinkronisasi ini.
+
+- Logika bisnis yang kompleks dan terpusat (KF05, KF06, KF07, KF09, KF10)
+Pemeriksaan stok, dua mode pemesanan (booking dan pre-order), validasi reservasi maksimal seminggu sebelumnya, serta penyimpanan tiket antrean merupakan aturan bisnis. Dalam MVC, aturan ini ditempatkan di Model/Controller, bukan di tampilan, sehingga mudah diuji dan diubah.
+
+- Response time (KNF02, KNF09, KNF12)
+Pemisahan lapisan membuat Model dapat dioptimalkan secara mandiri tanpa memengaruhi View, sehingga target 1 detik untuk menampilkan restoran dan 10 detik untuk konfirmasi pembayaran lebih mudah dicapai.
+
+- Reliability (KNF03, KNF06, KNF10, KNF14)
+Nomor antrean unik, pencegahan pemesanan meja ganda, konfirmasi semua pembayaran, dan pencegahan double-charge adalah aturan integritas data. Dengan MVC, aturan ini dipusatkan di Model sehingga konsisten, apa pun Controller atau View yang memanggilnya.
+
+- Security (KNF08)
+Privasi nomor rekening dan e-wallet dapat dijaga dengan memastikan View tidak pernah mengakses data sensitif secara langsung. Seluruh akses melewati Controller yang melakukan otorisasi dan validasi, dan Model yang mengelola enkripsi atau penyamaran data.
+
+- Availability (KNF01, KNF05, KNF07, KNF11)
+Fitur yang harus tersedia setiap saat seperti daftar restoran, nomor antrean, dan pendaftaran dapat dipelihara dan diperbarui per komponen.
+
+- Ergonomy (KNF04, KNF13)
+Antarmuka yang minimalis dan mudah digunakan membutuhkan iterasi desain tampilan yang sering. Karena View terpisah dari logika, desain UI dapat diubah tanpa menyentuh logika bisnis.
 
 <p align="center">
 <img alt="Contoh Arsitektur MVC" src="./assets/diagram/MVC.png" width="70%">
