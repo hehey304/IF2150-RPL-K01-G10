@@ -79,6 +79,13 @@ Alasan Pemilihan:
 - KNF10, KNF14:	Logika pembayaran terpusat di MetodePembayaranController dan RiwayatTransaksi, bukan tersebar di halaman.
 - KNF08:	Controller menjadi satu pintu validasi dan otorisasi sebelum Model diakses
 
+<p align="center">
+<img alt="Contoh Arsitektur MVC" src="./assets/diagram/MVC.png" width="70%">
+</p>
+<p align="center">
+<i>Gambar 1. Arsitektur MVC</i>
+</p>
+
 Selain *style/pattern*, tuliskan juga lingkungan operasi P/L. Tabel berikut **disalin dari subbab 2.5 *Lingkungan Operasi Perangkat Lunak* pada dokumen SKPL** tanpa perubahan. Setelah tabel, jelaskan kaitan teknologi yang dipakai dengan *style/pattern* yang dipilih. Contohnya, Django (Python) secara bawaan mengikuti pola MVT (*Model-View-Template*), yaitu varian dari MVC.
 
 Tabel 1.1. Lingkungan Operasi Perangkat Lunak
