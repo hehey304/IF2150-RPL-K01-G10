@@ -27,6 +27,8 @@
 * [Milestone 3](#milestone-3)
 * [Milestone 4](#milestone-4)
 * [Milestone 5](#milestone-5)
+* [Milestone 6](#milestone-6)
+
 
 ---
 
@@ -147,6 +149,18 @@
 | *30-09-2026* | *Chatima Anandakhorita* | *Menambahkan dan menyempurnakan isi dari Bab 3 dan Bab 4 milestone 5* | *1.5* | *Done* | *-* |
 
 **Catatan/Evaluasi Milestone 5:**
+* *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
+
+### Milestone 6
+**Periode:** 2-10-2026 - 7-10-2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- | 
+| *5-10-2026* | *Chatima Anandakhorita* | *Menambahkan tabel Bab 2 * | *1* | *Done* | *-* |
+| *7-10-2026* | *Chatima Anandakhorita* | *Memperbaiki kekurangan pada tabel Bab 2 setelah evaluasi. * | *0.5* | *Done* | *-* |
+
+
+
+**Catatan/Evaluasi Milestone 6:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 
 
