@@ -147,6 +147,7 @@
 | *30-09-2026* | *Muhammad Fauzi Muharam* | *Melengkapi 2.2* | *1* | *Done* | *-* |
 | *30-09-2026* | *Muhammad Nur Fikri Hariyawan* | *Menambah penjelasan pada 1.2* | *1.5* | *Done* | *-* |
 | *30-09-2026* | *Chatima Anandakhorita* | *Menambahkan dan menyempurnakan isi dari Bab 3 dan Bab 4 milestone 5* | *1.5* | *Done* | *-* |
+| *30-09-2026* | *Athallah Nanda Andita* | *Membantu mengecek bab 2 dan membantu membuat kerangka awal untuk deskripsi umum perangkat lunak* | *1* | *Done* | *-* |
 
 **Catatan/Evaluasi Milestone 5:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
@@ -158,6 +159,7 @@
 | *4-10-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 6* | *0.5* | *Done* | *-* |
 | *5-10-2026* | *Chatima Anandakhorita* | *Menambahkan tabel Bab 2* | *1* | *Done* | *-* |
 | *5-10-2026* | *Bayu Palamarta Wirawan* | *Mengembangkan Bab 1* | *1* | *Done* | *-* |
+| *5-10-2026* | *Athallah Nanda Andita* | *Menambahkan Bab 3 bagian 3.1 Logical View * | *1.5* | *Done* | *-* |
 | *7-10-2026* | *Chatima Anandakhorita* | *Memperbaiki kekurangan pada tabel Bab 2 setelah evaluasi.* | *0.5* | *Done* | *-* |
 | *7-10-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki kekurangan pada Bab 1* | *1* | *Done* | *-* |
 
