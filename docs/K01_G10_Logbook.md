@@ -155,8 +155,11 @@
 **Periode:** 2-10-2026 - 7-10-2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
 | :--- | :--- | :--- | :--- | :--- | :--- | 
-| *5-10-2026* | *Chatima Anandakhorita* | *Menambahkan tabel Bab 2 * | *1* | *Done* | *-* |
-| *7-10-2026* | *Chatima Anandakhorita* | *Memperbaiki kekurangan pada tabel Bab 2 setelah evaluasi. * | *0.5* | *Done* | *-* |
+| *4-10-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 6* | *0.5* | *Done* | *-* |
+| *5-10-2026* | *Chatima Anandakhorita* | *Menambahkan tabel Bab 2* | *1* | *Done* | *-* |
+| *5-10-2026* | *Bayu Palamarta Wirawan* | *Mengembangkan Bab 1* | *1* | *Done* | *-* |
+| *7-10-2026* | *Chatima Anandakhorita* | *Memperbaiki kekurangan pada tabel Bab 2 setelah evaluasi.* | *0.5* | *Done* | *-* |
+| *7-10-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki kekurangan pada Bab 1* | *1* | *Done* | *-* |
 
 
 
