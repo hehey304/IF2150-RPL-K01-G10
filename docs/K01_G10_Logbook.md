@@ -163,6 +163,7 @@
 | *7-10-2026* | *Chatima Anandakhorita* | *Memperbaiki kekurangan pada tabel Bab 2 setelah evaluasi.* | *0.5* | *Done* | *-* |
 | *7-10-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki kekurangan pada Bab 1* | *1* | *Done* | *-* |
 | *7-10-2026* | *Muhammad Nur Fikri Hariyawan* | *Mengisi form asistensi* | *0.5* | *Done* | *-* |
+| *7-10-2026* | *Muhammad Fauzi Muiharam* | *Membuat Process View* | *2* | *Done* | *-* |
 
 
 
