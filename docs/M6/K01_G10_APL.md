@@ -47,8 +47,10 @@ Isi bab ini dengan hal-hal berikut:
 1. **Style/pattern yang dipilih** beserta penjelasan singkat peran setiap bagiannya. Untuk MVC, jelaskan peran *Model*, *View*, dan *Controller*.
 2. **Alasan pemilihan** berdasarkan karakteristik P/L Anda, misalnya jenis pengguna, alur proses bisnis, serta KF dan KNF pada dokumen SKPL.
 3. **Gambar style/pattern yang diterapkan pada P/L Anda.** Jangan hanya menyalin Gambar 1. Isi setiap bagian pattern dengan komponen milik P/L Anda. Misalnya, kotak *Controller* berisi daftar *controller* yang ada di aplikasi dan kotak *Model* berisi daftar *model* yang ada di aplikasi.
+
+<br>
   
-Style yang dipilih adalah Architectural Style MVC. Model berperan sebagai representasi data dan aturan bisnis, View sebagai pengatur tampilan, dan Controller berperan sebagai penghubung Model dan View
+Style yang dipilih adalah Architectural Style MVC. Pola arsitektur ini memisahkan aplikasi menjadi 3 komponen utama, yaitu Model, View, dan Controller. Model berperan sebagai representasi data dan logika bisnis, View sebagai pengatur tampilan informasi kepada pengguna, dan Controller berperan sebagai penghubung Model dan View.
 
 Alasan Pemilihan:
 1. Berdasarkan jenis pengguna:
@@ -56,7 +58,10 @@ Alasan Pemilihan:
 - Restoran: Karena Model menjadi sumber data tunggal, perubahan dari sisi restoran secara otomatis tersedia untuk View pelanggan tanpa menduplikasi data.
 - Admin: View admin berupa panel kerja yang berbeda dari antarmuka pelanggan, sehingga bisa dikembangkan sendiri.
   
-2. Berdasarkan alur proses bisnis: Data antrean yang sama muncul di HalamanStatusAntrean (pelanggan) dan DashboardAntreanPage (restoran). Dengan MVC, perubahan di Model (misalnya setelah dequeue) dapat memperbarui kedua View sekaligus.
+2. Berdasarkan alur proses bisnis: 
+- Data antrean yang sama muncul di HalamanStatusAntrean (pelanggan) dan DashboardAntreanPage (restoran). Dengan MVC, perubahan di Model (misalnya setelah dequeue) dapat memperbarui kedua View sekaligus.
+- Aplikasi membutuhkan proses validasi yang cukup kompleks. Dengan MVC, proses bisnis yang kompleks bisa dipisahkan dengan antarmuka supaya tidak terlalu menganggu tampilan.
+- MVC memudahkan pengembangan fitur yang berbeda seperti registrasi restoran, pencarian restoran, booking, pre-order, pembayaran, dan pengelolaan antrean.
 
 3. Berdasarkan KF dan KNF:
 - Pemisahan peran pengguna (KF21, KF15, KF19, KF20)
@@ -85,7 +90,7 @@ Fitur yang harus tersedia setiap saat seperti daftar restoran, nomor antrean, da
 
 - Ergonomy (KNF04, KNF13)
 Antarmuka yang minimalis dan mudah digunakan membutuhkan iterasi desain tampilan yang sering. Karena View terpisah dari logika, desain UI dapat diubah tanpa menyentuh logika bisnis.
-
+<br>
 <p align="center">
 <img alt="Contoh Arsitektur MVC" src="./assets/diagram/MVC.png" width="70%">
 </p>
@@ -106,6 +111,20 @@ Tabel 1.1. Lingkungan Operasi Perangkat Lunak
 | *Bahasa Pemrograman* | *Typescript* |
 | *API* | *REST API* |
 | *...* | *...* |
+
+<br>
+
+Tabel 1.2. Hubungan Teknologi dengan Style MVC
+| Komponen | Hubungan |
+| :--- | :--- |
+| *Server* | *Localhost menjalankan aplikasi MVC yang terdiri dari Model, View, dan Controller serta memproses request dari client.* |
+| *Client* | *Google Chrome digunakan untuk mengakses dan menampilkan View, serta mengirimkan request ke Controller melalui REST API.* |
+| *DBMS* | *PostgreSQL 15+ digunakan oleh Model untuk menyimpan dan mengelola data aplikasi, seperti data restoran, customer, pesanan, dan antrean.* |
+| *OS* | *Windows 11 menjadi lingkungan untuk menjalankan server lokal, aplikasi MVC, dan PostgreSQL.* |
+| *Bahasa Pemrograman* | *TypeScript digunakan untuk mengimplementasikan logika Model, Controller, dan bagian View pada aplikasi.* |
+| *API* | *REST API menjadi penghubung antara Client/View dengan Controller untuk mengirim request dan menerima response dari server.* |
+| *...* | *...* |
+
 
 <sub><b><i>Catatan</i></b>: <i>Style/pattern yang dipilih di bab ini menjadi acuan untuk BAB 2 (pengelompokan komponen) dan BAB 3 (model arsitektur). Contoh pada dokumen ini memakai MVC secara konsisten dari BAB 1 sampai BAB 3. Kelompok boleh memakai pattern lain selama alasannya dijelaskan dan BAB 2 serta BAB 3 disesuaikan. Tabel 1.1 harus sama persis dengan subbab 2.5 dokumen SKPL; jangan menambah atau mengubah isinya karena SKPL sudah final.</i></sub>
 
