@@ -1,1 +1,17 @@
+name: antrian
 
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER:?isi DB_USER di .env}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?isi DB_PASSWORD di .env}
+      POSTGRES_DB: ${DB_NAME:?isi DB_NAME di .env}
+    ports:
+      - "${DB_PORT:?isi DB_PORT di .env}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql:ro
+      - ./db/seed.sql:/docker-entrypoint-initdb.d/2-seed.sql:ro
+volumes:
+  pgdata:
