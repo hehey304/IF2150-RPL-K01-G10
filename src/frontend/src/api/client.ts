@@ -1,0 +1,21 @@
+import { useAuthStore } from '../store/authStore';
+
+const BASE = import.meta.env.VITE_API_URL ?? "http://localhost:4000/api";
+
+export async function api<T>(path: string, options: RequestInit = {}): Promise<T> {
+  const token = useAuthStore.getState().token;
+  const res = await fetch(`${BASE}${path}`, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...options.headers,
+    },
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    if (res.status === 401) useAuthStore.getState().clear(); // expired session
+    throw new Error(data.message ?? 'Terjadi kesalahan');
+  }
+  return data as T;
+}
