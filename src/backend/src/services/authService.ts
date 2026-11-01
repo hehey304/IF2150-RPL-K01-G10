@@ -9,37 +9,45 @@ export class AppError extends Error {
 const JWT_SECRET = process.env.JWT_SECRET ?? 'ganti-di-env';
 const SESSION_HOURS = 8;
 
-export async function registerPelanggan(input: {
-  nama: string; username: string; email: string; noHp?: string; password: string;
-}) {
-  if (input.password.length < 8) throw new AppError(400, 'Password minimal 8 karakter');
+type AkunInput = { username: string; email: string; noHp?: string; password: string };
+
+async function registerAkun(role: "PELANGGAN" | "RESTORAN", input: AkunInput & { nama?: string }) {
+  if (input.password.length < 8) throw new AppError(400, "Password minimal 8 karakter");
 
   const client = await pool.connect();
   try {
-    await client.query('BEGIN');
+    await client.query("BEGIN");
     const hash = await bcrypt.hash(input.password, 10);
 
     const { rows } = await client.query(
       `INSERT INTO pengguna (username, email, no_hp, password_hash, role)
-       VALUES ($1, $2, $3, $4, 'PELANGGAN')
+       VALUES ($1, $2, $3, $4, $5)
        RETURNING id_pengguna, username, email, role`,
-      [input.username, input.email, input.noHp || null, hash]
-    );
-    await client.query(
-      `INSERT INTO pelanggan (id_akun, nama, no_hp, email) VALUES ($1, $2, $3, $4)`,
-      [rows[0].id_pengguna, input.nama, input.noHp || null, input.email]
+      [input.username, input.email, input.noHp || null, hash, role]
     );
 
-    await client.query('COMMIT');
+    // only customers get a row in `pelanggan`
+    if (role === "PELANGGAN") {
+      await client.query(
+        `INSERT INTO pelanggan (id_akun, nama, no_hp, email) VALUES ($1, $2, $3, $4)`,
+        [rows[0].id_pengguna, input.nama, input.noHp || null, input.email]
+      );
+    }
+
+    await client.query("COMMIT");
     return rows[0];
   } catch (e: any) {
     await client.query('ROLLBACK');
-    if (e.code === '23505') throw new AppError(409, 'Username, email, atau nomor HP sudah terdaftar');
+    await client.query("ROLLBACK");
+    if (e.code === "23505") throw new AppError(409, "Username, email, atau nomor HP sudah terdaftar");
     throw e;
   } finally {
     client.release();
   }
 }
+
+export const registerPelanggan = (i: AkunInput & { nama: string }) => registerAkun("PELANGGAN", i);
+export const registerRestoran = (i: AkunInput) => registerAkun("RESTORAN", i);
 
 export async function login(identifier: string, password: string) {
   const { rows } = await pool.query(

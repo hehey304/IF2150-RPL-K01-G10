@@ -2,7 +2,6 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import LoginPage from '../pages/auth/LoginPage';
 import RegistrasiPage from '../pages/auth/RegistrasiPage';
-import RegistrasiRestoPage from '../pages/restoran/RegistrasiRestoPage';
 import AdminLayout from '../layouts/AdminLayout';
 import PelangganLayout from '../layouts/PelangganLayout';
 import DashboardLayout from '../layouts/DashboardLayout';
@@ -15,7 +14,6 @@ export default function AppRoutes() {
       {/* public */}
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registrasi" element={<RegistrasiPage />} />
-      <Route path="/restoran/registrasi" element={<RegistrasiRestoPage />} />
       <Route element={<ProtectedRoute roles={["PELANGGAN", "RESTORAN", "ADMIN"]} />}>
         <Route path="/logout" element={<KonfirmasiLogoutPage />} />
       </Route>
