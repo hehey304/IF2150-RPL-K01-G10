@@ -8,7 +8,8 @@ export const loginApi = (identifier: string, password: string) =>
   });
 
 export const registerApi = (body: {
-  nama: string; username: string; email: string; noHp?: string; password: string;
-}) => api<{ user: User }>('/auth/register', { method: 'POST', body: JSON.stringify(body) });
+  nama?: string; username: string; email: string; noHp?: string; password: string;
+  role: "PELANGGAN" | "RESTORAN";
+}) => api<{ user: User }>("/auth/register", { method: "POST", body: JSON.stringify(body) });
 
 export const logoutApi = () => api('/auth/logout', { method: 'POST' });

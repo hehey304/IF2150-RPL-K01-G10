@@ -41,7 +41,7 @@ export default function LoginPage() {
       <p className="text-sm">
         Belum punya akun? <Link to="/registrasi" className="underline">Daftar</Link>
         {' · '}
-        <Link to="/restoran/registrasi" className="underline">Daftar sebagai restoran</Link>
+          <Link to="/registrasi?role=restoran" className="underline">Daftar sebagai restoran</Link>
       </p>
     </form>
   );
