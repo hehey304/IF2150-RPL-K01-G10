@@ -4,6 +4,9 @@ INSERT INTO pengguna (username, email, no_hp, password_hash, role) VALUES
  ('budi',      'budi@antri.test',      '0800000002', crypt('Password123!', gen_salt('bf', 10)), 'PELANGGAN'),
  ('bakso_jaya','bakso@antri.test',     '0800000003', crypt('Password123!', gen_salt('bf', 10)), 'RESTORAN');
 
+INSERT INTO pengguna (username, email, password_hash, role)
+VALUES ('admin', 'admin@antri.in', crypt('GantiPasswordIni123', gen_salt('bf')), 'ADMIN');
+
 INSERT INTO pelanggan (id_akun, nama, no_hp, email)
 SELECT id_pengguna, 'Budi Fiktif', no_hp, email FROM pengguna WHERE username = 'budi';
 
