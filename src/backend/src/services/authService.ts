@@ -37,7 +37,6 @@ async function registerAkun(role: "PELANGGAN" | "RESTORAN", input: AkunInput & {
     await client.query("COMMIT");
     return rows[0];
   } catch (e: any) {
-    await client.query('ROLLBACK');
     await client.query("ROLLBACK");
     if (e.code === "23505") throw new AppError(409, "Username, email, atau nomor HP sudah terdaftar");
     throw e;
