@@ -3,6 +3,8 @@ import cors from "cors";
 import { pool } from "./db/pool.js";
 import authRoutes from "./routes/auth.js";
 import { AppError } from "./services/authService.js";
+import pesananRoutes from './routes/pesanan.js';
+import { mulaiJobTimeout } from './jobs/timeoutPembayaran.js';
 // import { authenticate, requireRole } from "./middleware/auth.js";
 
 const app = express();
@@ -25,5 +27,8 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
   res.status(500).json({ message: "Terjadi kesalahan server" });
 });
 
+app.use('/api', pesananRoutes);
+
 const PORT = process.env.PORT ?? 4000;
 app.listen(PORT, () => console.log(`API jalan di http://localhost:${PORT}`));
+mulaiJobTimeout();

@@ -6,6 +6,11 @@ import AdminLayout from '../layouts/AdminLayout';
 import PelangganLayout from '../layouts/PelangganLayout';
 import DashboardLayout from '../layouts/DashboardLayout';
 import KonfirmasiLogoutPage from '../pages/auth/KonfirmasiLogoutPage';
+import DetailRestoranPage from '../pages/pelanggan/DetailRestoranPage';
+import KeranjangPage from '../pages/pelanggan/KeranjangPage';
+import JadwalBookingPage from '../pages/pelanggan/JadwalBookingPage';
+import PembayaranPage from '../pages/pelanggan/PembayaranPage';
+import TiketAntreanPage from '../pages/pelanggan/TiketAntreanPage';
 // ...import the other pages
 
 export default function AppRoutes() {
@@ -22,6 +27,11 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute roles={['PELANGGAN']} />}>
         <Route path="/pelanggan" element={<PelangganLayout />}>
           {/* <Route index element={<PencarianRestoPage />} /> */}
+          <Route path="restoran/:id" element={<DetailRestoranPage />} />
+          <Route path="keranjang" element={<KeranjangPage />} />
+          <Route path="booking" element={<JadwalBookingPage />} />
+          <Route path="pembayaran" element={<PembayaranPage />} />
+          <Route path="tiket/:pesananId" element={<TiketAntreanPage />} />
         </Route>
       </Route>
 
@@ -39,6 +49,5 @@ export default function AppRoutes() {
 
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
-    
   );
 }

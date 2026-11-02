@@ -1,4 +1,5 @@
-﻿export default function PelangganLayout() {
-  return <div>PelangganLayout</div>;
-}
+﻿import { Outlet } from 'react-router-dom';
 
+export default function PelangganLayout() {
+  return <Outlet />;
+}
