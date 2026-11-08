@@ -2,8 +2,7 @@
  * ModelAntrean (DPPL 2.3): Antrean (C04) dan TiketAntrean (C09).
  */
 import type { Queryable } from '../db/database.js';
-import { formatNomorAntrean, generateId } from '../utils/ids.js';
-import { Notifikasi } from './notifikasi.js';
+import { generateId } from '../utils/ids.js';
 
 export type StatusAntrean = 'BUKA' | 'PENUH' | 'TUTUP';
 export type StatusTiket = 'TERJADWAL' | 'MENUNGGU' | 'DIPANGGIL' | 'SELESAI' | 'DILEWATI' | 'DIBATALKAN';
@@ -29,8 +28,6 @@ export interface TiketRow {
   waktu_dipanggil: Date | null;
   status_antrean: StatusTiket;
   estimasi_waktu_tunggu: number;
-  disiapkan_pada: Date | null;
-  selesai_pada: Date | null;
 }
 
 /** Urutan antrean: tiket yang terbit lebih dulu dilayani lebih dulu. */
@@ -40,24 +37,10 @@ const URUTAN = 'ORDER BY t.waktu_terbit ASC, t.nomor_urut ASC';
  * Menentukan status antrean dari pengaturan kuota (aturan bisnis UC07).
  * kuota 0 -> TUTUP, tiket terbit hari ini >= kuota -> PENUH, selain itu BUKA.
  */
-export function tentukanStatusAntrean(kuotaMaksimum: number, tiketHariIni: number, ditutup = false): StatusAntrean {
-  if (ditutup || kuotaMaksimum <= 0) return 'TUTUP';
+export function tentukanStatusAntrean(kuotaMaksimum: number, tiketHariIni: number): StatusAntrean {
+  if (kuotaMaksimum <= 0) return 'TUTUP';
   if (tiketHariIni >= kuotaMaksimum) return 'PENUH';
   return 'BUKA';
-}
-
-/**
- * Menit layanan per antrean dari data nyata: median jeda antar-penyelesaian tiket dalam 3 jam terakhir.
- * Dipakai bila ada minimal 3 jeda; hasil dibatasi 1-15 menit. Selain itu memakai nilai bawaan.
- */
-export function medianJedaMenit(selesai: Date[], bawaan: number): number {
-  const urut = [...selesai].map((d) => new Date(d).getTime()).sort((a, b) => a - b);
-  const jeda: number[] = [];
-  for (let i = 1; i < urut.length; i++) jeda.push((urut[i] - urut[i - 1]) / 60_000);
-  if (jeda.length < 3) return bawaan;
-  jeda.sort((a, b) => a - b);
-  const tengah = jeda.length % 2 ? jeda[(jeda.length - 1) / 2] : (jeda[jeda.length / 2 - 1] + jeda[jeda.length / 2]) / 2;
-  return Math.min(15, Math.max(1, Math.round(tengah)));
 }
 
 /** getEstimasiWaktu(): estimasi menit tunggu berdasarkan jumlah antrean di depan. */
@@ -94,14 +77,12 @@ export const Antrean = {
   async updateStatus(q: Queryable, restoranId: string, menitPerAntrean: number): Promise<AntreanRow | null> {
     const antrean = await Antrean.getByRestoran(q, restoranId);
     if (!antrean) return null;
-    const kuota = await q.query<{ kuota_maksimum: number; antrean_ditutup: boolean; aktif: boolean }>(
-      `SELECT k.kuota_maksimum, k.antrean_ditutup, r.status_aktif AS aktif FROM pengaturan_kuota k
+    const kuota = await q.query<{ kuota_maksimum: number; aktif: boolean }>(
+      `SELECT k.kuota_maksimum, r.status_aktif AS aktif FROM pengaturan_kuota k
        JOIN restoran r ON r.restoran_id = k.restoran_id WHERE k.restoran_id = $1`,
       [restoranId],
     );
     const kuotaMaks = kuota[0]?.aktif ? kuota[0].kuota_maksimum : 0;
-    const ditutup = kuota[0]?.antrean_ditutup ?? false;
-    const menit = await Antrean.menitPerAntreanAktual(q, antrean.antrean_id, menitPerAntrean);
 
     // Pastikan pelanggan terdepan berstatus DIPANGGIL.
     const dipanggil = await q.query(
@@ -109,20 +90,12 @@ export const Antrean = {
       [antrean.antrean_id],
     );
     if (dipanggil.length === 0) {
-      const dipanggilBaru = await q.query<{ id_tiket: string; pelanggan_id: string; nomor_urut: number; tipe_antrean: string }>(
+      await q.query(
         `UPDATE tiket_antrean SET status_antrean = 'DIPANGGIL', waktu_dipanggil = NOW()
          WHERE id_tiket = (SELECT t.id_tiket FROM tiket_antrean t
-                           WHERE t.antrean_id = $1 AND t.status_antrean = 'MENUNGGU' ${URUTAN} LIMIT 1)
-         RETURNING id_tiket, pelanggan_id, nomor_urut, tipe_antrean`,
+                           WHERE t.antrean_id = $1 AND t.status_antrean = 'MENUNGGU' ${URUTAN} LIMIT 1)`,
         [antrean.antrean_id],
       );
-      for (const t of dipanggilBaru) {
-        await Notifikasi.kePelanggan(q, t.pelanggan_id, {
-          judul: `Giliranmu! Nomor ${formatNomorAntrean(t.nomor_urut)} dipanggil`,
-          isi: t.tipe_antrean === 'DINE_IN' ? 'Meja sudah siap, silakan menuju restoran.' : 'Pesanan siap diambil di kasir.',
-          tautan: `#/antrean/${t.id_tiket}`,
-        });
-      }
     }
 
     // Estimasi per tiket = posisi * menit per antrean.
@@ -131,7 +104,7 @@ export const Antrean = {
        FROM (SELECT id_tiket, (ROW_NUMBER() OVER (ORDER BY waktu_terbit, nomor_urut) - 1)::int AS posisi
              FROM tiket_antrean WHERE antrean_id = $1 AND status_antrean IN ('MENUNGGU', 'DIPANGGIL')) s
        WHERE t.id_tiket = s.id_tiket`,
-      [antrean.antrean_id, menit],
+      [antrean.antrean_id, menitPerAntrean],
     );
 
     const aktif = await q.query<{ n: number }>(
@@ -139,35 +112,13 @@ export const Antrean = {
       [antrean.antrean_id],
     );
     const total = aktif[0].n;
-    const status = tentukanStatusAntrean(kuotaMaks, await Antrean.tiketHariIni(q, antrean.antrean_id), ditutup);
+    const status = tentukanStatusAntrean(kuotaMaks, await Antrean.tiketHariIni(q, antrean.antrean_id));
     const rows = await q.query<AntreanRow>(
       `UPDATE antrean SET status_antrean = $2, total_antrean = $3, estimasi_waktu_tunggu = $4
        WHERE antrean_id = $1 RETURNING *`,
-      [antrean.antrean_id, status, total, hitungEstimasi(total, menit)],
+      [antrean.antrean_id, status, total, hitungEstimasi(total, menitPerAntrean)],
     );
     return rows[0];
-  },
-
-  /** Menit layanan per antrean berdasarkan riwayat penyelesaian tiket (lihat medianJedaMenit). */
-  async menitPerAntreanAktual(q: Queryable, antreanId: string, bawaan: number): Promise<number> {
-    const rows = await q.query<{ selesai_pada: Date }>(
-      `SELECT selesai_pada FROM tiket_antrean WHERE antrean_id = $1 AND status_antrean = 'SELESAI'
-         AND selesai_pada >= NOW() - INTERVAL '3 hours' ORDER BY selesai_pada DESC LIMIT 11`,
-      [antreanId],
-    );
-    return medianJedaMenit(rows.map((r) => r.selesai_pada), bawaan);
-  },
-
-  /** Menandai pesanan pada tiket mulai disiapkan dapur (iterasi 2, UC09). */
-  async tandaiDisiapkan(q: Queryable, restoranId: string, idTiket: string): Promise<TiketRow | null> {
-    const rows = await q.query<TiketRow>(
-      `UPDATE tiket_antrean t SET disiapkan_pada = NOW()
-       FROM antrean a WHERE a.antrean_id = t.antrean_id AND a.restoran_id = $1 AND t.id_tiket = $2
-         AND t.status_antrean IN ('MENUNGGU', 'DIPANGGIL') AND t.disiapkan_pada IS NULL
-       RETURNING t.*`,
-      [restoranId, idTiket],
-    );
-    return rows[0] ?? null;
   },
 
   /** getFrontCustomer() (Q-019): tiket terdepan yang sedang dipanggil/menunggu. */
@@ -194,15 +145,7 @@ export const Antrean = {
     if (!antrean) return null;
     const front = await Antrean.getFrontCustomer(q, antrean.antrean_id);
     if (!front) return null;
-    await q.query(`UPDATE tiket_antrean SET status_antrean = $2, selesai_pada = NOW() WHERE id_tiket = $1`, [
-      front.id_tiket,
-      statusAkhir,
-    ]);
-    await Notifikasi.kePelanggan(q, front.pelanggan_id, statusAkhir === 'SELESAI'
-      ? { judul: 'Pesanan selesai. Terima kasih!', isi: 'Bagaimana pengalamanmu? Beri ulasan untuk restoran ini.',
-          tautan: `#/pesanan/${front.pesanan_id}` }
-      : { judul: `Nomor ${formatNomorAntrean(front.nomor_urut)} dilewati`,
-          isi: 'Kamu tidak hadir saat dipanggil. Hubungi restoran bila ada kendala.', tautan: `#/antrean/${front.id_tiket}` });
+    await q.query(`UPDATE tiket_antrean SET status_antrean = $2 WHERE id_tiket = $1`, [front.id_tiket, statusAkhir]);
     await q.query(
       `UPDATE pesanan SET status_pemesanan = 'SELESAI' WHERE pesanan_id = $1 AND status_pemesanan = 'DIKONFIRMASI'`,
       [front.pesanan_id],
@@ -234,7 +177,6 @@ export const Antrean = {
       waktu_terbit: Date;
       waktu_dipanggil: Date | null;
       estimasi_waktu_tunggu: number;
-      disiapkan_pada: Date | null;
       pesanan_id: string;
       jumlah_rombongan: number;
       total_harga: number;
@@ -243,7 +185,7 @@ export const Antrean = {
       rincian: string;
     }>(
       `SELECT t.id_tiket, t.nomor_urut, t.tipe_antrean, t.status_antrean, t.waktu_terbit, t.waktu_dipanggil,
-              t.estimasi_waktu_tunggu, t.disiapkan_pada, p.pesanan_id, p.jumlah_rombongan, p.total_harga,
+              t.estimasi_waktu_tunggu, p.pesanan_id, p.jumlah_rombongan, p.total_harga,
               pl.nama AS nama_pelanggan, pl.no_hp,
               COALESCE((SELECT string_agg(m.nama_menu || ' x' || d.jumlah, ', ' ORDER BY m.nama_menu)
                         FROM detail_pesanan d JOIN menu m ON m.menu_id = d.menu_id
