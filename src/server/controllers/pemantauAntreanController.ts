@@ -23,7 +23,9 @@ export class PemantauAntreanController {
       tiket,
       pesanan,
       sisaAntrean: aktif ? tiket.posisi : 0,
-      estimasiMenit: aktif ? tiket.posisi * this.ctx.config.menitPerAntrean : 0,
+      // Iterasi 2: estimasi memakai waktu layanan nyata restoran (lihat Antrean.menitPerAntreanAktual).
+      estimasiMenit: aktif ? tiket.estimasi_waktu_tunggu : 0,
+      disiapkan: !!tiket.disiapkan_pada,
       giliranmu: tiket.status_antrean === 'DIPANGGIL',
       batasHadirMenit: this.ctx.config.autoDequeueMinutes,
     };

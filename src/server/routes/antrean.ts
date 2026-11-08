@@ -13,6 +13,8 @@ export const routeAntrean: DaftarRoute = (r, c) => {
     h((req) => c.kelolaAntrean.processDequeue(userOf(req), req.body?.idTiket)));
   r.post('/kelola/booking/:idTiket/hadir', guard.restoran,
     h((req) => c.kelolaAntrean.tandaiHadirBooking(userOf(req), p(req, 'idTiket'))));
+  r.post('/kelola/antrean/:idTiket/siapkan', guard.restoran,
+    h((req) => c.kelolaAntrean.tandaiDisiapkan(userOf(req), p(req, 'idTiket'))));
   // UC07 - restoran
   r.get('/kelola/kuota', guard.restoran, h((req) => c.kuota.displaySettings(userOf(req))));
   r.put('/kelola/kuota', guard.restoran, h((req) => c.kuota.onSaveSettings(userOf(req), req.body ?? {})));

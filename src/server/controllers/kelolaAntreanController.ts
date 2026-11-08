@@ -44,6 +44,11 @@ export class KelolaAntreanController {
         takeaway: daftar.filter((d) => d.tipe_antrean === 'TAKEAWAY').length,
         statusAntrean: antrean.status_antrean,
         kuotaMaksimum: kuota.kuota_maksimum,
+        antreanDitutup: kuota.antrean_ditutup,
+        menitPerAntrean: antrean.total_antrean
+          ? Math.round(antrean.estimasi_waktu_tunggu / antrean.total_antrean)
+          : this.ctx.config.menitPerAntrean,
+        modeSimulasi: restoran.mode_simulasi,
         tiketHariIni,
       },
       daftar,
@@ -69,6 +74,15 @@ export class KelolaAntreanController {
     });
     eventBus.antreanBerubah(restoranId, 'dequeue');
     return { tiket: hasil, nomor: hasil ? formatNomorAntrean(hasil.nomor_urut) : null };
+  }
+
+  /** Menandai pesanan mulai disiapkan dapur (iterasi 2, I-14 tombol "Mulai siapkan"). */
+  async tandaiDisiapkan(user: SessionUser, idTiket: string) {
+    const restoranId = this.restoranId(user);
+    const t = await Antrean.tandaiDisiapkan(this.ctx.db, restoranId, idTiket);
+    if (!t) throw conflict('Tiket tidak ditemukan atau sudah disiapkan');
+    eventBus.antreanBerubah(restoranId, 'disiapkan');
+    return { idTiket, disiapkanPada: t.disiapkan_pada };
   }
 
   /** Menandai booking sudah hadir (reservasi terpenuhi). */

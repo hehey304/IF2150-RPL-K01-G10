@@ -6,6 +6,7 @@ import { api, pantauRestoran } from '../core/api.js';
 import { html, mount, on } from '../core/html.js';
 import { badgeMode, ikon, konfirmasi, kosong, nomorAntrean, sibuk, tampilkanGalat, tanggal, toast } from '../core/ui.js';
 import type { RouteCtx } from '../main.js';
+import { panelSimulasi } from './simulasiView.js';
 
 const fmtDurasi = (ms: number) => {
   const s = Math.max(0, Math.floor(ms / 1000));
@@ -16,6 +17,10 @@ export async function dashboardAntreanPage(ctx: RouteCtx): Promise<void> {
   let data = await api.get('/kelola/antrean');
   let filter: 'SEMUA' | 'DINE_IN' | 'TAKEAWAY' = 'SEMUA';
 
+  mount(ctx.root, html`<div id="dash"></div><section class="kartu" id="simulasi"></section>`);
+  const dashEl = ctx.root.querySelector<HTMLElement>('#dash')!;
+  void panelSimulasi(ctx.root.querySelector<HTMLElement>('#simulasi')!).catch(() => {});
+
   const statusLabel = (s: string) =>
     s === 'BUKA' ? html`<strong class="hijau">Dibuka</strong>` : s === 'PENUH' ? html`<strong class="merah">Penuh</strong>` : html`<strong class="abu">Ditutup</strong>`;
 
@@ -25,7 +30,7 @@ export async function dashboardAntreanPage(ctx: RouteCtx): Promise<void> {
     const daftar = data.daftar.filter((d: any) => filter === 'SEMUA' || d.tipe_antrean === filter);
     const front = data.daftar[0];
     mount(
-      ctx.root,
+      dashEl,
       html`<header class="panel-kepala"><div><h1>Dashboard antrean</h1>
           <p class="redup">${tanggal(new Date(), { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })} · diperbarui otomatis</p></div>
           <span class="badge badge-live"><span class="titik-live"></span>Live</span></header>
@@ -33,7 +38,7 @@ export async function dashboardAntreanPage(ctx: RouteCtx): Promise<void> {
           <div class="kartu stat"><small>Antrean aktif</small><strong class="aksen">${r.antreanAktif}</strong><small>${r.tiketHariIni} tiket hari ini</small></div>
           <div class="kartu stat"><small>Meja terisi</small><strong>${r.mejaTerisi} / ${r.kapasitasMeja}</strong><small>${Math.max(0, r.kapasitasMeja - r.mejaTerisi)} meja tersisa</small></div>
           <div class="kartu stat"><small>Dine-in · Takeaway</small><strong>${r.dineIn} · ${r.takeaway}</strong><small>Antrean dipisah</small></div>
-          <div class="kartu stat"><small>Status antrean</small>${statusLabel(r.statusAntrean)}<small>Kuota ${r.kuotaMaksimum} / hari</small></div>
+          <div class="kartu stat"><small>Status antrean</small>${statusLabel(r.statusAntrean)}<small>${r.antreanDitutup ? 'Ditutup sementara' : `Kuota ${r.kuotaMaksimum} / hari`} · ± ${r.menitPerAntrean} mnt/antrean</small></div>
         </div>
         <section class="kartu">
           <div class="baris-antara alat">
@@ -55,8 +60,9 @@ export async function dashboardAntreanPage(ctx: RouteCtx): Promise<void> {
                     <td>${d.tipe_antrean === 'DINE_IN' ? `${d.jumlah_rombongan} orang` : '-'}</td><td>${d.rincian}</td>
                     <td>${d.waktu_dipanggil ? html`<span class="timer-kecil" data-sejak="${d.waktu_dipanggil}">${fmtDurasi(Date.now() - new Date(d.waktu_dipanggil).getTime())}</span>` : '—'}</td>
                     <td>${terdepan ? html`<span class="badge badge-oranye">Terdepan</span>`
-                      : d.estimasi_waktu_tunggu <= 6 ? html`<span class="badge badge-kuning">Disiapkan</span>` : html`<span class="badge badge-abu">Menunggu</span>`}</td>
-                    <td>${terdepan ? html`<button class="btn btn-kecil btn-lembut" data-dequeue="${d.id_tiket}">Dequeue</button>` : ''}</td></tr>`;
+                      : d.disiapkan_pada ? html`<span class="badge badge-kuning">Disiapkan</span>` : html`<span class="badge badge-abu">Menunggu</span>`}</td>
+                    <td>${terdepan ? html`<button class="btn btn-kecil btn-lembut" data-dequeue="${d.id_tiket}">Dequeue</button>`
+                      : d.disiapkan_pada ? '' : html`<button class="btn btn-kecil btn-ghost" data-siapkan="${d.id_tiket}">Mulai siapkan</button>`}</td></tr>`;
                 })}</tbody></table></div>`
             : kosong('Belum ada antrean saat ini', 'Antrean baru akan muncul otomatis tanpa memuat ulang halaman.')}
           <p class="catatan">${ikon('jam', 18)} Pelanggan terdepan otomatis di-dequeue jika tidak hadir dalam ${data.autoDequeueMenit} menit.</p>
@@ -100,6 +106,14 @@ export async function dashboardAntreanPage(ctx: RouteCtx): Promise<void> {
     } catch (err) {
       tampilkanGalat(err);
       await muatUlang();
+    }
+  });
+  on(ctx.root, 'click', '[data-siapkan]', async (_e, t) => {
+    try {
+      await sibuk(t as HTMLButtonElement, () => api.post(`/kelola/antrean/${t.dataset.siapkan}/siapkan`));
+      await muatUlang();
+    } catch (err) {
+      tampilkanGalat(err);
     }
   });
   on(ctx.root, 'click', '[data-hadir]', async (_e, t) => {

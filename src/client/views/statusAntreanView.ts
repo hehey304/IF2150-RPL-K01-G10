@@ -15,14 +15,16 @@ export async function antreanSayaPage(ctx: RouteCtx): Promise<void> {
     ctx.root,
     html`<div class="wadah wadah-sempit bagian"><h1>Antrean saya</h1>
       ${daftar.length
-        ? html`<ul class="list kartu">${daftar.map((d) => html`<li><a class="list-item tautan" href="${
+        ? html`<ul class="list kartu kartu-list">${daftar.map((d) => html`<li><a class="list-item tautan" href="${
             d.tiket.status_antrean === 'TERJADWAL' ? `#/tiket/${d.tiket.id_tiket}` : `#/antrean/${d.tiket.id_tiket}`}">
             <span class="nomor-kecil">${nomorAntrean(d.tiket.nomor_urut)}</span>
-            <span class="tumbuh"><strong>${d.tiket.nama_restoran}</strong><small>${MODE_LABEL[d.tiket.tipe_antrean]} · ${
+            <span class="tumbuh"><strong>${d.tiket.nama_restoran}</strong><small>${
               d.tiket.status_antrean === 'TERJADWAL'
-                ? `Booking ${tanggal(d.pesanan.tanggal_booking)} ${d.pesanan.slot_waktu_booking}`
-                : d.giliranmu ? 'Giliranmu sekarang!' : `${d.sisaAntrean} antrean lagi · ± ${d.estimasiMenit} mnt`}</small></span>
-            ${ikon('kembali', 18)}</a></li>`)}</ul>`
+                ? `Booking · ${tanggal(d.pesanan.tanggal_booking, { weekday: 'short', day: 'numeric', month: 'short' })}, ${d.pesanan.slot_waktu_booking} · ${d.pesanan.jumlah_rombongan} orang`
+                : `${MODE_LABEL[d.tiket.tipe_antrean]} · ${d.giliranmu ? 'Giliranmu sekarang!' : `${d.sisaAntrean} antrean lagi · ± ${d.estimasiMenit} mnt`}`}</small></span>
+            ${d.tiket.status_antrean === 'TERJADWAL' ? html`<span class="badge badge-ungu">Terjadwal</span>`
+              : d.giliranmu ? html`<span class="badge badge-hijau">Dipanggil</span>` : html`<span class="badge badge-oranye">Menunggu</span>`}
+            ${ikon('kanan', 18)}</a></li>`)}</ul>`
         : kosong('Belum ada antrean aktif', 'Pesan dari restoran viral untuk mendapatkan nomor antrean.',
             html`<a class="btn btn-utama" href="#/">Cari restoran</a>`)}
     </div>`,
@@ -34,7 +36,7 @@ const LANGKAH = ['Pembayaran diterima', 'Masuk antrean dapur', 'Sedang disiapkan
 function langkahAktif(d: any): number {
   const s = d.tiket.status_antrean;
   if (s === 'DIPANGGIL' || s === 'SELESAI') return 3;
-  if (d.sisaAntrean <= 2) return 2;
+  if (d.disiapkan) return 2;
   return 1;
 }
 
@@ -68,7 +70,7 @@ export async function halamanStatusAntrean(ctx: RouteCtx): Promise<void> {
           <section class="kartu status-utama">
             <div class="dua-nomor">
               <div><small>Nomor antreanmu</small><div class="nomor-besar">${nomorAntrean(t.nomor_urut)}</div></div>
-              <div><small>Sedang dilayani</small><div class="nomor-sedang">${t.nomor_dilayani ? nomorAntrean(t.nomor_dilayani) : '-'}</div></div>
+              <div><small>Sedang dilayani</small>${t.nomor_dilayani ? html`<div class="nomor-sedang">${nomorAntrean(t.nomor_dilayani)}</div>` : html`<div class="nomor-sedang kosong">Belum ada</div>`}</div>
             </div>
             <div class="progress besar"><span style="width:${persen}%"></span></div>
             <div class="baris-antara"><strong>${selesai ? (t.status_antrean === 'SELESAI' ? 'Pesanan selesai' : 'Antrean berakhir')
