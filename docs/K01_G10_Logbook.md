@@ -236,6 +236,8 @@
 | *8-11-2026* | *Chatima Anandakhorita* | *Memperbaiki implementasi permitraan restoran* | *1* | *Done* | *-* |
 | *8-11-2026* | *Chatima Anandakhorita* | *Implementasi sistem pembayaran* | *2* | *Done* | *-* |
 | *8-11-2026* | *Chatima Anandakhorita* | *Menambahkan dummy antrean* | *1* | *Done* | *-* |
+| *8-11-2026* | *Muhammad Nur Fikri Hariyawan* | *Implementasi Antrean* | *3.5* | *Done* | *-* |
+| *8-11-2026* | *Muhammad Nur Fikri Hariyawan* | *Implementasi Kuota* | *2.4* | *Done* | *-* |
 | *9-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki testing dengan helper* | *1* | *Done* | *-* |
 | *9-11-2026* | *Chatima Anandakhorita* | *Membuat form asistensi* | *1* | *Done* | *-* |
 | *10-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki isu kredensial database* | *1* | *Done* | *-* |
