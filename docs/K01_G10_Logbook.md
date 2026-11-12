@@ -229,10 +229,20 @@
 | *6-11-2026* | *Athallah Nanda Andita* | *Implementasi penghapusan restoran* | *3* | *Done* | *-* |
 | *8-11-2026* | *Bayu Palamarta Wirawan* | *Menerima implementasi antrean* | *1* | *Done* | *-* |
 | *8-11-2026* | *Athallah Nanda Andita* | *Implementasi ulasan* | *3* | *Done* | *-* |
+| *6-11-2026* | *Chatima Anandakhorita* | *Mengimplementasi fitur pencarian* | *2* | *Done* | *-* |
+| *6-11-2026* | *Chatima Anandakhorita* | *Mengimplementasi permitraan restoran* | *2* | *Done* | *-* |
+| *8-11-2026* | *Bayu Palamarta Wirawan* | *Menerima implementasi antrean* | *1* | *Done* | *-* |
+| *8-11-2026* | *Chatima Anandakhorita* | *Memperbaiki fitur pencarian* | *1* | *Done* | *-* |
+| *8-11-2026* | *Chatima Anandakhorita* | *Memperbaiki implementasi permitraan restoran* | *1* | *Done* | *-* |
+| *8-11-2026* | *Chatima Anandakhorita* | *Implementasi sistem pembayaran* | *2* | *Done* | *-* |
+| *8-11-2026* | *Chatima Anandakhorita* | *Menambahkan dummy antrean* | *1* | *Done* | *-* |
 | *8-11-2026* | *Muhammad Nur Fikri Hariyawan* | *Implementasi Antrean* | *3.5* | *Done* | *-* |
 | *8-11-2026* | *Muhammad Nur Fikri Hariyawan* | *Implementasi Kuota* | *2.4* | *Done* | *-* |
 | *9-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki testing dengan helper* | *1* | *Done* | *-* |
+| *9-11-2026* | *Chatima Anandakhorita* | *Membuat form asistensi* | *1* | *Done* | *-* |
 | *10-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki isu kredensial database* | *1* | *Done* | *-* |
+| *11-11-2026* | *Chatima Anandakhorita* | *Menambahkan bagian "Teknologi" pada README di dalam src dan testing mengikuti perintah README* | *2* | *Done* | *-* |
+
 
 **Catatan/Evaluasi Milestone 9:**
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
