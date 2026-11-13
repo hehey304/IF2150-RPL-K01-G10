@@ -85,8 +85,10 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 ### Milestone 9
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
+| *ChatGPT* | *Mengestimasi waktu pengerjaan antri.in* | *"Berdasarkan dokumen yang diberikan, berapa lama waktu yang diperlukan untuk menyelesaikan antri.in dalam kelompok berisi 5 pemula"* | *Kami merencanakan dan menyesuaikan pengerjaan fitur-fitur yang diperlukan dengan waktu yang disediakan* |
 | *Claude* | *Mengetahui cara menghubungkan tautan untuk laporan implementasi* | *"Cara melakukan tautan issue, commit, branching, dan pull request di github"* | *Saya menyesuaikan cara menulis tautan dengan tautan yang sebenarnya* |
 | *Claude* | *Membuat template pengerjaan aplikasi* | *"Siapkan template aplikasi antri.in sesuai dengan dokumen yang aku lampirkan"* | *Kami memahami isi kode dan melakukan penyesuaian kode untuk memastikan bisa bekerja dengan benar* |
+| *Claude* | *Mengetahui cara membuat database* | *"Bagaimana cara membuat database PostgreSQL 15+ berdasarkan schema.sql berikut"* | *Kami membuat database baru sesuai langkah-langkah dan menguji apakah bisa berjalan dengan baik* |
 | | | | | |
 
 ---
