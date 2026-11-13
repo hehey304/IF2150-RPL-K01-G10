@@ -220,10 +220,17 @@
 ### Milestone 9
 **Periode:** 29-10-2026 - 13-11-2026
 | Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
-| :--- | :--- | :--- | :--- | :--- | :--- | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
 | *29-10-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 9* | *1* | *Done* | *-* |
+| *31-10-2026* | *Muhammad Fauzi Muharam* | *Membangun implementasi awal antri.in (UC01-UC15, MVC TypeScript + PostgreSQL/PGlite) dengan bantuan AI (Claude Code) sebagai kode referensi kelompok* | *4* | *Done* | *Stack belum disepakati kelompok sejak awal* |
+| *31-10-2026* | *Muhammad Fauzi Muharam* | *Menyusun pembagian tugas, checklist per anggota, dan daftar file yang di-push tiap anggota (K01_G10_Pembagian-Tugas.md, K01_G10_Daftar-File.md)* | *0.5* | *Done* | *-* |
+| *01-11-2026* | *Muhammad Fauzi Muharam* | *Iterasi 2 dengan bantuan AI: notifikasi, ulasan & rating, profil restoran, foto menu, ganti/lupa kata sandi, simulator antrean dummy, ERD* | *2* | *Done* | *-* |
+| *02-11-2026* | *Muhammad Fauzi Muharam* | *Membandingkan kode login Bayu (React/Express) dengan kode referensi dan memutuskan arsitektur bersama kelompok* | *1.5* | *Done* | *Dua arsitektur berbeda dikerjakan paralel* |
+| *02-11-2026* | *Muhammad Fauzi Muharam* | *Payment gateway sandbox (AntriPay: QR, VA, kartu + OTP, webhook HMAC, refund) dan perapian layout desktop & mobile, dengan bantuan AI* | *1.5* | *Done* | *-* |
+| *02-11-2026* | *Muhammad Fauzi Muharam* | *Push fondasi proyek (setup, utilitas, kerangka UI, CSS) ke repo kelompok* | *[isi]* | *To Do* | *-* |
 | *4-11-2026* | *Bayu Palamarta Wirawan* | *Membuat Database* | *2* | *Done* | *-* |
 | *5-11-2026* | *Bayu Palamarta Wirawan* | *Mengimplementasi registrasi, login, logout* | *3* | *Done* | *-* |
+| *05-11-2026* | *Muhammad Fauzi Muharam* | *Push UC08 kelola menu & stok, notifikasi, dan profil restoran beserta test* | *[isi]* | *To Do* | *-* |
 | *6-11-2026* | *Bayu Palamarta Wirawan* | *Mengimplementasi pemesanan* | *3* | *Done* | *-* |
 | *6-11-2026* | *Athallah Nanda Andita* | *Implementasi keluhan pelanggan* | *2.5* | *Done* | *-* |
 | *6-11-2026* | *Athallah Nanda Andita* | *Implementasi penghapusan restoran* | *3* | *Done* | *-* |
