@@ -10,7 +10,7 @@
 | **Nomor Kelompok** | *G10*  |
 | **Nama Kelompok** | *Ducklings*  |
 | **Nama Perangkat Lunak** | *antri.in*  |
-| **Dokumen** | *K01_G10_DPPL2.md*  |
+| **Dokumen** | *K01_G10_Implementasi.md*  |
 
 ### Anggota Kelompok
 
