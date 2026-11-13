@@ -89,6 +89,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Claude* | *Mengetahui cara menghubungkan tautan untuk laporan implementasi* | *"Cara melakukan tautan issue, commit, branching, dan pull request di github"* | *Saya menyesuaikan cara menulis tautan dengan tautan yang sebenarnya* |
 | *Claude* | *Membuat template pengerjaan aplikasi* | *"Siapkan template aplikasi antri.in sesuai dengan dokumen yang aku lampirkan"* | *Kami memahami isi kode dan melakukan penyesuaian kode untuk memastikan bisa bekerja dengan benar* |
 | *Claude* | *Mengetahui cara membuat database* | *"Bagaimana cara membuat database PostgreSQL 15+ berdasarkan schema.sql berikut"* | *Kami membuat database baru sesuai langkah-langkah dan menguji apakah bisa berjalan dengan baik* |
+| *Claude* | *Mengetahui kebenaran kode yang sudah dibuat* | *"Dari kode yang sudah aku buat ini, apakah sudah sesuai dengan notasi fungsional"* | *Kami mengetahui salahnya dan memperbaikinya* |
 | | | | | |
 
 ---
