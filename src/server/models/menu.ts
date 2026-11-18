@@ -45,6 +45,13 @@ export const Menu = {
     return menu.aktif && jumlah > 0 && menu.stok >= jumlah;
   },
 
+  cekStok(
+    menu: Pick<MenuRow, 'stok' | 'aktif'>,
+    jumlah: number
+  ): boolean {
+    return this.isTersedia(menu, jumlah);
+  },
+
   /** kurangiStok(): pengurangan atomik, gagal bila stok tidak cukup (Q-014). */
   async kurangiStok(q: Queryable, menuId: string, jumlah: number): Promise<boolean> {
     const rows = await q.query(

@@ -23,7 +23,7 @@ export const config = {
   databaseUrl: process.env.DATABASE_URL || '',
   pgliteDir: process.env.PGLITE_DIR || './data/pglite',
   seedOnStart: (process.env.SEED_ON_START ?? 'true') !== 'false',
-  paymentTimeoutMinutes: num(process.env.PAYMENT_TIMEOUT_MINUTES, 15),
+  paymentTimeoutMinutes: num(process.env.PAYMENT_TIMEOUT_MINUTES, 5),
   autoDequeueMinutes: num(process.env.AUTO_DEQUEUE_MINUTES, 30),
   menitPerAntrean: num(process.env.MENIT_PER_ANTREAN, 3),
   biayaLayanan: num(process.env.BIAYA_LAYANAN, 2000),

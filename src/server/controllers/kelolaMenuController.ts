@@ -92,4 +92,17 @@ export class KelolaMenuController {
   async getFoto(menuId: string) {
     return Menu.getFoto(this.ctx.db, menuId);
   }
+
+  /** handleFetchMenuDetail(). */
+  async handleFetchMenuDetail(user: SessionUser, menuId: string) {
+    const restoranId = this.restoranId(user);
+
+    const menu = await Menu.getInfoMenu(this.ctx.db, menuId);
+
+    if (!menu || menu.restoran_id !== restoranId) {
+      throw notFound('Menu tidak ditemukan');
+    }
+
+    return menu;
+  }
 }
