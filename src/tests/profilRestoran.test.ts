@@ -1,5 +1,10 @@
 /**
  * Pengujian profil restoran & foto (iterasi 2). Penanggung jawab: Fauzi.
+ *
+ * Kelas yang berhubungan (ID kelas sesuai DPPL):
+ *   - C02 Restoran
+ *   - C03 Menu
+ *   - C24 KelolaMenuController
  */
 import { after, before, describe, test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -15,7 +20,7 @@ after(async () => {
 });
 
 describe('Profil restoran', () => {
-  test('ubah profil memvalidasi jam buka dan alamat', async () => {
+  test('[C02-UT01] ubah profil memvalidasi jam buka dan alamat', async () => {
     const resto = await loginSebagai(app, 'bakso@antri.in', 'restoran123');
     const e = await gagal(app.controllers.profilRestoran.ubahProfil(resto, {
       alamat: 'pendek', jamBuka: 'pagi', kategori: 'Bakso', lokasi: 'Cihampelas',

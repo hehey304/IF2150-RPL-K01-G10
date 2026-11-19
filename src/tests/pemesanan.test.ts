@@ -1,5 +1,10 @@
 /**
  * Pengujian UC02 bagian pemesanan (stok, kuota, booking). Penanggung jawab: Bayu.
+ *
+ * Kelas yang berhubungan (ID kelas sesuai DPPL):
+ *   - C06 Pesanan
+ *   - C08 RiwayatTransaksi
+ *   - C09 TiketAntrean
  */
 import { after, before, describe, test } from 'node:test';
 import assert from 'node:assert/strict';
@@ -16,7 +21,7 @@ after(async () => {
 });
 
 describe('UC02 pemesanan', () => {
-  test('pesanan lunas menerbitkan tiket dan mengurangi stok', async () => {
+  test('[C06-UT04, C09-UT05] pesanan lunas menerbitkan tiket dan mengurangi stok', async () => {
     const resto = await restoranId(app, 'Batagor Riri Viral');
     const menu = await menuPertama(app, resto);
     const { hasil, pesanan } = await pesanDanBayar(app, 'seblak1@contoh.id', {
@@ -30,7 +35,7 @@ describe('UC02 pemesanan', () => {
     const p = await app.ctx.db.query<{ status_pemesanan: string }>(`SELECT status_pemesanan FROM pesanan WHERE pesanan_id = $1`, [pesanan.pesanan_id]);
     assert.equal(p[0].status_pemesanan, 'DIKONFIRMASI');
   });
-  test('stok habis ditolak dengan daftar menu habis (Alt 3)', async () => {
+  test('[C06-UT05] stok habis ditolak dengan daftar menu habis (Alt 3)', async () => {
     const user = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
     const resto = await restoranId(app, 'Bakso Mang Ujang');
     const habis = await menuPertama(app, resto, { stokNol: true });
@@ -40,7 +45,7 @@ describe('UC02 pemesanan', () => {
     assert.equal(e.status, 409);
     assert.equal(e.details.menuHabis[0].menuId, habis.menu_id);
   });
-  test('antrean ditutup menolak dine-in/takeaway tetapi booking tetap bisa', async () => {
+  test('[C06-UT06] antrean ditutup menolak dine-in/takeaway tetapi booking tetap bisa', async () => {
     const user = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
     const resto = await restoranId(app, 'Kopi Senja Braga'); // kuota 0 = ditutup
     const menu = await menuPertama(app, resto);
@@ -57,7 +62,7 @@ describe('UC02 pemesanan', () => {
     });
     assert.equal(p!.mode_pemesanan, 'BOOKING');
   });
-  test('slot booking penuh ditolak (Alt 5)', async () => {
+  test('[C06-UT07] slot booking penuh ditolak (Alt 5)', async () => {
     const user = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
     const resto = await restoranId(app, 'Cilok Gang Senggol'); // kapasitas meja 4
     const menu = await menuPertama(app, resto);
@@ -72,7 +77,7 @@ describe('UC02 pemesanan', () => {
     const slot = await app.controllers.pemesanan.getSlotBooking(resto, tgl);
     assert.equal(slot.slot.find((s) => s.jam === '19:00')!.tersedia, false);
   });
-  test('pelanggan lain tidak dapat melihat pesanan', async () => {
+  test('[C06-UT08] pelanggan lain tidak dapat melihat pesanan', async () => {
     const pemilik = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
     const lain = await loginSebagai(app, 'dinda@contoh.id', 'pelanggan123');
     const daftar = await app.controllers.pemesanan.daftarPesananSaya(pemilik);
@@ -83,16 +88,34 @@ describe('UC02 pemesanan', () => {
 
 const sekarang = new Date(2026, 9, 31, 14, 30); // Sabtu 31 Okt 2026 14:30
 
-test('booking: maksimal 7 hari ke depan (KF09)', () => {
+test('[C06-UT01] booking: maksimal 7 hari ke depan (KF09)', () => {
   assert.equal(validasiJadwalBooking('2026-11-07', '12:00', 2, sekarang, 7), null);
   assert.match(validasiJadwalBooking('2026-11-08', '12:00', 2, sekarang, 7)!, /maksimal 7 hari/);
   assert.match(validasiJadwalBooking('2026-10-30', '12:00', 2, sekarang, 7)!, /maksimal 7 hari/);
 });
 
-test('booking: slot hari ini yang sudah lewat, slot tidak terdaftar, dan rombongan tidak valid ditolak', () => {
+test('[C06-UT02, C06-UT03] booking: slot hari ini yang sudah lewat, slot tidak terdaftar, dan rombongan tidak valid ditolak', () => {
   assert.match(validasiJadwalBooking('2026-10-31', '13:00', 2, sekarang, 7)!, /sudah lewat/);
   assert.equal(validasiJadwalBooking('2026-10-31', '17:00', 2, sekarang, 7), null);
   assert.match(validasiJadwalBooking('2026-11-01', '15:00', 2, sekarang, 7)!, /Slot/);
   assert.match(validasiJadwalBooking('2026-11-01', '12:00', 0, sekarang, 7)!, /rombongan/);
   assert.match(validasiJadwalBooking('besok', '12:00', 2, sekarang, 7)!, /tidak valid/);
+});
+
+describe('Pelengkap C06', () => {
+  test('C06-UT11 batalkanPesanan: pesanan yang sudah dibayar tidak dapat dibatalkan (409)', async () => {
+    const resto = await restoranId(app, 'Batagor Riri Viral');
+    const menu = await menuPertama(app, resto);
+    const { user, pesanan } = await pesanDanBayar(app, 'dinda@contoh.id', { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 1 }] });
+    const e = await gagal(app.controllers.pemesanan.batalkanPesanan(user, pesanan.pesanan_id));
+    assert.equal(e.status, 409);
+    assert.match(e.message, /sudah dibayar/);
+  });
+  test('C06-UT12 batalkanPesanan: pesanan tidak ada atau milik orang lain ditolak', async () => {
+    const user = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
+    assert.ok([403, 404].includes((await gagal(app.controllers.pemesanan.batalkanPesanan(user, 'PSN-tidak-ada'))).status));
+    const lain = await loginSebagai(app, 'dinda@contoh.id', 'pelanggan123');
+    const [milik] = await app.controllers.pemesanan.daftarPesananSaya(user);
+    assert.equal((await gagal(app.controllers.pemesanan.batalkanPesanan(lain, milik.pesanan_id))).status, 403);
+  });
 });

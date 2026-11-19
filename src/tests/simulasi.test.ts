@@ -1,5 +1,8 @@
 /**
  * Pengujian simulator antrean dummy (iterasi 2). Penanggung jawab: partner UC02.
+ *
+ * Kelas yang berhubungan (ID kelas sesuai DPPL):
+ *   - (tidak ada kelas pada DPPL; fitur tambahan)
  */
 import { after, before, describe, test } from 'node:test';
 import assert from 'node:assert/strict';

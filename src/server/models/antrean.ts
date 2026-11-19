@@ -323,7 +323,21 @@ export const TiketAntrean = {
   },
 
   /** updateStatusTiket() (Q-040). */
-  async updateStatusTiket(q: Queryable, idTiket: string, status: StatusTiket): Promise<void> {
-    await q.query(`UPDATE tiket_antrean SET status_antrean = $2 WHERE id_tiket = $1`, [idTiket, status]);
+  async updateStatusTiket(
+    q: Queryable,
+    idTiket: string,
+    status: StatusTiket
+  ): Promise<void> {
+    await q.query(
+      `UPDATE tiket_antrean
+      SET status_antrean = $2
+      WHERE id_tiket = $1
+        AND status_antrean NOT IN (
+          'SELESAI',
+          'DILEWATI',
+          'DIBATALKAN'
+        )`,
+      [idTiket, status]
+    );
   },
 };
