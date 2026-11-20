@@ -1080,11 +1080,7 @@ Tabel 4.2.25b. Ringkasan Cakupan Kelas C41
 
 ## 4.3 Pengujian Integrasi
 
-Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada Tabel 2.3 dan *view* arsitektur DPPL (*Logical View* dan *Process View*), dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*: basis data PostgreSQL (PGlite, mesin PostgreSQL *embedded*, atau PostgreSQL 15+ melalui `TEST_DATABASE_URL`), `SandboxPaymentGateway` sebagai *payment gateway* dummy beserta *webhook* bertanda tangan HMAC, dan `NotifikasiEmail` yang mencatat ke tabel `log_notifikasi`. Pada setiap test case, isi basis data dibaca langsung melalui SQL, tidak hanya melalui *controller*, sehingga aliran data sampai ke penyimpanan ikut terbukti. Pengujian bersifat otomatis (`node:test`, berkas `src/tests/integrasi.test.ts`) dan dijalankan dengan `npx tsx --test tests/integrasi.test.ts`.
-
-Tiga hal yang diperiksa: (1) *data flow*, yaitu data mengalir antarkomponen sampai tersimpan; (2) *interface coordination*, yaitu format dan parameter antarmodul cocok; (3) *communication protocol*, yaitu aturan pertukaran data dan penanganan kegagalan pada sistem eksternal (tanda tangan webhook, status gagal, kedaluwarsa, dan layanan email gagal).
-
-ID antarmuka mengikuti Tabel 3.3 (Subbab 3.3). Setiap layar diuji pada batas yang dilaluinya, yaitu dari *controller* yang melayani layar tersebut ke *Model*, basis data, dan sistem eksternal; tampilan di sisi klien tidak diuji pada subbab ini. Dialog konfirmasi (I-04, I-15, I-21) hanya komponen tampilan, sehingga yang diuji adalah aksi server yang dipicunya (logout, dequeue, dan hapus restoran). INT-TC32 sampai INT-TC35 menguji lapisan *Model* ke basis data yang dipakai seluruh antarmuka, sehingga tidak terikat pada satu layar.
+Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada dokumen DPPL, dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*. Apabila ada antarmuka tambahan yang belum didaftarkan pada dokumen DPPL, cantumkan juga.
 
 Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 
