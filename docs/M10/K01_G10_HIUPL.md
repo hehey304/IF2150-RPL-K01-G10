@@ -360,24 +360,24 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 | C21 | PengaturanKuotaController | Mendalam | Memuat validasi input kuota dan meja (angka, lebih dari 0) serta penyimpanan yang memicu pembaruan kapasitas | C21-UT01 s.d. C21-UT06 |
 | C22 | PengaturanKuotaPage | Tidak perlu | Kelas boundary. Validasi dilakukan ulang oleh C21 di server. Teruji lewat UC07 | - |
 | C23 | PengaturanMenuPage | Tidak perlu | Kelas boundary berupa daftar dan formulir menu. Validasi berada di C24. Teruji lewat UC08 | - |
-| C24 | KelolaMenuController | Mendalam | Memuat validasi nama, harga, dan stok menu, serta alur tambah, ubah, ubah stok, dan hapus menu | C24-UT01 s.d. C24-UT10 |
-| C25 | Pengguna | Mendalam | Aspek keamanan: hash kata sandi, pencocokan kredensial, pengecekan duplikasi, dan pengambilan profil | C25-UT01 s.d. C25-UT10 |
+| C24 | KelolaMenuController | Mendalam | Memuat validasi nama, harga, dan stok menu, serta alur tambah, ubah, ubah stok, dan hapus menu | C24-UT01 s.d. C24-UT08 |
+| C25 | Pengguna | Mendalam | Aspek keamanan: hash kata sandi, pencocokan kredensial, pengecekan duplikasi, dan pengambilan profil | C25-UT01 s.d. C25-UT07 |
 | C26 | HalamanProfilPage | Tidak perlu | Kelas boundary yang hanya memicu dialog logout. Teruji lewat UC12 | - |
 | C27 | KonfirmasiLogoutPage | Tidak perlu | Kelas boundary berupa dialog konfirmasi tanpa logika. Teruji lewat UC12 | - |
-| C28 | AutentikasiController | Mendalam | Aspek keamanan: validasi registrasi (email, kata sandi minimal 8 karakter, duplikasi), penerbitan token sesi, login, dan logout | C28-UT01 s.d. C28-UT10 |
-| C29 | SesiPengguna | Mendalam | Aspek keamanan: validasi token, masa berlaku sesi, dan penonaktifan sesi saat logout | C29-UT01 s.d. C29-UT08 |
-| C30 | Keluhan | Mendalam | Memuat aturan status keluhan (BARU, DIBACA, DITANGGAPI) dan penyimpanan keluhan | C30-UT01 s.d. C30-UT06 |
+| C28 | AutentikasiController | Mendalam | Aspek keamanan: validasi registrasi (email, kata sandi minimal 8 karakter, duplikasi), penerbitan token sesi, login, dan logout | C28-UT01 s.d. C28-UT11 |
+| C29 | SesiPengguna | Mendalam | Aspek keamanan: validasi token, masa berlaku sesi, dan penonaktifan sesi saat logout | C29-UT01 s.d. C29-UT06 |
+| C30 | Keluhan | Mendalam | Memuat aturan status keluhan (BARU, DIBACA, DITANGGAPI) dan penyimpanan keluhan | C30-UT01 s.d. C30-UT05 |
 | C31 | DashboardKelolaRestoranPage | Tidak perlu | Kelas boundary berupa daftar, pencarian, dan filter restoran. Teruji lewat UC15 | - |
 | C32 | KonfirmasiHapusRestoranPage | Tidak perlu | Kelas boundary berupa dialog konfirmasi. Teruji lewat UC15 | - |
-| C33 | KelolaDataRestoranController | Mendalam | Memuat aturan penghapusan dalam satu transaksi: soft delete restoran, penonaktifan menu, dan pembatalan antrean/pesanan aktif | C33-UT01 s.d. C33-UT06 |
+| C33 | KelolaDataRestoranController | Mendalam | Memuat aturan penghapusan dalam satu transaksi: soft delete restoran, penonaktifan menu, dan pembatalan antrean/pesanan aktif | C33-UT01 s.d. C33-UT03 |
 | C34 | PencarianRestoPage | Tidak perlu | Kelas boundary yang hanya menerima kata kunci/filter dan menampilkan hasil. Teruji lewat UC01 | - |
-| C35 | PencarianController | Mendalam | Memuat algoritma pencarian dan penerapan filter (nama, kategori, lokasi, rating) serta pengambilan status antrean dan pratinjau menu | C35-UT01 s.d. C35-UT08 |
+| C35 | PencarianController | Mendalam | Memuat algoritma pencarian dan penerapan filter (nama, kategori, lokasi, rating) serta pengambilan status antrean dan pratinjau menu | C35-UT01 s.d. C35-UT09 |
 | C36 | VerifikasiRestoranPage | Tidak perlu | Kelas boundary yang menampilkan detail pengajuan dan tombol setujui/tolak. Teruji lewat UC05 | - |
 | C37 | RegistrasiRestoPage | Tidak perlu | Kelas boundary berupa formulir pendaftaran mitra. Validasi berada di C12 dan C13. Teruji lewat UC04 | - |
 | C38 | RegistrasiPage | Tidak perlu | Kelas boundary berupa formulir registrasi. Validasi berada di C28. Teruji lewat UC10 | - |
 | C39 | LoginPage | Tidak perlu | Kelas boundary berupa formulir login. Validasi berada di C28. Teruji lewat UC11 | - |
 | C40 | KeluhanFormPage | Tidak perlu | Kelas boundary berupa formulir keluhan. Validasi berada di C41. Teruji lewat UC13 | - |
-| C41 | KeluhanController | Mendalam | Memuat validasi isi dan kategori keluhan, pencatatan tanggapan admin, dan pembaruan status | C41-UT01 s.d. C41-UT06 |
+| C41 | KeluhanController | Mendalam | Memuat validasi isi dan kategori keluhan, pencatatan tanggapan admin, dan pembaruan status | C41-UT01 s.d. C41-UT08 |
 | C42 | KeluhanDashboardPage | Tidak perlu | Kelas boundary berupa daftar dan detail keluhan. Teruji lewat UC14 | - |
 
 ## 4.2 Pengujian Unit Kelas
@@ -963,6 +963,119 @@ Tabel 4.2.21b. Ringkasan Cakupan Kelas C29
 | ID Algoritma yang tercakup | Algo-108, Algo-109, Algo-110 |
 | Coverage (wajib ≥ 70%) | `models/akun.ts`: 98,51% / 96,67%; `middleware/auth.ts`: 85,71% / 86,67% |
 
+### 4.2.22 Kelas Keluhan
+
+**ID Kelas:** C30  
+**Nama Kelas:** Keluhan  
+**Tingkat:** Mendalam
+
+Tabel 4.2.22. Hasil Pengujian Unit Kelas C30
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C30-UT01 | `updateStatusKeluhan()` | Batas | Keluhan dikirim lalu ditanggapi admin, kemudian dibuka ulang lewat `detailKeluhan()`. | Status tetap `DITANGGAPI`, tidak turun menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:99` |
+| C30-UT02 | `simpanKeluhan()` | Normal | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Pelanggan mengirim keluhan kategori `Pelayanan` dengan pesanan terkait. | Keluhan tersimpan berstatus `BARU` dan terhubung ke restoran pesanan | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C30-UT03 | `updateStatusKeluhan()` | Normal | Admin membuka detail keluhan yang berstatus `BARU`. | Status berubah menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C30-UT04 | `tanggapi()` | Normal | Admin mengirim tanggapan pada keluhan yang sama. | Tanggapan tersimpan, status `DITANGGAPI` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C30-UT05 | `daftar()` | Normal / Negatif | Cari keluhan dengan lima huruf awal nama restoran, lalu dengan kata kunci `zzz-tidak-ada-zzz`. | Keluhan ditemukan; kata kunci yang tidak cocok menghasilkan daftar kosong | Sesuai | Pass | `src/tests/keluhan.test.ts:123` |
+
+Tidak diuji secara unit: `daftarMilikPelanggan()` (baris 50-54), yang dipakai halaman riwayat keluhan pelanggan dan teruji lewat UC13.
+
+Tabel 4.2.22b. Ringkasan Cakupan Kelas C30
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | `simpanKeluhan()`, `updateStatusKeluhan()` |
+| Operasi yang diuji | Keduanya, ditambah `tanggapi()` dan `daftar()` yang ditambahkan saat implementasi |
+| ID Algoritma yang tercakup | Algo-111, Algo-112 |
+| Coverage (wajib ≥ 70%) | `models/keluhan.ts`: 91,25% / 87,50% |
+
+### 4.2.23 Kelas KelolaDataRestoranController
+
+**ID Kelas:** C33  
+**Nama Kelas:** KelolaDataRestoranController  
+**Tingkat:** Mendalam
+
+Tabel 4.2.23. Hasil Pengujian Unit Kelas C33
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C33-UT01 | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` | Normal | `keluhan.test.ts › hapus restoran menonaktifkan menu dan membatalkan antrean aktif`. Hapus restoran "Seblak Teh Nining". | Tidak ada tiket berstatus `MENUNGGU`/`DIPANGGIL`, tidak ada menu aktif, detail restoran 404, dan akun restoran tidak lagi terhubung ke restoran | Sesuai | Pass | `src/tests/keluhan.test.ts:44` |
+| C33-UT02 | `daftarRestoran()` | Normal | Ambil daftar dengan filter `semua`, `aktif`, dan `nonaktif`. | Filter `aktif` hanya berisi restoran aktif, `nonaktif` hanya restoran nonaktif, dan jumlah `semua` = `aktif` + `nonaktif` | Sesuai | Pass | `src/tests/keluhan.test.ts:74` |
+| C33-UT03 | `hapusDataRestoran()` | Negatif / Normal | Hapus ID `RST-tidak-ada`; hapus "Bakso Mang Ujang" lalu hapus sekali lagi. | ID tidak ada dan penghapusan kedua ditolak 404; pelanggan terdampak menerima notifikasi "dibatalkan"; email `RESTORAN_DIHAPUS` tercatat di `log_notifikasi` | Sesuai | Pass | `src/tests/keluhan.test.ts:112` |
+
+`nonaktifkanRelasiMenu()` tidak berdiri sebagai method terpisah. Penonaktifan menu dijalankan di dalam `Restoran.setSoftDelete()` pada transaksi yang sama, sehingga teruji melalui C33-UT01. *Branch* yang belum tercakup adalah filter `banyak-keluhan` pada `daftarRestoran()` dan cabang kegagalan `setSoftDelete()` di dalam transaksi.
+
+Tabel 4.2.23b. Ringkasan Cakupan Kelas C33
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` |
+| Operasi yang diuji | Keduanya (`nonaktifkanRelasiMenu()` melalui `Restoran.setSoftDelete()`), ditambah `daftarRestoran()` |
+| ID Algoritma yang tercakup | Algo-117, Algo-118 |
+| Coverage (wajib ≥ 70%) | `kelolaDataRestoranController.ts`: 100% / 77,78% |
+
+### 4.2.24 Kelas PencarianController
+
+**ID Kelas:** C35  
+**Nama Kelas:** PencarianController  
+**Tingkat:** Mendalam
+
+Tabel 4.2.24. Hasil Pengujian Unit Kelas C35
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C35-UT01 | `terapkanFilter()` (kategori) | Normal | Ambil daftar kategori, lalu cari dengan kategori pertama. | Minimal satu restoran ditemukan dan semuanya berkategori tersebut | Sesuai | Pass | `src/tests/pencarian.test.ts:47` |
+| C35-UT02 | `terapkanFilter()` (rating, antrean) | Negatif / Batas | `minRating` = `abc`; lalu `antreanPendek` = `true`. | Rating tidak valid diabaikan (jumlah hasil sama dengan tanpa filter); filter antrean pendek tidak menambah hasil | Sesuai | Pass | `src/tests/pencarian.test.ts:53` |
+| C35-UT03 | `getDetailRestoran()` | Negatif | ID restoran `RST-tidak-ada`. | 404 | 404 | Pass | `src/tests/pencarian.test.ts:60` |
+| C35-UT04 | `cariRestoran()` | Normal | `pencarian.test.ts › cari berdasarkan kata kunci menu dan filter rating`. Kata kunci `geprek`. | Hanya "Ayam Geprek Bu Rini" yang dikembalikan | Sesuai | Pass | `src/tests/pencarian.test.ts:26` |
+| C35-UT05 | `terapkanFilter()` (rating) | Batas | `minRating` = `4.7`. | Semua hasil memiliki rating rata-rata ≥ 4,7 | Sesuai | Pass | `src/tests/pencarian.test.ts:26` |
+| C35-UT06 | `cariRestoran()` | Negatif | Kata kunci `tidak-ada-xyz`. | Daftar hasil kosong dan saran restoran viral tetap diberikan | Sesuai | Pass | `src/tests/pencarian.test.ts:32` |
+| C35-UT07 | `terapkanFilter()` (lokasi) | Normal | `lokasi` = `Dago`. | Minimal dua restoran, semuanya berlokasi Dago; daftar pilihan lokasi tetap memuat "Braga" | Sesuai | Pass | `src/tests/pencarian.test.ts:39` |
+| C35-UT08 | `cariRestoran()` (melalui REST API) | Normal | `api.test.ts › endpoint terlindungi…`. `GET /api/restoran?q=bakso` tanpa login. | Pencarian dapat diakses publik dan mengembalikan minimal satu restoran | Sesuai | Pass | `src/tests/api.test.ts:23` |
+| C35-UT09 | `ambilStatusAntrean()`, `ambilPreviewMenu()` | Normal | `getDetailRestoran()` untuk "Bakso Mang Ujang". | Status antrean bernilai `BUKA`, `TUTUP`, atau `PENUH`; pratinjau menu tidak kosong dan seluruhnya menu aktif | Sesuai | Pass | `src/tests/pencarian.test.ts:67` |
+
+Pada implementasi, `terapkanFilter()` digabung ke dalam `cariRestoran()`. Begitu pula `ambilStatusAntrean()` dan `ambilPreviewMenu()`, yang dijalankan di dalam `getDetailRestoran()`. Keempat operasi DPPL tetap teruji melalui dua method tersebut.
+
+Tabel 4.2.24b. Ringkasan Cakupan Kelas C35
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | `cariRestoran()`, `terapkanFilter()`, `ambilStatusAntrean()`, `ambilPreviewMenu()` |
+| Operasi yang diuji | Keempatnya (melalui `cariRestoran()` dan `getDetailRestoran()`) |
+| ID Algoritma yang tercakup | Algo-125, Algo-126, Algo-127, Algo-128 |
+| Coverage (wajib ≥ 70%) | `pencarianController.ts`: 100% / 100% |
+
+### 4.2.25 Kelas KeluhanController
+
+**ID Kelas:** C41  
+**Nama Kelas:** KeluhanController  
+**Tingkat:** Mendalam
+
+Tabel 4.2.25. Hasil Pengujian Unit Kelas C41
+
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C41-UT01 | `kirimKeluhan()` | Negatif | Kategori `Ngawur`, isi `pendek`. | 400 dengan galat pada kolom `isi` dan `kategori` | Sesuai | Pass | `src/tests/keluhan.test.ts:86` |
+| C41-UT02 | `kirimKeluhan()`, `tanggapiKeluhan()` | Batas / Negatif | Isi tepat 500 karakter; lalu tanggapan kosong; lalu tanggapan untuk ID `KLH-tidak-ada`. | 500 karakter diterima (status `BARU`); tanggapan kosong 400; ID tidak ada 404 | Sesuai | Pass | `src/tests/keluhan.test.ts:92` |
+| C41-UT03 | `kirimKeluhan()` | Negatif | Akun admin mencoba mengirim keluhan. | 403, karena hanya pelanggan yang boleh mengirim keluhan | 403 | Pass | `src/tests/keluhan.test.ts:105` |
+| C41-UT04 | `kirimKeluhan()` | Normal / Batas | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Keluhan kategori `Pelayanan` dengan pesanan terkait; lalu isi 501 karakter. | Keluhan berstatus `BARU` dan terhubung ke restoran pesanan; isi 501 karakter ditolak 400 | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C41-UT05 | `detailKeluhan()` | Normal | Admin membuka detail keluhan tersebut. | Status berubah menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C41-UT06 | `tanggapiKeluhan()` | Normal | Admin mengirim tanggapan. | Status `DITANGGAPI` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
+| C41-UT07 | `tampilkanKeluhan()` | Normal | `keluhan.test.ts › filter keluhan Ditanggapi…`. Filter status `DITANGGAPI`. | Semua keluhan pada hasil berstatus `DITANGGAPI` dan keluhan yang baru ditanggapi ikut tampil | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
+| C41-UT08 | `tanggapiKeluhan()` | Normal | Daftar notifikasi pelanggan setelah keluhannya ditanggapi. | Ada notifikasi berjudul "…ditanggapi" untuk pelanggan | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
+
+Tidak diuji secara unit: `keluhanSaya()` (baris 39-41), yaitu daftar keluhan milik pelanggan yang teruji lewat UC13.
+
+Tabel 4.2.25b. Ringkasan Cakupan Kelas C41
+
+| Informasi | Keterangan |
+| :--- | :--- |
+| Daftar operasi public pada DPPL | `kirimKeluhan()`, `tampilkanKeluhan()`, `tanggapiKeluhan()` |
+| Operasi yang diuji | Ketiganya, ditambah `detailKeluhan()` |
+| ID Algoritma yang tercakup | Algo-139, Algo-140, Algo-141 |
+| Coverage (wajib ≥ 70%) | `keluhanController.ts`: 95,77% / 94,44% |
+
 <br>
 
 ## 4.3 Pengujian Integrasi
@@ -1310,6 +1423,14 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C16-UT01 – C16-UT07 (KelolaAntreanController) | ![Bukti 1](assets/image-34.png) ![Bukti 2](assets/image-35.png) |
 | C20-UT01 – C20-UT05 (Kuota) | ![Bukti 1](assets/image-36.png) ![Bukti 2](assets/image-37.png) |
 | C21-UT01 – C21-UT06 (PengaturanKuotaController) | ![Bukti 1](assets/image-38.png) ![Bukti 2](assets/image-39.png) |
+| C24-UT01 – C24-UT08 (KelolaMenuController, 8 test case) | ![Bukti 1](assets/image-60.png) |
+| C25-UT01 – C25-UT07 (Pengguna, 7 test case) | ![Bukti 1](assets/image-59.png) |
+| C28-UT01 – C28-UT11 (AutentikasiController, 11 test case) | ![Bukti 1](assets/image-59.png) |
+| C29-UT01 – C29-UT06 (SesiPengguna, 6 test case) | ![Bukti 1](assets/image-59.png) |
+| C30-UT01 – C30-UT05 (Keluhan, 5 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
+| C33-UT01 – C33-UT03 (KelolaDataRestoranController, 3 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
+| C35-UT01 – C35-UT09 (PencarianController, 9 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
+| C41-UT01 – C41-UT08 (KeluhanController, 8 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | Coverage | <img width="1515" height="432" alt="image" src="https://github.com/user-attachments/assets/f672d4e5-1499-482d-93b7-42f13cf89380" /> <img width="1487" height="503" alt="image" src="https://github.com/user-attachments/assets/eccf05c2-e27f-4587-bd31-672739e78509" /> |
 | *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
 | UC01-TC01 – UC01-TC07 (Mencari dan filter resto, keluaran test otomatis) | ![Keluaran test UC01](assets/UC01-test.png) ![UI UC01-TC06](assets/UC01-TC06-ui.png) |
@@ -1345,6 +1466,7 @@ Tabel 4.6. Bukti Hasil Pengujian
 | KNF12-TC01 (Response Time — Verifikasi Mitra ≤ 4 Hari Kerja) | ![Bukti KNF12 Dokumen](assets/image-52.png)<br>![Bukti KNF12 Setujui](assets/image-53.png)<br>![Bukti KNF12 Email](assets/image-54.png) |
 | KNF13-TC01 (Ergonomy — Usability Testing ≤ 8 menit) | ![Bukti KNF13 Ketersediaan Responden](assets/image-55.jpg)<br>![Bukti KNF13 Hasil Waktu Pengujian](assets/image-56.jpg) |
 | KNF14-TC01 (Reliability — Pencegahan Double-Charge) | ![Bukti KNF14](assets/image-42.png) |
+
 
 | *...* | *...* |
 

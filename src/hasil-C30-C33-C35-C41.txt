@@ -1,0 +1,42 @@
+▶ REST API
+  ✔ [C29-UT06, C35-UT08] endpoint terlindungi memerlukan login dan peran yang sesuai (218.0295ms)
+✔ REST API (3483.1752ms)
+▶ UC13-UC15 keluhan & kelola restoran
+  ✔ [C30-UT02, C30-UT03, C30-UT04, C41-UT04, C41-UT05, C41-UT06] keluhan dikirim, dibaca, dan ditanggapi admin (80.9133ms)
+  ✔ [C02-UT02, C02-UT05, C33-UT01] hapus restoran menonaktifkan menu dan membatalkan antrean aktif (101.2215ms)
+✔ UC13-UC15 keluhan & kelola restoran (3439.4408ms)
+▶ Iterasi 2: keluhan & kelola restoran
+  ✔ [C41-UT07, C41-UT08] filter keluhan Ditanggapi dan notifikasi tanggapan ke pelanggan (78.9659ms)
+  ✔ [C33-UT02] filter Aktif/Nonaktif pada kelola restoran (5.1818ms)
+✔ Iterasi 2: keluhan & kelola restoran (84.4128ms)
+▶ C30/C41 Keluhan
+  ✔ C41-UT01 kategori tidak valid dan isi terlalu pendek ditolak per kolom (72.6434ms)
+  ✔ C41-UT02 batas isi tepat 500 karakter diterima, tanggapan kosong atau id tidak ada ditolak (64.5917ms)
+  ✔ C30-UT01 keluhan yang sudah ditanggapi tidak turun status saat dibaca ulang (92.0094ms)
+  ✔ C41-UT03 admin tidak boleh mengirim keluhan (hanya pelanggan) (79.3452ms)
+✔ C30/C41 Keluhan (309.4328ms)
+▶ Pelengkap C30, C33
+  ✔ C33-UT03 hapusDataRestoran: restoran tidak ada/sudah dihapus -> 404; pelanggan terdampak dan email dicatat (87.4343ms)
+  ✔ C30-UT05 daftar keluhan: pencarian kata kunci nama restoran (73.0239ms)
+✔ Pelengkap C30, C33 (160.7442ms)
+▶ UC01 pencarian
+  ✔ [C02-UT04, C35-UT04, C35-UT05] cari berdasarkan kata kunci menu dan filter rating (13.835ms)
+  ✔ [C35-UT06] hasil kosong memberi saran restoran viral (5.2053ms)
+✔ UC01 pencarian (3374.953ms)
+✔ [C35-UT07] filter area/lokasi (iterasi 2) (3.0125ms)
+▶ C35 PencarianController
+  ✔ C35-UT01 filter kategori hanya mengembalikan kategori tersebut (8.4309ms)
+  ✔ C35-UT02 minRating tidak valid diabaikan, antreanPendek hanya antrean BUKA (10.4704ms)
+  ✔ C35-UT03 detail restoran tidak ditemukan -> 404 (1.8618ms)
+✔ C35 PencarianController (21.15ms)
+▶ Pelengkap C35
+  ✔ C35-UT09 getDetailRestoran: status antrean dan pratinjau menu aktif tersedia (3.3948ms)
+✔ Pelengkap C35 (3.5934ms)
+ℹ tests 18
+ℹ suites 8
+ℹ pass 18
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6853.1912

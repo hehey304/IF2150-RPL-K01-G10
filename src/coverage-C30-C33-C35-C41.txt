@@ -1,0 +1,130 @@
+▶ REST API
+  ✔ [C29-UT06, C35-UT08] endpoint terlindungi memerlukan login dan peran yang sesuai (147.727ms)
+✔ REST API (3255.9809ms)
+▶ KNF02 waktu respons
+  ✔ KNF02-TC01 detail restoran tampil <= 1 detik dan header Server-Timing ada (20.4214ms)
+✔ KNF02 waktu respons (20.5368ms)
+▶ UC13-UC15 keluhan & kelola restoran
+  ✔ [C30-UT02, C30-UT03, C30-UT04, C41-UT04, C41-UT05, C41-UT06] keluhan dikirim, dibaca, dan ditanggapi admin (85.0237ms)
+  ✔ [C02-UT02, C02-UT05, C33-UT01] hapus restoran menonaktifkan menu dan membatalkan antrean aktif (83.821ms)
+✔ UC13-UC15 keluhan & kelola restoran (3287.6618ms)
+▶ Iterasi 2: keluhan & kelola restoran
+  ✔ [C41-UT07, C41-UT08] filter keluhan Ditanggapi dan notifikasi tanggapan ke pelanggan (79.0836ms)
+  ✔ [C33-UT02] filter Aktif/Nonaktif pada kelola restoran (3.4644ms)
+✔ Iterasi 2: keluhan & kelola restoran (82.6952ms)
+▶ C30/C41 Keluhan
+  ✔ C41-UT01 kategori tidak valid dan isi terlalu pendek ditolak per kolom (70.365ms)
+  ✔ C41-UT02 batas isi tepat 500 karakter diterima, tanggapan kosong atau id tidak ada ditolak (69.7802ms)
+  ✔ C30-UT01 keluhan yang sudah ditanggapi tidak turun status saat dibaca ulang (74.0776ms)
+  ✔ C41-UT03 admin tidak boleh mengirim keluhan (hanya pelanggan) (65.8259ms)
+✔ C30/C41 Keluhan (280.3461ms)
+▶ Pelengkap C30, C33
+  ✔ C33-UT03 hapusDataRestoran: restoran tidak ada/sudah dihapus -> 404; pelanggan terdampak dan email dicatat (85.9894ms)
+  ✔ C30-UT05 daftar keluhan: pencarian kata kunci nama restoran (73.0158ms)
+✔ Pelengkap C30, C33 (159.1658ms)
+▶ Pelengkap C02 (purgeData) dan C33
+  ✔ C02-UT09 setSoftDelete/purgeData: menu, kuota, antrean, pesanan aktif, dan pembayaran menunggu ikut dinonaktifkan (192.0385ms)
+✔ Pelengkap C02 (purgeData) dan C33 (192.2221ms)
+▶ Pelengkap C02 (setSoftDelete langsung)
+  ✔ C02-UT10 Restoran.setSoftDelete: restoran aktif -> true dan tidak tampil; panggilan kedua dan ID tidak ada -> false (7.3967ms)
+✔ Pelengkap C02 (setSoftDelete langsung) (7.6043ms)
+▶ UC01 pencarian
+  ✔ [C02-UT04, C35-UT04, C35-UT05] cari berdasarkan kata kunci menu dan filter rating (9.2762ms)
+  ✔ [C35-UT06] hasil kosong memberi saran restoran viral (3.9977ms)
+✔ UC01 pencarian (3109.3996ms)
+✔ [C35-UT07] filter area/lokasi (iterasi 2) (2.3477ms)
+▶ C35 PencarianController
+  ✔ C35-UT01 filter kategori hanya mengembalikan kategori tersebut (5.0906ms)
+  ✔ C35-UT02 minRating tidak valid diabaikan, antreanPendek hanya antrean BUKA (7.2542ms)
+  ✔ C35-UT03 detail restoran tidak ditemukan -> 404 (1.171ms)
+✔ C35 PencarianController (13.6938ms)
+▶ Pelengkap C35
+  ✔ C35-UT09 getDetailRestoran: status antrean dan pratinjau menu aktif tersedia (6.2441ms)
+✔ Pelengkap C35 (6.3274ms)
+ℹ tests 21
+ℹ suites 11
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5033.5287
+ℹ start of coverage report
+ℹ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+ℹ file                              | line % | branch % | funcs % | uncovered lines
+ℹ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+ℹ server                            |        |          |         | 
+ℹ  adapters                         |        |          |         | 
+ℹ   notifikasiEmail.ts              |  88.89 |    71.43 |  100.00 | 25-26 28-29
+ℹ   paymentGatewayAdapter.ts        |  80.33 |    80.00 |  100.00 | 1-11 57
+ℹ  app.ts                           | 100.00 |    66.67 |   75.00 | 
+ℹ  config.ts                        |  88.10 |    60.00 |  100.00 | 8-11 42
+ℹ  controllers                      |        |          |         | 
+ℹ   autentikasiController.ts        |  47.34 |    60.87 |   46.67 | 26-57 81-83 87-100 104-118 122-132 135-140 147-165 169-177
+ℹ   kelolaAntreanController.ts      |  35.51 |    83.33 |   36.36 | 20-22 26-58 65-77 81-86 90-100 107-121 125-132
+ℹ   kelolaDataRestoranController.ts | 100.00 |    77.78 |   85.71 | 
+ℹ   kelolaMenuController.ts         |  38.95 |   100.00 |   25.00 | 15-17 20-35 39-40 44-48 52-57 61-68 72-76 80-90 93-94
+ℹ   keluhanController.ts            |  95.77 |    94.44 |   87.50 | 39-41
+ℹ   metodePembayaranController.ts   |  69.01 |    48.00 |   80.95 | 31-32 56-68 80-81 84-85 88-101 136-149 156-158 160-165 176-179 201-215
+ℹ   notifikasiController.ts         |  80.77 |   100.00 |   66.67 | 19-20 23-25
+ℹ   pemantauAntreanController.ts    |  75.81 |    50.00 |   85.71 | 47-61
+ℹ   pemesananController.ts          |  60.11 |    32.00 |   63.64 | 36-52 70-71 78-79 96-98 100-102 106-107 112-113 115-125 144-151 155-174 183-187
+ℹ   pencarianController.ts          | 100.00 |   100.00 |  100.00 | 
+ℹ   pengajuanMitraController.ts     |  21.86 |   100.00 |   27.27 | 28-69 73-113 116-117 120-121 125-138 142-147 151-191 195-214
+ℹ   pengaturanKuotaController.ts    |  41.07 |   100.00 |   50.00 | 17-19 23-32 36-55
+ℹ   profilRestoranController.ts     |  41.94 |   100.00 |   37.50 | 18-20 23-26 29-48 51-57 60-61
+ℹ   simulasiController.ts           |  51.16 |   100.00 |   42.86 | 15-17 20-29 32-35 39-42
+ℹ   ulasanController.ts             |  40.38 |   100.00 |   50.00 | 17-22 25-47 50-51
+ℹ  db                               |        |          |         | 
+ℹ   database.ts                     |  97.70 |    83.33 |   72.22 | 71-72
+ℹ   seed.ts                         |  98.79 |    78.26 |  100.00 | 1-3
+ℹ  middleware                       |        |          |         | 
+ℹ   auth.ts                         |  88.10 |    81.25 |  100.00 | 1-3 24-25
+ℹ   errorHandler.ts                 |  60.00 |    40.00 |  100.00 | 1 11-13 15-18
+ℹ   timing.ts                       |  66.67 |    66.67 |  100.00 | 1 3-6 15-16
+ℹ  models                           |        |          |         | 
+ℹ   akun.ts                         |  78.11 |    69.23 |   42.11 | 1-3 39-43 70 97-101 144-146 150-151 155-156 160 165-168 175-181 186-191 195-199
+ℹ   antrean.ts                      |  84.50 |    62.16 |   68.18 | 1-4 75-76 163-170 204 217-221 229-258 327
+ℹ   keluhan.ts                      |  91.25 |    87.50 |   83.33 | 1-2 50-54
+ℹ   kuota.ts                        |  48.65 |   100.00 |    0.00 | 1-4 6-11 16-17 22-27 35
+ℹ   menu.ts                         |  73.87 |    85.71 |   50.00 | 1-4 70-75 80-84 89-93 98-104 108-109
+ℹ   mitra.ts                        |  74.65 |   100.00 |   18.18 | 1-5 68-69 73-77 81-83 88-92 96 101-106 125-130 135 139-140
+ℹ   notifikasi.ts                   |  86.76 |    77.78 |   83.33 | 1-5 63-66
+ℹ   pembayaran.ts                   |  78.10 |    80.00 |   66.67 | 1-5 52-57 92-103
+ℹ   pesanan.ts                      |  72.32 |    73.33 |   58.33 | 1-5 39-41 49-69 74-79 173-178 202-222
+ℹ   profilRestoran.ts               |  32.65 |   100.00 |    0.00 | 1-4 6-13 17-27 31-35 40-42 46-47
+ℹ   restoran.ts                     |  98.17 |    78.57 |  100.00 | 1-4
+ℹ   ulasan.ts                       |  44.26 |   100.00 |    0.00 | 1-5 20-22 26-27 32-50 55-59
+ℹ  realtime                         |        |          |         | 
+ℹ   eventBus.ts                     | 100.00 |   100.00 |  100.00 | 
+ℹ  routes                           |        |          |         | 
+ℹ   antrean.ts                      |  95.24 |   100.00 |   20.00 | 1
+ℹ   autentikasi.ts                  |  93.33 |    75.00 |   22.22 | 1
+ℹ   index.ts                        |  89.62 |   100.00 |   66.67 | 1-4 90-96
+ℹ   keluhan.ts                      |  94.12 |   100.00 |   12.50 | 1
+ℹ   menu.ts                         |  73.91 |   100.00 |   12.50 | 1 17-21
+ℹ   mitra.ts                        |  77.08 |   100.00 |   11.11 | 1 29-30 39-46
+ℹ   notifikasi.ts                   |  90.00 |   100.00 |   20.00 | 1
+ℹ   pembayaran.ts                   |  93.33 |   100.00 |   16.67 | 1
+ℹ   pemesanan.ts                    |  91.67 |   100.00 |   14.29 | 1
+ℹ   pencarian.ts                    |  85.71 |   100.00 |  100.00 | 1
+ℹ   profilRestoran.ts               |  66.67 |   100.00 |   20.00 | 1 12-16
+ℹ   simulasi.ts                     |  88.89 |   100.00 |   25.00 | 1
+ℹ   ulasan.ts                       |  88.89 |   100.00 |   25.00 | 1
+ℹ   util.ts                         |  80.00 |    83.33 |  100.00 | 1-4 29-30
+ℹ  sandbox-pg                       |        |          |         | 
+ℹ   routes.ts                       |  65.71 |   100.00 |   18.18 | 1-4 11 18-19 24-28
+ℹ   sandboxGateway.ts               |  63.89 |    63.16 |   47.37 | 99-100 122-124 136-138 141-143 150-165 168-171 174-179 183-186 190-197 201-225 229-245
+ℹ  services                         |        |          |         | 
+ℹ   simulatorAntrean.ts             |  40.34 |    83.33 |   40.00 | 53-76 79-80 84-110 114-142 146-164 167-170
+ℹ  utils                            |        |          |         | 
+ℹ   errors.ts                       |  93.75 |   100.00 |   87.50 | 16
+ℹ   ids.ts                          | 100.00 |   100.00 |  100.00 | 
+ℹ   unggah.ts                       |  66.67 |   100.00 |   20.00 | 1-3 24-25 32-33 36-42
+ℹ   validasi.ts                     |  55.56 |   100.00 |   33.33 | 1 11-14 16-18
+ℹ tests                             |        |          |         | 
+ℹ  helpers.ts                       |  91.94 |    58.33 |  100.00 | 16-20
+ℹ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+ℹ all files                         |  70.65 |    74.54 |   53.06 | 
+ℹ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+ℹ end of coverage report
