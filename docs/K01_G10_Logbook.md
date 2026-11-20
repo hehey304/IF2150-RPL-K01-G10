@@ -31,7 +31,7 @@
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
 * [Milestone 9](#milestone-9)
-
+* [Milestone 10](#milestone-10)
 
 ---
 
@@ -255,5 +255,12 @@
 * *(Isi jika ada catatan khusus untuk asisten atau evaluasi singkat kerja tim)*
 ---
 
+### Milestone 10
+**Periode:** 14-10-2026 - 20-11-2026
+| Tanggal | Nama Anggota | Deskripsi Pekerjaan | Durasi (Jam) | Status | Kendala / *Blocker* | 
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *17-11-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 10* | *3* | *Done* | *-* |
+| *19-11-2026* | *Bayu Palamarta Wirawan* | *Melakukan pengujian uji kelas C01-C21* | *3* | *Done* | *-* |
+| *20-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki pengujian uji kelas C01-C21* | *5* | *Done* | *-* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
