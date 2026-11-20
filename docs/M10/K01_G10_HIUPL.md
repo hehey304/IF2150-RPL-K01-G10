@@ -874,18 +874,18 @@ Tabel 4.2.17b. Ringkasan Cakupan Kelas C21
 
 Tabel 4.2.18. Hasil Pengujian Unit Kelas C24
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C24-UT01 | `handleAddMenu()` | Normal | `menu.test.ts › tambah, ubah stok, dan hapus menu`. Harga 30000, stok 10. | Menu tersimpan | Sesuai | Pass | `src/tests/menu.test.ts:25` |
-| C24-UT02 | `handleAddMenu()` | Negatif | Nama `X`, harga `-1`, stok `a`. | 400 untuk tiga kolom | Sesuai | Pass | `src/tests/menu.test.ts:25` |
-| C24-UT03 | `handleFetchMenu()`, `handleDeleteMenu()` | Normal | Hapus menu lalu ambil daftar. | Menu tidak ada di daftar | Sesuai | Pass | `src/tests/menu.test.ts:25` |
-| C24-UT04 | `handleUpdateStok()` | Batas | Stok diubah ke `'0'`. | Stok 0 | Sesuai | Pass | `src/tests/menu.test.ts:25` |
-| C24-UT05 | `handleUpdateStok()` | Negatif | `menu.test.ts › restoran lain tidak bisa mengubah menu…`. | 404 | 404 | Pass | `src/tests/menu.test.ts:36` |
-| C24-UT06 | `handleUpdateMenu()` | Batas | Harga `500` (batas bawah), stok 7. | Tersimpan | Sesuai | Pass | `src/tests/menu.test.ts:88` |
-| C24-UT07 | `handleUpdateMenu()` | Batas / Negatif | Harga `499`; menu `MNU-tidak-ada`. | 400 pada kolom `harga`; 404 | Sesuai | Pass | `src/tests/menu.test.ts:95` |
-| C24-UT08 | `handleFetchMenuDetail()` | Normal | Memeriksa operasi pada `KelolaMenuController`. | Operasi tersedia | Operasi tidak ada | **Fail** | `src/tests/menu.test.ts:104` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C24-UT01 | `handleAddMenu()` | Normal | `menu.test.ts › tambah, ubah stok, dan hapus menu`. Harga 30000, stok 10. | Menu tersimpan | Sesuai | Pass |
+| C24-UT02 | `handleAddMenu()` | Negatif | Nama `X`, harga `-1`, stok `a`. | 400 untuk tiga kolom | Sesuai | Pass |
+| C24-UT03 | `handleFetchMenu()`, `handleDeleteMenu()` | Normal | Hapus menu lalu ambil daftar. | Menu tidak ada di daftar | Sesuai | Pass |
+| C24-UT04 | `handleUpdateStok()` | Batas | Stok diubah ke `'0'`. | Stok 0 | Sesuai | Pass |
+| C24-UT05 | `handleUpdateStok()` | Negatif | `menu.test.ts › restoran lain tidak bisa mengubah menu…`. | 404 | 404 | Pass |
+| C24-UT06 | `handleUpdateMenu()` | Batas | Harga `500` (batas bawah), stok 7. | Tersimpan | Sesuai | Pass |
+| C24-UT07 | `handleUpdateMenu()` | Batas / Negatif | Harga `499`; menu `MNU-tidak-ada`. | 400 pada kolom `harga`; 404 | Sesuai | Pass |
+| C24-UT08 | `handleFetchMenuDetail()` | Normal | Memeriksa operasi pada `KelolaMenuController`. | Operasi tersedia | Operasi tidak ada | **Fail** |
 
-`handleFetchMenuDetail()` tidak ada di kode (C24-UT08 Fail). 
+**Catatan C24-UT08 (Fail).** Penyebab: operasi `handleFetchMenuDetail()` yang dirancang pada DPPL tidak diimplementasikan sebagai method tersendiri. Data detail menu sudah ikut dikembalikan oleh `handleFetchMenu()`, sehingga halaman I-17 tetap berfungsi, tetapi operasi tersebut tidak ada pada kelas `KelolaMenuController`. Usulan perbaikan: tambahkan method `handleFetchMenuDetail(user, menuId)` yang memanggil `Menu.getInfoMenu()` (Q-012), menolak menu milik restoran lain atau ID yang tidak ada dengan 404, serta endpoint `GET /api/kelola/menu/:id`. Setelah itu ubah C24-UT08 menjadi test perilaku (detail menu sendiri didapat; ID tidak ada menghasilkan 404). 
 
 Tabel 4.2.18b. Ringkasan Cakupan Kelas C24
 
@@ -904,15 +904,15 @@ Tabel 4.2.18b. Ringkasan Cakupan Kelas C24
 
 Tabel 4.2.19. Hasil Pengujian Unit Kelas C25
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C25-UT01 | `saveCredentials()` (hash) | Normal | Baca kolom `password_hash` seluruh pengguna. | Semua berformat bcrypt, bukan plain-text (KNF08) | Sesuai | Pass | `src/tests/autentikasi.test.ts:106` |
-| C25-UT02 | `validateAccount()` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. Email `UJI@contoh.id` (huruf besar). | Login berhasil, peran PELANGGAN | Sesuai | Pass | `src/tests/autentikasi.test.ts:30` |
-| C25-UT03 | `validateAccount()` | Negatif | `autentikasi.test.ts › kredensial salah memberi pesan umum`. | 401, pesan umum | Sesuai | Pass | `src/tests/autentikasi.test.ts:51` |
-| C25-UT04 | pengecekan duplikasi | Negatif | Email sudah terdaftar. | 409 | 409 | Pass | `src/tests/autentikasi.test.ts:41` |
-| C25-UT05 | `getUserInfo()` (ubah profil) | Normal / Negatif | `autentikasi.test.ts › ubah profil memvalidasi nomor telepon…`. Nomor `12`, nomor duplikat, lalu nilai valid. | 400, 409, lalu nama tersimpan di basis data | Sesuai | Pass | `src/tests/autentikasi.test.ts:59` |
-| C25-UT06 | `saveCredentials()` (ganti sandi) | Negatif / Normal | `autentikasi.test.ts › ganti kata sandi…`. Sandi lama salah, lalu benar. | 400, lalu login dengan sandi baru berhasil | Sesuai | Pass | `src/tests/autentikasi.test.ts:71` |
-| C25-UT07 | `logout()` | Normal | Lihat C28-UT05. | Sesi nonaktif | Sesuai | Pass | `src/tests/autentikasi.test.ts:30` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C25-UT01 | `saveCredentials()` (hash) | Normal | Baca kolom `password_hash` seluruh pengguna. | Semua berformat bcrypt, bukan plain-text (KNF08) | Sesuai | Pass |
+| C25-UT02 | `validateAccount()` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. Email `UJI@contoh.id` (huruf besar). | Login berhasil, peran PELANGGAN | Sesuai | Pass |
+| C25-UT03 | `validateAccount()` | Negatif | `autentikasi.test.ts › kredensial salah memberi pesan umum`. | 401, pesan umum | Sesuai | Pass |
+| C25-UT04 | pengecekan duplikasi | Negatif | Email sudah terdaftar. | 409 | 409 | Pass |
+| C25-UT05 | `getUserInfo()` (ubah profil) | Normal / Negatif | `autentikasi.test.ts › ubah profil memvalidasi nomor telepon…`. Nomor `12`, nomor duplikat, lalu nilai valid. | 400, 409, lalu nama tersimpan di basis data | Sesuai | Pass |
+| C25-UT06 | `saveCredentials()` (ganti sandi) | Negatif / Normal | `autentikasi.test.ts › ganti kata sandi…`. Sandi lama salah, lalu benar. | 400, lalu login dengan sandi baru berhasil | Sesuai | Pass |
+| C25-UT07 | `logout()` | Normal | Lihat C28-UT05. | Sesi nonaktif | Sesuai | Pass |
 
 Tabel 4.2.19b. Ringkasan Cakupan Kelas C25
 
@@ -921,7 +921,7 @@ Tabel 4.2.19b. Ringkasan Cakupan Kelas C25
 | Daftar operasi public pada DPPL | `validateAccount()`, `logout()`, `getUserInfo()`, `saveCredentials()` |
 | Operasi yang diuji | Keempatnya |
 | ID Algoritma yang tercakup | Algo-097, Algo-098, Algo-099, Algo-100 |
-| Coverage (wajib ≥ 70%) | `models/akun.ts` (bersama C01, C14, C29): 98,51% / 96,67% |
+| Coverage (wajib ≥ 70%) | `models/akun.ts` (bersama C01, C14, C29): 98,51% / 96,77% |
 
 ### 4.2.20 Kelas AutentikasiController
 
@@ -931,19 +931,19 @@ Tabel 4.2.19b. Ringkasan Cakupan Kelas C25
 
 Tabel 4.2.20. Hasil Pengujian Unit Kelas C28
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C28-UT01 | `createAccount()` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. | Akun terbentuk | Sesuai | Pass | `src/tests/autentikasi.test.ts:30` |
-| C28-UT02 | `createAccount()` | Negatif | Email duplikat `pelanggan@antri.in`. | 409 | 409 | Pass | `src/tests/autentikasi.test.ts:41` |
-| C28-UT03 | `createAccount()` | Negatif | Kata sandi `pendek`. | 400 dengan kolom `password` | Sesuai | Pass | `src/tests/autentikasi.test.ts:41` |
-| C28-UT04 | `validation()` | Negatif | Kata sandi salah. | 401, "Email atau kata sandi yang Anda masukkan salah" | Sesuai | Pass | `src/tests/autentikasi.test.ts:51` |
-| C28-UT05 | `processLogout()` | Normal | Logout lalu validasi token yang sama. | Token tidak valid (`null`) | `null` | Pass | `src/tests/autentikasi.test.ts:30` |
-| C28-UT06 | `handleSessionDeletion()` | Normal | `autentikasi.test.ts › ganti kata sandi mengakhiri sesi lain…`. | Sesi lain berakhir, sesi saat ini tetap | Sesuai | Pass | `src/tests/autentikasi.test.ts:71` |
-| C28-UT07 | token reset (lupa sandi) | Normal / Negatif | `autentikasi.test.ts › lupa kata sandi: token sekali pakai…`. | Reset berhasil; pemakaian ulang token 404; email lupa sandi tercatat | Sesuai | Pass | `src/tests/autentikasi.test.ts:82` |
-| C28-UT08 | `createAccount()` | Negatif | Nama `A`, email `bukan-email`, nomor `123`, konfirmasi sandi berbeda, persetujuan tidak dicentang. | 400 pada kolom `nama`, `email`, `noHp`, `password`, `setuju` | Sesuai | Pass | `src/tests/autentikasi.test.ts:118` |
-| C28-UT09 | `createAccount()` | Batas | Sandi 7 karakter, lalu tepat 8 karakter. | 7 ditolak; 8 diterima | Sesuai | Pass | `src/tests/autentikasi.test.ts:124` |
-| C28-UT10 | `handleSessionDeletion()` (`gantiKataSandi`) | Negatif | Kata sandi baru `pendek`; konfirmasi berbeda; masukan kosong. | 400 pada ketiganya (kolom `baru` terisi); sandi lama tetap berlaku | Sesuai | Pass | `src/tests/autentikasi.test.ts:153` |
-| C28-UT11 | `getProfil()` | Normal | Akun RESTORAN baru tanpa restoran: sebelum dan sesudah mengajukan kemitraan; lalu akun pelanggan. | `pengajuan` `null`, lalu `MENUNGGU` bernama "Warung Calon"; pelanggan `null` | Sesuai | Pass | `src/tests/autentikasi.test.ts:165` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C28-UT01 | `createAccount()` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. | Akun terbentuk | Sesuai | Pass |
+| C28-UT02 | `createAccount()` | Negatif | Email duplikat `pelanggan@antri.in`. | 409 | 409 | Pass |
+| C28-UT03 | `createAccount()` | Negatif | Kata sandi `pendek`. | 400 dengan kolom `password` | Sesuai | Pass |
+| C28-UT04 | `validation()` | Negatif | Kata sandi salah. | 401, "Email atau kata sandi yang Anda masukkan salah" | Sesuai | Pass |
+| C28-UT05 | `processLogout()` | Normal | Logout lalu validasi token yang sama. | Token tidak valid (`null`) | `null` | Pass |
+| C28-UT06 | `handleSessionDeletion()` | Normal | `autentikasi.test.ts › ganti kata sandi mengakhiri sesi lain…`. | Sesi lain berakhir, sesi saat ini tetap | Sesuai | Pass |
+| C28-UT07 | token reset (lupa sandi) | Normal / Negatif | `autentikasi.test.ts › lupa kata sandi: token sekali pakai…`. | Reset berhasil; pemakaian ulang token 404; email lupa sandi tercatat | Sesuai | Pass |
+| C28-UT08 | `createAccount()` | Negatif | Nama `A`, email `bukan-email`, nomor `123`, konfirmasi sandi berbeda, persetujuan tidak dicentang. | 400 pada kolom `nama`, `email`, `noHp`, `password`, `setuju` | Sesuai | Pass |
+| C28-UT09 | `createAccount()` | Batas | Sandi 7 karakter, lalu tepat 8 karakter. | 7 ditolak; 8 diterima | Sesuai | Pass |
+| C28-UT10 | `handleSessionDeletion()` (`gantiKataSandi`) | Negatif | Kata sandi baru `pendek`; konfirmasi berbeda; masukan kosong. | 400 pada ketiganya (kolom `baru` terisi); sandi lama tetap berlaku | Sesuai | Pass |
+| C28-UT11 | `getProfil()` | Normal | Akun RESTORAN baru tanpa restoran: sebelum dan sesudah mengajukan kemitraan; lalu akun pelanggan. | `pengajuan` `null`, lalu `MENUNGGU` bernama "Warung Calon"; pelanggan `null` | Sesuai | Pass |
 
 Semua baris `autentikasiController.ts` tercakup. *Branch* semula 69,86% (di bawah 70%) karena dua cabang belum diuji: penolakan kata sandi baru pada `gantiKataSandi` (baris 136-139) dan status pengajuan mitra pada `getProfil` (baris 89 dan 96-97). Keduanya kini diuji oleh C28-UT10 dan C28-UT11, sehingga *branch* naik menjadi 82,61%.
 
@@ -964,14 +964,14 @@ Tabel 4.2.20b. Ringkasan Cakupan Kelas C28
 
 Tabel 4.2.21. Hasil Pengujian Unit Kelas C29
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C29-UT01 | `validateSession()` | Batas | Setel `waktu_kedaluwarsa` ke 1 menit yang lalu. | Sesi tidak valid (`null`) | `null` | Pass | `src/tests/autentikasi.test.ts:97` |
-| C29-UT02 | `validateToken()` | Negatif | Token `token-ngawur`. | `null` | `null` | Pass | `src/tests/autentikasi.test.ts:103` |
-| C29-UT03 | `validateSession()` | Normal | Login lalu validasi token. | Pengguna dikembalikan | Sesuai | Pass | `src/tests/autentikasi.test.ts:30` |
-| C29-UT04 | `hapusSesi()` | Normal | Logout lalu validasi (lihat C28-UT05). | `null` | `null` | Pass | `src/tests/autentikasi.test.ts:30` |
-| C29-UT05 | `hapusSesi()` (sesi lain) | Normal | Lihat C28-UT06. | Sesi lain nonaktif | Sesuai | Pass | `src/tests/autentikasi.test.ts:71` |
-| C29-UT06 | `validateToken()` (middleware) | Normal / Negatif | `api.test.ts › endpoint terlindungi…`. Tanpa token, peran salah, peran benar. | 401, 403, 200 | Sesuai | Pass | `src/tests/api.test.ts:23` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C29-UT01 | `validateSession()` | Batas | Setel `waktu_kedaluwarsa` ke 1 menit yang lalu. | Sesi tidak valid (`null`) | `null` | Pass |
+| C29-UT02 | `validateToken()` | Negatif | Token `token-ngawur`. | `null` | `null` | Pass |
+| C29-UT03 | `validateSession()` | Normal | Login lalu validasi token. | Pengguna dikembalikan | Sesuai | Pass |
+| C29-UT04 | `hapusSesi()` | Normal | Logout lalu validasi (lihat C28-UT05). | `null` | `null` | Pass |
+| C29-UT05 | `hapusSesi()` (sesi lain) | Normal | Lihat C28-UT06. | Sesi lain nonaktif | Sesuai | Pass |
+| C29-UT06 | `validateToken()` (middleware) | Normal / Negatif | `api.test.ts › endpoint terlindungi…`. Tanpa token, peran salah, peran benar. | 401, 403, 200 | Sesuai | Pass |
 
 Tabel 4.2.21b. Ringkasan Cakupan Kelas C29
 
@@ -980,7 +980,7 @@ Tabel 4.2.21b. Ringkasan Cakupan Kelas C29
 | Daftar operasi public pada DPPL | `validateSession()`, `hapusSesi()`, `validateToken()` |
 | Operasi yang diuji | Ketiganya |
 | ID Algoritma yang tercakup | Algo-108, Algo-109, Algo-110 |
-| Coverage (wajib ≥ 70%) | `models/akun.ts`: 98,51% / 96,67%; `middleware/auth.ts`: 85,71% / 90,00% |
+| Coverage (wajib ≥ 70%) | `models/akun.ts`: 98,51% / 96,77%; `middleware/auth.ts`: 85,71% / 90,00% |
 
 ### 4.2.22 Kelas Keluhan
 
@@ -990,13 +990,13 @@ Tabel 4.2.21b. Ringkasan Cakupan Kelas C29
 
 Tabel 4.2.22. Hasil Pengujian Unit Kelas C30
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C30-UT01 | `updateStatusKeluhan()` | Batas | Keluhan dikirim lalu ditanggapi admin, kemudian dibuka ulang lewat `detailKeluhan()`. | Status tetap `DITANGGAPI`, tidak turun menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:99` |
-| C30-UT02 | `simpanKeluhan()` | Normal | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Pelanggan mengirim keluhan kategori `Pelayanan` dengan pesanan terkait. | Keluhan tersimpan berstatus `BARU` dan terhubung ke restoran pesanan | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C30-UT03 | `updateStatusKeluhan()` | Normal | Admin membuka detail keluhan yang berstatus `BARU`. | Status berubah menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C30-UT04 | `tanggapi()` | Normal | Admin mengirim tanggapan pada keluhan yang sama. | Tanggapan tersimpan, status `DITANGGAPI` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C30-UT05 | `daftar()` | Normal / Negatif | Cari keluhan dengan lima huruf awal nama restoran, lalu dengan kata kunci `zzz-tidak-ada-zzz`. | Keluhan ditemukan; kata kunci yang tidak cocok menghasilkan daftar kosong | Sesuai | Pass | `src/tests/keluhan.test.ts:123` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C30-UT01 | `updateStatusKeluhan()` | Batas | Keluhan dikirim lalu ditanggapi admin, kemudian dibuka ulang lewat `detailKeluhan()`. | Status tetap `DITANGGAPI`, tidak turun menjadi `DIBACA` | Sesuai | Pass |
+| C30-UT02 | `simpanKeluhan()` | Normal | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Pelanggan mengirim keluhan kategori `Pelayanan` dengan pesanan terkait. | Keluhan tersimpan berstatus `BARU` dan terhubung ke restoran pesanan | Sesuai | Pass |
+| C30-UT03 | `updateStatusKeluhan()` | Normal | Admin membuka detail keluhan yang berstatus `BARU`. | Status berubah menjadi `DIBACA` | Sesuai | Pass |
+| C30-UT04 | `tanggapi()` | Normal | Admin mengirim tanggapan pada keluhan yang sama. | Tanggapan tersimpan, status `DITANGGAPI` | Sesuai | Pass |
+| C30-UT05 | `daftar()` | Normal / Negatif | Cari keluhan dengan lima huruf awal nama restoran, lalu dengan kata kunci `zzz-tidak-ada-zzz`. | Keluhan ditemukan; kata kunci yang tidak cocok menghasilkan daftar kosong | Sesuai | Pass |
 
 `daftarMilikPelanggan()` tidak memiliki ID pengujian unit tersendiri, tetapi seluruh barisnya tercakup oleh rangkaian pengujian lengkap (`npm test`).
 
@@ -1017,11 +1017,11 @@ Tabel 4.2.22b. Ringkasan Cakupan Kelas C30
 
 Tabel 4.2.23. Hasil Pengujian Unit Kelas C33
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C33-UT01 | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` | Normal | `keluhan.test.ts › hapus restoran menonaktifkan menu dan membatalkan antrean aktif`. Hapus restoran "Seblak Teh Nining". | Tidak ada tiket berstatus `MENUNGGU`/`DIPANGGIL`, tidak ada menu aktif, detail restoran 404, dan akun restoran tidak lagi terhubung ke restoran | Sesuai | Pass | `src/tests/keluhan.test.ts:44` |
-| C33-UT02 | `daftarRestoran()` | Normal | Ambil daftar dengan filter `semua`, `aktif`, dan `nonaktif`. | Filter `aktif` hanya berisi restoran aktif, `nonaktif` hanya restoran nonaktif, dan jumlah `semua` = `aktif` + `nonaktif` | Sesuai | Pass | `src/tests/keluhan.test.ts:74` |
-| C33-UT03 | `hapusDataRestoran()` | Negatif / Normal | Hapus ID `RST-tidak-ada`; hapus "Bakso Mang Ujang" lalu hapus sekali lagi. | ID tidak ada dan penghapusan kedua ditolak 404; pelanggan terdampak menerima notifikasi "dibatalkan"; email `RESTORAN_DIHAPUS` tercatat di `log_notifikasi` | Sesuai | Pass | `src/tests/keluhan.test.ts:112` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C33-UT01 | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` | Normal | `keluhan.test.ts › hapus restoran menonaktifkan menu dan membatalkan antrean aktif`. Hapus restoran "Seblak Teh Nining". | Tidak ada tiket berstatus `MENUNGGU`/`DIPANGGIL`, tidak ada menu aktif, detail restoran 404, dan akun restoran tidak lagi terhubung ke restoran | Sesuai | Pass |
+| C33-UT02 | `daftarRestoran()` | Normal | Ambil daftar dengan filter `semua`, `aktif`, dan `nonaktif`. | Filter `aktif` hanya berisi restoran aktif, `nonaktif` hanya restoran nonaktif, dan jumlah `semua` = `aktif` + `nonaktif` | Sesuai | Pass |
+| C33-UT03 | `hapusDataRestoran()` | Negatif / Normal | Hapus ID `RST-tidak-ada`; hapus "Bakso Mang Ujang" lalu hapus sekali lagi. | ID tidak ada dan penghapusan kedua ditolak 404; pelanggan terdampak menerima notifikasi "dibatalkan"; email `RESTORAN_DIHAPUS` tercatat di `log_notifikasi` | Sesuai | Pass |
 
 `nonaktifkanRelasiMenu()` tidak berdiri sebagai method terpisah. Penonaktifan menu dijalankan di dalam `Restoran.setSoftDelete()` pada transaksi yang sama, sehingga teruji melalui C33-UT01. Seluruh baris tercakup, dengan sebagian kecil *branch* (sekitar 18%) belum dilalui.
 
@@ -1032,7 +1032,7 @@ Tabel 4.2.23b. Ringkasan Cakupan Kelas C33
 | Daftar operasi public pada DPPL | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` |
 | Operasi yang diuji | Keduanya (`nonaktifkanRelasiMenu()` melalui `Restoran.setSoftDelete()`), ditambah `daftarRestoran()` |
 | ID Algoritma yang tercakup | Algo-117, Algo-118 |
-| Coverage (wajib ≥ 70%) | `kelolaDataRestoranController.ts`: 100% / 82,35%% |
+| Coverage (wajib ≥ 70%) | `kelolaDataRestoranController.ts`: 100% / 82,35% |
 
 ### 4.2.24 Kelas PencarianController
 
@@ -1042,17 +1042,17 @@ Tabel 4.2.23b. Ringkasan Cakupan Kelas C33
 
 Tabel 4.2.24. Hasil Pengujian Unit Kelas C35
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C35-UT01 | `terapkanFilter()` (kategori) | Normal | Ambil daftar kategori, lalu cari dengan kategori pertama. | Minimal satu restoran ditemukan dan semuanya berkategori tersebut | Sesuai | Pass | `src/tests/pencarian.test.ts:47` |
-| C35-UT02 | `terapkanFilter()` (rating, antrean) | Negatif / Batas | `minRating` = `abc`; lalu `antreanPendek` = `true`. | Rating tidak valid diabaikan (jumlah hasil sama dengan tanpa filter); filter antrean pendek tidak menambah hasil | Sesuai | Pass | `src/tests/pencarian.test.ts:53` |
-| C35-UT03 | `getDetailRestoran()` | Negatif | ID restoran `RST-tidak-ada`. | 404 | 404 | Pass | `src/tests/pencarian.test.ts:60` |
-| C35-UT04 | `cariRestoran()` | Normal | `pencarian.test.ts › cari berdasarkan kata kunci menu dan filter rating`. Kata kunci `geprek`. | Hanya "Ayam Geprek Bu Rini" yang dikembalikan | Sesuai | Pass | `src/tests/pencarian.test.ts:26` |
-| C35-UT05 | `terapkanFilter()` (rating) | Batas | `minRating` = `4.7`. | Semua hasil memiliki rating rata-rata ≥ 4,7 | Sesuai | Pass | `src/tests/pencarian.test.ts:26` |
-| C35-UT06 | `cariRestoran()` | Negatif | Kata kunci `tidak-ada-xyz`. | Daftar hasil kosong dan saran restoran viral tetap diberikan | Sesuai | Pass | `src/tests/pencarian.test.ts:32` |
-| C35-UT07 | `terapkanFilter()` (lokasi) | Normal | `lokasi` = `Dago`. | Minimal dua restoran, semuanya berlokasi Dago; daftar pilihan lokasi tetap memuat "Braga" | Sesuai | Pass | `src/tests/pencarian.test.ts:39` |
-| C35-UT08 | `cariRestoran()` (melalui REST API) | Normal | `api.test.ts › endpoint terlindungi…`. `GET /api/restoran?q=bakso` tanpa login. | Pencarian dapat diakses publik dan mengembalikan minimal satu restoran | Sesuai | Pass | `src/tests/api.test.ts:23` |
-| C35-UT09 | `ambilStatusAntrean()`, `ambilPreviewMenu()` | Normal | `getDetailRestoran()` untuk "Bakso Mang Ujang". | Status antrean bernilai `BUKA`, `TUTUP`, atau `PENUH`; pratinjau menu tidak kosong dan seluruhnya menu aktif | Sesuai | Pass | `src/tests/pencarian.test.ts:67` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C35-UT01 | `terapkanFilter()` (kategori) | Normal | Ambil daftar kategori, lalu cari dengan kategori pertama. | Minimal satu restoran ditemukan dan semuanya berkategori tersebut | Sesuai | Pass |
+| C35-UT02 | `terapkanFilter()` (rating, antrean) | Negatif / Batas | `minRating` = `abc`; lalu `antreanPendek` = `true`. | Rating tidak valid diabaikan (jumlah hasil sama dengan tanpa filter); filter antrean pendek tidak menambah hasil | Sesuai | Pass |
+| C35-UT03 | `getDetailRestoran()` | Negatif | ID restoran `RST-tidak-ada`. | 404 | 404 | Pass |
+| C35-UT04 | `cariRestoran()` | Normal | `pencarian.test.ts › cari berdasarkan kata kunci menu dan filter rating`. Kata kunci `geprek`. | Hanya "Ayam Geprek Bu Rini" yang dikembalikan | Sesuai | Pass |
+| C35-UT05 | `terapkanFilter()` (rating) | Batas | `minRating` = `4.7`. | Semua hasil memiliki rating rata-rata ≥ 4,7 | Sesuai | Pass |
+| C35-UT06 | `cariRestoran()` | Negatif | Kata kunci `tidak-ada-xyz`. | Daftar hasil kosong dan saran restoran viral tetap diberikan | Sesuai | Pass |
+| C35-UT07 | `terapkanFilter()` (lokasi) | Normal | `lokasi` = `Dago`. | Minimal dua restoran, semuanya berlokasi Dago; daftar pilihan lokasi tetap memuat "Braga" | Sesuai | Pass |
+| C35-UT08 | `cariRestoran()` (melalui REST API) | Normal | `api.test.ts › endpoint terlindungi…`. `GET /api/restoran?q=bakso` tanpa login. | Pencarian dapat diakses publik dan mengembalikan minimal satu restoran | Sesuai | Pass |
+| C35-UT09 | `ambilStatusAntrean()`, `ambilPreviewMenu()` | Normal | `getDetailRestoran()` untuk "Bakso Mang Ujang". | Status antrean bernilai `BUKA`, `TUTUP`, atau `PENUH`; pratinjau menu tidak kosong dan seluruhnya menu aktif | Sesuai | Pass |
 
 Pada implementasi, `terapkanFilter()` digabung ke dalam `cariRestoran()`. Begitu pula `ambilStatusAntrean()` dan `ambilPreviewMenu()`, yang dijalankan di dalam `getDetailRestoran()`. Keempat operasi DPPL tetap teruji melalui dua method tersebut.
 
@@ -1073,16 +1073,16 @@ Tabel 4.2.24b. Ringkasan Cakupan Kelas C35
 
 Tabel 4.2.25. Hasil Pengujian Unit Kelas C41
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C41-UT01 | `kirimKeluhan()` | Negatif | Kategori `Ngawur`, isi `pendek`. | 400 dengan galat pada kolom `isi` dan `kategori` | Sesuai | Pass | `src/tests/keluhan.test.ts:86` |
-| C41-UT02 | `kirimKeluhan()`, `tanggapiKeluhan()` | Batas / Negatif | Isi tepat 500 karakter; lalu tanggapan kosong; lalu tanggapan untuk ID `KLH-tidak-ada`. | 500 karakter diterima (status `BARU`); tanggapan kosong 400; ID tidak ada 404 | Sesuai | Pass | `src/tests/keluhan.test.ts:92` |
-| C41-UT03 | `kirimKeluhan()` | Negatif | Akun admin mencoba mengirim keluhan. | 403, karena hanya pelanggan yang boleh mengirim keluhan | 403 | Pass | `src/tests/keluhan.test.ts:105` |
-| C41-UT04 | `kirimKeluhan()` | Normal / Batas | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Keluhan kategori `Pelayanan` dengan pesanan terkait; lalu isi 501 karakter. | Keluhan berstatus `BARU` dan terhubung ke restoran pesanan; isi 501 karakter ditolak 400 | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C41-UT05 | `detailKeluhan()` | Normal | Admin membuka detail keluhan tersebut. | Status berubah menjadi `DIBACA` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C41-UT06 | `tanggapiKeluhan()` | Normal | Admin mengirim tanggapan. | Status `DITANGGAPI` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
-| C41-UT07 | `tampilkanKeluhan()` | Normal | `keluhan.test.ts › filter keluhan Ditanggapi…`. Filter status `DITANGGAPI`. | Semua keluhan pada hasil berstatus `DITANGGAPI` dan keluhan yang baru ditanggapi ikut tampil | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
-| C41-UT08 | `tanggapiKeluhan()` | Normal | Daftar notifikasi pelanggan setelah keluhannya ditanggapi. | Ada notifikasi berjudul "…ditanggapi" untuk pelanggan | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C41-UT01 | `kirimKeluhan()` | Negatif | Kategori `Ngawur`, isi `pendek`. | 400 dengan galat pada kolom `isi` dan `kategori` | Sesuai | Pass |
+| C41-UT02 | `kirimKeluhan()`, `tanggapiKeluhan()` | Batas / Negatif | Isi tepat 500 karakter; lalu tanggapan kosong; lalu tanggapan untuk ID `KLH-tidak-ada`. | 500 karakter diterima (status `BARU`); tanggapan kosong 400; ID tidak ada 404 | Sesuai | Pass |
+| C41-UT03 | `kirimKeluhan()` | Negatif | Akun admin mencoba mengirim keluhan. | 403, karena hanya pelanggan yang boleh mengirim keluhan | 403 | Pass |
+| C41-UT04 | `kirimKeluhan()` | Normal / Batas | `keluhan.test.ts › keluhan dikirim, dibaca, dan ditanggapi admin`. Keluhan kategori `Pelayanan` dengan pesanan terkait; lalu isi 501 karakter. | Keluhan berstatus `BARU` dan terhubung ke restoran pesanan; isi 501 karakter ditolak 400 | Sesuai | Pass |
+| C41-UT05 | `detailKeluhan()` | Normal | Admin membuka detail keluhan tersebut. | Status berubah menjadi `DIBACA` | Sesuai | Pass |
+| C41-UT06 | `tanggapiKeluhan()` | Normal | Admin mengirim tanggapan. | Status `DITANGGAPI` | Sesuai | Pass |
+| C41-UT07 | `tampilkanKeluhan()` | Normal | `keluhan.test.ts › filter keluhan Ditanggapi…`. Filter status `DITANGGAPI`. | Semua keluhan pada hasil berstatus `DITANGGAPI` dan keluhan yang baru ditanggapi ikut tampil | Sesuai | Pass |
+| C41-UT08 | `tanggapiKeluhan()` | Normal | Daftar notifikasi pelanggan setelah keluhannya ditanggapi. | Ada notifikasi berjudul "…ditanggapi" untuk pelanggan | Sesuai | Pass |
 
 `keluhanSaya()` tidak memiliki ID pengujian unit tersendiri, tetapi seluruh barisnya tercakup oleh rangkaian pengujian lengkap (`npm test`).
 
