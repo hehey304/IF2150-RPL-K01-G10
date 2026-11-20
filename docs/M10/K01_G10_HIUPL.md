@@ -1,4 +1,3 @@
-<img width="1142" height="630" alt="image" src="https://github.com/user-attachments/assets/663b8ca0-b75c-4a60-aa04-3ecea7ac5d27" /><h1>
 IF2150 REKAYASA PERANGKAT LUNAK
 <br>
 TUGAS 10
