@@ -1080,26 +1080,82 @@ Tabel 4.2.25b. Ringkasan Cakupan Kelas C41
 
 ## 4.3 Pengujian Integrasi
 
-Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada dokumen DPPL, dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*. Apabila ada antarmuka tambahan yang belum didaftarkan pada dokumen DPPL, cantumkan juga.
+Pengujian integrasi memeriksa interaksi antarkomponen yang melewati batas, yaitu *Controller* ke *Model*, aplikasi ke basis data, dan aplikasi ke sistem eksternal. Daftar antarmuka mengacu pada Tabel 2.3 dan *view* arsitektur DPPL (*Logical View* dan *Process View*), dengan minimal satu test case untuk setiap antarmuka. Pengujian memakai komponen nyata, bukan *mock*: basis data PostgreSQL (PGlite, mesin PostgreSQL *embedded*, atau PostgreSQL 15+ melalui `TEST_DATABASE_URL`), `SandboxPaymentGateway` sebagai *payment gateway* dummy beserta *webhook* bertanda tangan HMAC, dan `NotifikasiEmail` yang mencatat ke tabel `log_notifikasi`. Pada setiap test case, isi basis data dibaca langsung melalui SQL, tidak hanya melalui *controller*, sehingga aliran data sampai ke penyimpanan ikut terbukti. Pengujian bersifat otomatis (`node:test`, berkas `src/tests/integrasi.test.ts`) dan dijalankan dengan `npx tsx --test tests/integrasi.test.ts`.
+
+Tiga hal yang diperiksa: (1) *data flow*, yaitu data mengalir antarkomponen sampai tersimpan; (2) *interface coordination*, yaitu format dan parameter antarmodul cocok; (3) *communication protocol*, yaitu aturan pertukaran data dan penanganan kegagalan pada sistem eksternal (tanda tangan webhook, status gagal, kedaluwarsa, dan layanan email gagal).
+
+ID antarmuka mengikuti Tabel 3.3 (Subbab 3.3). Setiap layar diuji pada batas yang dilaluinya, yaitu dari *controller* yang melayani layar tersebut ke *Model*, basis data, dan sistem eksternal; tampilan di sisi klien tidak diuji pada subbab ini. Dialog konfirmasi (I-04, I-15, I-21) hanya komponen tampilan, sehingga yang diuji adalah aksi server yang dipicunya (logout, dequeue, dan hapus restoran). INT-TC32 sampai INT-TC35 menguji lapisan *Model* ke basis data yang dipakai seluruh antarmuka, sehingga tidak terikat pada satu layar.
 
 Tabel 4.3.1. Daftar Antarmuka Antarkomponen
 
-| ID Antarmuka | Komponen Asal | Komponen Tujuan | Jenis Batas | Test Case |
-| :--- | :--- | :--- | :--- | :--- |
-| *I-01* | *KeranjangController* | *Keranjang (Model)* | *Controller - Model* | *INT-TC01, INT-TC02* |
-| *I-02* | *Pesanan (Model)* | *Database* | *Aplikasi - Basis data* | *INT-TC03* |
-| *I-03* | *PaymentGatewayAdapter* | *Payment Gateway (dummy)* | *Aplikasi - Sistem eksternal* | *INT-TC04, INT-TC05* |
-| *[I-XX]* | *[Komponen asal]* | *[Komponen tujuan]* | *[Jenis batas]* | *[ID test case]* |
-| *...* | *...* | *...* | *...* | *...* |
+| ID Antarmuka | Nama Antarmuka | Komponen Asal | Komponen Tujuan | Jenis Batas | Test Case |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| *I-01* | *Registrasi Akun* | *AutentikasiController* | *ModelAkun (Pengguna, Pelanggan) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC01, INT-TC02* |
+| *I-02* | *Login* | *AutentikasiController* | *SesiPengguna dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC01* |
+| *I-03* | *Profil Akun* | *AutentikasiController* | *ModelAkun, SesiPengguna, dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC01, INT-TC03* |
+| *I-04* | *Dialog Konfirmasi Keluar* | *AutentikasiController (logout)* | *SesiPengguna dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC03* |
+| *I-05* | *Beranda & Pencarian Restoran* | *PencarianController* | *ModelRestoran, ModelAntrean, dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC04, INT-TC05, INT-TC22* |
+| *I-06* | *Detail Restoran & Menu* | *PencarianController* | *ModelRestoran (Menu, Kuota) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC04, INT-TC05, INT-TC23* |
+| *I-07* | *Keranjang & Mode Layanan* | *PemesananController* | *ModelPesanan, ModelRestoran (Menu), dan BasisDataPostgreSQL* | *Controller - Model - Basis data; Klien - Server (REST API)* | *INT-TC06, INT-TC07, INT-TC09, INT-TC29, INT-TC30, INT-TC31* |
+| *I-08* | *Pilih Jadwal Booking* | *PemesananController* | *ModelPesanan (slot booking) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC08, INT-TC10* |
+| *I-09* | *Pembayaran* | *MetodePembayaranController* | *PaymentGatewayAdapter, Payment Gateway (sandbox), dan BasisDataPostgreSQL* | *Aplikasi - Sistem eksternal* | *INT-TC11, INT-TC12, INT-TC13, INT-TC14, INT-TC15, INT-TC16, INT-TC17, INT-TC30, INT-TC36* |
+| *I-10* | *Tiket Antrean* | *MetodePembayaranController* | *ModelAntrean (TiketAntrean) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC12, INT-TC18, INT-TC30* |
+| *I-11* | *Status Antrean* | *PemantauAntreanController* | *ModelAntrean, ModelPesanan, dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC20* |
+| *I-12* | *Formulir Keluhan* | *KeluhanController* | *ModelKeluhan dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC28* |
+| *I-13* | *Pendaftaran Mitra* | *PengajuanMitraController* | *ModelRestoran (PengajuanMitra, DokumenVerifikasi) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC25, INT-TC26, INT-TC37* |
+| *I-14* | *Dashboard & Kelola Antrean* | *KelolaAntreanController, PemantauAntreanController* | *ModelAntrean, kanal real-time (SSE), dan BasisDataPostgreSQL* | *Controller - Model dan kanal real-time* | *INT-TC19, INT-TC20, INT-TC21* |
+| *I-15* | *Dialog Konfirmasi Dequeue* | *KelolaAntreanController* | *ModelAntrean dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC20* |
+| *I-16* | *Pengaturan Kuota & Meja* | *PengaturanKuotaController* | *ModelRestoran (Kuota), ModelAntrean, dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC22* |
+| *I-17* | *Pengaturan Menu & Stok* | *KelolaMenuController* | *ModelRestoran (Menu) dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC23* |
+| *I-18* | *Verifikasi Pengajuan Mitra* | *PengajuanMitraController* | *ModelRestoran, NotifikasiEmail, dan Layanan Email* | *Controller - Model dan Aplikasi - Sistem eksternal* | *INT-TC24, INT-TC25, INT-TC26* |
+| *I-19* | *Daftar Keluhan* | *KeluhanController* | *ModelKeluhan dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC28* |
+| *I-20* | *Kelola Restoran Mitra* | *KelolaDataRestoranController* | *ModelRestoran, ModelAntrean, dan NotifikasiEmail* | *Controller - Model dan Aplikasi - Sistem eksternal* | *INT-TC27* |
+| *I-21* | *Dialog Konfirmasi Hapus Restoran* | *KelolaDataRestoranController* | *ModelRestoran, ModelAntrean, dan BasisDataPostgreSQL* | *Controller - Model - Basis data* | *INT-TC27* |
+| *Lapisan data* | *Seluruh antarmuka* | *Seluruh Model* | *BasisDataPostgreSQL* | *Aplikasi - Basis data* | *INT-TC32, INT-TC33, INT-TC34, INT-TC35* |
 
 Tabel 4.3.2. Hasil Pengujian Integrasi
 
 | ID Pengujian | ID Antarmuka | Skenario | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *INT-TC01* | *I-01* | *Normal: tambah item ke keranjang* | *Panggil `tambahItem()` melalui KeranjangController dengan produk valid* | *Item tersimpan pada Keranjang dan tampil pada daftar item* | *[Hasil aktual]* | *Pass/Fail* |
-| *INT-TC03* | *I-02* | *Normal: simpan pesanan* | *Buat pesanan, lalu baca ulang langsung dari basis data* | *Baris pesanan ada dengan nilai total dan status yang sama* | *[...]* | *Pass/Fail* |
-| *INT-TC05* | *I-03* | *Gagal: gateway mengembalikan status gagal* | *Kirim otorisasi dengan saldo dummy tidak cukup* | *Status pesanan tidak berubah menjadi "Lunas", pesan gagal diteruskan ke pengguna* | *[...]* | *Pass/Fail* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| *INT-TC01* | *I-01, I-02* | *Normal: registrasi dan login* | *Panggil `createAccount()` dengan data valid, lalu `validation()`; baca tabel `pengguna`, `pelanggan`, `sesi_pengguna`* | *Akun berperan PELANGGAN tersimpan dengan kata sandi ter-hash bcrypt, profil pelanggan terbentuk, sesi aktif tercatat* | *Sesuai: data tersimpan pada ketiga tabel, kata sandi berformat bcrypt, sesi aktif* | *Pass* |
+| *INT-TC02* | *I-01* | *Gagal: email sudah terdaftar* | *Registrasi dengan email `pelanggan@antri.in`* | *Ditolak 409; jumlah baris `pengguna` dan `pelanggan` tidak berubah* | *Sesuai: status 409, jumlah baris tetap* | *Pass* |
+| *INT-TC03* | *I-03, I-04* | *Normal: logout* | *Login, lalu `processLogout()`; baca `sesi_pengguna`* | *Sesi tidak lagi aktif dan token tidak valid* | *Sesuai: tidak ada sesi aktif, `validateSession()` mengembalikan null* | *Pass* |
+| *INT-TC04* | *I-05, I-06* | *Normal: pencarian dan detail restoran* | *`cariRestoran({q:'bakso'})` dan `getDetailRestoran()`; bandingkan dengan tabel `restoran`, `menu`, `pengaturan_kuota`* | *Hasil sama dengan isi tabel; jumlah menu dan kuota sesuai basis data* | *Sesuai: nama, status aktif, jumlah menu, dan kuota sama dengan basis data* | *Pass* |
+| *INT-TC05* | *I-05, I-06* | *Alternatif: restoran nonaktif* | *Set `status_aktif = false` melalui SQL, lalu cari dan buka detail* | *Tidak muncul pada pencarian; detail 404* | *Sesuai: hilang dari hasil, detail 404* | *Pass* |
+| *INT-TC06* | *I-07* | *Normal: buat pesanan takeaway* | *`buatPesanan()` 2 porsi; baca `pesanan`, `detail_pesanan`, `menu`* | *Status MENUNGGU_PEMBAYARAN, total = subtotal + biaya layanan, detail tersimpan, stok belum berkurang* | *Sesuai: nilai total, detail, dan stok sama dengan harapan* | *Pass* |
+| *INT-TC07* | *I-07* | *Alternatif 3: stok tidak cukup* | *Pesan melebihi stok* | *Ditolak 409 beserta daftar menu habis; tidak ada pesanan baru; stok tetap* | *Sesuai: 409, jumlah baris `pesanan` dan stok tidak berubah* | *Pass* |
+| *INT-TC08* | *I-08* | *Alternatif 5: booking lebih dari 7 hari* | *Booking tanggal hari ini + 8* | *Ditolak 400 dengan pesan maksimal 7 hari; tidak tersimpan* | *Sesuai: 400, pesan memuat "maksimal 7 hari", tidak ada baris baru* | *Pass* |
+| *INT-TC09* | *I-07* | *Gagal: satu menu tidak valid pada pesanan* | *Dua item: satu valid, satu ID menu tidak ada* | *Ditolak 409; tidak ada baris `pesanan` maupun `detail_pesanan`* | *Sesuai: tidak ada data parsial* | *Pass* |
+| *INT-TC10* | *I-08* | *Alternatif 2: booking tempat* | *Booking besok pukul 12:00 pada restoran yang antreannya ditutup; baca `pesanan` dan `getSlotBooking()`* | *Mode, rombongan, tanggal, dan slot tersimpan; slot terpakai bertambah 1* | *Sesuai: data tersimpan dan slot terpakai bertambah 1* | *Pass* |
+| *INT-TC11* | *I-09* | *Normal: membuat tagihan* | *`buatTagihan()` metode EWALLET; baca `pembayaran` dan `gateway_transaksi`* | *Kode bayar, jumlah, dan status MENUNGGU konsisten di kedua sisi* | *Sesuai: order id, kode bayar, jumlah, metode, dan status sama* | *Pass* |
+| *INT-TC12* | *I-09, I-10* | *Normal: gateway melunasi (webhook)* | *Setujui pembayaran e-wallet di gateway; baca seluruh tabel terkait* | *Pembayaran LUNAS; stok berkurang; riwayat transaksi dicatat; pesanan DIKONFIRMASI; tiket antrean terbit; notifikasi restoran bertambah 1* | *Sesuai pada seluruh tabel* | *Pass* |
+| *INT-TC13* | *I-09* | *Alternatif 4: gateway menolak kartu* | *Bayar dengan kartu uji yang ditolak* | *Pembayaran GAGAL; pesanan DIBATALKAN; tanpa tiket dan riwayat; stok tetap* | *Sesuai* | *Pass* |
+| *INT-TC14* | *I-09* | *Alternatif 4: pembayaran melewati batas waktu* | *Majukan batas waktu, bayar via virtual account, lalu `verifikasiPembayaran()`* | *410; pembayaran KEDALUWARSA; pesanan DIBATALKAN; dana dikembalikan di gateway; tanpa tiket* | *Sesuai: status gateway DIKEMBALIKAN* | *Pass* |
+| *INT-TC15* | *I-09* | *Gagal: tanda tangan webhook tidak valid* | *POST `/api/pembayaran/notifikasi` dengan `X-Signature` salah* | *Ditolak 401; pembayaran dan pesanan tidak berubah* | *Sesuai: 401, status tetap MENUNGGU* | *Pass* |
+| *INT-TC16* | *I-09* | *Normal: webhook GAGAL bertanda tangan sah* | *POST notifikasi status GAGAL dengan HMAC valid* | *Diterima 200; pembayaran GAGAL; pesanan DIBATALKAN* | *Sesuai* | *Pass* |
+| *INT-TC17* | *I-09* | *Alternatif 3: stok habis saat pembayaran diproses* | *Kurangi stok menjadi 1, lalu bayar pesanan 2 porsi* | *Dana dikembalikan; pesanan DIBATALKAN; transaksi di-rollback (tanpa riwayat/tiket); stok tidak negatif* | *Sesuai: gateway DIKEMBALIKAN, stok tetap 1* | *Pass* |
+| *INT-TC36* | *I-09* | *Alternatif 5: pelanggan membatalkan pesanan sebelum membayar* | *`batalkanPesanan()` pada pesanan dengan tagihan virtual account MENUNGGU; lalu pelanggan mentransfer ke gateway; baca `pesanan`, `pembayaran`, `gateway_transaksi`* | *Pesanan DIBATALKAN; pembayaran GAGAL; transaksi gateway GAGAL; transfer susulan ditolak 409; tanpa tiket dan riwayat; stok tetap* | *Sesuai* | *Pass* |
+| *INT-TC18* | *I-10* | *Normal: dua pembayaran berturut-turut* | *Dua pelanggan membayar pada restoran yang sama* | *Nomor urut tiket berurutan; `total_antrean` bertambah 2* | *Sesuai* | *Pass* |
+| *INT-TC19* | *I-14* | *Normal: pembaruan real-time* | *Buka kanal SSE restoran, lalu bayar pesanan* | *Event `tiket-baru` diterima kanal* | *Sesuai: event diterima* | *Pass* |
+| *INT-TC20* | *I-11, I-14, I-15* | *Normal: dequeue manual* | *`processDequeue()` pada pelanggan terdepan; baca `tiket_antrean` dan `antrean`; pelanggan memantau status* | *Tiket SELESAI; `nomor_dilayani` +1; `total_antrean` -1; tiket berikutnya DIPANGGIL; sisa antrean pelanggan berkurang 1* | *Sesuai* | *Pass* |
+| *INT-TC21* | *I-14* | *Alternatif 2: pelanggan tidak hadir* | *Tiket dipanggil 31 menit lalu; jalankan `autoDequeue()`* | *Restoran diproses dan tiket berstatus DILEWATI* | *Sesuai* | *Pass* |
+| *INT-TC22* | *I-16* | *Alternatif 2: menutup antrean (kuota 0)* | *`onSaveSettings()` kuota 0; cek pencarian dan pemesanan; lalu buka kembali* | *Kuota 0 tersimpan; antrean TUTUP; pencarian menampilkan TUTUP; takeaway ditolak 409; setelah dibuka kembali BUKA* | *Sesuai* | *Pass* |
+| *INT-TC23* | *I-17* | *Normal: tambah, ubah stok, hapus menu* | *`handleAddMenu()`, `handleUpdateStok()`, `handleDeleteMenu()`; cek pencarian dan pemesanan; input tidak valid* | *Menu tersimpan dan tampil di pencarian; stok 0 menolak pemesanan; menu terhapus hilang dari pencarian; input salah 400 tanpa menyimpan* | *Sesuai* | *Pass* |
+| *INT-TC24* | *I-18* | *Normal: pengajuan disetujui* | *`setujui()` pengajuan Surabi Enhaii; baca `pengajuan_mitra`, `restoran`, `pengaturan_kuota`, `antrean`, `log_notifikasi`* | *Restoran aktif beserta kuota dan antrean dibuat; akun tertaut; email diterima berstatus TERKIRIM* | *Sesuai* | *Pass* |
+| *INT-TC25* | *I-13, I-18* | *Alternatif 1: pengajuan ditolak* | *`tolak()` dengan alasan; baca `pengajuan_mitra`, `notifikasi`, `log_notifikasi`* | *Status DITOLAK dan alasan tersimpan; notifikasi dalam aplikasi dibuat; email memuat alasan* | *Sesuai* | *Pass* |
+| *INT-TC26* | *I-13, I-18* | *Gagal: layanan email tidak dapat dihubungi* | *Paksa pengiriman email gagal saat `tolak()`* | *Penolakan tetap tersimpan; log email berstatus GAGAL* | *Sesuai* | *Pass* |
+| *INT-TC37* | *I-13* | *Normal dan gagal: pendaftaran mitra* | *`simpanPengajuan()` dengan dokumen berformat salah, lalu dokumen valid, lalu pengajuan ganda; baca `pengajuan_mitra` dan `dokumen_verifikasi`* | *Dokumen berformat salah ditolak 400 tanpa menyimpan; pengajuan valid tersimpan berstatus MENUNGGU beserta dokumen verifikasi; pengajuan ganda ditolak 409* | *Sesuai: 400 dan 409, satu baris pengajuan, dua dokumen PDF tersimpan* | *Pass* |
+| *INT-TC27* | *I-20, I-21* | *Normal: hapus restoran* | *`hapusDataRestoran()` pada restoran dengan antrean aktif* | *Restoran dan menu nonaktif; antrean TUTUP; tiket aktif DIBATALKAN; pelanggan terdampak dan email pemilik tercatat; detail 404* | *Sesuai* | *Pass* |
+| *INT-TC28* | *I-12, I-19* | *Normal: keluhan dan tanggapan* | *`kirimKeluhan()` terkait pesanan, lalu `tanggapiKeluhan()`* | *Keluhan BARU tersimpan beserta pelanggan, pesanan, dan restoran; status DITANGGAPI; pelanggan menerima notifikasi* | *Sesuai* | *Pass* |
+| *INT-TC29* | *I-07* | *Gagal: tanpa token dan peran salah* | *POST `/api/pesanan` tanpa token dan dengan token restoran* | *401 dan 403; tidak ada pesanan tersimpan* | *Sesuai* | *Pass* |
+| *INT-TC30* | *I-07, I-09, I-10* | *Normal: alur REST lengkap* | *Login, pesan, buat tagihan, bayar di gateway, verifikasi, lihat tiket* | *Pesanan MENUNGGU_PEMBAYARAN, lalu LUNAS dengan tiket tersimpan; tiket dapat dibaca (200)* | *Sesuai* | *Pass* |
+| *INT-TC31* | *I-07* | *Gagal: pemetaan kesalahan bisnis ke HTTP* | *Pesan menu habis dan keranjang kosong lewat REST* | *409 dengan daftar menu habis; 400 untuk keranjang kosong* | *Sesuai* | *Pass* |
+| *INT-TC32* | *Lapisan data* | *Gagal: constraint CHECK* | *Set stok = -1 melalui SQL* | *Ditolak basis data; stok tidak berubah* | *Sesuai* | *Pass* |
+| *INT-TC33* | *Lapisan data* | *Gagal: kesalahan di tengah transaksi* | *`db.tx()` mengurangi stok lalu melempar error* | *Perubahan di-rollback; stok tetap* | *Sesuai* | *Pass* |
+| *INT-TC34* | *Lapisan data* | *Normal: relasi ON DELETE CASCADE* | *Hapus baris `pesanan`* | *`detail_pesanan` dan `pembayaran` ikut terhapus* | *Sesuai* | *Pass* |
+| *INT-TC35* | *Lapisan data* | *Normal: migrasi skema berulang* | *Jalankan `migrate()` kedua kalinya* | *Tanpa error; jumlah baris tabel tidak berubah* | *Sesuai* | *Pass* |
+
+Ringkasan: 37 test case integrasi dijalankan dengan `node:test`; 37 Pass, 0 Fail. Bukti hasil aktual (keluaran test runner dan isi basis data) dilampirkan pada Subbab 4.6.
 
 <br>
 
@@ -1432,7 +1488,18 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C35-UT01 – C35-UT09 (PencarianController, 9 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | C41-UT01 – C41-UT08 (KeluhanController, 8 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | Coverage | <img width="1515" height="432" alt="image" src="https://github.com/user-attachments/assets/f672d4e5-1499-482d-93b7-42f13cf89380" /> <img width="1487" height="503" alt="image" src="https://github.com/user-attachments/assets/eccf05c2-e27f-4587-bd31-672739e78509" /> |
-| *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
+| INT-TC01 – INT-TC03 (I-01 s.d. I-04, AutentikasiController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152143.png) |
+| INT-TC04 – INT-TC05 (I-05, I-06, PencarianController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152202.png) |
+| INT-TC06 – INT-TC10 (I-07, I-08, PemesananController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152209.png) |
+| INT-TC11 – INT-TC17, INT-TC36 (I-09, MetodePembayaranController dan Payment Gateway) | ![Bukti 1](assets/Screenshot%202026-11-20%20152218.png) ![Bukti 2](assets/Screenshot%202026-11-20%20152225.png) ![Bukti 3](assets/Screenshot%202026-11-20%20152232.png) |
+| INT-TC18 – INT-TC19 (I-10, I-14, tiket antrean dan kanal real-time) | ![Bukti 1](assets/Screenshot%202026-11-20%20152238.png) |
+| INT-TC20 – INT-TC21 (I-11, I-14, I-15, KelolaAntreanController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152245.png) |
+| INT-TC22 – INT-TC23 (I-16, I-17, PengaturanKuotaController dan KelolaMenuController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152252.png) |
+| INT-TC24 – INT-TC26, INT-TC37 (I-13, I-18, PengajuanMitraController dan NotifikasiEmail) | ![Bukti 1](assets/Screenshot%202026-11-20%20152300.png) |
+| INT-TC27 (I-20, I-21, KelolaDataRestoranController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152306.png) |
+| INT-TC28 (I-12, I-19, KeluhanController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152328.png) |
+| INT-TC29 – INT-TC31 (I-07, I-09, I-10, klien REST) | ![Bukti 1](assets/Screenshot%202026-11-20%20152321.png) |
+| INT-TC32 – INT-TC35 (lapisan data Model dan basis data) | ![Bukti 1](assets/Screenshot%202026-11-20%20152316.png) |
 | UC01-TC01 – UC01-TC07 (Mencari dan filter resto, keluaran test otomatis) | ![Keluaran test UC01](assets/UC01-test.png) ![UI UC01-TC06](assets/UC01-TC06-ui.png) |
 | UC02-TC01 – UC02-TC10 (Pemesanan dan pembayaran digital, keluaran test otomatis) | ![Keluaran test UC02](assets/UC02-test.png) |
 | UC03-TC01 – UC03-TC04 (Menampilkan status antrean, keluaran test otomatis) | ![Keluaran test UC03](assets/UC03-test.png) |
