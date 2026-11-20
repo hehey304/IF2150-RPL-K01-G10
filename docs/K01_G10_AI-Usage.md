@@ -99,6 +99,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Gemini* | *Membuat uji-KNF* | *"Untuk uji KNF yang saya tidak tau cara mengujinya dengan Chrome DevTools, melainkan membutuhkan simulasi pengguna, bagaimana cara saya mengetesnya?"* | *Saya bertanya kembali pada AI mengenai kode pengujian yang dibuat, bagian-bagian tertentu memiliki fungsi apa.* |
 | *Claude* | *Mengecek Kelengkapan Testcase* | *"Kelas apa yang masih memerlukan pengujian pada kasus normal/batas/negatif pada operasi publicnya?"* | *Saya menambahkan algoritma-algortima testing yang masih kurang dan melengkapi dokumennya* |
 | *Gemini* | *Mempercepat pembuatan Traceability* | *"Berdasarkan SKPL dan DPPL, susunlah traceability dengan format berikut* | *Saya mengecek ulang kelengkapan informasi sebelum memasukan ke dalam dokumen* |
+| *Claude* | *Cara melakukan uji integrasi* | *"Bagaimana cara melakukan uji integrasi"* | *Saya menggunakan integrasi.test.ts pada folder ts dan membaca hasil test tersebut* |
 | | | | | |
 
 ---
