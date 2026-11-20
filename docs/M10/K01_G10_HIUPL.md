@@ -1,4 +1,4 @@
-<h1>
+<img width="1142" height="630" alt="image" src="https://github.com/user-attachments/assets/663b8ca0-b75c-4a60-aa04-3ecea7ac5d27" /><h1>
 IF2150 REKAYASA PERANGKAT LUNAK
 <br>
 TUGAS 10
@@ -114,6 +114,10 @@ Tabel 1.4. Aturan Penomoran
 
 ## 1.5 Referensi
 Cantumkan daftar buku, panduan, atau dokumentasi lain yang dirujuk dalam pembuatan dokumen dan pengembangan P/L, **minimal dokumen SKPL, APL, DPPL, dan Implementasi (Tugas 9)**. Tambahkan dokumentasi *framework*/*library*/*testing tool* atau referensi lain apabila digunakan.
+SKPL.md <br>APL.md <br>DPPL2.md<br>Implementasi.md
+Pressman, R. S., _Software Engineering: A Practitioner's Approach_, _8th Edition_, McGraw-Hill, 2015.  
+Sommerville, I., _Software Engineering_, _10th Edition_, Pearson, 2016.  
+Larman, C., _Applying UML and Patterns: An Introduction to Object-Oriented Analysis and Design and Iterative Development_, _3rd Edition_, Prentice Hall, 2004.
 
 ## 1.6 Deskripsi Umum Dokumen (Ikhtisar)
 Dokumen ini disusun dalam lima bab. Bab 1 berisi pendahuluan yang mencakup tujuan penulisan dokumen, lingkup masalah, definisi dan singkatan, aturan penomoran, referensi, serta ikhtisar dokumen. Bab 2 memaparkan deskripsi umum perangkat lunak antri.in beserta konteks, batasan, dan keterkaitannya dengan sistem eksternal, dilengkapi use case diagram. Bab 3 menjelaskan implementasi, yaitu lingkungan implementasi, daftar modul/kelas, daftar antarmuka, dan file lain yang dihasilkan, serta perubahannya terhadap rancangan pada DPPL. Bab 4 melaporkan hasil pengujian pada tingkat unit, integrasi, use case, dan kebutuhan non-fungsional beserta buktinya. Bab 5 menyajikan matriks kerunutan (traceability) yang memetakan KF, KNF, use case, kelas, file implementasi, dan test case.
@@ -182,7 +186,8 @@ Tabel 2.1. Daftar Use Case antri.in
 </p>
 
 <br>
-
+Sistem Informasi Pemesanan dan Manajemen Antrean Restoran merupakan sistem yang dirancang untuk mempermudah proses pemesanan, pembayaran, serta pengelolaan operasional restoran. Sistem ini melibatkan tiga aktor utama, yaitu Admin, Pelanggan, dan Restoran. Admin bertugas melakukan verifikasi terhadap pendaftaran restoran yang ingin bergabung sebagai mitra baru. Pelanggan dapat melakukan registrasi dan login untuk mengakses layanan sistem, mencari dan memfilter restoran, melakukan pemesanan serta pembayaran, memantau status antrean, dan menyampaikan keluhan apabila terdapat kendala dalam pelayanan. Sementara itu, Restoran dapat melakukan pendaftaran sebagai mitra baru dan setelah memperoleh akses ke sistem, restoran dapat login untuk mengelola antrean, memantau aktivitas antrean melalui dashboard, mengelola stok dan menu makanan, serta mengatur kuota antrean dan meja sesuai kapasitas yang tersedia. Selain itu, restoran juga dapat menanggapi keluhan yang disampaikan oleh pelanggan serta mengajukan penghapusan restoran melalui sistem. Seluruh aktor dapat mengakhiri sesi penggunaan sistem dengan melakukan logout. Dengan adanya sistem ini, diharapkan proses pemesanan dan pengelolaan antrean restoran menjadi lebih efektif, terorganisasi, dan memudahkan interaksi antara pelanggan dengan pihak restoran.
+<br>
 ---
 
 # BAB 3: Implementasi
@@ -197,7 +202,7 @@ Tabel 3.1. Lingkungan Implementasi
 
 | Aspek | Keterangan |
 | :--- | :--- |
-| *Hardware* | *[Spesifikasi perangkat keras]* |
+| *Hardware* | *Processor: Intel(R) Core(TM) 7 240H (2.50 GHz), RAM	16.0 GB, NVIDIA GeForce RTX 5060* |
 | *Operating System* | *Windows 11* |
 | *Bahasa Pemrograman* | *Typescript 7.0.2* |
 | *Framework/Library* | *Node.js 20 LTS, Express 4.22.3, bcryptjs 3.0.3* |
