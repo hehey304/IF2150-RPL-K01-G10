@@ -389,7 +389,7 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 
 Pengujian unit dilakukan pada kelas bertingkat Mendalam dan Sedang. Kelas Mendalam diuji pada seluruh operasi public dengan kasus normal, batas, dan negatif, serta mencapai *coverage* minimal 70%. Kelas Sedang diuji minimal dengan satu kasus normal dan satu kasus gagal pada operasi public utama.
 
-Cara menjalankan unit test: *`cd src && npm test && npx tsx --test --experimental-test-coverage --test-coverage-include='server/*/.ts' tests/*.test.ts`*.
+Cara menjalankan unit test: *`npx tsx --test --experimental-test-coverage --test-coverage-include='server/**/*.ts' --test-coverage-include='client/models/keranjang.ts'   tests/*.test.ts`*.
 
 Lokasi file test: *`src/tests/`*.
 
@@ -439,7 +439,7 @@ Tabel 4.2.2b. Ringkasan Cakupan Kelas C02
 | Daftar operasi public pada DPPL | `getDetailRestoran()`, `getMenu()`, `getAntrean()`, `ajukanPendaftaran()`, `getPengaturan()`, `getDaftarMenu()`, `showDashboard()`, `accountRegister()`, `setSoftDelete()`, `purgeData()` |
 | Operasi yang diuji | `getDetailRestoran()`, `getDaftarMenu()`, `ajukanPendaftaran()`, `getAntrean()`, `getPengaturan()`, `accountRegister()`, `setSoftDelete()`, `purgeData()` (8 dari 10) |
 | ID Algoritma yang tercakup | Algo-009, Algo-011, Algo-012, Algo-014, Algo-016, Algo-017 (perkiraan pemetaan, perlu dicocokkan dengan DPPL) |
-| Coverage (wajib ≥ 70%) | `models/restoran.ts`: 98,17% baris / 100% *branch* / 100% fungsi. Bukti pada 4.6. |
+| Coverage (wajib ≥ 70%) | `models/restoran.ts`: 98,17% baris / 100% *branch* / 100% fungsi |
 
 ### 4.2.3 Kelas Menu
 
@@ -475,7 +475,7 @@ Tabel 4.2.3b. Ringkasan Cakupan Kelas C03
 | Daftar operasi public pada DPPL | `getInfoMenu()`, `cekStok()`, `kurangiStok()`, `tambahMenu()`, `updateStok()`, `updateInfoMenu()`, `isTersedia()`, `hapusMenu()` |
 | Operasi yang diuji | `getInfoMenu()`, `kurangiStok()`, `tambahMenu()`, `updateStok()`, `updateInfoMenu()`, `isTersedia()` (juga berperan `cekStok()`), `hapusMenu()` (8 dari 8) |
 | ID Algoritma yang tercakup | Algo-019 s.d. Algo-026 sebagian (perlu dicocokkan) |
-| Coverage (wajib ≥ 70%) | `models/menu.ts`: 91,53% baris / 100% *branch* / 81,82% fungsi |
+| Coverage (wajib ≥ 70%) | `models/menu.ts`: 94.59% baris / 100% *branch* / 90.00% fungsi |
 
 ### 4.2.4 Kelas Antrean
 
@@ -507,7 +507,7 @@ Tabel 4.2.4b. Ringkasan Cakupan Kelas C04
 | Daftar operasi public pada DPPL | `getFrontCustomer()`, `getEstimasiWaktu()`, `getDetailAntrean()`, `updateStatus()`, `dequeueCustomer()`, `getPesananPreOrder()`, `getQueueStatus()`, `updateMenu()` |
 | Operasi yang diuji | `getFrontCustomer()`, `getEstimasiWaktu()`, `getDetailAntrean()`, `updateStatus()`, `dequeueCustomer()`, `getQueueStatus()` (6 dari 8) |
 | ID Algoritma yang tercakup | Algo-027, Algo-028, Algo-030, Algo-031, Algo-033 (perlu dicocokkan) |
-| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C09): 98,25% baris / 89,29% *branch* / 95,45% fungsi |
+| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C09): 98,18% baris / 89,29% *branch* / 95,45% fungsi |
 
 ### 4.2.5 Kelas Keranjang
 
@@ -540,7 +540,7 @@ Tabel 4.2.5b. Ringkasan Cakupan Kelas C05
 | Daftar operasi public pada DPPL | `tambahItem()`, `hapusItem()`, `hitungTotal()`, `kosongkanKeranjang()` |
 | Operasi yang diuji | `tambahItem()`, `hapusItem()`, `hitungTotal()`, `kosongkanKeranjang()` (4 dari 4) |
 | ID Algoritma yang tercakup | Algo-035, Algo-036, Algo-037 |
-| Coverage (wajib ≥ 70%) | `client/models/keranjang.ts`: 76,51% baris / 90,00% *branch* (diukur terpisah dengan `--test-coverage-include='client/models/keranjang.ts'`) |
+| Coverage (wajib ≥ 70%) | `client/models/keranjang.ts`: 90,96% baris / 90,90% *branch* / 92,00% fungsi |
 
 ### 4.2.6 Kelas Pesanan
 
@@ -577,7 +577,7 @@ Tabel 4.2.6b. Ringkasan Cakupan Kelas C06
 | Daftar operasi public pada DPPL | `validasiBooking()`, `buatTagihan()`, `batalkanPesanan()`, `updateStatus()`, `getDetailPesanan()`, `showOrderDetails()` |
 | Operasi yang diuji | 5 dari 6 (kecuali `showOrderDetails()`) |
 | ID Algoritma yang tercakup | Algo-039, Algo-040, Algo-041, Algo-042, Algo-043 |
-| Coverage (wajib ≥ 70%) | `models/pesanan.ts`: 97,77% / 94,44%; `pemesananController.ts`: 92,55% / 77,05% |
+| Coverage (wajib ≥ 70%) | `models/pesanan.ts`: 97,77% baris / 94,44% branch / 100,00% fungsi; `pemesananController.ts`: 95,21% baris / 76,67% branch / 100.00 % fungsi |
 
 ### 4.2.7 Kelas MetodePembayaranController
 
@@ -614,7 +614,7 @@ Tabel 4.2.7b. Ringkasan Cakupan Kelas C07
 | Daftar operasi public pada DPPL | `buatTagihan()`, `verifikasiPembayaran()`, `cekTimeout()` |
 | Operasi yang diuji | Ketiganya |
 | ID Algoritma yang tercakup | Algo-045, Algo-046, Algo-047 |
-| Coverage (wajib ≥ 70%) | `metodePembayaranController.ts`: 95,45% / 76,39%; `models/pembayaran.ts`: 95,24% / 86,67%; `paymentGatewayAdapter.ts`: 81,97% / 83,33% |
+| Coverage (wajib ≥ 70%) | `metodePembayaranController.ts`: 95,45% baris / 76,39% branch / 100.00% fungsi ; `models/pembayaran.ts`: 95,24% baris / 86,67% branch / 100,00% fungsi; `paymentGatewayAdapter.ts`: 81,97% baris / 83,33% branch / 100.00% fungsi |
 
 ### 4.2.8 Kelas RiwayatTransaksi
 
@@ -629,8 +629,6 @@ Tabel 4.2.8. Hasil Pengujian Unit Kelas C08
 | C08-UT01 | `catatLogTransaksi()` | Normal | Tidak langsung lewat C07-UT02: pembayaran lunas lalu `verifikasiPembayaran`. | Transaksi lunas tercatat, status LUNAS | Sesuai | Pass |
 | C08-UT02 | `getBuktiPembayaran()` | Normal / Negatif | Sebelum bayar, lalu setelah e-wallet lunas. | `null` sebelum bayar; sesudahnya status LUNAS, metode EWALLET, jumlah = total | Sesuai | Pass |
 | C08-UT03 | `catatLogTransaksi()` | Negatif | Pembayaran kartu dengan hasil GAGAL. | Tidak ada transaksi tercatat (`null`) | `null` | Pass |
-
-Kelas Sedang terpenuhi: kasus normal (C08-UT01, C08-UT02) dan negatif (C08-UT03) ada. `getBuktiPembayaran()` dan `catatLogTransaksi()` teruji langsung.
 
 ### 4.2.9 Kelas TiketAntrean
 
@@ -661,7 +659,7 @@ Tabel 4.2.9b. Ringkasan Cakupan Kelas C09
 | Daftar operasi public pada DPPL | `generateNomorAntrean()`, `cetakRincianTiket()`, `getDetailTiket()`, `updateStatusTiket()` |
 | Operasi yang diuji | 4 dari 4 (`cetakRincianTiket()` teruji lewat `getTiket`) |
 | ID Algoritma yang tercakup | Algo-050, Algo-052, Algo-053 |
-| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C04): 98,25% / 89,29% |
+| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C04): 98,18% baris / 89,29% *branch* / 95,45% fungsi |
 
 ### 4.2.10 Kelas PemantauAntreanController
 
@@ -677,8 +675,6 @@ Tabel 4.2.10. Hasil Pengujian Unit Kelas C10
 | C10-UT02 | `getStatusAntrean()` | Negatif | Tiket tidak ada, dan tiket milik pelanggan lain. | 404 dan 403 | Sesuai | Pass |
 | C10-UT03 | `getStatusAntrean()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | `sisaAntrean` dan `estimasiMenit` mengikuti dequeue | Sesuai | Pass |
 | C10-UT04 | `getAntreanAktifSaya()` | Normal | `antrean.test.ts › "Mulai siapkan"…`. | Tiket aktif dan flag `disiapkan` terbaca | Sesuai | Pass |
-
-Tingkat Sedang terpenuhi (kasus normal dan gagal ada). *Coverage* `pemantauAntreanController.ts`: 100% / 80,95%.
 
 ### 4.2.11 Kelas PengajuanMitraController
 
@@ -702,8 +698,6 @@ Tabel 4.2.11. Hasil Pengujian Unit Kelas C12
 | C12-UT10 | `tolak()` | Batas | Pengajuan baru; alasan `abcd` lalu `abcde`. | 4 karakter ditolak 400; 5 karakter diterima, status DITOLAK | Sesuai | Pass |
 | C12-UT11 | `validasiKelengkapan()` | Normal / Batas | Nama 3 karakter, alamat 10 karakter, harga Rp500, NIB dan izin usaha PDF; lalu nama `AB`, alamat 8 karakter, harga Rp499. | Tanpa galat; galat pada `namaRestoran`, `alamat`, `daftarMenu` | Sesuai | Pass |
 
-Tidak diuji: pembatalan transaksi `setujui` bila terjadi galat di tengah (rollback).
-
 Tabel 4.2.11b. Ringkasan Cakupan Kelas C12
 
 | Informasi | Keterangan |
@@ -711,7 +705,7 @@ Tabel 4.2.11b. Ringkasan Cakupan Kelas C12
 | Daftar operasi public pada DPPL | `validasiKelengkapan()`, `simpanPengajuan()`, `setujui()`, `tolak()` |
 | Operasi yang diuji | Keempatnya |
 | ID Algoritma yang tercakup | Algo-058, Algo-059, Algo-060, Algo-061 |
-| Coverage (wajib ≥ 70%) | `pengajuanMitraController.ts`: 90,23% / 88,14% |
+| Coverage (wajib ≥ 70%) | `pengajuanMitraController.ts`: 91,16% baris / 88,14% branch / 85,71% fungsi |
 
 ### 4.2.12 Kelas DokumenVerifikasi
 
@@ -741,7 +735,7 @@ Tabel 4.2.12b. Ringkasan Cakupan Kelas C13
 | Daftar operasi public pada DPPL | `unggahDokumen()`, `validasiFormat()` |
 | Operasi yang diuji | Keduanya |
 | ID Algoritma yang tercakup | Algo-062, Algo-063 |
-| Coverage (wajib ≥ 70%) | `models/mitra.ts`: 95,07% / 100% |
+| Coverage (wajib ≥ 70%) | `models/mitra.ts`: 95,07% baris / 100% branch / 91,67% fungsi |
 
 ### 4.2.13 Kelas Admin
 
@@ -785,7 +779,7 @@ Tabel 4.2.14b. Ringkasan Cakupan Kelas C15
 | Daftar operasi public pada DPPL | `kirimEmail()` |
 | Operasi yang diuji | `kirimEmail()` |
 | ID Algoritma yang tercakup | Algo-068 |
-| Coverage (wajib ≥ 70%) | `adapters/notifikasiEmail.ts`: **66,67% baris** / 100% *branch*. Baris tidak tercakup 1-6 dan 8-13 adalah artefak transformasi `tsx` (impor dan deklarasi), tetapi angka resmi tetap di bawah 70%. |
+| Coverage (wajib ≥ 70%) | `adapters/notifikasiEmail.ts`: 100,00% baris / 100,00% *branch* / 100,00% fungsi |
 
 ### 4.2.15 Kelas KelolaAntreanController
 
@@ -815,7 +809,7 @@ Tabel 4.2.15b. Ringkasan Cakupan Kelas C16
 | Daftar operasi public pada DPPL | `getAntrean()`, `processDequeue()`, `mulaiTimer()` |
 | Operasi yang diuji | Ketiganya (`mulaiTimer` sebagai `autoDequeue`) |
 | ID Algoritma yang tercakup | Algo-069, Algo-070, Algo-071 |
-| Coverage (wajib ≥ 70%) | `kelolaAntreanController.ts`: 86,23% / 82,35% |
+| Coverage (wajib ≥ 70%) | `kelolaAntreanController.ts`: 86,23% baris / 82,35% branch /  86.67% fungsi |
 
 ### 4.2.16 Kelas Kuota
 
@@ -842,7 +836,7 @@ Tabel 4.2.16b. Ringkasan Cakupan Kelas C20
 | Daftar operasi public pada DPPL | `updateKapasitas()`, `isAntreanTutup()` |
 | Operasi yang diuji | Keduanya |
 | ID Algoritma yang tercakup | Algo-080, Algo-081 |
-| Coverage (wajib ≥ 70%) | `models/kuota.ts`: 72,97% / 100% |
+| Coverage (wajib ≥ 70%) | `models/kuota.ts`: 72,97% baris / 100% branch / 100% fungsi |
 
 ### 4.2.17 Kelas PengaturanKuotaController
 
@@ -870,7 +864,7 @@ Tabel 4.2.17b. Ringkasan Cakupan Kelas C21
 | Daftar operasi public pada DPPL | `displaySettings()`, `onSaveSettings()`, `showErrorPeringatan()` |
 | Operasi yang diuji | `displaySettings()`, `onSaveSettings()` (2 dari 3; `showErrorPeringatan()` adalah UI) |
 | ID Algoritma yang tercakup | Algo-083 |
-| Coverage (wajib ≥ 70%) | `pengaturanKuotaController.ts`: 100% / 91,30% |
+| Coverage (wajib ≥ 70%) | `pengaturanKuotaController.ts`: 100% baris / 91,30% branch / 100% fungsi |
 
 ### 4.2.18 Kelas KelolaMenuController
 
@@ -1508,7 +1502,7 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C33-UT01 – C33-UT03 (KelolaDataRestoranController, 3 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | C35-UT01 – C35-UT09 (PencarianController, 9 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | C41-UT01 – C41-UT08 (KeluhanController, 8 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
-| Coverage | <img width="1022" height="572" alt="image" src="https://github.com/user-attachments/assets/52f5365e-bfd9-4ff5-81c9-673bbd9069bd" /> <img width="901" height="600" alt="image" src="https://github.com/user-attachments/assets/f490108c-e3f0-4096-aa5b-6f434712d171" /> <img width="1022" height="602" alt="image" src="https://github.com/user-attachments/assets/59b62d10-f897-4671-b15c-5100fa9cdfa4" />|
+| Coverage | <img width="1373" height="897" alt="image" src="https://github.com/user-attachments/assets/67adcd1e-c2ab-4f68-80fa-5a793f9de71c" /> <img width="1362" height="895" alt="image" src="https://github.com/user-attachments/assets/f548eb81-9ab4-4871-8428-254e4b1d54b2" />|
 | INT-TC01 – INT-TC03 (I-01 s.d. I-04, AutentikasiController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152143.png) |
 | INT-TC04 – INT-TC05 (I-05, I-06, PencarianController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152202.png) |
 | INT-TC06 – INT-TC10 (I-07, I-08, PemesananController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152209.png) ![Bukti 2](assets/Screenshot%202026-11-20%20163157.png) ![Bukti 3](assets/Screenshot%202026-11-20%20163235.png) |

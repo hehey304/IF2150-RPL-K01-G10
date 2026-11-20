@@ -100,6 +100,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Claude* | *Mengecek Kelengkapan Testcase* | *"Kelas apa yang masih memerlukan pengujian pada kasus normal/batas/negatif pada operasi publicnya?"* | *Saya menambahkan algoritma-algortima testing yang masih kurang dan melengkapi dokumennya* |
 | *Gemini* | *Mempercepat pembuatan Traceability* | *"Berdasarkan SKPL dan DPPL, susunlah traceability dengan format berikut* | *Saya mengecek ulang kelengkapan informasi sebelum memasukan ke dalam dokumen* |
 | *Claude* | *Cara melakukan uji integrasi* | *"Bagaimana cara melakukan uji integrasi"* | *Saya menggunakan integrasi.test.ts pada folder ts dan membaca hasil test tersebut* |
+| *Claude* | *Mengecek testcase yang dibuat dan menganalisis bagian yang fail* | *"Dari testcase yang dibuat, apakah ada yang bisa ditambahkan lagi? Lalu untuk bagian yang fail apa alasannya?"* | *Saya menambahkan beberapa testcase serta memberikan penjelasan terhadap pengujian yang gagal dan tidak sesuai* |
 | | | | | |
 
 ---
