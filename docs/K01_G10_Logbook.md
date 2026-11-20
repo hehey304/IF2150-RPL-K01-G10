@@ -263,10 +263,12 @@
 | *19-11-2026* | *Bayu Palamarta Wirawan* | *Melakukan pengujian uji kelas C01-C21* | *3* | *Done* | *-* |
 | *19-11-2026* | *Chatima Anandakhorita* | *Melakukan Pengujian terhadap KNF 1-14* | *4* | *Done* | *-* |
 | *19-11-2026* | *Athallah Nanda Andita* | *Melakukan pengujian use case UC01-UC15* | *3.5* | *Done* | *-* |
+| *19-11-2026* | *Muhammad Fauzi Muharam* | *Menguji C22-42* | *1* | *Done* | *-* |
 | *20-11-2026* | *Chatima Anandakhorita* | *Menyesuaikan kembali uji KNF 13 yang membutuhkan responden* | *2* | *Done* | *-* |
 | *20-11-2026* | *Chatima Anandakhorita* | *Menambahkan bukti uji KNF pada tabel 4.6* | *2* | *Done* | *-* |
 | *20-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki pengujian uji kelas C01-C21* | *5* | *Done* | *-* |
 | *20-11-2026* | *Athallah Nanda Andita* | *Mengambil dan mengisi bukti uji use case* | *2.5* | *Done* | *-* |
+| *20-11-2026* | *Muhammad Fauzi Muharam* | *Menguji C22-42 dengan test case terbaru dan melengkapi docs* | *3* | *Done* | *-* |
 | *20-11-2026* | *Muhammad Nur Fikri Hariyawan* | *melakukan pengujian integrasi* | *4* | *Done* | *Beberapa kali komputer tidak dapat melakukan screenshot* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
