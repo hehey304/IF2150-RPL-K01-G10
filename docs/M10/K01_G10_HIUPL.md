@@ -1490,10 +1490,10 @@ Tabel 4.6. Bukti Hasil Pengujian
 | Coverage | <img width="1515" height="432" alt="image" src="https://github.com/user-attachments/assets/f672d4e5-1499-482d-93b7-42f13cf89380" /> <img width="1487" height="503" alt="image" src="https://github.com/user-attachments/assets/eccf05c2-e27f-4587-bd31-672739e78509" /> |
 | INT-TC01 – INT-TC03 (I-01 s.d. I-04, AutentikasiController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152143.png) |
 | INT-TC04 – INT-TC05 (I-05, I-06, PencarianController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152202.png) |
-| INT-TC06 – INT-TC10 (I-07, I-08, PemesananController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152209.png) |
-| INT-TC11 – INT-TC17, INT-TC36 (I-09, MetodePembayaranController dan Payment Gateway) | ![Bukti 1](assets/Screenshot%202026-11-20%20152218.png) ![Bukti 2](assets/Screenshot%202026-11-20%20152225.png) ![Bukti 3](assets/Screenshot%202026-11-20%20152232.png) |
-| INT-TC18 – INT-TC19 (I-10, I-14, tiket antrean dan kanal real-time) | ![Bukti 1](assets/Screenshot%202026-11-20%20152238.png) |
-| INT-TC20 – INT-TC21 (I-11, I-14, I-15, KelolaAntreanController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152245.png) |
+| INT-TC06 – INT-TC10 (I-07, I-08, PemesananController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152209.png) ![Bukti 2](assets/Screenshot%202026-11-20%20163157.png) ![Bukti 3](assets/Screenshot%202026-11-20%20163235.png) |
+| INT-TC11 – INT-TC17, INT-TC36 (I-09, MetodePembayaranController dan Payment Gateway) | ![Bukti 1](assets/Screenshot%202026-11-20%20152218.png) ![Bukti 2](assets/Screenshot%202026-11-20%20152225.png) ![Bukti 3](assets/Screenshot%202026-11-20%20152232.png) ![Bukti 4](assets/Screenshot%202026-11-20%20163306.png) ![Bukti 5](assets/Screenshot%202026-11-20%20163325.png) ![Bukti 6](assets/Screenshot%202026-11-20%20163352.png) ![Bukti 7](assets/Screenshot%202026-11-20%20163428.png) |
+| INT-TC18 – INT-TC19 (I-10, I-14, tiket antrean dan kanal real-time) | ![Bukti 1](assets/Screenshot%202026-11-20%20152238.png) ![Bukti 2](assets/Screenshot%202026-11-20%20163044.png) |
+| INT-TC20 – INT-TC21 (I-11, I-14, I-15, KelolaAntreanController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152245.png) ![Bukti 2](assets/Screenshot%202026-11-20%20163025.png) |
 | INT-TC22 – INT-TC23 (I-16, I-17, PengaturanKuotaController dan KelolaMenuController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152252.png) |
 | INT-TC24 – INT-TC26, INT-TC37 (I-13, I-18, PengajuanMitraController dan NotifikasiEmail) | ![Bukti 1](assets/Screenshot%202026-11-20%20152300.png) |
 | INT-TC27 (I-20, I-21, KelolaDataRestoranController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152306.png) |
