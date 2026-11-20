@@ -389,7 +389,7 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 
 Pengujian unit dilakukan pada kelas bertingkat Mendalam dan Sedang. Kelas Mendalam diuji pada seluruh operasi public dengan kasus normal, batas, dan negatif, serta mencapai *coverage* minimal 70%. Kelas Sedang diuji minimal dengan satu kasus normal dan satu kasus gagal pada operasi public utama.
 
-Cara menjalankan unit test: *`cd src && npm test`*.
+Cara menjalankan unit test: *`cd src && npm test && npx tsx --test --experimental-test-coverage --test-coverage-include='server/*/.ts' tests/*.test.ts`*.
 
 Lokasi file test: *`src/tests/`*.
 
