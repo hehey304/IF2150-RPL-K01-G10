@@ -31,6 +31,7 @@
 * [Milestone 7](#milestone-7)
 * [Milestone 8](#milestone-8)
 * [Milestone 9](#milestone-9)
+* [Milestone 10](#milestone-10)
 
 ---
 
@@ -90,6 +91,12 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Claude* | *Membuat template pengerjaan aplikasi* | *"Siapkan template aplikasi antri.in sesuai dengan dokumen yang aku lampirkan"* | *Kami memahami isi kode dan melakukan penyesuaian kode untuk memastikan bisa bekerja dengan benar* |
 | *Claude* | *Mengetahui cara membuat database* | *"Bagaimana cara membuat database PostgreSQL 15+ berdasarkan schema.sql berikut"* | *Kami membuat database baru sesuai langkah-langkah dan menguji apakah bisa berjalan dengan baik* |
 | *Claude* | *Mengetahui kebenaran kode yang sudah dibuat* | *"Dari kode yang sudah aku buat ini, apakah sudah sesuai dengan notasi fungsional"* | *Kami mengetahui salahnya dan memperbaikinya* |
+| | | | | |
+
+### Milestone 10
+| Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
+| :--- | :--- | :--- | :--- |
+| *Gemini* | *Membuat uji-KNF* | *"Untuk uji KNF yang saya tidak tau cara mengujinya dengan Chrome DevTools, melainkan membutuhkan simulasi pengguna, bagaimana cara saya mengetesnya?"* | *Saya bertanya kembali pada AI mengenai kode pengujian yang dibuat, bagian-bagian tertentu memiliki fungsi apa.* |
 | | | | | |
 
 ---

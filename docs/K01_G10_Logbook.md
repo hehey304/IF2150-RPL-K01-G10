@@ -261,6 +261,9 @@
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | *17-11-2026* | *Bayu Palamarta Wirawan* | *Melakukan inisialisasi Milestone 10* | *3* | *Done* | *-* |
 | *19-11-2026* | *Bayu Palamarta Wirawan* | *Melakukan pengujian uji kelas C01-C21* | *3* | *Done* | *-* |
+| *19-11-2026* | *Chatima Anandakhorita* | *Melakukan Pengujian terhadap KNF 1-14* | *4* | *Done* | *-* |
+| *20-11-2026* | *Chatima Anandakhorita* | *Menyesuaikan kembali uji KNF 13 yang membutuhkan responden* | *2* | *Done* | *-* |
+| *20-11-2026* | *Chatima Anandakhorita* | *Menambahkan bukti uji KNF pada tabel 4.6* | *2* | *Done* | *-* |
 | *20-11-2026* | *Bayu Palamarta Wirawan* | *Memperbaiki pengujian uji kelas C01-C21* | *5* | *Done* | *-* |
 
 ``Gunakan format penulisan Logbook yang sama untuk setiap Milestone dan pastikan pembuatan Daftar Isi juga sudah sesuai sebelum Logbook dikumpulkan. ``
