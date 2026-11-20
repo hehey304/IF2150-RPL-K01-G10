@@ -338,25 +338,25 @@ Tabel 4.1.1. Identifikasi Tingkat Pengujian Kelas
 | ID Kelas | Nama Kelas | Tingkat | Alasan | Test Case Terkait |
 | :--- | :--- | :--- | :--- | :--- |
 | C01 | Pelanggan | Sedang | Hanya mendelegasikan `accountRegister()` ke AutentikasiController dan menyimpan profil, serta `getDetails()` berupa pembacaan data | C01-UT01 s.d. C01-UT03 |
-| C02 | Restoran | Mendalam | Memuat aturan status aktif (`getDetailRestoran()` hanya restoran aktif), pencarian, `setSoftDelete()`, dan pembersihan data (`purgeData()`) | C02-UT01 s.d. C02-UT10 |
-| C03 | Menu | Mendalam | Memuat validasi harga dan stok, `isTersedia()`, `kurangiStok()` yang atomik dan tidak boleh negatif, serta soft delete | C03-UT01 s.d. C03-UT11 |
-| C04 | Antrean | Mendalam | Memuat algoritma dequeue, penentuan tiket terdepan, estimasi waktu tunggu (median waktu layanan), dan pembaruan status antrean | C04-UT01 s.d. C04-UT08 |
+| C02 | Restoran | Mendalam | Memuat aturan status aktif (`getDetailRestoran()` hanya restoran aktif), pencarian, `setSoftDelete()`, dan pembersihan data (`purgeData()`) | C02-UT01 s.d. C02-UT13 |
+| C03 | Menu | Mendalam | Memuat validasi harga dan stok, `isTersedia()`, `kurangiStok()` yang atomik dan tidak boleh negatif, serta soft delete | C03-UT01 s.d. C03-UT14 |
+| C04 | Antrean | Mendalam | Memuat algoritma dequeue, penentuan tiket terdepan, estimasi waktu tunggu (median waktu layanan), dan pembaruan status antrean | C04-UT01 s.d. C04-UT10 |
 | C05 | Keranjang | Mendalam | Memuat perhitungan `hitungTotal()` dan aturan tambah/hapus item (jumlah item yang sama digabung) | C05-UT01 s.d. C05-UT11 |
-| C06 | Pesanan | Mendalam | Memuat validasi booking (maksimal 7 hari, kapasitas meja per slot), transisi status pesanan, dan pembatalan yang hanya berlaku untuk status tertentu | C06-UT01 s.d. C06-UT12 |
-| C07 | MetodePembayaranController | Mendalam | Integrasi eksternal ke Payment Gateway, batas waktu pembayaran, verifikasi lunas, pencegahan double-charge, dan pembatalan saat timeout | C07-UT01 s.d. C07-UT13 |
+| C06 | Pesanan | Mendalam | Memuat validasi booking (maksimal 7 hari, kapasitas meja per slot), transisi status pesanan, dan pembatalan yang hanya berlaku untuk status tertentu | C06-UT01 s.d. C06-UT15 |
+| C07 | MetodePembayaranController | Mendalam | Integrasi eksternal ke Payment Gateway, batas waktu pembayaran, verifikasi lunas, pencegahan double-charge, dan pembatalan saat timeout | C07-UT01 s.d. C07-UT14 |
 | C08 | RiwayatTransaksi | Sedang | Hanya mencatat transaksi lunas dan membaca bukti pembayaran, dipanggil oleh MetodePembayaranController | C08-UT01 s.d. C08-UT03 |
-| C09 | TiketAntrean | Mendalam | Memuat algoritma nomor urut unik per hari (KNF03), estimasi waktu tunggu, dan aturan status final yang tidak boleh diubah | C09-UT01 s.d. C09-UT07 |
+| C09 | TiketAntrean | Mendalam | Memuat algoritma nomor urut unik per hari (KNF03), estimasi waktu tunggu, dan aturan status final yang tidak boleh diubah | C09-UT01 s.d. C09-UT09 |
 | C10 | PemantauAntreanController | Sedang | Hanya mengoordinasikan pembacaan status antrean dan pengiriman pembaruan lewat Server-Sent Events | C10-UT01 s.d. C10-UT04 |
 | C11 | HalamanStatusAntrean | Tidak perlu | Kelas boundary yang hanya menampilkan data status antrean dari server. Teruji lewat UC03 | - |
-| C12 | PengajuanMitraController | Mendalam | Memuat validasi kelengkapan data, aturan status pengajuan (hanya status menunggu yang dapat disetujui/ditolak), alasan penolakan wajib, dan pemicu email | C12-UT01 s.d. C12-UT10 |
-| C13 | DokumenVerifikasi | Mendalam | Memuat validasi format (PDF/JPG/PNG) dan ukuran maksimal 5 MB | C13-UT01 s.d. C13-UT07 |
+| C12 | PengajuanMitraController | Mendalam | Memuat validasi kelengkapan data, aturan status pengajuan (hanya status menunggu yang dapat disetujui/ditolak), alasan penolakan wajib, dan pemicu email | C12-UT01 s.d. C12-UT11 |
+| C13 | DokumenVerifikasi | Mendalam | Memuat validasi format (PDF/JPG/PNG) dan ukuran maksimal 5 MB | C13-UT01 s.d. C13-UT08 |
 | C14 | Admin | Sedang | Hanya mendelegasikan `accountRegister()` ke AutentikasiController. Peninjauan pengajuan, keluhan, dan penghapusan dilakukan lewat controller lain | C14-UT01 s.d. C14-UT02 |
-| C15 | NotifikasiEmail | Mendalam | Integrasi eksternal: validasi format email, penentuan subjek, pencatatan status kirim (terkirim/gagal) ke `log_notifikasi` | C15-UT01 s.d. C15-UT04 |
-| C16 | KelolaAntreanController | Mendalam | Memuat algoritma dequeue dalam transaksi, pembaruan kapasitas, serta timer dequeue otomatis bagi pelanggan yang tidak hadir | C16-UT01 s.d. C16-UT07 |
+| C15 | NotifikasiEmail | Mendalam | Integrasi eksternal: validasi format email, penentuan subjek, pencatatan status kirim (terkirim/gagal) ke `log_notifikasi` | C15-UT01 s.d. C15-UT05 |
+| C16 | KelolaAntreanController | Mendalam | Memuat algoritma dequeue dalam transaksi, pembaruan kapasitas, serta timer dequeue otomatis bagi pelanggan yang tidak hadir | C16-UT01 s.d. C16-UT08 |
 | C17 | KonfirmasiDequeuePage | Tidak perlu | Kelas boundary berupa dialog konfirmasi tanpa logika bisnis. Teruji lewat UC06 | - |
 | C18 | KelolaAntreanPage | Tidak perlu | Kelas boundary yang hanya menampilkan daftar antrean dan membuka dialog. Teruji lewat UC06 | - |
 | C19 | DashboardAntreanPage | Tidak perlu | Kelas boundary yang menampilkan antrean dan memuat ulang data. Teruji lewat UC09 | - |
-| C20 | Kuota | Mendalam | Memuat perhitungan kapasitas, aturan antrean tutup bila kapasitas habis atau ditutup manual, serta penyimpanan kuota terakhir | C20-UT01 s.d. C20-UT05 |
+| C20 | Kuota | Mendalam | Memuat perhitungan kapasitas, aturan antrean tutup bila kapasitas habis atau ditutup manual, serta penyimpanan kuota terakhir | C20-UT01 s.d. C20-UT07 |
 | C21 | PengaturanKuotaController | Mendalam | Memuat validasi input kuota dan meja (angka, lebih dari 0) serta penyimpanan yang memicu pembaruan kapasitas | C21-UT01 s.d. C21-UT06 |
 | C22 | PengaturanKuotaPage | Tidak perlu | Kelas boundary. Validasi dilakukan ulang oleh C21 di server. Teruji lewat UC07 | - |
 | C23 | PengaturanMenuPage | Tidak perlu | Kelas boundary berupa daftar dan formulir menu. Validasi berada di C24. Teruji lewat UC08 | - |
@@ -396,11 +396,11 @@ Lokasi file test: *`src/tests/`*.
 
 Tabel 4.2.1. Hasil Pengujian Unit Kelas C01
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C01-UT01 | `accountRegister(data)` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. Registrasi akun uji lalu login memakai email berhuruf besar. | Akun tersimpan, login berhasil dengan peran PELANGGAN | Akun terbuat dan login berhasil (teruji tidak langsung lewat C28) | Pass | `src/tests/autentikasi.test.ts:30` |
-| C01-UT02 | `accountRegister(data)` | Negatif | `autentikasi.test.ts › email/nomor duplikat dan kata sandi lemah ditolak`. Email sudah terdaftar. | Ditolak status 409 | Ditolak 409 | Pass | `src/tests/autentikasi.test.ts:41` |
-| C01-UT03 | `getDetails()` (`Pelanggan.getByAkun`) | Normal / Negatif | Daftarkan akun lalu baca profilnya; ID akun `USR-tidak-ada`. | Nama dan email sesuai; akun tidak ada menghasilkan `null` | Sesuai | Pass | `src/tests/autentikasi.test.ts:131` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C01-UT01 | `accountRegister(data)` | Normal | `autentikasi.test.ts › registrasi, login, dan logout`. Registrasi akun uji lalu login memakai email berhuruf besar. | Akun tersimpan, login berhasil dengan peran PELANGGAN | Akun terbuat dan login berhasil (teruji tidak langsung lewat C28) | Pass |
+| C01-UT02 | `accountRegister(data)` | Negatif | `autentikasi.test.ts › email/nomor duplikat dan kata sandi lemah ditolak`. Email sudah terdaftar. | Ditolak status 409 | Ditolak 409 | Pass |
+| C01-UT03 | `getDetails()` (`Pelanggan.getByAkun`) | Normal / Negatif | Daftarkan akun lalu baca profilnya; ID akun `USR-tidak-ada`. | Nama dan email sesuai; akun tidak ada menghasilkan `null` | Sesuai | Pass |
 
 
 ### 4.2.2 Kelas Restoran
@@ -411,18 +411,21 @@ Tabel 4.2.1. Hasil Pengujian Unit Kelas C01
 
 Tabel 4.2.2. Hasil Pengujian Unit Kelas C02
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C02-UT01 | `getDetailRestoran(restoranId)` | Normal | `profilRestoran.test.ts › ubah profil memvalidasi jam buka dan alamat`. Ambil detail restoran Bakso. | Detail memuat deskripsi yang baru disimpan | Deskripsi sesuai | Pass | `src/tests/profilRestoran.test.ts:23` |
-| C02-UT02 | `getDetailRestoran(restoranId)` | Negatif | `pencarian.test.ts › C35-UT03`. ID `RST-tidak-ada`. Juga `keluhan.test.ts › hapus restoran…` untuk restoran nonaktif. | Galat 404 | 404 pada kedua kasus | Pass | `src/tests/keluhan.test.ts:44` |
-| C02-UT03 | `getDaftarMenu(restoranId)` | Normal | `menu.test.ts › C03-UT04`. | Hanya menu aktif yang dikembalikan | Semua menu berstatus aktif | Pass | `src/tests/menu.test.ts:64` |
-| C02-UT04 | `Restoran.cari` (dipakai C35) | Normal / Batas | `pencarian.test.ts` (kata kunci menu, rating, lokasi) dan `pencarian.test.ts › C35-UT01, C35-UT02`. | Hasil sesuai filter, kosong bila tidak ada | Sesuai | Pass | `src/tests/pencarian.test.ts:26` |
-| C02-UT05 | `setSoftDelete()` | Normal | `keluhan.test.ts › hapus restoran menonaktifkan menu dan membatalkan antrean aktif`. | Restoran nonaktif, tidak muncul di detail (404) | Sesuai | Pass | `src/tests/keluhan.test.ts:44` |
-| C02-UT06 | `ajukanPendaftaran()` dan `accountRegister(idAkun)` | Normal | `mitra.test.ts › ajukan -> tolak -> ajukan ulang -> setujui…`. Setujui membuat restoran tertaut ke akun. | Sesi pengguna memuat `restoranId` dan restoran dapat dicari | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
-| C02-UT07 | `getPengaturan(restoranId)` | Normal / Negatif | `antrean.test.ts › C20-UT02`. ID ada dan ID `RST-tidak-ada`. | Data kuota, atau `null` | Sesuai | Pass | `src/tests/antrean.test.ts:196` |
-| C02-UT08 | `getAntrean()` (`Antrean.getByRestoran`) | Normal / Negatif | Antrean restoran Bakso; ID `RST-tidak-ada`. | Antrean ada; `null` untuk ID tidak ada | Sesuai | Pass | `src/tests/antrean.test.ts:249` |
-| C02-UT09 | `purgeData()` (digabung dalam `setSoftDelete()`) | Normal | Dua pesanan aktif (satu lunas, satu menunggu bayar), lalu `hapusDataRestoran()`. | Menu nonaktif dan stok 0, kuota 0, antrean TUTUP dengan total 0, kedua pesanan DIBATALKAN, pembayaran menunggu GAGAL, `dihapus_pada` terisi | Sesuai | Pass | `src/tests/keluhan.test.ts:135` |
-| C02-UT10 | `setSoftDelete()` | Normal / Negatif | Panggil `Restoran.setSoftDelete` langsung pada restoran aktif, lalu sekali lagi, dan pada ID tidak ada. | `true` dan restoran tidak tampil; panggilan kedua dan ID tidak ada menghasilkan `false` | Sesuai | Pass | `src/tests/keluhan.test.ts:164` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C02-UT01 | `getDetailRestoran(restoranId)` | Normal | `profilRestoran.test.ts › ubah profil memvalidasi jam buka dan alamat`. Ambil detail restoran Bakso. | Detail memuat deskripsi yang baru disimpan | Deskripsi sesuai | Pass |
+| C02-UT02 | `getDetailRestoran(restoranId)` | Negatif | `pencarian.test.ts › C35-UT03`. ID `RST-tidak-ada`. Juga `keluhan.test.ts › hapus restoran…` untuk restoran nonaktif. | Galat 404 | 404 pada kedua kasus | Pass |
+| C02-UT03 | `getDaftarMenu(restoranId)` | Normal | `menu.test.ts › C03-UT04`. | Hanya menu aktif yang dikembalikan | Semua menu berstatus aktif | Pass |
+| C02-UT04 | `Restoran.cari` (dipakai C35) | Normal / Batas | `pencarian.test.ts` (kata kunci menu, rating, lokasi) dan `pencarian.test.ts › C35-UT01, C35-UT02`. | Hasil sesuai filter, kosong bila tidak ada | Sesuai | Pass |
+| C02-UT05 | `setSoftDelete()` | Normal | `keluhan.test.ts › hapus restoran menonaktifkan menu dan membatalkan antrean aktif`. | Restoran nonaktif, tidak muncul di detail (404) | Sesuai | Pass |
+| C02-UT06 | `ajukanPendaftaran()` dan `accountRegister(idAkun)` | Normal | `mitra.test.ts › ajukan -> tolak -> ajukan ulang -> setujui…`. Setujui membuat restoran tertaut ke akun. | Sesi pengguna memuat `restoranId` dan restoran dapat dicari | Sesuai | Pass |
+| C02-UT07 | `getPengaturan(restoranId)` | Normal / Negatif | `antrean.test.ts › C20-UT02`. ID ada dan ID `RST-tidak-ada`. | Data kuota, atau `null` | Sesuai | Pass |
+| C02-UT08 | `getAntrean()` (`Antrean.getByRestoran`) | Normal / Negatif | Antrean restoran Bakso; ID `RST-tidak-ada`. | Antrean ada; `null` untuk ID tidak ada | Sesuai | Pass |
+| C02-UT09 | `purgeData()` (digabung dalam `setSoftDelete()`) | Normal | Dua pesanan aktif (satu lunas, satu menunggu bayar), lalu `hapusDataRestoran()`. | Menu nonaktif dan stok 0, kuota 0, antrean TUTUP dengan total 0, kedua pesanan DIBATALKAN, pembayaran menunggu GAGAL, `dihapus_pada` terisi | Sesuai | Pass |
+| C02-UT10 | `setSoftDelete()` | Normal / Negatif | Panggil `Restoran.setSoftDelete` langsung pada restoran aktif, lalu sekali lagi, dan pada ID tidak ada. | `true` dan restoran tidak tampil; panggilan kedua dan ID tidak ada menghasilkan `false` | Sesuai | Pass |
+| C02-UT11 | `getDaftarMenu(restoranId)` | Negatif / Batas | ID `RST-tidak-ada`; lalu restoran Cilok sebelum dan sesudah `hapusDataRestoran()`. | Daftar kosong untuk ID tidak ada; menu aktif ada sebelum, kosong sesudah dihapus | Sesuai | Pass |
+| C02-UT12 | `ajukanPendaftaran()` dan `accountRegister(idAkun)` (`Restoran.buat`) | Normal / Negatif | Buat restoran baru; lalu dengan `idAkun` `USR-tidak-ada`; `Restoran.getByAkun` untuk akun tidak ada. | Restoran tersimpan dengan kuota 50 dan antrean BUKA; akun tidak ada ditolak; `getByAkun` menghasilkan `null` | Sesuai | Pass |
+| C02-UT13 | `purgeData()` (`setSoftDelete`) | Negatif | `setSoftDelete` pada ID `RST-tidak-ada`; bandingkan jumlah menu aktif sebelum dan sesudah. | `false`; restoran lain tidak berubah | Sesuai | Pass |
 
 Tabel 4.2.2b. Ringkasan Cakupan Kelas C02
 
@@ -441,28 +444,31 @@ Tabel 4.2.2b. Ringkasan Cakupan Kelas C02
 
 Tabel 4.2.3. Hasil Pengujian Unit Kelas C03
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C03-UT01 | `kurangiStok(jumlah)` | Normal / Batas | Kurangi 1, lalu kurangi sisa stok tepat habis. | Keduanya berhasil, stok akhir 0 | Stok 0 | Pass | `src/tests/menu.test.ts:45` |
-| C03-UT02 | `kurangiStok(jumlah)` | Negatif | Kurangi stok + 1. | Mengembalikan `false`, stok tidak berubah dan tidak negatif | `false`, stok tetap | Pass | `src/tests/menu.test.ts:52` |
-| C03-UT03 | `isTersedia(jumlah)` | Batas / Negatif | Stok 5 dengan jumlah 5, 6, 0, dan menu nonaktif. | `true`, `false`, `false`, `false` | Sesuai | Pass | `src/tests/menu.test.ts:58` |
-| C03-UT04 | `getInfoMenu()` / daftar menu | Normal | Daftar menu restoran Geprek. | Hanya menu aktif | Sesuai | Pass | `src/tests/menu.test.ts:64` |
-| C03-UT05 | `tambahMenu()`, `hapusMenu()` | Normal | `menu.test.ts › tambah, ubah stok, dan hapus menu`. Tambah menu lalu hapus. | Menu muncul lalu hilang dari daftar | Sesuai | Pass | `src/tests/menu.test.ts:25` |
-| C03-UT06 | `updateStok(stokBaru)` | Batas | Sama dengan C03-UT05, stok diubah ke `'0'`. | Stok = 0 | Stok 0 | Pass | `src/tests/menu.test.ts:25` |
-| C03-UT07 | `tambahMenu()` (validasi) | Negatif | Nama `X`, harga `-1`, stok `a`. | Galat 400 pada kolom `harga`, `namaMenu`, `stok` | Ketiga kolom ditolak | Pass | `src/tests/menu.test.ts:25` |
-| C03-UT08 | `updateStok()` lintas restoran | Negatif | `menu.test.ts › restoran lain tidak bisa mengubah menu milik restoran lain`. | Galat 404 | 404 | Pass | `src/tests/menu.test.ts:36` |
-| C03-UT09 | `getInfoMenu()` | Normal / Negatif | Menu ada; ID `MNU-tidak-ada`. | Menu dikembalikan; `null` untuk ID tidak ada | Sesuai | Pass | `src/tests/menu.test.ts:72` |
-| C03-UT10 | `updateInfoMenu()` | Normal / Negatif | Ubah nama, harga 600, stok 3 pada restoran pemilik; coba dari restoran lain. | Perubahan tersimpan; restoran lain mendapat `null` | Sesuai | Pass | `src/tests/menu.test.ts:77` |
-| C03-UT11 | `cekStok()` | Normal | Memeriksa operasi `cekStok` pada kelas `Menu` (DPPL C03). | Operasi tersedia | Operasi tidak ada (hanya `isTersedia`) | **Fail** | `src/tests/menu.test.ts:107` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C03-UT01 | `kurangiStok(jumlah)` | Normal / Batas | Kurangi 1, lalu kurangi sisa stok tepat habis. | Keduanya berhasil, stok akhir 0 | Stok 0 | Pass |
+| C03-UT02 | `kurangiStok(jumlah)` | Negatif | Kurangi stok + 1. | Mengembalikan `false`, stok tidak berubah dan tidak negatif | `false`, stok tetap | Pass |
+| C03-UT03 | `isTersedia(jumlah)` | Batas / Negatif | Stok 5 dengan jumlah 5, 6, 0, dan menu nonaktif. | `true`, `false`, `false`, `false` | Sesuai | Pass |
+| C03-UT04 | `getInfoMenu()` / daftar menu | Normal | Daftar menu restoran Geprek. | Hanya menu aktif | Sesuai | Pass |
+| C03-UT05 | `tambahMenu()`, `hapusMenu()` | Normal | `menu.test.ts › tambah, ubah stok, dan hapus menu`. Tambah menu lalu hapus. | Menu muncul lalu hilang dari daftar | Sesuai | Pass |
+| C03-UT06 | `updateStok(stokBaru)` | Batas | Sama dengan C03-UT05, stok diubah ke `'0'`. | Stok = 0 | Stok 0 | Pass |
+| C03-UT07 | `tambahMenu()` (validasi) | Negatif | Nama `X`, harga `-1`, stok `a`. | Galat 400 pada kolom `harga`, `namaMenu`, `stok` | Ketiga kolom ditolak | Pass |
+| C03-UT08 | `updateStok()` lintas restoran | Negatif | `menu.test.ts › restoran lain tidak bisa mengubah menu milik restoran lain`. | Galat 404 | 404 | Pass |
+| C03-UT09 | `getInfoMenu()` | Normal / Negatif | Menu ada; ID `MNU-tidak-ada`. | Menu dikembalikan; `null` untuk ID tidak ada | Sesuai | Pass |
+| C03-UT10 | `updateInfoMenu()` | Normal / Negatif | Ubah nama, harga 600, stok 3 pada restoran pemilik; coba dari restoran lain. | Perubahan tersimpan; restoran lain mendapat `null` | Sesuai | Pass |
+| C03-UT11 | `cekStok()` (digabung dalam `isTersedia()`) | Normal / Batas | Menu nyata dari basis data; jumlah sama dengan stok, lalu stok + 1. | Stok sama diterima; stok + 1 ditolak | Sesuai | Pass |
+| C03-UT12 | `hapusMenu()` | Negatif / Batas | Hapus dari restoran lain, ID `MNU-tidak-ada`, pemilik, lalu pemilik sekali lagi. | `false`, `false`, `true`, `false` (menu lain tetap aktif) | Sesuai | Pass |
+| C03-UT13 | `tambahMenu()` | Batas / Negatif | Harga `499`; lalu harga `500` dengan stok `0`. | 499 ditolak 400 pada kolom `harga`; 500 dan stok 0 diterima | Sesuai | Pass |
+| C03-UT14 | `updateInfoMenu()` | Batas / Negatif | Ubah stok menjadi 0; lalu ubah menu yang sudah dihapus. | Stok 0 tersimpan; menu yang dihapus mendapat `null` | Sesuai | Pass |
 
-Penyebab fail: `cekStok()` tidak ada di kode, hanya `isTersedia()` (C03-UT11 Fail).
+Catatan: `cekStok()` digabung dalam `isTersedia()` pada kode (komentar `menu.ts`: `isTersedia() / cekStok()`), dipakai `pemesananController` untuk menolak pesanan melebihi stok.
 
 Tabel 4.2.3b. Ringkasan Cakupan Kelas C03
 
 | Informasi | Keterangan |
 | :--- | :--- |
 | Daftar operasi public pada DPPL | `getInfoMenu()`, `cekStok()`, `kurangiStok()`, `tambahMenu()`, `updateStok()`, `updateInfoMenu()`, `isTersedia()`, `hapusMenu()` |
-| Operasi yang diuji | `getInfoMenu()`, `kurangiStok()`, `tambahMenu()`, `updateStok()`, `updateInfoMenu()`, `isTersedia()`, `hapusMenu()` (7 dari 8; `cekStok()` tidak diimplementasikan) |
+| Operasi yang diuji | `getInfoMenu()`, `kurangiStok()`, `tambahMenu()`, `updateStok()`, `updateInfoMenu()`, `isTersedia()` (juga berperan `cekStok()`), `hapusMenu()` (8 dari 8) |
 | ID Algoritma yang tercakup | Algo-019 s.d. Algo-026 sebagian (perlu dicocokkan) |
 | Coverage (wajib ≥ 70%) | `models/menu.ts`: 91,53% baris / 100% *branch* / 81,82% fungsi |
 
@@ -474,16 +480,18 @@ Tabel 4.2.3b. Ringkasan Cakupan Kelas C03
 
 Tabel 4.2.4. Hasil Pengujian Unit Kelas C04
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C04-UT01 | `getQueueStatus()` | Normal / Batas | `antrean.test.ts › status antrean dari kuota`. `(0,0)`, `(30,29)`, `(30,30)`. | TUTUP, BUKA, PENUH | Sesuai | Pass | `src/tests/antrean.test.ts:94` |
-| C04-UT02 | `getEstimasiWaktu()` | Normal / Negatif | `antrean.test.ts › estimasi waktu tunggu`. `(6,3)` dan `(-1,3)`. | 18 dan 0 | Sesuai | Pass | `src/tests/antrean.test.ts:100` |
-| C04-UT03 | `getEstimasiWaktu()` (median) | Batas | `antrean.test.ts › menit per antrean dari median jeda…`. Data kurang, normal, dan terlalu besar. | 3 (bawaan), 5, 15 (maksimum) | Sesuai | Pass | `src/tests/antrean.test.ts:156` |
-| C04-UT04 | `dequeueCustomer()`, `updateStatus()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | Antrean aktif berkurang 1, `nomorDilayani`=1, sisa dan estimasi pelanggan berkurang | Sesuai | Pass | `src/tests/antrean.test.ts:41` |
-| C04-UT05 | `getFrontCustomer()` | Normal | Pada test yang sama, `daftar[0]` berstatus DIPANGGIL. | Pelanggan terdepan DIPANGGIL | Sesuai | Pass | `src/tests/antrean.test.ts:41` |
-| C04-UT06 | `updateStatus()` + notifikasi | Normal | `antrean.test.ts › pelanggan yang dipanggil mendapat notifikasi "Giliranmu"`. | Notifikasi berjudul "Giliranmu…" | Ada | Pass | `src/tests/antrean.test.ts:143` |
-| C04-UT07 | `dequeueCustomer()` | Negatif | `antrean.test.ts › restoran tanpa antrean tidak dapat dequeue`. | Galat "Belum ada antrean" | Sesuai | Pass | `src/tests/antrean.test.ts:74` |
-| C04-UT08 | `getDetailAntrean()` | Normal / Negatif | Detail antrean restoran Bakso; ID `RST-tidak-ada`. | Hanya tiket MENUNGGU/DIPANGGIL beserta rincian; daftar kosong untuk ID tidak ada | Sesuai | Pass | `src/tests/antrean.test.ts:243` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C04-UT01 | `getQueueStatus()` | Normal / Batas | `antrean.test.ts › status antrean dari kuota`. `(0,0)`, `(30,29)`, `(30,30)`. | TUTUP, BUKA, PENUH | Sesuai | Pass |
+| C04-UT02 | `getEstimasiWaktu()` | Normal / Negatif | `antrean.test.ts › estimasi waktu tunggu`. `(6,3)` dan `(-1,3)`. | 18 dan 0 | Sesuai | Pass |
+| C04-UT03 | `getEstimasiWaktu()` (median) | Batas | `antrean.test.ts › menit per antrean dari median jeda…`. Data kurang, normal, dan terlalu besar. | 3 (bawaan), 5, 15 (maksimum) | Sesuai | Pass |
+| C04-UT04 | `dequeueCustomer()`, `updateStatus()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | Antrean aktif berkurang 1, `nomorDilayani`=1, sisa dan estimasi pelanggan berkurang | Sesuai | Pass |
+| C04-UT05 | `getFrontCustomer()` | Normal | Pada test yang sama, `daftar[0]` berstatus DIPANGGIL. | Pelanggan terdepan DIPANGGIL | Sesuai | Pass |
+| C04-UT06 | `updateStatus()` + notifikasi | Normal | `antrean.test.ts › pelanggan yang dipanggil mendapat notifikasi "Giliranmu"`. | Notifikasi berjudul "Giliranmu…" | Ada | Pass |
+| C04-UT07 | `dequeueCustomer()` | Negatif | `antrean.test.ts › restoran tanpa antrean tidak dapat dequeue`. | Galat "Belum ada antrean" | Sesuai | Pass |
+| C04-UT08 | `getDetailAntrean()` | Normal / Negatif | Detail antrean restoran Bakso; ID `RST-tidak-ada`. | Hanya tiket MENUNGGU/DIPANGGIL beserta rincian; daftar kosong untuk ID tidak ada | Sesuai | Pass |
+| C04-UT09 | `updateStatus()`, `getFrontCustomer()`, `dequeueCustomer()` | Negatif | Restoran `RST-tidak-ada`; antrean `ANT-tidak-ada`. | `null` untuk ketiganya | Sesuai | Pass |
+| C04-UT10 | `dequeueCustomer()` | Batas | Keluarkan tiket sampai tersisa satu, lalu keluarkan tiket terakhir. | Tiket SELESAI; `total_antrean` 0; tidak ada pelanggan terdepan (`null`) | Sesuai | Pass |
 
 Tidak diuji: `getPesananPreOrder`, `updateMenu`.
 
@@ -494,7 +502,7 @@ Tabel 4.2.4b. Ringkasan Cakupan Kelas C04
 | Daftar operasi public pada DPPL | `getFrontCustomer()`, `getEstimasiWaktu()`, `getDetailAntrean()`, `updateStatus()`, `dequeueCustomer()`, `getPesananPreOrder()`, `getQueueStatus()`, `updateMenu()` |
 | Operasi yang diuji | `getFrontCustomer()`, `getEstimasiWaktu()`, `getDetailAntrean()`, `updateStatus()`, `dequeueCustomer()`, `getQueueStatus()` (6 dari 8) |
 | ID Algoritma yang tercakup | Algo-027, Algo-028, Algo-030, Algo-031, Algo-033 (perlu dicocokkan) |
-| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C09): 98,25% baris / 83,67% *branch* / 95,45% fungsi |
+| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C09): 98,25% baris / 89,29% *branch* / 95,45% fungsi |
 
 ### 4.2.5 Kelas Keranjang
 
@@ -504,19 +512,19 @@ Tabel 4.2.4b. Ringkasan Cakupan Kelas C04
 
 Tabel 4.2.5. Hasil Pengujian Unit Kelas C05
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C05-UT01 | `tambahItem()`, `hitungTotal()` | Normal | `keranjang.test.ts › tambahItem dan hitungTotal`. M1 25.000 x 2 dan M2 6.000 x 3. | Total = 68.000, total item 5 | Sesuai | Pass | `src/tests/keranjang.test.ts:17` |
-| C05-UT02 | `tambahItem()` | Normal | Item sama ditambah dua kali. | Jumlah digabung = 2 | 2 | Pass | `src/tests/keranjang.test.ts:17` |
-| C05-UT03 | `tambahItem()` | Batas | `keranjang.test.ts › jumlah per item dibatasi 50…`. Tambah 70. | Jumlah = 50 | 50 | Pass | `src/tests/keranjang.test.ts:44` |
-| C05-UT04 | `tambahItem()` | Negatif | Tambah dengan jumlah 0. | Melempar galat | Galat dilempar | Pass | `src/tests/keranjang.test.ts:44` |
-| C05-UT05 | `tambahItem()` | Normal | `keranjang.test.ts › menambah dari restoran lain mengosongkan keranjang`. | Hanya item restoran baru | Sesuai | Pass | `src/tests/keranjang.test.ts:27` |
-| C05-UT06 | `hapusItem()` / `ubahJumlah(…,0)` | Batas | `keranjang.test.ts › ubahJumlah ke 0 menghapus item…`. | Item hilang, `restoranId` = null | Sesuai | Pass | `src/tests/keranjang.test.ts:36` |
-| C05-UT07 | Persistensi (penyimpanan) | Normal | `keranjang.test.ts › keranjang tersimpan dan dimuat ulang…`. | Isi, mode BOOKING, dan rombongan terbaca ulang | Sesuai | Pass | `src/tests/keranjang.test.ts:51` |
-| C05-UT08 | `aturMode()` dan muat data rusak | Negatif | `keranjang.test.ts › aturMode non-booking…; data rusak…`. | Jadwal dihapus, data rusak diabaikan | Sesuai | Pass | `src/tests/keranjang.test.ts:62` |
-| C05-UT09 | `kosongkanKeranjang()` | Normal | Tambah item lalu kosongkan; muat ulang dari penyimpanan. | Item 0, restoran `null`, penyimpanan ikut kosong | Sesuai | Pass | `src/tests/keranjang.test.ts:72` |
-| C05-UT10 | `hitungTotal()` | Negatif | Keranjang tanpa item. | Total = 0 | 0 | Pass | `src/tests/keranjang.test.ts:82` |
-| C05-UT11 | `hapusItem()` | Normal / Negatif | Dua item, hapus satu, lalu hapus ID tidak ada. | Sisa satu item, total 12.000, ID tidak ada diabaikan | Sesuai | Pass | `src/tests/keranjang.test.ts:86` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C05-UT01 | `tambahItem()`, `hitungTotal()` | Normal | `keranjang.test.ts › tambahItem dan hitungTotal`. M1 25.000 x 2 dan M2 6.000 x 3. | Total = 68.000, total item 5 | Sesuai | Pass |
+| C05-UT02 | `tambahItem()` | Normal | Item sama ditambah dua kali. | Jumlah digabung = 2 | 2 | Pass |
+| C05-UT03 | `tambahItem()` | Batas | `keranjang.test.ts › jumlah per item dibatasi 50…`. Tambah 70. | Jumlah = 50 | 50 | Pass |
+| C05-UT04 | `tambahItem()` | Negatif | Tambah dengan jumlah 0. | Melempar galat | Galat dilempar | Pass |
+| C05-UT05 | `tambahItem()` | Normal | `keranjang.test.ts › menambah dari restoran lain mengosongkan keranjang`. | Hanya item restoran baru | Sesuai | Pass |
+| C05-UT06 | `hapusItem()` / `ubahJumlah(…,0)` | Batas | `keranjang.test.ts › ubahJumlah ke 0 menghapus item…`. | Item hilang, `restoranId` = null | Sesuai | Pass |
+| C05-UT07 | Persistensi (penyimpanan) | Normal | `keranjang.test.ts › keranjang tersimpan dan dimuat ulang…`. | Isi, mode BOOKING, dan rombongan terbaca ulang | Sesuai | Pass |
+| C05-UT08 | `aturMode()` dan muat data rusak | Negatif | `keranjang.test.ts › aturMode non-booking…; data rusak…`. | Jadwal dihapus, data rusak diabaikan | Sesuai | Pass |
+| C05-UT09 | `kosongkanKeranjang()` | Normal | Tambah item lalu kosongkan; muat ulang dari penyimpanan. | Item 0, restoran `null`, penyimpanan ikut kosong | Sesuai | Pass |
+| C05-UT10 | `hitungTotal()` | Negatif | Keranjang tanpa item. | Total = 0 | 0 | Pass |
+| C05-UT11 | `hapusItem()` | Normal / Negatif | Dua item, hapus satu, lalu hapus ID tidak ada. | Sisa satu item, total 12.000, ID tidak ada diabaikan | Sesuai | Pass |
 
 Seluruh operasi public diuji, termasuk `kosongkanKeranjang()` dan `hitungTotal()` pada keranjang kosong.
 
@@ -537,20 +545,23 @@ Tabel 4.2.5b. Ringkasan Cakupan Kelas C05
 
 Tabel 4.2.6. Hasil Pengujian Unit Kelas C06
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C06-UT01 | `validasiBooking()` | Batas | `pemesanan.test.ts › booking: maksimal 7 hari ke depan`. H+7, H+8, kemarin. | H+7 valid; H+8 dan kemarin ditolak ("maksimal 7 hari") | Sesuai | Pass | `src/tests/pemesanan.test.ts:91` |
-| C06-UT02 | `validasiBooking()` | Negatif | `pemesanan.test.ts › booking: slot hari ini yang sudah lewat…`. Slot lewat, slot tidak terdaftar, rombongan 0, tanggal `besok`. | Ditolak dengan pesan sesuai | Sesuai | Pass | `src/tests/pemesanan.test.ts:97` |
-| C06-UT03 | `validasiBooking()` | Batas | Slot 17:00 pada hari ini (belum lewat). | Valid (`null`) | `null` | Pass | `src/tests/pemesanan.test.ts:97` |
-| C06-UT04 | `buatTagihan()` / pembuatan pesanan | Normal | `pemesanan.test.ts › pesanan lunas menerbitkan tiket dan mengurangi stok`. | Total = harga x 2 + biaya layanan, stok berkurang 2, status DIKONFIRMASI | Sesuai | Pass | `src/tests/pemesanan.test.ts:24` |
-| C06-UT05 | pembuatan pesanan | Negatif | `pemesanan.test.ts › stok habis ditolak…`. Menu stok 0. | 409 dan `menuHabis` memuat menu | Sesuai | Pass | `src/tests/pemesanan.test.ts:38` |
-| C06-UT06 | pembuatan pesanan | Negatif / Normal | `pemesanan.test.ts › antrean ditutup…`. Takeaway pada antrean tutup, lalu booking. | Takeaway ditolak ("ditutup"), booking berhasil | Sesuai | Pass | `src/tests/pemesanan.test.ts:48` |
-| C06-UT07 | `validasiBooking()` (kapasitas meja) | Batas | `pemesanan.test.ts › slot booking penuh ditolak`. 4 booking pada kapasitas 4, lalu ke-5. | Ke-5 ditolak 409, slot `tersedia=false` | Sesuai | Pass | `src/tests/pemesanan.test.ts:65` |
-| C06-UT08 | `getDetailPesanan()` | Negatif | `pemesanan.test.ts › pelanggan lain tidak dapat melihat pesanan`. | 403 | 403 | Pass | `src/tests/pemesanan.test.ts:80` |
-| C06-UT09 | `batalkanPesanan()` | Normal | `pembayaran.test.ts › pembatalan pesanan oleh pelanggan ikut membatalkan transaksi…`. | Transaksi gateway GAGAL | Sesuai | Pass | `src/tests/pembayaran.test.ts:102` |
-| C06-UT10 | `updateStatus()` | Normal | `pembayaran.test.ts › pembayaran gagal membatalkan pesanan`. | Status DIBATALKAN, tiket `null` | Sesuai | Pass | `src/tests/pembayaran.test.ts:131` |
-| C06-UT11 | `batalkanPesanan()` | Negatif | Pesanan yang sudah dibayar dibatalkan pelanggan. | Ditolak 409 ("sudah dibayar") | 409 | Pass | `src/tests/pemesanan.test.ts:106` |
-| C06-UT12 | `batalkanPesanan()` | Negatif | Pesanan tidak ada, dan pesanan milik pelanggan lain. | Ditolak (404/403) | Sesuai | Pass | `src/tests/pemesanan.test.ts:114` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C06-UT01 | `validasiBooking()` | Batas | `pemesanan.test.ts › booking: maksimal 7 hari ke depan`. H+7, H+8, kemarin. | H+7 valid; H+8 dan kemarin ditolak ("maksimal 7 hari") | Sesuai | Pass |
+| C06-UT02 | `validasiBooking()` | Negatif | `pemesanan.test.ts › booking: slot hari ini yang sudah lewat…`. Slot lewat, slot tidak terdaftar, rombongan 0, tanggal `besok`. | Ditolak dengan pesan sesuai | Sesuai | Pass |
+| C06-UT03 | `validasiBooking()` | Batas | Slot 17:00 pada hari ini (belum lewat). | Valid (`null`) | `null` | Pass |
+| C06-UT04 | `buatTagihan()` / pembuatan pesanan | Normal | `pemesanan.test.ts › pesanan lunas menerbitkan tiket dan mengurangi stok`. | Total = harga x 2 + biaya layanan, stok berkurang 2, status DIKONFIRMASI | Sesuai | Pass |
+| C06-UT05 | pembuatan pesanan | Negatif | `pemesanan.test.ts › stok habis ditolak…`. Menu stok 0. | 409 dan `menuHabis` memuat menu | Sesuai | Pass |
+| C06-UT06 | pembuatan pesanan | Negatif / Normal | `pemesanan.test.ts › antrean ditutup…`. Takeaway pada antrean tutup, lalu booking. | Takeaway ditolak ("ditutup"), booking berhasil | Sesuai | Pass |
+| C06-UT07 | `validasiBooking()` (kapasitas meja) | Batas | `pemesanan.test.ts › slot booking penuh ditolak`. 4 booking pada kapasitas 4, lalu ke-5. | Ke-5 ditolak 409, slot `tersedia=false` | Sesuai | Pass |
+| C06-UT08 | `getDetailPesanan()` | Negatif | `pemesanan.test.ts › pelanggan lain tidak dapat melihat pesanan`. | 403 | 403 | Pass |
+| C06-UT09 | `batalkanPesanan()` | Normal | `pembayaran.test.ts › pembatalan pesanan oleh pelanggan ikut membatalkan transaksi…`. | Transaksi gateway GAGAL | Sesuai | Pass |
+| C06-UT10 | `updateStatus()` | Normal | `pembayaran.test.ts › pembayaran gagal membatalkan pesanan`. | Status DIBATALKAN, tiket `null` | Sesuai | Pass |
+| C06-UT11 | `batalkanPesanan()` | Negatif | Pesanan yang sudah dibayar dibatalkan pelanggan. | Ditolak 409 ("sudah dibayar") | 409 | Pass |
+| C06-UT12 | `batalkanPesanan()` | Negatif | Pesanan tidak ada, dan pesanan milik pelanggan lain. | Ditolak (404/403) | Sesuai | Pass |
+| C06-UT13 | `getDetailPesanan()` | Normal / Negatif | Pesanan lunas; lalu ID `PSN-tidak-ada`. | Memuat item, restoran, pembayaran, dan tiket; `null` untuk ID tidak ada | Sesuai | Pass |
+| C06-UT14 | `updateStatus()` | Normal / Negatif | Ubah pesanan DIKONFIRMASI ke SELESAI; lalu status `NGAWUR`. | SELESAI tersimpan; status di luar daftar ditolak | Sesuai | Pass |
+| C06-UT15 | pembuatan pesanan | Batas | Stok diatur 3; pesan 3, lalu pesan 4. | 3 diterima; 4 ditolak 409 | Sesuai | Pass |
 
 Tidak diuji: `showOrderDetails` (UI).
 
@@ -561,7 +572,7 @@ Tabel 4.2.6b. Ringkasan Cakupan Kelas C06
 | Daftar operasi public pada DPPL | `validasiBooking()`, `buatTagihan()`, `batalkanPesanan()`, `updateStatus()`, `getDetailPesanan()`, `showOrderDetails()` |
 | Operasi yang diuji | 5 dari 6 (kecuali `showOrderDetails()`) |
 | ID Algoritma yang tercakup | Algo-039, Algo-040, Algo-041, Algo-042, Algo-043 |
-| Coverage (wajib ≥ 70%) | `models/pesanan.ts`: 97,77% / 94,44%; `pemesananController.ts`: 92,55% / 75,00% |
+| Coverage (wajib ≥ 70%) | `models/pesanan.ts`: 97,77% / 94,44%; `pemesananController.ts`: 92,55% / 77,05% |
 
 ### 4.2.7 Kelas MetodePembayaranController
 
@@ -571,22 +582,23 @@ Tabel 4.2.6b. Ringkasan Cakupan Kelas C06
 
 Tabel 4.2.7. Hasil Pengujian Unit Kelas C07
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C07-UT01 | `buatTagihan()` | Normal | `pembayaran.test.ts › e-wallet: setujui di aplikasi…`. Metode EWALLET. | URL checkout, status MENUNGGU, jumlah = total, QR SVG tersedia | Sesuai | Pass | `src/tests/pembayaran.test.ts:41` |
-| C07-UT02 | `verifikasiPembayaran()` | Normal | Setujui e-wallet lalu verifikasi. | Pesanan DIKONFIRMASI, tiket terbit, status LUNAS | Sesuai | Pass | `src/tests/pembayaran.test.ts:41` |
-| C07-UT03 | `verifikasiPembayaran()` | Batas / Negatif | `pembayaran.test.ts › virtual account: nominal harus tepat`. Total - 1 lalu total. | Total - 1 ditolak 400; total tepat berhasil | Sesuai | Pass | `src/tests/pembayaran.test.ts:56` |
-| C07-UT04 | Kartu (3-D Secure) | Negatif / Normal | `pembayaran.test.ts › kartu: hanya kartu uji, OTP…`. Kartu asli, OTP salah, OTP benar. | Kartu asli ditolak, OTP salah 400, OTP benar LUNAS | Sesuai | Pass | `src/tests/pembayaran.test.ts:64` |
-| C07-UT05 | `verifikasiPembayaran()` | Negatif | Kartu ditolak gateway. | Status GAGAL, pesanan DIBATALKAN | Sesuai | Pass | `src/tests/pembayaran.test.ts:64` |
-| C07-UT06 | `buatTagihan()` (cegah double-charge) | Negatif | `pembayaran.test.ts › ganti metode membatalkan transaksi lama…`. | Transaksi lama GAGAL, pesanan tetap MENUNGGU_PEMBAYARAN, tagihan aktif = baru | Sesuai | Pass | `src/tests/pembayaran.test.ts:82` |
-| C07-UT07 | `verifikasiPembayaran()` | Negatif | `pembayaran.test.ts › stok habis saat lunas…`. | Dana dikembalikan, pesanan DIBATALKAN, notifikasi refund | Sesuai | Pass | `src/tests/pembayaran.test.ts:91` |
-| C07-UT08 | `cekTimeout()` / verifikasi kedaluwarsa | Batas | `pembayaran.test.ts › tagihan kedaluwarsa dibatalkan, dan pembayaran yang terlambat dikembalikan`. | 410, pesanan DIBATALKAN, dana DIKEMBALIKAN | Sesuai | Pass | `src/tests/pembayaran.test.ts:140` |
-| C07-UT09 | Gateway kedaluwarsa | Batas | `pembayaran.test.ts › transaksi gateway yang lewat batas waktu…`. | Status KEDALUWARSA dan bayar 410 | Sesuai | Pass | `src/tests/pembayaran.test.ts:150` |
-| C07-UT10 | `terimaNotifikasi()` (HMAC) | Negatif | `pembayaran.test.ts › tanda tangan HMAC diverifikasi`. | Tanda tangan salah atau data diubah ditolak, 401 | Sesuai | Pass | `src/tests/pembayaran.test.ts:112` |
-| C07-UT11 | `terimaNotifikasi()` | Negatif | `pembayaran.test.ts › notifikasi palsu dengan tanda tangan sah…`. Nominal 1. | Ditolak 404 | Sesuai | Pass | `src/tests/pembayaran.test.ts:122` |
-| C07-UT12 | Validasi kartu (Luhn) | Normal / Negatif | `pembayaran.test.ts › algoritma Luhn`. | Nomor sah lolos, nomor salah tidak | Sesuai | Pass | `src/tests/pembayaran.test.ts:159` |
-| C07-UT13 | `cekTimeout()` | Batas | Setel `batas_waktu_bayar` ke 1 menit lalu, panggil `cekTimeout()` dua kali. | Pesanan DIBATALKAN, panggilan kedua mengembalikan 0 | Sesuai | Pass | `src/tests/pembayaran.test.ts:185` |
-| KNF07-TC01 | `config.paymentTimeoutMinutes` | Batas | `pembayaran.test.ts › KNF07-TC01`. | = 5 menit (SKPL KNF07) | **15 menit** | **Fail** | `src/tests/pembayaran.test.ts:165` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C07-UT01 | `buatTagihan()` | Normal | `pembayaran.test.ts › e-wallet: setujui di aplikasi…`. Metode EWALLET. | URL checkout, status MENUNGGU, jumlah = total, QR SVG tersedia | Sesuai | Pass |
+| C07-UT02 | `verifikasiPembayaran()` | Normal | Setujui e-wallet lalu verifikasi. | Pesanan DIKONFIRMASI, tiket terbit, status LUNAS | Sesuai | Pass |
+| C07-UT03 | `verifikasiPembayaran()` | Batas / Negatif | `pembayaran.test.ts › virtual account: nominal harus tepat`. Total - 1 lalu total. | Total - 1 ditolak 400; total tepat berhasil | Sesuai | Pass |
+| C07-UT04 | Kartu (3-D Secure) | Negatif / Normal | `pembayaran.test.ts › kartu: hanya kartu uji, OTP…`. Kartu asli, OTP salah, OTP benar. | Kartu asli ditolak, OTP salah 400, OTP benar LUNAS | Sesuai | Pass |
+| C07-UT05 | `verifikasiPembayaran()` | Negatif | Kartu ditolak gateway. | Status GAGAL, pesanan DIBATALKAN | Sesuai | Pass |
+| C07-UT06 | `buatTagihan()` (cegah double-charge) | Negatif | `pembayaran.test.ts › ganti metode membatalkan transaksi lama…`. | Transaksi lama GAGAL, pesanan tetap MENUNGGU_PEMBAYARAN, tagihan aktif = baru | Sesuai | Pass |
+| C07-UT07 | `verifikasiPembayaran()` | Negatif | `pembayaran.test.ts › stok habis saat lunas…`. | Dana dikembalikan, pesanan DIBATALKAN, notifikasi refund | Sesuai | Pass |
+| C07-UT08 | `cekTimeout()` / verifikasi kedaluwarsa | Batas | `pembayaran.test.ts › tagihan kedaluwarsa dibatalkan, dan pembayaran yang terlambat dikembalikan`. | 410, pesanan DIBATALKAN, dana DIKEMBALIKAN | Sesuai | Pass |
+| C07-UT09 | Gateway kedaluwarsa | Batas | `pembayaran.test.ts › transaksi gateway yang lewat batas waktu…`. | Status KEDALUWARSA dan bayar 410 | Sesuai | Pass |
+| C07-UT10 | `terimaNotifikasi()` (HMAC) | Negatif | `pembayaran.test.ts › tanda tangan HMAC diverifikasi`. | Tanda tangan salah atau data diubah ditolak, 401 | Sesuai | Pass |
+| C07-UT11 | `terimaNotifikasi()` | Negatif | `pembayaran.test.ts › notifikasi palsu dengan tanda tangan sah…`. Nominal 1. | Ditolak 404 | Sesuai | Pass |
+| C07-UT12 | Validasi kartu (Luhn) | Normal / Negatif | `pembayaran.test.ts › algoritma Luhn`. | Nomor sah lolos, nomor salah tidak | Sesuai | Pass |
+| C07-UT13 | `cekTimeout()` | Batas | Setel `batas_waktu_bayar` ke 1 menit lalu, panggil `cekTimeout()` dua kali. | Pesanan DIBATALKAN, panggilan kedua mengembalikan 0 | Sesuai | Pass |
+| C07-UT14 | `buatTagihan()` | Batas | Pesanan satu item (total terkecil). | Nominal tagihan = harga + biaya layanan = total pesanan | Sesuai | Pass |
+| KNF07-TC01 | `config.paymentTimeoutMinutes` | Batas | `pembayaran.test.ts › KNF07-TC01`. | = 5 menit (SKPL KNF07) | **15 menit** | **Fail** |
 
 Penyebab Fail: nilai bawaan `paymentTimeoutMinutes` pada `server/config.ts` adalah 15, sedangkan SKPL meminta 5 menit (DPPL Algo-045 juga menulis 15).
 
@@ -607,11 +619,11 @@ Tabel 4.2.7b. Ringkasan Cakupan Kelas C07
 
 Tabel 4.2.8. Hasil Pengujian Unit Kelas C08
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C08-UT01 | `catatLogTransaksi()` | Normal | Tidak langsung lewat C07-UT02: pembayaran lunas lalu `verifikasiPembayaran`. | Transaksi lunas tercatat, status LUNAS | Sesuai | Pass | `src/tests/pembayaran.test.ts:41` |
-| C08-UT02 | `getBuktiPembayaran()` | Normal / Negatif | Sebelum bayar, lalu setelah e-wallet lunas. | `null` sebelum bayar; sesudahnya status LUNAS, metode EWALLET, jumlah = total | Sesuai | Pass | `src/tests/pembayaran.test.ts:171` |
-| C08-UT03 | `catatLogTransaksi()` | Negatif | Pembayaran kartu dengan hasil GAGAL. | Tidak ada transaksi tercatat (`null`) | `null` | Pass | `src/tests/pembayaran.test.ts:180` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C08-UT01 | `catatLogTransaksi()` | Normal | Tidak langsung lewat C07-UT02: pembayaran lunas lalu `verifikasiPembayaran`. | Transaksi lunas tercatat, status LUNAS | Sesuai | Pass |
+| C08-UT02 | `getBuktiPembayaran()` | Normal / Negatif | Sebelum bayar, lalu setelah e-wallet lunas. | `null` sebelum bayar; sesudahnya status LUNAS, metode EWALLET, jumlah = total | Sesuai | Pass |
+| C08-UT03 | `catatLogTransaksi()` | Negatif | Pembayaran kartu dengan hasil GAGAL. | Tidak ada transaksi tercatat (`null`) | `null` | Pass |
 
 Kelas Sedang terpenuhi: kasus normal (C08-UT01, C08-UT02) dan negatif (C08-UT03) ada. `getBuktiPembayaran()` dan `catatLogTransaksi()` teruji langsung.
 
@@ -623,15 +635,17 @@ Kelas Sedang terpenuhi: kasus normal (C08-UT01, C08-UT02) dan negatif (C08-UT03)
 
 Tabel 4.2.9. Hasil Pengujian Unit Kelas C09
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C09-UT01 | `generateNomorAntrean()` | Normal | Tiga pelanggan memesan dan membayar pada restoran yang sama. | Tiga nomor unik dan menaik (KNF03) | Unik dan menaik | Pass | `src/tests/antrean.test.ts:164` |
-| C09-UT02 | `generateNomorAntrean()` | Batas | Bandingkan dengan `MAX(nomor_urut)` hari ini. | Nomor = maks + 1 | Sesuai | Pass | `src/tests/antrean.test.ts:176` |
-| C09-UT03 | `updateStatusTiket()` | Negatif | Ubah tiket SELESAI ke MENUNGGU. | Ditolak, status tetap SELESAI (DPPL: status final tidak boleh diubah) | Status berubah menjadi MENUNGGU | **Fail** | `src/tests/antrean.test.ts:182` |
-| C09-UT04 | `formatNomorAntrean` | Normal / Batas | `antrean.test.ts › format nomor antrean`. 7 dan 1234. | `A-007` dan `A-1234` | Sesuai | Pass | `src/tests/antrean.test.ts:113` |
-| C09-UT05 | `generateNomorAntrean()` / penerbitan | Normal | `pemesanan.test.ts › pesanan lunas menerbitkan tiket…`. | `idTiket` terbit setelah lunas | Sesuai | Pass | `src/tests/pemesanan.test.ts:24` |
-| C09-UT06 | `getDetailTiket()` | Normal / Negatif | Tidak langsung: C10-UT02. | Tiket tersedia, atau 404 | Sesuai | Pass | `src/tests/antrean.test.ts:222` |
-| C09-UT07 | `generateNomorAntrean()` | Batas | Geser `waktu_terbit` semua tiket antrean ke 1 hari lalu. | Nomor kembali ke 1 (reset harian) | 1 | Pass | `src/tests/antrean.test.ts:254` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C09-UT01 | `generateNomorAntrean()` | Normal | Tiga pelanggan memesan dan membayar pada restoran yang sama. | Tiga nomor unik dan menaik (KNF03) | Unik dan menaik | Pass |
+| C09-UT02 | `generateNomorAntrean()` | Batas | Bandingkan dengan `MAX(nomor_urut)` hari ini. | Nomor = maks + 1 | Sesuai | Pass |
+| C09-UT03 | `updateStatusTiket()` | Negatif | Ubah tiket SELESAI ke MENUNGGU. | Ditolak, status tetap SELESAI (DPPL: status final tidak boleh diubah) | Status berubah menjadi MENUNGGU | **Fail** |
+| C09-UT04 | `formatNomorAntrean` | Normal / Batas | `antrean.test.ts › format nomor antrean`. 7 dan 1234. | `A-007` dan `A-1234` | Sesuai | Pass |
+| C09-UT05 | `generateNomorAntrean()` / penerbitan | Normal | `pemesanan.test.ts › pesanan lunas menerbitkan tiket…`. | `idTiket` terbit setelah lunas | Sesuai | Pass |
+| C09-UT06 | `getDetailTiket()` | Normal / Negatif | Tidak langsung: C10-UT02. | Tiket tersedia, atau 404 | Sesuai | Pass |
+| C09-UT07 | `generateNomorAntrean()` | Batas | Geser `waktu_terbit` semua tiket antrean ke 1 hari lalu. | Nomor kembali ke 1 (reset harian) | 1 | Pass |
+| C09-UT08 | `updateStatusTiket()` | Normal / Batas | Ubah tiket MENUNGGU ke DIPANGGIL; lalu ID `TKT-tidak-ada`. | DIPANGGIL tersimpan; ID tidak ada tidak menimbulkan galat | Sesuai | Pass |
+| C09-UT09 | `cetakRincianTiket()` (`getTiket`) | Normal / Negatif | Pemilik membuka tiket; pelanggan lain; ID `TKT-tidak-ada`. | Tiket dan bukti LUNAS terbaca; 403; 404 | Sesuai | Pass |
 
 Penyebab Fail (C09-UT03): `TiketAntrean.updateStatusTiket` (`models/antrean.ts`) menjalankan `UPDATE` tanpa memeriksa status saat ini. Usulan: tambahkan kondisi `AND status_antrean NOT IN ('SELESAI','DILEWATI','DIBATALKAN')` pada query.
 
@@ -640,9 +654,9 @@ Tabel 4.2.9b. Ringkasan Cakupan Kelas C09
 | Informasi | Keterangan |
 | :--- | :--- |
 | Daftar operasi public pada DPPL | `generateNomorAntrean()`, `cetakRincianTiket()`, `getDetailTiket()`, `updateStatusTiket()` |
-| Operasi yang diuji | 3 dari 4 |
+| Operasi yang diuji | 4 dari 4 (`cetakRincianTiket()` teruji lewat `getTiket`) |
 | ID Algoritma yang tercakup | Algo-050, Algo-052, Algo-053 |
-| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C04): 98,25% / 83,67% |
+| Coverage (wajib ≥ 70%) | `models/antrean.ts` (bersama C04): 98,25% / 89,29% |
 
 ### 4.2.10 Kelas PemantauAntreanController
 
@@ -652,12 +666,12 @@ Tabel 4.2.9b. Ringkasan Cakupan Kelas C09
 
 Tabel 4.2.10. Hasil Pengujian Unit Kelas C10
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C10-UT01 | `updateTampilanAntrean()` (`subscribe`) | Normal | Buka kanal SSE palsu, pancarkan event, tutup koneksi, pancarkan lagi. | Event `siap` dan `antrean` terkirim; setelah tutup tidak ada tulisan baru | Sesuai | Pass | `src/tests/antrean.test.ts:207` |
-| C10-UT02 | `getStatusAntrean()` | Negatif | Tiket tidak ada, dan tiket milik pelanggan lain. | 404 dan 403 | Sesuai | Pass | `src/tests/antrean.test.ts:222` |
-| C10-UT03 | `getStatusAntrean()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | `sisaAntrean` dan `estimasiMenit` mengikuti dequeue | Sesuai | Pass | `src/tests/antrean.test.ts:41` |
-| C10-UT04 | `getAntreanAktifSaya()` | Normal | `antrean.test.ts › "Mulai siapkan"…`. | Tiket aktif dan flag `disiapkan` terbaca | Sesuai | Pass | `src/tests/antrean.test.ts:131` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C10-UT01 | `updateTampilanAntrean()` (`subscribe`) | Normal | Buka kanal SSE palsu, pancarkan event, tutup koneksi, pancarkan lagi. | Event `siap` dan `antrean` terkirim; setelah tutup tidak ada tulisan baru | Sesuai | Pass |
+| C10-UT02 | `getStatusAntrean()` | Negatif | Tiket tidak ada, dan tiket milik pelanggan lain. | 404 dan 403 | Sesuai | Pass |
+| C10-UT03 | `getStatusAntrean()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | `sisaAntrean` dan `estimasiMenit` mengikuti dequeue | Sesuai | Pass |
+| C10-UT04 | `getAntreanAktifSaya()` | Normal | `antrean.test.ts › "Mulai siapkan"…`. | Tiket aktif dan flag `disiapkan` terbaca | Sesuai | Pass |
 
 Tingkat Sedang terpenuhi (kasus normal dan gagal ada). *Coverage* `pemantauAntreanController.ts`: 100% / 80,95%.
 
@@ -669,18 +683,19 @@ Tingkat Sedang terpenuhi (kasus normal dan gagal ada). *Coverage* `pemantauAntre
 
 Tabel 4.2.11. Hasil Pengujian Unit Kelas C12
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C12-UT01 | `setujui()`, `tolak()` | Negatif | Setujui pengajuan MENUNGGU, lalu setujui dan tolak lagi. | Keduanya 409 | 409 | Pass | `src/tests/mitra.test.ts:79` |
-| C12-UT02 | `tinjauPengajuan` (`detailPengajuan`) | Negatif | ID `PGJ-tidak-ada`. | 404 | 404 | Pass | `src/tests/mitra.test.ts:86` |
-| C12-UT03 | `validasiKelengkapan()` | Negatif | `mitra.test.ts › pengajuan tidak lengkap ditolak per kolom`. Hanya nama `AB`. | 400 dengan kolom `namaRestoran`, `kategori`, `alamat`, `daftarMenu`, `nib`, `izinUsaha` | Semua kolom ada | Pass | `src/tests/mitra.test.ts:30` |
-| C12-UT04 | `simpanPengajuan()` | Negatif | `mitra.test.ts › ajukan -> tolak -> …`. Pengajuan ganda. | 409 | 409 | Pass | `src/tests/mitra.test.ts:36` |
-| C12-UT05 | `tolak()` | Negatif | Alasan kosong. | 400 | 400 | Pass | `src/tests/mitra.test.ts:36` |
-| C12-UT06 | `tolak()` | Normal | Alasan valid. | Status ditolak, email MITRA_DITOLAK tercatat | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
-| C12-UT07 | `simpanPengajuan()` | Normal | Ajukan ulang setelah ditolak. | Pengajuan baru MENUNGGU | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
-| C12-UT08 | `setujui()` | Normal | Setujui pengajuan ulang. | Restoran aktif, sesi memuat `restoranId`, restoran dapat dicari, email MITRA_DITERIMA | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
-| C12-UT09 | `setujui()` (notifikasi dalam aplikasi) | Normal | `mitra.test.ts › akun pengaju mendapat notifikasi saat pengajuan disetujui`. | Notifikasi "disetujui" | Sesuai | Pass | `src/tests/mitra.test.ts:69` |
-| C12-UT10 | `tolak()` | Batas | Pengajuan baru; alasan `abcd` lalu `abcde`. | 4 karakter ditolak 400; 5 karakter diterima, status DITOLAK | Sesuai | Pass | `src/tests/mitra.test.ts:125` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C12-UT01 | `setujui()`, `tolak()` | Negatif | Setujui pengajuan MENUNGGU, lalu setujui dan tolak lagi. | Keduanya 409 | 409 | Pass |
+| C12-UT02 | `tinjauPengajuan` (`detailPengajuan`) | Negatif | ID `PGJ-tidak-ada`. | 404 | 404 | Pass |
+| C12-UT03 | `validasiKelengkapan()` | Negatif | `mitra.test.ts › pengajuan tidak lengkap ditolak per kolom`. Hanya nama `AB`. | 400 dengan kolom `namaRestoran`, `kategori`, `alamat`, `daftarMenu`, `nib`, `izinUsaha` | Semua kolom ada | Pass |
+| C12-UT04 | `simpanPengajuan()` | Negatif | `mitra.test.ts › ajukan -> tolak -> …`. Pengajuan ganda. | 409 | 409 | Pass |
+| C12-UT05 | `tolak()` | Negatif | Alasan kosong. | 400 | 400 | Pass |
+| C12-UT06 | `tolak()` | Normal | Alasan valid. | Status ditolak, email MITRA_DITOLAK tercatat | Sesuai | Pass |
+| C12-UT07 | `simpanPengajuan()` | Normal | Ajukan ulang setelah ditolak. | Pengajuan baru MENUNGGU | Sesuai | Pass |
+| C12-UT08 | `setujui()` | Normal | Setujui pengajuan ulang. | Restoran aktif, sesi memuat `restoranId`, restoran dapat dicari, email MITRA_DITERIMA | Sesuai | Pass |
+| C12-UT09 | `setujui()` (notifikasi dalam aplikasi) | Normal | `mitra.test.ts › akun pengaju mendapat notifikasi saat pengajuan disetujui`. | Notifikasi "disetujui" | Sesuai | Pass |
+| C12-UT10 | `tolak()` | Batas | Pengajuan baru; alasan `abcd` lalu `abcde`. | 4 karakter ditolak 400; 5 karakter diterima, status DITOLAK | Sesuai | Pass |
+| C12-UT11 | `validasiKelengkapan()` | Normal / Batas | Nama 3 karakter, alamat 10 karakter, harga Rp500, NIB dan izin usaha PDF; lalu nama `AB`, alamat 8 karakter, harga Rp499. | Tanpa galat; galat pada `namaRestoran`, `alamat`, `daftarMenu` | Sesuai | Pass |
 
 Tidak diuji: pembatalan transaksi `setujui` bila terjadi galat di tengah (rollback).
 
@@ -691,7 +706,7 @@ Tabel 4.2.11b. Ringkasan Cakupan Kelas C12
 | Daftar operasi public pada DPPL | `validasiKelengkapan()`, `simpanPengajuan()`, `setujui()`, `tolak()` |
 | Operasi yang diuji | Keempatnya |
 | ID Algoritma yang tercakup | Algo-058, Algo-059, Algo-060, Algo-061 |
-| Coverage (wajib ≥ 70%) | `pengajuanMitraController.ts`: 90,23% / 86,44% |
+| Coverage (wajib ≥ 70%) | `pengajuanMitraController.ts`: 90,23% / 88,14% |
 
 ### 4.2.12 Kelas DokumenVerifikasi
 
@@ -701,24 +716,25 @@ Tabel 4.2.11b. Ringkasan Cakupan Kelas C12
 
 Tabel 4.2.12. Hasil Pengujian Unit Kelas C13
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C13-UT01 | `validasiFormat()` | Normal | `mitra.test.ts › validasi format dokumen mitra (Algo-063)`. NIB PDF 1000 byte. | `null` (valid) | `null` | Pass | `src/tests/mitra.test.ts:62` |
-| C13-UT02 | `validasiFormat()` | Negatif | NIB berformat `application/zip`. | Pesan "format" | Sesuai | Pass | `src/tests/mitra.test.ts:62` |
-| C13-UT03 | `validasiFormat()` | Negatif | Jenis `foto` dengan PDF. | Pesan "format" | Sesuai | Pass | `src/tests/mitra.test.ts:62` |
-| C13-UT04 | `validasiFormat()` | Batas / Negatif | Izin usaha PNG 6 MB. | Pesan "5 MB" | Sesuai | Pass | `src/tests/mitra.test.ts:62` |
-| C13-UT05 | `unggahDokumen()` | Normal | Tidak langsung lewat C12-UT04 dan C12-UT08 (berkas PDF diunggah pada pengajuan). | Dokumen tersimpan pada pengajuan | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
-| C13-UT06 | `validasiFormat()` | Batas | Izin usaha PNG berukuran tepat 5 MB dan 5 MB + 1 byte. | 5 MB diterima; lebih sedikit ditolak ("5 MB") | Sesuai | Pass | `src/tests/mitra.test.ts:115` |
-| C13-UT07 | `validasiFormat()` | Normal / Negatif | Foto JPG, PNG, dan PDF. | JPG dan PNG diterima, PDF ditolak | Sesuai | Pass | `src/tests/mitra.test.ts:120` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C13-UT01 | `validasiFormat()` | Normal | `mitra.test.ts › validasi format dokumen mitra (Algo-063)`. NIB PDF 1000 byte. | `null` (valid) | `null` | Pass |
+| C13-UT02 | `validasiFormat()` | Negatif | NIB berformat `application/zip`. | Pesan "format" | Sesuai | Pass |
+| C13-UT03 | `validasiFormat()` | Negatif | Jenis `foto` dengan PDF. | Pesan "format" | Sesuai | Pass |
+| C13-UT04 | `validasiFormat()` | Batas / Negatif | Izin usaha PNG 6 MB. | Pesan "5 MB" | Sesuai | Pass |
+| C13-UT05 | `unggahDokumen()` | Normal | Tidak langsung lewat C12-UT04 dan C12-UT08 (berkas PDF diunggah pada pengajuan). | Dokumen tersimpan pada pengajuan | Sesuai | Pass |
+| C13-UT06 | `validasiFormat()` | Batas | Izin usaha PNG berukuran tepat 5 MB dan 5 MB + 1 byte. | 5 MB diterima; lebih sedikit ditolak ("5 MB") | Sesuai | Pass |
+| C13-UT07 | `validasiFormat()` | Normal / Negatif | Foto JPG, PNG, dan PDF. | JPG dan PNG diterima, PDF ditolak | Sesuai | Pass |
+| C13-UT08 | `unggahDokumen()` | Normal / Negatif | Panggil langsung untuk pengajuan yang ada; lalu `PGJ-tidak-ada`. | Jumlah dokumen bertambah 1; pengajuan tidak ada ditolak | Sesuai | Pass |
 
-Tidak diuji: `unggahDokumen` secara langsung (hanya lewat pengajuan, C13-UT05).
+`unggahDokumen` kini teruji langsung (C13-UT08) selain lewat pengajuan (C13-UT05).
 
 Tabel 4.2.12b. Ringkasan Cakupan Kelas C13
 
 | Informasi | Keterangan |
 | :--- | :--- |
 | Daftar operasi public pada DPPL | `unggahDokumen()`, `validasiFormat()` |
-| Operasi yang diuji | Keduanya (`unggahDokumen` tidak langsung) |
+| Operasi yang diuji | Keduanya |
 | ID Algoritma yang tercakup | Algo-062, Algo-063 |
 | Coverage (wajib ≥ 70%) | `models/mitra.ts`: 95,07% / 100% |
 
@@ -730,10 +746,10 @@ Tabel 4.2.12b. Ringkasan Cakupan Kelas C13
 
 Tabel 4.2.13. Hasil Pengujian Unit Kelas C14
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C14-UT01 | `accountRegister()` | Normal / Negatif | Buat akun ADMIN lalu `Admin.accountRegister`; ulangi untuk akun yang sama. | Baris `admin` tersimpan; pendaftaran ganda ditolak (kunci unik) | Sesuai | Pass | `src/tests/autentikasi.test.ts:138` |
-| C14-UT02 | Login akun admin | Normal | Login `admin@antri.in`. | Peran ADMIN dan tanpa `restoranId` | Sesuai | Pass | `src/tests/autentikasi.test.ts:145` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C14-UT01 | `accountRegister()` | Normal / Negatif | Buat akun ADMIN lalu `Admin.accountRegister`; ulangi untuk akun yang sama. | Baris `admin` tersimpan; pendaftaran ganda ditolak (kunci unik) | Sesuai | Pass |
+| C14-UT02 | Login akun admin | Normal | Login `admin@antri.in`. | Peran ADMIN dan tanpa `restoranId` | Sesuai | Pass |
 
 Operasi `tinjauPengajuan`, `lihatKeluhan`, dan `konfirmasiPenghapusan` hanya diteruskan ke controller lain dan teruji lewat C12-UT02, C41-UT08, dan C33-UT01.
 
@@ -747,12 +763,13 @@ Catatan: `AutentikasiController.createAccount` hanya membuat peran RESTORAN atau
 
 Tabel 4.2.14. Hasil Pengujian Unit Kelas C15
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C15-UT01 | `kirimEmail()` | Normal | Kirim email ke `uji-email@contoh.id`. | Baris `log_notifikasi` berstatus TERKIRIM | TERKIRIM | Pass | `src/tests/mitra.test.ts:93` |
-| C15-UT02 | `kirimEmail()` | Negatif | `console.log` dibuat melempar galat. | Baris `log_notifikasi` berstatus GAGAL | GAGAL | Pass | `src/tests/mitra.test.ts:98` |
-| C15-UT03 | `kirimEmail()` (validasi format) | Negatif | Penerima `bukan-email`. | Ditolak (HIUPL 4.1: validasi format email) | Diterima dan dicatat | **Fail** | `src/tests/mitra.test.ts:109` |
-| C15-UT04 | `kirimEmail()` | Normal | `mitra.test.ts › ajukan -> tolak…`. Dua email ke satu penerima. | Log berurutan `MITRA_DITOLAK`, `MITRA_DITERIMA` | Sesuai | Pass | `src/tests/mitra.test.ts:36` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C15-UT01 | `kirimEmail()` | Normal | Kirim email ke `uji-email@contoh.id`. | Baris `log_notifikasi` berstatus TERKIRIM | TERKIRIM | Pass |
+| C15-UT02 | `kirimEmail()` | Negatif | `console.log` dibuat melempar galat. | Baris `log_notifikasi` berstatus GAGAL | GAGAL | Pass |
+| C15-UT03 | `kirimEmail()` (validasi format) | Negatif | Penerima `bukan-email`. | Ditolak (HIUPL 4.1: validasi format email) | Diterima dan dicatat | **Fail** |
+| C15-UT04 | `kirimEmail()` | Normal | `mitra.test.ts › ajukan -> tolak…`. Dua email ke satu penerima. | Log berurutan `MITRA_DITOLAK`, `MITRA_DITERIMA` | Sesuai | Pass |
+| C15-UT05 | `kirimEmail()` | Batas | Isi pesan 5000 karakter. | Tercatat utuh (panjang 5000) berstatus TERKIRIM | Sesuai | Pass |
 
 Penyebab Fail (C15-UT03): `kirimEmail` pada `adapters/notifikasiEmail.ts` tidak memvalidasi alamat. Status GAGAL hanya muncul bila pencetakan ke konsol melempar galat. Usulan: validasi format penerima (galat atau status GAGAL).
 
@@ -773,15 +790,16 @@ Tabel 4.2.14b. Ringkasan Cakupan Kelas C15
 
 Tabel 4.2.15. Hasil Pengujian Unit Kelas C16
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C16-UT01 | `getAntrean()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | Ringkasan dan daftar, terdepan berstatus DIPANGGIL | Sesuai | Pass | `src/tests/antrean.test.ts:41` |
-| C16-UT02 | `processDequeue()` | Normal | Dequeue tiket terdepan. | Nomor `A-001` dilayani, antrean aktif berkurang 1 | Sesuai | Pass | `src/tests/antrean.test.ts:41` |
-| C16-UT03 | `processDequeue()` | Negatif | `antrean.test.ts › dequeue dengan data layar usang ditolak`. ID `TKT-usang`. | 409 | 409 | Pass | `src/tests/antrean.test.ts:59` |
-| C16-UT04 | `processDequeue()` | Negatif | `antrean.test.ts › restoran tanpa antrean tidak dapat dequeue`. | Galat "Belum ada antrean" | Sesuai | Pass | `src/tests/antrean.test.ts:74` |
-| C16-UT05 | `mulaiTimer()` (`autoDequeue`) | Normal | `antrean.test.ts › dequeue otomatis setelah 30 menit tidak hadir`. Dipanggil 31 menit lalu. | Tiket DILEWATI, restoran diproses | DILEWATI | Pass | `src/tests/antrean.test.ts:64` |
-| C16-UT06 | `tandaiDisiapkan()` | Normal / Negatif | `antrean.test.ts › "Mulai siapkan" menandai tiket…`. Tandai dua kali. | Pertama berhasil, kedua 409 | Sesuai | Pass | `src/tests/antrean.test.ts:131` |
-| C16-UT07 | `mulaiTimer()` (`autoDequeue`) | Batas | Tiket DIPANGGIL 29 menit 55 detik lalu. | Belum dilewati, status tetap DIPANGGIL | DIPANGGIL | Pass | `src/tests/antrean.test.ts:232` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C16-UT01 | `getAntrean()` | Normal | `antrean.test.ts › dequeue memanggil pelanggan berikutnya…`. | Ringkasan dan daftar, terdepan berstatus DIPANGGIL | Sesuai | Pass |
+| C16-UT02 | `processDequeue()` | Normal | Dequeue tiket terdepan. | Nomor `A-001` dilayani, antrean aktif berkurang 1 | Sesuai | Pass |
+| C16-UT03 | `processDequeue()` | Negatif | `antrean.test.ts › dequeue dengan data layar usang ditolak`. ID `TKT-usang`. | 409 | 409 | Pass |
+| C16-UT04 | `processDequeue()` | Negatif | `antrean.test.ts › restoran tanpa antrean tidak dapat dequeue`. | Galat "Belum ada antrean" | Sesuai | Pass |
+| C16-UT05 | `mulaiTimer()` (`autoDequeue`) | Normal | `antrean.test.ts › dequeue otomatis setelah 30 menit tidak hadir`. Dipanggil 31 menit lalu. | Tiket DILEWATI, restoran diproses | DILEWATI | Pass |
+| C16-UT06 | `tandaiDisiapkan()` | Normal / Negatif | `antrean.test.ts › "Mulai siapkan" menandai tiket…`. Tandai dua kali. | Pertama berhasil, kedua 409 | Sesuai | Pass |
+| C16-UT07 | `mulaiTimer()` (`autoDequeue`) | Batas | Tiket DIPANGGIL 29 menit 55 detik lalu. | Belum dilewati, status tetap DIPANGGIL | DIPANGGIL | Pass |
+| C16-UT08 | `getAntrean()`, `mulaiTimer()` (`autoDequeue`) | Batas / Negatif | Antrean kosong (Martabak); akun pelanggan; `autoDequeue` saat semua tiket baru dipanggil. | Ringkasan 0 dan daftar kosong; pelanggan 403; `autoDequeue` mengembalikan daftar kosong | Sesuai | Pass |
 
 Tidak diuji: kegagalan di tengah transaksi dan timer 300 detik pada Algo-071 (kode memakai 30 menit dari `autoDequeueMinutes`). Baris 90-100 dan 125-132 pada `kelolaAntreanController.ts` tidak tercakup (86,23% baris). Batas 29 menit 55 detik teruji pada C16-UT07.
 
@@ -792,7 +810,7 @@ Tabel 4.2.15b. Ringkasan Cakupan Kelas C16
 | Daftar operasi public pada DPPL | `getAntrean()`, `processDequeue()`, `mulaiTimer()` |
 | Operasi yang diuji | Ketiganya (`mulaiTimer` sebagai `autoDequeue`) |
 | ID Algoritma yang tercakup | Algo-069, Algo-070, Algo-071 |
-| Coverage (wajib ≥ 70%) | `kelolaAntreanController.ts`: 86,23% / 73,33% |
+| Coverage (wajib ≥ 70%) | `kelolaAntreanController.ts`: 86,23% / 82,35% |
 
 ### 4.2.16 Kelas Kuota
 
@@ -802,13 +820,15 @@ Tabel 4.2.15b. Ringkasan Cakupan Kelas C16
 
 Tabel 4.2.16. Hasil Pengujian Unit Kelas C20
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C20-UT01 | `isAntreanTutup()` | Normal / Batas | Kuota 10 tidak ditutup, kuota 10 ditutup, kuota 0. | `false`, `true`, `true` | Sesuai | Pass | `src/tests/antrean.test.ts:191` |
-| C20-UT02 | `updateKapasitas()` | Normal | Simpan kuota 21 dan meja 5, lalu baca. Juga ID tidak ada. | Nilai tersimpan; ID tidak ada `null` | Sesuai | Pass | `src/tests/antrean.test.ts:196` |
-| C20-UT03 | `isAntreanTutup()` | Batas | `antrean.test.ts › kuota negatif ditolak; kuota 0 menutup antrean`. | Kuota 0 menutup (TUTUP), kuota 40 membuka (BUKA) | Sesuai | Pass | `src/tests/antrean.test.ts:82` |
-| C20-UT04 | `updateKapasitas()` | Normal | `antrean.test.ts › tutup sementara tidak menghapus nilai kuota`. | Kuota 35 tetap setelah tutup dan buka | Sesuai | Pass | `src/tests/antrean.test.ts:119` |
-| C20-UT05 | Status dari kuota | Batas | `antrean.test.ts › status antrean dari kuota`. `(30,30)`. | PENUH | PENUH | Pass | `src/tests/antrean.test.ts:94` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C20-UT01 | `isAntreanTutup()` | Normal / Batas | Kuota 10 tidak ditutup, kuota 10 ditutup, kuota 0. | `false`, `true`, `true` | Sesuai | Pass |
+| C20-UT02 | `updateKapasitas()` | Normal | Simpan kuota 21 dan meja 5, lalu baca. Juga ID tidak ada. | Nilai tersimpan; ID tidak ada `null` | Sesuai | Pass |
+| C20-UT03 | `isAntreanTutup()` | Batas | `antrean.test.ts › kuota negatif ditolak; kuota 0 menutup antrean`. | Kuota 0 menutup (TUTUP), kuota 40 membuka (BUKA) | Sesuai | Pass |
+| C20-UT04 | `updateKapasitas()` | Normal | `antrean.test.ts › tutup sementara tidak menghapus nilai kuota`. | Kuota 35 tetap setelah tutup dan buka | Sesuai | Pass |
+| C20-UT05 | Status dari kuota | Batas | `antrean.test.ts › status antrean dari kuota`. `(30,30)`. | PENUH | PENUH | Pass |
+| C20-UT06 | `updateKapasitas()` | Negatif / Batas | Kuota `-1`; kuota 0; kuota 10000. | `-1` ditolak basis data; 0 menutup antrean; 10000 tersimpan dan antrean terbuka | Sesuai | Pass |
+| C20-UT07 | `updateKapasitas()` | Negatif | ID `RST-tidak-ada`. | Tidak ada baris berubah (`undefined`) | Sesuai | Pass |
 
 Tabel 4.2.16b. Ringkasan Cakupan Kelas C20
 
@@ -827,14 +847,14 @@ Tabel 4.2.16b. Ringkasan Cakupan Kelas C20
 
 Tabel 4.2.17. Hasil Pengujian Unit Kelas C21
 
-| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan | Lokasi Test |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| C21-UT01 | `onSaveSettings()` | Negatif | `antrean.test.ts › kuota negatif ditolak…`. Kuota `-5`. | 400 | 400 | Pass | `src/tests/antrean.test.ts:82` |
-| C21-UT02 | `onSaveSettings()` | Normal / Batas | Kuota 0 (tutup), lalu kuota 40. | `antreanTutup=true` lalu status BUKA | Sesuai | Pass | `src/tests/antrean.test.ts:82` |
-| C21-UT03 | validasi input (`bilanganCacah`) | Normal / Batas / Negatif | `antrean.test.ts › input kuota: hanya bilangan bulat tidak negatif`. `'12'`, `0`, `'-3'`, `'abc'`, `2.5`. | 12, 0, `null`, `null`, `null` | Sesuai | Pass | `src/tests/antrean.test.ts:105` |
-| C21-UT04 | `onSaveSettings()` | Normal | `antrean.test.ts › tutup sementara tidak menghapus nilai kuota`. | Kuota 35 dipertahankan | Sesuai | Pass | `src/tests/antrean.test.ts:119` |
-| C21-UT05 | `onSaveSettings()` | Batas / Negatif | Meja `-1`; kuota `abc`; kuota `10001`; kuota `10000`. | Tiga pertama ditolak per kolom (400); 10000 diterima | Sesuai | Pass | `src/tests/antrean.test.ts:259` |
-| C21-UT06 | `displaySettings()` | Normal / Negatif | Pengaturan restoran Cilok; akses oleh pelanggan. | Kuota dan status tutup terbaca; pelanggan ditolak (401/403) | Sesuai | Pass | `src/tests/antrean.test.ts:268` |
+| ID Pengujian | Operasi yang Diuji | Jenis Kasus | Prosedur/Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| C21-UT01 | `onSaveSettings()` | Negatif | `antrean.test.ts › kuota negatif ditolak…`. Kuota `-5`. | 400 | 400 | Pass |
+| C21-UT02 | `onSaveSettings()` | Normal / Batas | Kuota 0 (tutup), lalu kuota 40. | `antreanTutup=true` lalu status BUKA | Sesuai | Pass |
+| C21-UT03 | validasi input (`bilanganCacah`) | Normal / Batas / Negatif | `antrean.test.ts › input kuota: hanya bilangan bulat tidak negatif`. `'12'`, `0`, `'-3'`, `'abc'`, `2.5`. | 12, 0, `null`, `null`, `null` | Sesuai | Pass |
+| C21-UT04 | `onSaveSettings()` | Normal | `antrean.test.ts › tutup sementara tidak menghapus nilai kuota`. | Kuota 35 dipertahankan | Sesuai | Pass |
+| C21-UT05 | `onSaveSettings()` | Batas / Negatif | Meja `-1`; kuota `abc`; kuota `10001`; kuota `10000`. | Tiga pertama ditolak per kolom (400); 10000 diterima | Sesuai | Pass |
+| C21-UT06 | `displaySettings()` | Normal / Negatif | Pengaturan restoran Cilok; akses oleh pelanggan. | Kuota dan status tutup terbaca; pelanggan ditolak (401/403) | Sesuai | Pass |
 
 Tidak diuji: `showErrorPeringatan` (UI). Catatan konsistensi: Tabel 4.1.1 menyebut validasi "lebih dari 0", sedangkan kode menerima 0 sampai 10000 (kuota) dan 0 sampai 1000 (meja); kuota 0 berarti antrean ditutup.
 
@@ -1459,22 +1479,23 @@ Tabel 4.6. Bukti Hasil Pengujian
 | ID Pengujian | Bukti Hasil Pengujian |
 | :--- | :--- |
 | C01-UT01 – C01-UT03 (Pelanggan, 3 test case) | ![Bukti 1](assets/image-1.png) |
-| C02-UT01 – C02-UT10 (Restoran, 10 test case) | ![Bukti 1](assets/image-2.png) ![Bukti 2](assets/image-3.png) ![Bukti 3](assets/image-4.png) ![Bukti 4](assets/image-6.png) ![Bukti 5](assets/image-7.png) ![Bukti 6](assets/image-8.png) ![Bukti 7](assets/image-9.png) ![Bukti 8](assets/image-10.png) ![Bukti 9](assets/image-11.png) |
-| C03-UT01 – C03-UT11 (Menu) | ![Bukti 1](assets/image-12.png) |
-| C04-UT01 – C04-UT08 (Antrean) | ![Bukti 1](assets/image-13.png) ![Bukti 2](assets/image-14.png)|
+| C02-UT01 – C02-UT13 (Restoran, 10 test case) | ![Bukti 1](assets/image-2.png) ![Bukti 2](assets/image-3.png) ![Bukti 3](assets/image-4.png) ![Bukti 4](assets/image-6.png) ![Bukti 5](assets/image-7.png) ![Bukti 6](assets/image-8.png) ![Bukti 7](assets/image-9.png) ![Bukti 8](assets/image-10.png) ![Bukti 9](assets/image-11.png) ![Bukti 10](assets/c02_11_13.png) |
+| C03-UT01 – C03-UT14 (Menu) | ![Bukti 1](assets/image-12.png) ![Bukti 2](assets/c03.png) |
+| C04-UT01 – C04-UT10 (Antrean) | ![Bukti 1](assets/image-13.png) ![Bukti 2](assets/image-14.png) ![Bukti 3](assets/c04_20.png)|
 | C05-UT01 – C05-UT11 (Keranjang) | ![Bukti 1](assets/image-15.png) |
-| C06-UT01 – C06-UT12 (Pesanan) | ![Bukti 1](assets/image-16.png) ![Bukti 2](assets/image-17.png) |
-| C07-UT01 – C07-UT13 (MetodePembayaranController) | ![Bukti 1](assets/image-18.png) ![Bukti 2](assets/image-19.png) |
+| C06-UT01 – C06-UT15 (Pesanan) | ![Bukti 1](assets/image-16.png) ![Bukti 2](assets/image-17.png) ![Bukti 3](assets/c06.png) |
+| C07-UT01 – C07-UT14 (MetodePembayaranController) | ![Bukti 1](assets/image-18.png) ![Bukti 2](assets/image-19.png) ![Bukti 3](assets/c07.png) |
 | C08-UT01 – C08-UT03 (RiwayatTransaksi) | ![Bukti 1](assets/image-20.png) ![Bukti 2](assets/image-21.png) |
-| C09-UT01 – C09-UT07 (TiketAntrean) | ![Bukti 1](assets/image-22.png) ![Bukti 2](assets/image-23.png) ![Bukti 3](assets/image-24.png) ![Bukti 4](assets/image-25.png) |
+| C09-UT01 – C09-UT09 (TiketAntrean) | ![Bukti 1](assets/image-22.png) ![Bukti 2](assets/image-23.png) ![Bukti 3](assets/image-24.png) ![Bukti 4](assets/image-25.png) ![Bukti 3](assets/c04_20.png) |
 | C10-UT01 – C10-UT04 (PemantauAntreanController) | ![Bukti 1](assets/image-27.png) ![Bukti 2](assets/image-28.png) |
-| C12-UT01 – C12-UT10 (PengajuanMitraController) | ![Bukti 1](assets/image-30.png) |
-| C13-UT01 – C13-UT07 (DokumenVerifikasi) | ![Bukti 1](assets/image-31.png) |
+| C12-UT01 – C12-UT11 (PengajuanMitraController) | ![Bukti 1](assets/image-30.png) ![Bukti 2](assets/c12_15.png) |
+| C13-UT01 – C13-UT08 (DokumenVerifikasi) | ![Bukti 1](assets/image-31.png) |
 | C14-UT01 – C14-UT02 (Admin) | ![Bukti 1](assets/image-32.png) |
-| C15-UT01 – C15-UT04 (NotifikasiEmail) | ![Bukti 1](assets/image-33.png) |
-| C16-UT01 – C16-UT07 (KelolaAntreanController) | ![Bukti 1](assets/image-34.png) ![Bukti 2](assets/image-35.png) |
-| C20-UT01 – C20-UT05 (Kuota) | ![Bukti 1](assets/image-36.png) ![Bukti 2](assets/image-37.png) |
+| C15-UT01 – C15-UT05 (NotifikasiEmail) | ![Bukti 1](assets/image-33.png) |
+| C16-UT01 – C16-UT08 (KelolaAntreanController) | ![Bukti 1](assets/image-34.png) ![Bukti 2](assets/image-35.png) ![Bukti 3](assets/c04_20.png) |
+| C20-UT01 – C20-UT07 (Kuota) | ![Bukti 1](assets/image-36.png) ![Bukti 2](assets/image-37.png) ![Bukti 3](assets/c04_20.png) |
 | C21-UT01 – C21-UT06 (PengaturanKuotaController) | ![Bukti 1](assets/image-38.png) ![Bukti 2](assets/image-39.png) |
+| Coverage | ![Coverage 1](assets/cover1.png) ![Coverage 2](assets/cover2.png) |
 | C24-UT01 – C24-UT08 (KelolaMenuController, 8 test case) | ![Bukti 1](assets/image-60.png) |
 | C25-UT01 – C25-UT07 (Pengguna, 7 test case) | ![Bukti 1](assets/image-59.png) |
 | C28-UT01 – C28-UT11 (AutentikasiController, 11 test case) | ![Bukti 1](assets/image-59.png) |

@@ -274,3 +274,58 @@ describe('Pelengkap C02, C04, C09, C16, C21', () => {
     assert.ok([401, 403].includes((await gagal(app.controllers.kuota.displaySettings(pel))).status));
   });
 });
+
+describe('Pelengkap C04, C09, C16, C20 (normal, batas, negatif)', () => {
+  test('C04-UT09 updateStatus, getFrontCustomer, dequeueCustomer: restoran atau antrean tidak ada -> null', async () => {
+    assert.equal(await Antrean.updateStatus(app.ctx.db, 'RST-tidak-ada', 3), null);
+    assert.equal(await Antrean.getFrontCustomer(app.ctx.db, 'ANT-tidak-ada'), null);
+    assert.equal(await Antrean.dequeueCustomer(app.ctx.db, 'RST-tidak-ada', 'SELESAI', 3), null);
+  });
+  test('C04-UT10 dequeueCustomer: tiket terakhir (batas) selesai, antrean menjadi kosong dan tidak ada pelanggan terdepan', async () => {
+    const resto = await restoranId(app, 'Mie Kocok Pak Haji');
+    const menu = await menuPertama(app, resto);
+    await pesanDanBayar(app, 'yoga@contoh.id', { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 1 }] });
+    const menit = app.ctx.config.menitPerAntrean;
+    let a = await Antrean.updateStatus(app.ctx.db, resto, menit);
+    while ((a?.total_antrean ?? 0) > 1) {
+      await Antrean.dequeueCustomer(app.ctx.db, resto, 'SELESAI', menit);
+      a = await Antrean.updateStatus(app.ctx.db, resto, menit);
+    }
+    assert.equal(a?.total_antrean, 1);
+    const hasil = await Antrean.dequeueCustomer(app.ctx.db, resto, 'SELESAI', menit);
+    assert.equal(hasil?.status_antrean, 'SELESAI');
+    const sesudah = await Antrean.getByRestoran(app.ctx.db, resto);
+    assert.equal(sesudah?.total_antrean, 0);
+    assert.equal(await Antrean.getFrontCustomer(app.ctx.db, sesudah!.antrean_id), null);
+  });
+  test('C09-UT08 updateStatusTiket: MENUNGGU -> DIPANGGIL tersimpan; ID tiket tidak ada tidak menimbulkan galat', async () => {
+    const [t] = await app.ctx.db.query<{ id_tiket: string }>(`SELECT id_tiket FROM tiket_antrean WHERE status_antrean = 'MENUNGGU' LIMIT 1`);
+    assert.ok(t, 'ada tiket MENUNGGU');
+    await TiketAntrean.updateStatusTiket(app.ctx.db, t.id_tiket, 'DIPANGGIL');
+    const [s] = await app.ctx.db.query<{ status_antrean: string }>(`SELECT status_antrean FROM tiket_antrean WHERE id_tiket = $1`, [t.id_tiket]);
+    assert.equal(s.status_antrean, 'DIPANGGIL');
+    await TiketAntrean.updateStatusTiket(app.ctx.db, 'TKT-tidak-ada', 'SELESAI');
+  });
+  test('C16-UT08 getAntrean: antrean kosong -> ringkasan 0 (batas), akun pelanggan ditolak (negatif); autoDequeue tanpa tiket kedaluwarsa -> daftar kosong', async () => {
+    const kosong = await loginSebagai(app, 'martabak@antri.in', 'restoran123');
+    const r = await app.controllers.kelolaAntrean.getAntrean(kosong);
+    assert.equal(r.ringkasan.antreanAktif, 0);
+    assert.deepEqual(r.daftar, []);
+    const pel = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
+    assert.equal((await gagal(app.controllers.kelolaAntrean.getAntrean(pel))).status, 403);
+    await app.ctx.db.query(`UPDATE tiket_antrean SET waktu_dipanggil = NOW() WHERE status_antrean = 'DIPANGGIL'`);
+    assert.deepEqual(await app.controllers.kelolaAntrean.autoDequeue(), []);
+  });
+  test('C20-UT06 updateKapasitas: kuota negatif ditolak basis data; kuota 0 menutup, kuota 10000 tersimpan (batas)', async () => {
+    const id = await restoranId(app, 'Batagor Riri Viral');
+    await assert.rejects(Kuota.updateKapasitas(app.ctx.db, id, -1, 5, false));
+    const nol = await Kuota.updateKapasitas(app.ctx.db, id, 0, 5, false);
+    assert.equal(Kuota.isAntreanTutup(nol), true);
+    const maks = await Kuota.updateKapasitas(app.ctx.db, id, 10000, 5, false);
+    assert.equal(maks.kuota_maksimum, 10000);
+    assert.equal(Kuota.isAntreanTutup(maks), false);
+  });
+  test('C20-UT07 updateKapasitas: restoran tidak ada -> tidak ada baris yang berubah', async () => {
+    assert.equal(await Kuota.updateKapasitas(app.ctx.db, 'RST-tidak-ada', 10, 5, false), undefined);
+  });
+});

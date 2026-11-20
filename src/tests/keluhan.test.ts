@@ -18,6 +18,9 @@ import assert from 'node:assert/strict';
 import type { App } from '../server/app.js';
 import { appUji, gagal, loginSebagai, menuPertama, pesanDanBayar, restoranId } from './helpers.js';
 import { Restoran } from '../server/models/restoran.js';
+import { Menu } from '../server/models/menu.js';
+import { Kuota } from '../server/models/kuota.js';
+import { Antrean } from '../server/models/antrean.js';
 
 let app: App;
 before(async () => {
@@ -169,5 +172,30 @@ describe('Pelengkap C02 (setSoftDelete langsung)', () => {
     assert.ok(await Restoran.getDetailRestoran(app.ctx.db, id, true), 'tetap ada bila nonaktif disertakan');
     assert.equal(await Restoran.setSoftDelete(app.ctx.db, id), false);
     assert.equal(await Restoran.setSoftDelete(app.ctx.db, 'RST-tidak-ada'), false);
+  });
+});
+
+describe('Pelengkap C02 (negatif dan batas)', () => {
+  test('C02-UT11 getDaftarMenu: restoran tidak ada -> daftar kosong; restoran yang dihapus tidak memuat menu lagi (batas)', async () => {
+    assert.deepEqual(await Menu.getDaftarMenu(app.ctx.db, 'RST-tidak-ada'), []);
+    const id = await restoranId(app, 'Cilok Gang Senggol');
+    assert.ok((await Menu.getDaftarMenu(app.ctx.db, id)).length > 0);
+    await app.controllers.kelolaRestoran.hapusDataRestoran(id);
+    assert.deepEqual(await Menu.getDaftarMenu(app.ctx.db, id), []);
+  });
+  test('C02-UT12 ajukanPendaftaran/accountRegister (Restoran.buat): restoran baru lengkap dengan kuota dan antrean; akun tidak ada ditolak', async () => {
+    const data = { nama: 'Warung Uji C02', kategori: 'Makanan', lokasi: 'Dago', alamat: 'Jl. Uji No. 1, Bandung', email: 'uji-c02@contoh.id', noHp: null, idAkun: null };
+    const id = await Restoran.buat(app.ctx.db, data);
+    assert.equal((await Restoran.getDetailRestoran(app.ctx.db, id))?.nama_restoran, 'Warung Uji C02');
+    assert.equal((await Kuota.get(app.ctx.db, id))?.kuota_maksimum, 50);
+    assert.equal((await Antrean.getByRestoran(app.ctx.db, id))?.status_antrean, 'BUKA');
+    await assert.rejects(Restoran.buat(app.ctx.db, { ...data, idAkun: 'USR-tidak-ada' }));
+    assert.equal(await Restoran.getByAkun(app.ctx.db, 'USR-tidak-ada'), null);
+  });
+  test('C02-UT13 purgeData (setSoftDelete) pada ID tidak ada tidak mengubah restoran lain', async () => {
+    const hitung = async () => (await app.ctx.db.query<{ n: number }>(`SELECT COUNT(*)::int AS n FROM menu WHERE aktif`))[0].n;
+    const sebelum = await hitung();
+    assert.equal(await Restoran.setSoftDelete(app.ctx.db, 'RST-tidak-ada'), false);
+    assert.equal(await hitung(), sebelum);
   });
 });
