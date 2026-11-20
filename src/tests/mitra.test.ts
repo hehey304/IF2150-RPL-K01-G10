@@ -134,3 +134,32 @@ describe('Pelengkap C12, C13', () => {
     assert.equal((await app.controllers.mitra.tolak(p.idPengajuan, 'abcde')).status, 'DITOLAK');
   });
 });
+
+describe('Pelengkap C12, C13, C15 (normal, batas, negatif)', () => {
+  const berkas = (jenis: string) => ({ fieldname: jenis, originalname: `${jenis}.pdf`, mimetype: 'application/pdf', size: 1000, path: '/tmp/tidak-ada' });
+  const lengkap = { namaRestoran: 'ABC', kategori: 'Kue', lokasi: 'Dago', alamat: 'Jl. Dago 1', emailKontak: 'ok@contoh.id', noHp: '081600000123',
+    daftarMenu: JSON.stringify([{ namaMenu: 'Kue', harga: '500' }]) };
+  test('C12-UT11 validasiKelengkapan: data lengkap dengan nama 3 karakter, alamat 10 karakter, harga Rp500 -> tanpa galat; batas bawah dilanggar -> galat', () => {
+    const ok = app.controllers.mitra.validasiKelengkapan(lengkap, [berkas('nib'), berkas('izinUsaha')]);
+    assert.deepEqual(ok.galat, {});
+    const salah = app.controllers.mitra.validasiKelengkapan(
+      { ...lengkap, namaRestoran: 'AB', alamat: 'Jl. Dago', daftarMenu: JSON.stringify([{ namaMenu: 'Kue', harga: '499' }]) },
+      [berkas('nib'), berkas('izinUsaha')]);
+    assert.deepEqual(Object.keys(salah.galat).sort(), ['alamat', 'daftarMenu', 'namaRestoran']);
+  });
+  test('C13-UT08 unggahDokumen langsung: dokumen tersimpan untuk pengajuan yang ada; pengajuan tidak ada ditolak', async () => {
+    const [p] = await app.controllers.mitra.daftarPengajuan();
+    const hitung = async () => (await app.ctx.db.query<{ n: number }>(`SELECT COUNT(*)::int AS n FROM dokumen_verifikasi WHERE id_pengajuan = $1`, [p.id_pengajuan]))[0].n;
+    const sebelum = await hitung();
+    await DokumenVerifikasi.unggahDokumen(app.ctx.db, { idPengajuan: p.id_pengajuan, jenis: 'foto', namaFile: 'foto.png', path: '/tmp/foto.png', mime: 'image/png' });
+    assert.equal(await hitung(), sebelum + 1);
+    await assert.rejects(DokumenVerifikasi.unggahDokumen(app.ctx.db, { idPengajuan: 'PGJ-tidak-ada', jenis: 'foto', namaFile: 'foto.png', path: '/tmp/foto.png', mime: 'image/png' }));
+  });
+  test('C15-UT05 kirimEmail: isi pesan sangat panjang (5000 karakter) tercatat utuh berstatus TERKIRIM (batas)', async () => {
+    const penerima = 'panjang@contoh.id';
+    await new NotifikasiEmail(app.ctx.db, false).kirimEmail({ penerima, jenis: 'MITRA_DITOLAK', subjek: 'Uji panjang', isiPesan: 'x'.repeat(5000) });
+    const [r] = await app.ctx.db.query<{ status: string; panjang: number }>(`SELECT status, LENGTH(isi_pesan)::int AS panjang FROM log_notifikasi WHERE penerima = $1`, [penerima]);
+    assert.equal(r.status, 'TERKIRIM');
+    assert.equal(r.panjang, 5000);
+  });
+});

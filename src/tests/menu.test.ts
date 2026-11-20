@@ -104,7 +104,40 @@ describe('Pelengkap C03, C24', () => {
   test('C24-UT08 handleFetchMenuDetail ada pada kelas (DPPL C24)', { todo: 'handleFetchMenuDetail belum diimplementasikan pada KelolaMenuController' }, () => {
     assert.equal(typeof (app.controllers.menu as unknown as Record<string, unknown>).handleFetchMenuDetail, 'function');
   });
-  test('C03-UT11 cekStok ada pada kelas Menu (DPPL C03)', { todo: 'cekStok belum diimplementasikan; hanya isTersedia' }, () => {
-    assert.equal(typeof (Menu as unknown as Record<string, unknown>).cekStok, 'function');
+  test('C03-UT11 cekStok (digabung dalam isTersedia): data menu nyata, jumlah sama dengan stok diterima, stok + 1 ditolak', async () => {
+    const menu = await menuPertama(app, await restoranId(app, 'Ayam Geprek Bu Rini'));
+    const baris = (await Menu.getInfoMenu(app.ctx.db, menu.menu_id))!;
+    assert.equal(Menu.isTersedia(baris, baris.stok), true);
+    assert.equal(Menu.isTersedia(baris, baris.stok + 1), false);
+  });
+});
+
+describe('Pelengkap C03 (negatif dan batas)', () => {
+  test('C03-UT12 hapusMenu: restoran lain atau ID tidak ada -> false; pemilik -> true; hapus ulang -> false', async () => {
+    const pemilik = await restoranId(app, 'Ayam Geprek Bu Rini');
+    const lain = await restoranId(app, 'Bakso Mang Ujang');
+    const m = await Menu.tambahMenu(app.ctx.db, pemilik, { namaMenu: 'Menu Hapus Uji', deskripsiMenu: '', kategoriMenu: 'Uji', harga: 5000, stok: 5 });
+    assert.equal(await Menu.hapusMenu(app.ctx.db, lain, m.menu_id), false);
+    assert.equal((await Menu.getInfoMenu(app.ctx.db, m.menu_id))?.aktif, true);
+    assert.equal(await Menu.hapusMenu(app.ctx.db, pemilik, 'MNU-tidak-ada'), false);
+    assert.equal(await Menu.hapusMenu(app.ctx.db, pemilik, m.menu_id), true);
+    assert.equal(await Menu.hapusMenu(app.ctx.db, pemilik, m.menu_id), false);
+  });
+  test('C03-UT13 tambahMenu: harga Rp499 ditolak, Rp500 dengan stok 0 diterima (batas)', async () => {
+    const resto = await loginSebagai(app, 'geprek@antri.in', 'restoran123');
+    const e = await gagal(app.controllers.menu.handleAddMenu(resto, { namaMenu: 'Batas Harga', harga: '499', stok: '1' }));
+    assert.equal(e.status, 400);
+    assert.ok(e.details.fields.harga);
+    const ok = await app.controllers.menu.handleAddMenu(resto, { namaMenu: 'Batas Harga Sah', harga: '500', stok: '0' });
+    assert.equal(ok.harga, 500);
+    assert.equal(ok.stok, 0);
+  });
+  test('C03-UT14 updateInfoMenu: stok 0 (batas) tersimpan; menu yang sudah dihapus -> null (negatif)', async () => {
+    const id = await restoranId(app, 'Ayam Geprek Bu Rini');
+    const m = await Menu.tambahMenu(app.ctx.db, id, { namaMenu: 'Menu Batas Uji', deskripsiMenu: '', kategoriMenu: 'Uji', harga: 500, stok: 9 });
+    const ubah = await Menu.updateInfoMenu(app.ctx.db, id, m.menu_id, { namaMenu: 'Menu Batas Uji', deskripsiMenu: '', kategoriMenu: 'Uji', harga: 500, stok: 0 });
+    assert.equal(ubah?.stok, 0);
+    await Menu.hapusMenu(app.ctx.db, id, m.menu_id);
+    assert.equal(await Menu.updateInfoMenu(app.ctx.db, id, m.menu_id, { namaMenu: 'X', deskripsiMenu: '', kategoriMenu: 'Uji', harga: 500, stok: 1 }), null);
   });
 });

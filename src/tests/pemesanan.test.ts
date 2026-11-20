@@ -9,7 +9,7 @@
 import { after, before, describe, test } from 'node:test';
 import assert from 'node:assert/strict';
 import type { App } from '../server/app.js';
-import { validasiJadwalBooking } from '../server/models/pesanan.js';
+import { Pesanan, validasiJadwalBooking } from '../server/models/pesanan.js';
 import { appUji, gagal, loginSebagai, menuPertama, pesanDanBayar, restoranId } from './helpers.js';
 
 let app: App;
@@ -117,5 +117,50 @@ describe('Pelengkap C06', () => {
     const lain = await loginSebagai(app, 'dinda@contoh.id', 'pelanggan123');
     const [milik] = await app.controllers.pemesanan.daftarPesananSaya(user);
     assert.equal((await gagal(app.controllers.pemesanan.batalkanPesanan(lain, milik.pesanan_id))).status, 403);
+  });
+});
+
+describe('Pelengkap C06, C09 (normal, batas, negatif)', () => {
+  test('C06-UT13 getDetailPesanan: pesanan lunas memuat item, restoran, pembayaran, dan tiket; ID tidak ada -> null', async () => {
+    const resto = await restoranId(app, 'Batagor Riri Viral');
+    const menu = await menuPertama(app, resto);
+    const { pesanan } = await pesanDanBayar(app, 'yoga@contoh.id', { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 1 }] });
+    const d = await Pesanan.getDetailPesanan(app.ctx.db, pesanan.pesanan_id);
+    assert.equal(d?.items.length, 1);
+    assert.equal(d?.nama_restoran, 'Batagor Riri Viral');
+    assert.ok(d?.pembayaran);
+    assert.ok(d?.tiket);
+    assert.equal(await Pesanan.getDetailPesanan(app.ctx.db, 'PSN-tidak-ada'), null);
+  });
+  test('C06-UT14 updateStatus: DIKONFIRMASI -> SELESAI tersimpan; status di luar daftar ditolak (negatif)', async () => {
+    const resto = await restoranId(app, 'Batagor Riri Viral');
+    const menu = await menuPertama(app, resto);
+    const { pesanan } = await pesanDanBayar(app, 'seblak1@contoh.id', { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 1 }] });
+    await Pesanan.updateStatus(app.ctx.db, pesanan.pesanan_id, 'SELESAI');
+    assert.equal((await Pesanan.getById(app.ctx.db, pesanan.pesanan_id))?.status_pemesanan, 'SELESAI');
+    await assert.rejects(Pesanan.updateStatus(app.ctx.db, pesanan.pesanan_id, 'NGAWUR' as never));
+  });
+  test('C06-UT15 buatPesanan: jumlah sama dengan stok diterima, stok + 1 ditolak 409 (batas)', async () => {
+    const user = await loginSebagai(app, 'pelanggan@antri.in', 'pelanggan123');
+    const resto = await restoranId(app, 'Cilok Gang Senggol');
+    const menu = await menuPertama(app, resto);
+    await app.ctx.db.query(`UPDATE menu SET stok = 3 WHERE menu_id = $1`, [menu.menu_id]);
+    const ok = await app.controllers.pemesanan.buatPesanan(user, { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 3 }] });
+    assert.equal(ok!.mode_pemesanan, 'TAKEAWAY');
+    const e = await gagal(app.controllers.pemesanan.buatPesanan(user, { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 4 }] }));
+    assert.equal(e.status, 409);
+    await app.ctx.db.query(`UPDATE menu SET stok = 30 WHERE menu_id = $1`, [menu.menu_id]);
+  });
+  test('C09-UT08 cetakRincianTiket (getTiket): pemilik melihat tiket dan bukti; orang lain 403; tiket tidak ada 404', async () => {
+    const resto = await restoranId(app, 'Batagor Riri Viral');
+    const menu = await menuPertama(app, resto);
+    const { user, hasil } = await pesanDanBayar(app, 'bima@contoh.id', { restoranId: resto, mode: 'TAKEAWAY', items: [{ menuId: menu.menu_id, jumlah: 1 }] });
+    const idTiket = (hasil as { idTiket: string | null }).idTiket!;
+    const r = await app.controllers.pemesanan.getTiket(user, idTiket);
+    assert.equal(r.tiket.id_tiket, idTiket);
+    assert.equal(r.pesanan.bukti?.status_pelunasan, 'LUNAS');
+    const lain = await loginSebagai(app, 'dinda@contoh.id', 'pelanggan123');
+    assert.equal((await gagal(app.controllers.pemesanan.getTiket(lain, idTiket))).status, 403);
+    assert.equal((await gagal(app.controllers.pemesanan.getTiket(user, 'TKT-tidak-ada'))).status, 404);
   });
 });

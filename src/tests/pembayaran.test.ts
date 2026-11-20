@@ -190,3 +190,12 @@ describe('Pelengkap C07, C08', () => {
     assert.equal(await app.controllers.pembayaran.cekTimeout(), 0);
   });
 });
+
+describe('Pelengkap C07 (batas nominal)', () => {
+  test('C07-UT14 buatTagihan: pesanan satu item termurah -> nominal tagihan = harga + biaya layanan (total terkecil)', async () => {
+    const a = await tagihan('pelanggan@antri.in', 'EWALLET', 1);
+    const info = await gw.infoCheckout(a.idGw);
+    assert.equal(info.jumlah, a.menu.harga + app.ctx.config.biayaLayanan);
+    assert.equal(a.pesanan.total_harga, info.jumlah);
+  });
+});
