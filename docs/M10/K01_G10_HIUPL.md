@@ -58,7 +58,7 @@ Dipersiapkan oleh:
 
 | Revisi | Deskripsi |
 | :--- | :--- |
-| *A* | *Deskripsikan perubahan yang dilakukan dari dokumen sebelumnya pada dokumen ini. Jika tidak terdapat perubahan, harap kosongkan tabel.* |
+| *A* |  |
 | *B* |  |
 | *C* |  |
 | ... |  |
@@ -95,7 +95,7 @@ Tabel 1.3. Definisi Istilah dan Singkatan
 | *...* | *...* |
 
 ## 1.4 Aturan Penomoran
-Tuliskan aturan penomoran (ID) yang digunakan dalam dokumen ini. Gunakan pola ID yang **sama** dengan yang sudah dipakai pada dokumen-dokumen sebelumnya (SKPL, APL, DPPL), kecuali untuk ID pengujian yang baru diperkenalkan pada dokumen ini.
+
 
 Tabel 1.4. Aturan Penomoran
 
@@ -113,7 +113,7 @@ Tabel 1.4. Aturan Penomoran
 | *...* | *...* | *...* |
 
 ## 1.5 Referensi
-Cantumkan daftar buku, panduan, atau dokumentasi lain yang dirujuk dalam pembuatan dokumen dan pengembangan P/L, **minimal dokumen SKPL, APL, DPPL, dan Implementasi (Tugas 9)**. Tambahkan dokumentasi *framework*/*library*/*testing tool* atau referensi lain apabila digunakan.
+
 SKPL.md <br>APL.md <br>DPPL2.md<br>Implementasi.md<br>
 Pressman, R. S., _Software Engineering: A Practitioner's Approach_, _8th Edition_, McGraw-Hill, 2015.  
 Sommerville, I., _Software Engineering_, _10th Edition_, Pearson, 2016.  
@@ -126,10 +126,6 @@ Dokumen ini disusun dalam lima bab. Bab 1 berisi pendahuluan yang mencakup tujua
 ---
 
 # BAB 2: Deskripsi Umum Perangkat Lunak
-
-Bagian ini diisi dengan *System Overview*, dalam bentuk gambar dan narasi yang memberikan gambaran tentang aplikasi dan konteksnya. **Batasan dan keterkaitan** antara sistem yang dibangun dengan sistem lain di luarnya harus jelas. Deskripsi umum sistem perlu dilengkapi dengan pemodelan kasus yang dihadapi, seperti *use case diagram*. Berikan narasi yang jelas untuk setiap gambar yang ditampilkan.
-
-Bagian ini dapat menyalin atau meringkas dari dokumen SKPL atau DPPL.
 
 ## Gambaran Sistem
 
@@ -192,11 +188,8 @@ Sistem Informasi Pemesanan dan Manajemen Antrean Restoran merupakan sistem yang 
 
 # BAB 3: Implementasi
 
-Bagian ini diisi dengan informasi tentang elemen P/L yang dikembangkan (*executable files*, *configuration files*, *data files*, dan sebagainya) serta perubahannya terhadap rancangan pada DPPL (jika ada).
-
 ## 3.1 Lingkungan Implementasi
 
-Tuliskan *hardware* dan *software* yang digunakan untuk implementasi, mencakup *operating system*, bahasa pemrograman beserta versinya, *framework*/*library*, DBMS, *development tools*, dan *version control*. Lingkungan ini harus konsisten dengan **Subbab 2.1 DPPL**; jelaskan jika ada perubahan. Cantumkan juga *framework* dan alat pengujian yang dipakai.
 
 Tabel 3.1. Lingkungan Implementasi
 
@@ -208,11 +201,9 @@ Tabel 3.1. Lingkungan Implementasi
 | *Framework/Library* | *Node.js 20 LTS, Express 4.22.3, bcryptjs 3.0.3* |
 | *DBMS* | *PostgreSQL 15+* |
 | *Development Tools* | *Visual Studio Code, GitHub* |
-| *Testing Tools* | *`node:test` (`npm test`, `npm run test:pg` untuk PostgreSQL), `npm run profile` (`performance.now()` dan `EXPLAIN ANALYZE`), middleware `Server-Timing` untuk waktu respons API, [isi: Chrome DevTools dan alat coverage yang dipakai]* |
+| *Testing Tools* | *`node:test` (`npm test`, `npm run test:pg` untuk PostgreSQL), `npm run profile` (`performance.now()` dan `EXPLAIN ANALYZE`), middleware `Server-Timing` untuk waktu respons API* |
 
 ## 3.2 Implementasi Modul
-
-Daftar modul/kelas yang **TELAH** diimplementasikan. Gunakan nama dan ID kelas yang sama dengan DPPL, dan konsisten dengan Tabel B.5 pada dokumen Implementasi (Tugas 9).
 
 Tabel 3.2. Implementasi Modul
 
@@ -262,8 +253,6 @@ Tabel 3.2. Implementasi Modul
 | 42 | C42 | KeluhanDashboardPage | `src/client/views/keluhanView.ts` | - |
 
 ## 3.3 Implementasi Antarmuka
-
-Daftar antarmuka yang telah diimplementasikan. Gunakan ID dan nama layar yang sama dengan ID dan nama layar pada tugas DPPL.
 
 Tabel 3.3. Implementasi Antarmuka
 
@@ -1558,7 +1547,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 
 # BAB 5: Traceability
 
-Petakan setiap KF ke KNF, use case, kelas perancangan, file implementasi, dan test case. Tabel traceability berikut akan menjadi sarana verifikasi KF. Setiap KF memiliki minimal satu test case dan dinyatakan terpenuhi apabila **seluruh** test case terkaitnya berkesimpulan `Pass`. KF yang tidak diimplementasikan tetap dicantumkan beserta alasannya.
 
 Tabel 5.1. Matriks Kerunutan KF terhadap Implementasi dan Pengujian
 
