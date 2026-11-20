@@ -994,22 +994,268 @@ Tabel 4.3.2. Hasil Pengujian Integrasi
 
 Pengujian use case dilakukan pada seluruh skenario normal dan alternatif sesuai Subbab 4.4 SKPL, dengan minimal satu test case untuk setiap skenario. Kolom ID KF menunjukkan KF yang diverifikasi oleh test case tersebut.
 
-### 4.4.1 Use Case [Nama Use Case 1]
+Pengujian ini berada pada tingkat **sistem**: aplikasi dirakit utuh (basis data dengan data contoh, *payment gateway sandbox*, dan notifikasi email), lalu diuji dari luar sesuai skenario use case pada SKPL. Test case dirancang dengan teknik kotak hitam:
 
-**ID Use Case:** *[UC01 sesuai SKPL]*  
-**Nama Use Case:** *[Nama use case sesuai SKPL]*
+- **Partisi ekuivalen.** Satu wakil untuk setiap kelompok masukan yang diperlakukan sama oleh spesifikasi, misalnya peran pengguna (pelanggan, restoran, admin), mode pemesanan (dine-in, takeaway, booking), dan metode pembayaran (e-wallet, virtual account, kartu).
+- **Analisis nilai batas.** Batas yang disebut spesifikasi diuji di kedua sisinya, misalnya booking hari ke-7 dan ke-8, kata sandi 7 dan 8 karakter, stok 0 dan 1, rating 4,4 dan 4,5, dokumen tepat 5 MB dan sedikit di atasnya, serta kuota sama dengan dan lebih satu dari jumlah tiket hari ini.
 
-Tabel 4.4.1. Hasil Pengujian Use Case [UC01]
+Hasil yang diharapkan ditulis dari SKPL **sebelum** aplikasi dijalankan, bukan disalin dari keluaran aplikasi. Bila SKPL tidak menentukan suatu hasil, acuan lain (KF atau DPPL) disebutkan pada sel hasil yang diharapkan. Bila SKPL bermakna ganda, bacaan yang dipakai dicatat sebagai asumsi di bawah tabel use case yang bersangkutan.
+
+Kolom Prosedur Pengujian ditulis sebagai langkah aktor. Langkah yang sama dijalankan otomatis oleh test di `src/tests/usecase.test.ts` (nama setiap test diawali ID pengujiannya, misalnya `[UC01-TC01]`) melalui REST API yang dipanggil antarmuka web, lalu diperiksa dari respons, data tersimpan, dan *event real-time*. Bagian hasil yang berupa tampilan (dialog konfirmasi, pesan, pengalihan halaman) dibuktikan dengan tangkapan layar antarmuka pada Subbab 4.6. Tiga test case yang hanya berupa menekan "Batal" pada dialog (UC06-TC02, UC12-TC02, UC15-TC02) tidak mengirim permintaan ke server, sehingga diuji lewat antarmuka.
+
+Cara menjalankan pengujian use case: `cd src && npm test` (seluruh test), atau `npx tsx --test tests/usecase.test.ts` (hanya use case).
+
+Lokasi file test: `src/tests/usecase.test.ts`.
+
+Notasi H pada kolom Masukan berarti tanggal pelaksanaan pengujian (19 November 2026), dan H+7 berarti tujuh hari setelahnya. Batas waktu pembayaran (UC02-TC07) dan batas hadir 30 menit (UC06-TC03) tidak ditunggu sungguhan: stempel waktunya dimundurkan langsung di basis data, lalu pemeriksaan sistem dijalankan. Akun uji berasal dari data contoh, dengan kata sandi `pelanggan123` untuk pelanggan, `restoran123` untuk restoran, dan `admin12345` untuk admin.
+
+### 4.4.1 Use Case Mencari dan Filter Resto
+
+**ID Use Case:** UC01  
+**Nama Use Case:** Mencari dan filter resto
+
+Tabel 4.4.1. Hasil Pengujian Use Case UC01
 
 | ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| *UC01-TC01* | *KF01* | *Normal* | *1. Buka halaman login.<br>2. Masukkan kredensial.<br>3. Klik tombol "Login".* | *User: rpl@gmail.com<br>Pass: 123456* | *Pengguna diarahkan ke Halaman Dashboard.* | *Pengguna diarahkan ke Halaman Dashboard sesuai hasil yang diharapkan.* | *Pass* |
-| *UC01-TC02* | *KF01* | *Alternatif 1: [Nama skenario]* | *[Langkah-langkah pengujian]* | *[Data masukan]* | *[Hasil yang diharapkan]* | *[Hasil aktual]* | *[Pass/Fail. Jika Fail: penjelasan dan solusi]* |
-| *...* | *...* | *...* | *...* | *...* | *...* | *...* | *...* |
+| UC01-TC01 | KF01 | Normal: cari dengan kata kunci | 1. Buka Beranda.<br>2. Ketik kata kunci pada kolom pencarian.<br>3. Klik "Cari". | Kata kunci: `bakso` | Daftar hasil memuat Bakso Mang Ujang dan tidak memuat restoran yang tidak berkaitan dengan bakso (mis. Kopi Senja Braga). | Hasil memuat Bakso Mang Ujang; Kopi Senja Braga tidak muncul. | Pass |
+| UC01-TC02 | KF01 | Normal: filter rating (nilai batas 4,5) | 1. Buka Beranda.<br>2. Klik filter "Rating 4.5+". | Filter rating ≥ 4,5 | Restoran ber-rating tepat 4,5 (Kopi Senja Braga, Batagor Riri Viral) tetap tampil. Restoran ber-rating 4,4 (Martabak Kubang 99) dan 4,3 (Cilok Gang Senggol) tidak tampil. (Ambang 4,5 mengikuti filter "Rating 4.5+" pada rancangan antarmuka I-05.) | Kopi Senja Braga dan Batagor Riri Viral tampil; Martabak Kubang 99 dan Cilok Gang Senggol tidak tampil; semua hasil ber-rating ≥ 4,5. | Pass |
+| UC01-TC03 | KF01 | Normal: filter jenis makanan | 1. Buka Beranda.<br>2. Klik filter kategori "Mie". | Kategori: Mie | Hanya restoran berkategori Mie (Mie Kocok Pak Haji) yang tampil. | Hasil hanya Mie Kocok Pak Haji. | Pass |
+| UC01-TC04 | KF01, KF02 | Normal: membuka detail restoran (langkah 2) | 1. Lakukan UC01-TC01.<br>2. Klik kartu Bakso Mang Ujang. | Restoran: Bakso Mang Ujang | Halaman detail menampilkan informasi menu (nama, harga, ketersediaan), rating, ulasan, dan status antrean saat ini (jumlah antrean, estimasi tunggu, meja tersisa). | Detail memuat rating 4,8 beserta jumlah ulasan, status antrean, jumlah antrean, estimasi tunggu, meja tersisa, dan menu lengkap dengan harga dan stok; daftar ulasan dapat dimuat. | Pass |
+| UC01-TC05 | KF02 | Normal: restoran yang belum disetujui admin | Prasyarat: pengajuan "Surabi Enhaii" masih menunggu verifikasi (data awal).<br>1. Buka Beranda.<br>2. Cari "Surabi". | Kata kunci: `Surabi` | Surabi Enhaii tidak tampil pada daftar restoran karena belum disetujui admin. (Setelah disetujui, lihat UC05-TC02.) | Hasil pencarian kosong. | Pass |
+| UC01-TC06 | KF01 | Alternatif 1: hasil pencarian tidak ditemukan | 1. Buka Beranda.<br>2. Cari kata kunci yang tidak ada di sistem. | Kata kunci: `sushi` | Muncul pesan "Restoran tidak ditemukan" disertai daftar restoran lain secara default, diurutkan dari yang paling viral. | Hasil kosong; daftar saran terisi dan terurut dari skor viral tertinggi. Antarmuka menampilkan "Restoran tidak ditemukan" beserta restoran yang sedang viral. | Pass |
+| UC01-TC07 | KF01 | Alternatif 1: mereset pencarian (langkah 2) | 1. Lakukan UC01-TC06.<br>2. Klik "Lihat semua ›" untuk mereset kata kunci dan filter. | - | Kembali ke langkah 1 skenario normal: daftar seluruh restoran aktif ditampilkan. | Seluruh 8 restoran aktif tampil kembali; Surabi Enhaii (belum disetujui) tidak termasuk. | Pass |
 
-### 4.4.2 Use Case [Nama Use Case 2]
+### 4.4.2 Use Case Melakukan Pemesanan dan Pembayaran Digital
 
-*[Lanjutkan untuk seluruh use case dengan pola yang sama, hingga 4.4.N.]*
+**ID Use Case:** UC02  
+**Nama Use Case:** Melakukan pemesanan dan pembayaran digital
+
+Tabel 4.4.2. Hasil Pengujian Use Case UC02
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC02-TC01 | KF05, KF06, KF08, KF10, KF11, KF12 | Normal: dine-in, bayar e-wallet | Prasyarat: login sebagai `pelanggan@antri.in`.<br>1. Buka detail Bakso Mang Ujang, tambah menu dan atur jumlahnya.<br>2. Buka Keranjang, pilih "Dine-in", atur jumlah rombongan.<br>3. Klik "Lanjut ke pembayaran".<br>4. Pilih "E-wallet", klik "Bayar".<br>5. Bayar pada simulator e-wallet. | Bakso Urat × 2 (@Rp25.000), Es Teh Manis × 1 (@Rp6.000); dine-in, 2 orang; e-wallet | Menu tercatat di keranjang. Total tagihan Rp58.000 (subtotal Rp56.000 + biaya layanan Rp2.000 sesuai konfigurasi `BIAYA_LAYANAN`). Tagihan dan batas waktu pembayaran ditampilkan. Setelah lunas, tampil halaman tiket berisi ID pesanan, nomor antrean, dan rincian pesanan. | Pesanan tersimpan dengan subtotal Rp56.000, biaya layanan Rp2.000, dan total Rp58.000. Tagihan Rp58.000 terbit dengan batas waktu. Setelah lunas, tiket terbit memuat ID pesanan, nomor antrean, dan 2 item pesanan. | Pass |
+| UC02-TC02 | KF07, KF10, KF13 | Normal: data pesanan tersimpan dan tampil di restoran | Prasyarat: catat stok Bakso Urat dan meja tersisa **sebelum** UC02-TC01.<br>1. Setelah UC02-TC01, login `bakso@antri.in`.<br>2. Buka "Dashboard Antrean" dan "Menu & Stok". | Pesanan dari UC02-TC01 | Pesanan UC02-TC01 tampil di dashboard restoran dengan nomor antrean dan rincian yang sama. Stok Bakso Urat berkurang tepat 2. Meja tersisa berkurang karena kuota meja dipotong oleh pesanan dine-in. | Pesanan tampil di dashboard restoran dengan rincian "Bakso Urat x2". Stok Bakso Urat berkurang 2 dan meja tersisa berkurang 1. | Pass |
+| UC02-TC03 | KF06, KF08, KF11, KF12 | Alternatif 1: pre-order takeaway, bayar virtual account | 1. Buka detail Martabak Kubang 99 (restoran tanpa meja dine-in).<br>2. Tambah menu, pilih "Takeaway".<br>3. Pilih "Virtual account", bayar nominal yang tepat. | Martabak Telor Spesial × 1 (@Rp45.000); takeaway; VA Rp47.000 | Pesanan diproses tanpa pemeriksaan kuota meja. Setelah lunas, tampil nomor panggilan pengambilan, ID pesanan, dan bukti pembayaran. | Restoran berkapasitas meja 0 tetap menerima takeaway. Total Rp47.000 lunas lewat VA. Tiket takeaway bernomor terbit beserta bukti pembayaran. | Pass |
+| UC02-TC04 | KF06, KF09, KF10 | Alternatif 2: booking tempat pada batas H+7, bayar kartu | 1. Buka detail Bakso Mang Ujang, tambah menu.<br>2. Pilih "Booking tempat", tanggal H+7, slot 19:00, 2 kursi.<br>3. Bayar dengan kartu. | Mie Bakso × 2 (@Rp22.000); booking H+7 pukul 19:00; kartu | Tanggal H+7 (batas terakhir yang sah) diterima. Setelah lunas, kuota meja pada jadwal tersebut terkunci dan tampil bukti reservasi berisi nomor booking, jadwal, dan rincian pesanan. | Booking H+7 pukul 19:00 diterima dan lunas (Rp46.000). Tiket berstatus Terjadwal sebagai bukti reservasi; slot 19:00 tercatat terpakai 1. | Pass |
+| UC02-TC05 | KF07 | Alternatif 3: stok menu habis saat checkout | 1. Pelanggan menambahkan menu ke keranjang.<br>2. Restoran mengubah stok menu itu menjadi 0.<br>3. Pelanggan klik "Lanjut ke pembayaran".<br>4. Pelanggan menghapus menu yang habis, lalu lanjut lagi. | Bakso Mercon × 1 dan Es Teh Manis × 1; stok Bakso Mercon diubah ke 0 | Langkah 3: checkout ditolak, menu ditandai habis, muncul pesan "Mohon maaf, terdapat menu pilihan yang telah habis". Langkah 4: total tagihan diperbarui dan pemesanan dapat dilanjutkan. | Langkah 3 ditolak dengan pesan "Mohon maaf, terdapat menu pilihan yang telah habis" dan Bakso Mercon ditandai habis. Langkah 4: total menjadi Rp8.000 dan pesanan tersimpan. | Pass |
+| UC02-TC06 | KF07 | Alternatif 3: jumlah pesanan melebihi stok (nilai batas) | 1. Restoran mengubah stok menu menjadi 2.<br>2. Pelanggan memesan 3 porsi.<br>3. Pelanggan menurunkan jumlah menjadi 2. | Mie Bakso Komplit: jumlah 3 lalu 2; stok 2 | Jumlah 3 (stok + 1) ditolak dengan pesan menu habis dan keterangan sisa stok. Jumlah 2 (sama dengan stok) diterima. | Jumlah 3 ditolak dengan pesan menu habis dan sisa stok 2; jumlah 2 diterima. | Pass |
+| UC02-TC07 | KF12 | Alternatif 4: batas waktu pembayaran habis | 1. Buat pesanan takeaway, pilih metode, klik "Bayar".<br>2. Biarkan pembayaran tidak diselesaikan hingga batas waktu terlewati (stempel batas waktu tagihan dimundurkan).<br>3. Periksa status pembayaran dan pesanan. | Seblak Original × 1; takeaway; e-wallet tidak dibayar | Muncul pesan "Batas waktu pembayaran habis. Transaksi dibatalkan". Pesanan berstatus dibatalkan dan tidak ada tiket antrean yang terbit. | Verifikasi pembayaran menjawab "Batas waktu pembayaran habis. Transaksi dibatalkan". Pesanan berstatus Dibatalkan dan tidak memiliki tiket. | Pass |
+| UC02-TC08 | KF12 | Alternatif 4: pembayaran gagal (ditolak) | 1. Buat pesanan takeaway, pilih "E-wallet", klik "Bayar".<br>2. Pada simulator e-wallet, klik "Tolak". | Seblak Original × 1; takeaway; e-wallet ditolak | Pesanan dibatalkan, tidak ada tiket antrean yang terbit, dan muncul pesan bahwa transaksi gagal/dibatalkan (lihat asumsi A2). | Status pembayaran Gagal; pesanan Dibatalkan dan tidak memiliki tiket. | Pass |
+| UC02-TC09 | KF09 | Alternatif 5: tanggal booking melebihi 7 hari (nilai batas H+8) | 1. Pilih "Booking tempat", periksa tanggal terakhir yang dapat dipilih.<br>2. Kirim permintaan booking H+8 langsung ke server. | Tanggal H+8, slot 19:00, 2 kursi | Tanggal H+8 tidak dapat dipilih. Permintaan langsung ke server ditolak dengan pesan bahwa reservasi hanya dapat dilakukan maksimal 7 hari sebelum kedatangan, dan tidak ada pesanan yang tersimpan. | Semua slot H+8 berstatus tidak tersedia. Permintaan langsung ditolak dengan pesan "Reservasi hanya dapat dilakukan maksimal 7 hari sebelum kedatangan"; jumlah pesanan tidak bertambah. | Pass |
+| UC02-TC10 | KF09 | Alternatif 5: slot booking sudah penuh | Prasyarat: kapasitas meja Bakso Mang Ujang diubah menjadi 1; `dinda@contoh.id` sudah booking H+2 pukul 19:00 dan lunas.<br>1. Pelanggan memilih H+2, slot 19:00.<br>2. Pelanggan memilih slot 20:00. | Tanggal H+2; slot 19:00 lalu 20:00 | Slot 19:00 ditolak dan muncul pesan bahwa kuota meja pada jam tersebut telah penuh. Slot 20:00 dapat dipilih. | Slot 19:00 berstatus "Penuh"; pemesanan pada slot itu ditolak dengan pesan "Reservasi hanya dapat dilakukan maksimal 7 hari sebelum kedatangan atau kuota meja pada jam tersebut telah penuh". Slot 20:00 tersedia dan diterima. | Pass |
+
+Asumsi dan catatan UC02:
+
+- **A1.** "Maksimal 7 hari ke depan" (KF09) dibaca inklusif: H+7 sah dan H+8 tidak sah.
+- **A2.** SKPL alternatif 4 memakai satu pesan, "Batas waktu pembayaran habis. Transaksi dibatalkan", untuk dua kejadian berbeda, yaitu kedaluwarsa dan gagal. Pesan tersebut dipakai sebagai acuan UC02-TC07. Untuk UC02-TC08, hasil yang diharapkan adalah pembatalan pesanan tanpa tiket. Usulan: teks SKPL alternatif 4 dipisahkan untuk kedua kejadian tersebut.
+- **C1.** Durasi batas waktu pembayaran (5 menit pada KNF07, sedangkan nilai bawaan `PAYMENT_TIMEOUT_MINUTES` adalah 15) diverifikasi pada Subbab 4.5, bukan di sini.
+
+### 4.4.3 Use Case Menampilkan Status Antrean
+
+**ID Use Case:** UC03  
+**Nama Use Case:** Menampilkan status antrean
+
+Tabel 4.4.3. Hasil Pengujian Use Case UC03
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC03-TC01 | KF03 | Normal: menampilkan informasi antrean (langkah 1) | 1. Login `pelanggan@antri.in`.<br>2. Buka "Antrean saya", pilih tiket di Bakso Mang Ujang. | Tiket A-007 (data awal) | Halaman status menampilkan nomor antrean pelanggan, nomor yang sedang dilayani, sisa antrean, estimasi waktu tunggu, dan rincian pesanan. | Status memuat nomor A-007, nomor yang sedang dilayani, sisa antrean 6, estimasi waktu tunggu, dan 2 item pesanan. | Pass |
+| UC03-TC02 | KF03, KF17 | Normal: pembaruan otomatis (langkah 2) | 1. Biarkan halaman status terbuka.<br>2. Restoran melakukan dequeue pelanggan terdepan. | Satu kali dequeue | Tanpa memuat ulang halaman, sisa antrean pelanggan berkurang 1 dan nomor yang sedang dilayani berganti. | Kanal *real-time* (Server-Sent Events) menerima event "dequeue"; sisa antrean berkurang 1 dan nomor yang dilayani bertambah. | Pass |
+| UC03-TC03 | KF03 | Normal: notifikasi giliran (langkah 2) | 1. Restoran melakukan dequeue berulang sampai tiket pelanggan menjadi terdepan.<br>2. Amati status dan notifikasi pelanggan. | Dequeue berulang | Saat tiket pelanggan menjadi terdepan, muncul notifikasi bahwa sudah giliran pelanggan untuk mengambil pesanan atau menuju restoran. | Tiket berstatus Dipanggil (giliranmu) dan notifikasi "Giliranmu! Nomor A-007 dipanggil" masuk ke pelanggan. | Pass |
+| UC03-TC04 | KF03 | Normal: validasi ID antrean (partisi tidak sah) | 1. Login sebagai `dinda@contoh.id`.<br>2. Buka status tiket milik `pelanggan@antri.in`. | ID tiket milik pelanggan lain | Akses ditolak; informasi antrean dan pesanan milik pelanggan lain tidak ditampilkan. | Status maupun detail tiket ditolak (403) tanpa data antrean. | Pass |
+
+### 4.4.4 Use Case Pendaftaran Mitra Restoran Baru
+
+**ID Use Case:** UC04  
+**Nama Use Case:** Pendaftaran mitra restoran baru
+
+Tabel 4.4.4. Hasil Pengujian Use Case UC04
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC04-TC01 | KF14 | Normal: pendaftaran lengkap | Dijalankan setelah UC04-TC02 s.d. TC04, sekaligus sebagai langkah 3 alternatif 1 (data diperbaiki lalu dikirim ulang).<br>1. Login `mitrabaru@antri.in`, buka "Pendaftaran Mitra".<br>2. Isi seluruh formulir dan unggah dokumen.<br>3. Klik "Daftar". | Nama: Warung Nasi Ampera Uji; kategori: Nasi; area: Coblong; telepon: 081234567890; alamat: Jl. Dipatiukur No. 10, Bandung; NIB dan izin usaha: PDF; menu: Nasi Ampera Rp20.000 | Data tersimpan dengan status "Menunggu Verifikasi" dan muncul pesan bahwa pendaftaran berhasil. Pengajuan tampil di daftar verifikasi admin. | Pengajuan tersimpan berstatus Menunggu dan tampil di daftar verifikasi admin. | Pass |
+| UC04-TC02 | KF14 | Alternatif 1: data tidak lengkap | 1. Isi formulir, kosongkan nama restoran dan jangan unggah NIB.<br>2. Klik "Daftar". | Nama restoran kosong; NIB tidak diunggah | Formulir tidak disimpan; kolom nama restoran dan NIB ditandai beserta masalahnya, dan muncul peringatan untuk melengkapi data. | Ditolak (400); kolom nama restoran dan NIB ditandai; pengajuan tidak tersimpan. | Pass |
+| UC04-TC03 | KF14 | Alternatif 1: format dokumen tidak sesuai | 1. Isi formulir lengkap, unggah NIB berformat .docx.<br>2. Klik "Daftar". | NIB: berkas .docx | Formulir tidak disimpan; kolom NIB ditandai dengan keterangan format harus PDF/JPG/PNG (acuan format: DPPL kelas C13). | Ditolak (400); kolom NIB ditandai "NIB harus berformat PDF/JPEG/PNG"; tidak tersimpan. | Pass |
+| UC04-TC04 | KF14 | Alternatif 1: ukuran dokumen di atas batas (nilai batas) | 1. Isi formulir lengkap, unggah NIB sedikit di atas 5 MB.<br>2. Klik "Daftar". | NIB: PDF 5.243.904 byte | Formulir tidak disimpan; kolom NIB ditandai bahwa ukuran melebihi 5 MB (batas 5 MB mengacu pada DPPL kelas C13). | Ditolak (400) dengan pesan umum "Ukuran berkas melebihi batas (dokumen maks. 5 MB, foto maks. 2 MB)" dan tidak tersimpan, **tetapi kolom NIB tidak ditandai**. | **Fail**. Batas 5 MB ditegakkan `multer` sebelum validasi formulir, sehingga galat tidak menandai kolom NIB. Solusi: `errorHandler` mengembalikan `fields` untuk kolom berkas yang melebihi batas (rincian di bawah tabel). |
+| UC04-TC05 | KF14 | Normal: ukuran dokumen tepat di batas (nilai batas) | Prasyarat: daftarkan akun Restoran baru `resto.batas@contoh.id`, lalu login.<br>1. Isi formulir lengkap, unggah NIB tepat 5 MB.<br>2. Klik "Daftar". | NIB: PDF 5.242.880 byte | Dokumen diterima; pengajuan tersimpan dengan status "Menunggu Verifikasi". | Diterima; pengajuan tersimpan berstatus Menunggu. | Pass |
+
+Penyebab Fail (UC04-TC04): batas ukuran berkas ditegakkan lebih dulu oleh `multer` (`limits.fileSize` pada `server/routes/mitra.ts`), sebelum validasi `DokumenVerifikasi.validasiFormat()`. Galat `LIMIT_FILE_SIZE` lalu dijawab oleh `server/middleware/errorHandler.ts` tanpa `fields`, sehingga formulir tidak dapat menandai kolom NIB seperti diminta SKPL alternatif 1 ("menandai bagian yang bermasalah"). Usulan: pada `errorHandler`, kembalikan juga `fields: { [err.field]: 'NIB melebihi ukuran maksimum 5 MB' }` (objek `MulterError` menyimpan nama kolom pada `err.field`), atau naikkan batas `multer` dan biarkan `validasiFormat()` yang menolak.
+
+### 4.4.5 Use Case Memverifikasi Pendaftaran Restoran
+
+**ID Use Case:** UC05  
+**Nama Use Case:** Memverifikasi pendaftaran restoran
+
+Tabel 4.4.5. Hasil Pengujian Use Case UC05
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC05-TC01 | KF15 | Normal: membuka detail pengajuan (langkah 1) | 1. Login `admin@antri.in`, buka "Verifikasi Mitra".<br>2. Pilih pengajuan Surabi Enhaii. | Pengajuan: Surabi Enhaii | Tampil rincian profil restoran, dokumen verifikasi (NIB dan izin usaha dapat dibuka), dan daftar menu yang diajukan (Surabi Oncom, Surabi Cokelat Keju). | Detail memuat alamat, email, telepon, dokumen NIB dan Izin usaha (terbuka sebagai PDF), serta menu Surabi Oncom dan Surabi Cokelat Keju. | Pass |
+| UC05-TC02 | KF15, KF16, KF02 | Normal: menyetujui pengajuan (langkah 2) | 1. Klik "Setujui", lalu konfirmasi.<br>2. Periksa log email.<br>3. Sebagai pelanggan, cari "Surabi". | Pengajuan: Surabi Enhaii | Status pengajuan menjadi "Disetujui". Email penerimaan tercatat terkirim ke surabi@antri.in. Surabi Enhaii tampil di daftar restoran pelanggan (kebalikan UC01-TC05). | Status Disetujui; log email "MITRA_DITERIMA" ke surabi@antri.in berstatus Terkirim; Surabi Enhaii muncul di pencarian. | Pass |
+| UC05-TC03 | KF15 | Alternatif 1: menolak tanpa alasan (partisi tidak sah) | 1. Pilih pengajuan Warung Nasi Ampera Uji.<br>2. Kosongkan alasan, klik "Tolak". | Alasan: kosong | Penolakan tidak diproses dan muncul pesan bahwa alasan penolakan wajib diisi; status tetap menunggu verifikasi. (Acuan: SKPL alternatif 1 langkah 2, admin memasukkan alasan penolakan.) | Ditolak (400) dengan kolom alasan ditandai; status tetap Menunggu. | Pass |
+| UC05-TC04 | KF15, KF16 | Alternatif 1: menolak dengan alasan | 1. Isi alasan, klik "Tolak".<br>2. Periksa log email.<br>3. Login `mitrabaru@antri.in`, buka "Pendaftaran Mitra". | Alasan: "Dokumen NIB tidak terbaca, mohon unggah ulang." | Status pengajuan menjadi "Ditolak". Email penolakan beserta alasannya tercatat terkirim. Akun pemohon melihat alasan penolakan. Restoran tidak tampil di daftar pelanggan. | Status Ditolak; log email "MITRA_DITOLAK" memuat alasan; akun pemohon melihat status Ditolak beserta alasannya; restoran tidak muncul di pencarian. | Pass |
+
+### 4.4.6 Use Case Mengelola Antrean
+
+**ID Use Case:** UC06  
+**Nama Use Case:** Mengelola antrean
+
+Tabel 4.4.6. Hasil Pengujian Use Case UC06
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC06-TC01 | KF04, KF17 | Normal: dequeue pelanggan terdepan | 1. Login `bakso@antri.in`, buka "Dashboard Antrean".<br>2. Klik "Dequeue terdepan".<br>3. Klik "Ya, dequeue". | Pelanggan terdepan A-001 | Langkah 2: muncul pesan konfirmasi dequeue. Langkah 3: pelanggan terdepan hilang dari daftar, pelanggan berikutnya menjadi terdepan, dan jumlah antrean aktif berkurang 1. | Dialog "Dequeue antrean A-001?" tampil (bukti UI UC06-TC02). A-001 keluar dari daftar, A-002 menjadi terdepan berstatus Dipanggil, dan antrean aktif berkurang 1. | Pass |
+| UC06-TC02 | KF04 | Alternatif 1: membatalkan dequeue | 1. Buka "Dashboard Antrean"; catat terdepan dan jumlah antrean.<br>2. Klik "Dequeue terdepan".<br>3. Klik "Batal". | - | Pesan konfirmasi tertutup; nomor terdepan dan jumlah antrean tidak berubah. | Dialog tertutup. Antrean aktif tetap 7 dan terdepan tetap A-001 (dicek lewat API sebelum dan sesudah). | Pass |
+| UC06-TC03 | KF04, KF17 | Alternatif 2: pelanggan tidak hadir (dequeue otomatis, nilai batas waktu) | 1. Pelanggan terdepan sudah dipanggil tetapi tidak hadir; restoran tidak melakukan dequeue.<br>2. Periksa antrean saat 29 menit sejak dipanggil.<br>3. Periksa lagi saat 31 menit.<br>4. Pelanggan tersebut membuka status antreannya. | Batas hadir 30 menit (`AUTO_DEQUEUE_MINUTES`) | Sebelum batas waktu, pelanggan terdepan tetap di antrean. Setelah batas waktu terlewati, sistem melakukan dequeue otomatis, pelanggan berikutnya menjadi terdepan, dan status antrean di sisi pelanggan ikut diperbarui. | Pada 29 menit tiket tetap Dipanggil. Pada 31 menit tiket berubah menjadi Dilewati, pelanggan berikutnya dipanggil, dan status di sisi pelanggan menjadi Dilewati dengan sisa antrean 0. | Pass |
+
+### 4.4.7 Use Case Mengatur Kuota Antrean dan Meja
+
+**ID Use Case:** UC07  
+**Nama Use Case:** Mengatur kuota antrean dan meja
+
+Tabel 4.4.7. Hasil Pengujian Use Case UC07
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC07-TC01 | KF18 | Normal: mengubah kuota dan kapasitas meja | 1. Login `bakso@antri.in`, buka "Kuota & Meja".<br>2. Ubah nilai, klik "Simpan pengaturan".<br>3. Muat ulang; sebagai pelanggan buka detail Bakso Mang Ujang. | Kuota: 30 → 40; meja: 12 → 10 | Langkah 1: kuota dan kapasitas meja saat ini tampil. Langkah 2: nilai baru tersimpan. Langkah 3: nilai baru tetap tersimpan dan informasi meja di halaman pelanggan ikut berubah. | Nilai awal 30/12 tampil. Kuota 40 dan meja 10 tersimpan dan tetap setelah dibaca ulang. Halaman pelanggan menunjukkan kapasitas meja 10 dengan meja tersisa terhitung ulang. | Pass |
+| UC07-TC02 | KF18 | Alternatif 1: kuota negatif, lalu diperbaiki | 1. Isi kuota -5, klik "Simpan pengaturan".<br>2. Perbaiki kuota menjadi 40, simpan. | Kuota: -5, lalu 40 | Langkah 1: pembaruan ditolak dan muncul peringatan agar kuota diisi dengan format yang valid; nilai tidak berubah. Langkah 2: nilai 40 tersimpan. | Ditolak dengan pesan "Input tidak valid. Masukkan angka bulat yang tidak negatif" dan kolom kuota ditandai; kuota tetap 40. Nilai 40 berhasil disimpan. | Pass |
+| UC07-TC03 | KF18 | Alternatif 1: kuota bukan angka | 1. Isi kuota dengan teks, klik "Simpan pengaturan". | Kuota: `abc` | Pembaruan ditolak dan muncul peringatan format kuota tidak valid; nilai tidak berubah. | Ditolak (400) dengan kolom kuota ditandai; kuota tetap 40. | Pass |
+| UC07-TC04 | KF18, KF08 | Alternatif 2: kuota 0 menutup antrean | 1. Isi kuota 0, simpan.<br>2. Sebagai pelanggan, buka detail restoran dan coba pesan dine-in dan takeaway. | Kuota: 0 | Tampilan kuota di sisi pelanggan berubah menjadi "Antrean penuh/Ditutup". Pesanan dine-in/takeaway baru ditolak. | Status antrean restoran menjadi Tutup. Pesanan dine-in dan takeaway ditolak dengan pesan "Antrean restoran sedang ditutup". | Pass |
+| UC07-TC05 | KF18, KF08 | Alternatif 2: booking saat kuota 0 | 1. Dengan kuota 0, pelanggan memilih "Booking tempat" untuk H+1 pukul 12:00 dan melanjutkan ke pembayaran. | Kuota: 0; booking H+1 pukul 12:00 | Sesuai SKPL alternatif 2, "tidak ada antrean atau pesanan baru yang bisa masuk ketika kuota ditutup", sehingga booking ditolak (lihat asumsi A3). | **Booking diterima** (200) dan pesanan tersimpan menunggu pembayaran. | **Fail**. `buatPesanan()` tidak memeriksa status antrean untuk mode booking, sehingga booking tetap diterima saat kuota 0. Solusi: tolak booking saat antrean ditutup, atau revisi SKPL bila booking hari lain memang boleh (rincian di bawah tabel). |
+| UC07-TC06 | KF18 | Alternatif 2: kuota sama dengan jumlah tiket hari ini (nilai batas) | 1. Catat jumlah tiket hari ini (T) di dashboard.<br>2. Isi kuota = T, simpan; coba pesan takeaway.<br>3. Isi kuota = T + 1, simpan; coba pesan lagi. | Kuota: T, lalu T + 1 | Kuota = T: status antrean penuh dan pesanan baru ditolak. Kuota = T + 1: status kembali dibuka dan pesanan baru dapat masuk. | Kuota = T: status Penuh dan takeaway ditolak dengan pesan "Kuota antrean restoran hari ini sudah penuh". Kuota = T + 1: status Buka dan takeaway diterima. | Pass |
+
+Asumsi UC07:
+
+- **A3.** SKPL alternatif 2 menyatakan tidak ada antrean atau pesanan baru yang bisa masuk saat kuota ditutup. Di sisi lain, kuota bersifat harian, sehingga booking untuk hari lain dapat dibaca sebagai pesanan di luar kuota hari ini. UC07-TC05 memakai bacaan SKPL apa adanya.
+
+Penyebab Fail (UC07-TC05): `PemesananController.buatPesanan()` hanya memeriksa status antrean Tutup/Penuh untuk mode selain booking (`if (mode !== 'BOOKING')`), sehingga booking tetap diterima saat kuota 0. Usulan: tim memutuskan bacaan yang dipakai (asumsi A3). Bila mengikuti SKPL, tolak booking saat antrean ditutup. Bila booking hari lain memang tetap boleh, revisi teks SKPL UC07 alternatif 2, lalu ubah hasil yang diharapkan UC07-TC05 dan uji ulang.
+
+### 4.4.8 Use Case Mengelola Stok dan Menu Makanan
+
+**ID Use Case:** UC08  
+**Nama Use Case:** Mengelola stok dan menu makanan
+
+Tabel 4.4.8. Hasil Pengujian Use Case UC08
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC08-TC01 | KF07 | Normal: mengubah informasi menu | 1. Login `bakso@antri.in`, buka "Menu & Stok".<br>2. Ubah harga Mie Bakso, klik "Simpan".<br>3. Sebagai pelanggan, buka detail restoran. | Mie Bakso: Rp22.000 → Rp23.000 | Daftar menu, stok, dan harga tampil. Harga baru tersimpan dan tampil di halaman pelanggan. | Harga awal Rp22.000 tampil; harga Rp23.000 tersimpan dan tampil di halaman pelanggan. | Pass |
+| UC08-TC02 | KF07 | Normal: mengubah stok | 1. Ubah kolom stok Bakso Mercon.<br>2. Muat ulang daftar menu. | Bakso Mercon: stok → 30 | Stok baru tersimpan dan tetap 30 setelah dimuat ulang. | Stok Bakso Mercon tersimpan 30. | Pass |
+| UC08-TC03 | KF07 | Alternatif 1: menambah menu baru | 1. Klik "+ Tambah menu", isi formulir, simpan.<br>2. Sebagai pelanggan, buka detail restoran. | Bakso Keju; kategori Bakso; Rp30.000; stok 20 | Menu baru tersimpan, tampil di daftar menu restoran dan di halaman pelanggan. | Bakso Keju (Rp30.000, stok 20) tampil di daftar menu restoran dan halaman pelanggan. | Pass |
+| UC08-TC04 | KF07 | Alternatif 2: menghapus menu | 1. Klik hapus pada Bakso Keju, konfirmasi.<br>2. Sebagai pelanggan, buka detail restoran. | Menu: Bakso Keju | Menu terhapus dari daftar restoran dan tidak lagi tampil di halaman pelanggan. | Bakso Keju hilang dari daftar menu restoran dan halaman pelanggan. | Pass |
+| UC08-TC05 | KF07 | Alternatif 3: stok diubah menjadi 0 (nilai batas) | 1. Ubah stok Mie Bakso menjadi 0.<br>2. Sebagai pelanggan, coba pesan Mie Bakso. | Mie Bakso: stok 0 | Stok 0 langsung tersimpan. Halaman pelanggan menandai Mie Bakso habis dan menu tidak dapat dipesan. | Stok 0 tersimpan dan terlihat oleh pelanggan; pemesanan ditolak dengan pesan "Mohon maaf, terdapat menu pilihan yang telah habis". | Pass |
+| UC08-TC06 | KF07 | Alternatif 3: stok 1 (nilai batas) | 1. Ubah stok Mie Bakso menjadi 1.<br>2. Pelanggan memesan 2 porsi, lalu 1 porsi. | Mie Bakso: stok 1 | Mie Bakso kembali tersedia dan dapat dipesan 1 porsi, tetapi tidak lebih dari 1. | Pesanan 2 porsi ditolak; pesanan 1 porsi diterima. | Pass |
+
+### 4.4.9 Use Case Menampilkan Dashboard Antrean Restoran
+
+**ID Use Case:** UC09  
+**Nama Use Case:** Menampilkan dashboard antrean restoran
+
+Tabel 4.4.9. Hasil Pengujian Use Case UC09
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC09-TC01 | KF13 | Normal: menampilkan daftar antrean (langkah 1) | Prasyarat: ada booking lunas H+1 pukul 12:00.<br>1. Login `bakso@antri.in`.<br>2. Buka "Dashboard Antrean". | - | Tampil daftar antrean beserta rincian pesanan, nomor antrean, kapasitas meja tersisa, dan meja yang sudah di-booking. | Dashboard memuat seluruh antrean aktif dengan nomor, nama pelanggan, mode, dan rincian pesanan; kapasitas meja 12 dan meja terisi; booking H+1 pukul 12:00 tampil. | Pass |
+| UC09-TC02 | KF13 | Normal: pembaruan tanpa memuat ulang (langkah 2) | 1. Biarkan dashboard terbuka.<br>2. Pelanggan memesan takeaway dan membayar lunas. | Es Teh Manis × 1, takeaway | Antrean baru muncul di dashboard tanpa memuat ulang halaman. | Kanal *real-time* menerima event "tiket-baru" dan pesanan baru langsung ada di daftar antrean. | Pass |
+| UC09-TC03 | KF13 | Alternatif 1: antrean kosong pada restoran baru | Prasyarat: Surabi Enhaii sudah disetujui.<br>1. Login `surabi@antri.in`.<br>2. Buka "Dashboard Antrean". | Restoran baru tanpa pesanan | Tampil pesan "Belum ada antrean saat ini". | Daftar antrean kosong (antrean aktif 0). Antarmuka menampilkan "Belum ada antrean saat ini". | Pass |
+
+### 4.4.10 Use Case Registrasi Akun
+
+**ID Use Case:** UC10  
+**Nama Use Case:** Registrasi akun
+
+Tabel 4.4.10. Hasil Pengujian Use Case UC10
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC10-TC01 | KF21 | Normal: registrasi pelanggan | 1. Buka halaman "Daftar".<br>2. Pilih peran Pelanggan, isi data, centang Syarat & Ketentuan.<br>3. Klik "Daftar". | Uji Pelanggan; uji.pelanggan@contoh.id; 081299990001; `rahasia123` | Formulir meminta nama lengkap, email, nomor telepon, dan kata sandi. Akun tersimpan, muncul notifikasi registrasi berhasil, dan pengguna diarahkan ke halaman login. | Akun tersimpan berperan Pelanggan dan dapat dipakai login. Antarmuka menampilkan "Registrasi berhasil. Silakan masuk." dan membuka halaman Masuk dengan email terisi. | Pass |
+| UC10-TC02 | KF21 | Normal: registrasi restoran (partisi peran) | 1. Pilih peran Restoran, isi data, klik "Daftar".<br>2. Login dengan akun tersebut. | Uji Resto; uji.resto@contoh.id; 081299990002; `rahasia123` | Registrasi berhasil. Setelah login, akun berperan Restoran (diarahkan ke "Pendaftaran Mitra"). | Akun tersimpan berperan Restoran; login berhasil tanpa restoran tertaut (belum bermitra). | Pass |
+| UC10-TC03 | KF21 | Alternatif 1: email sudah terdaftar | 1. Isi data dengan email terdaftar, klik "Daftar".<br>2. Klik tautan "Masuk". | Email: pelanggan@antri.in; telepon: 081299990003 | Pendaftaran ditolak dengan pesan "Email atau nomor telepon sudah terdaftar. Silakan gunakan akun lain atau lakukan login". Tautan "Masuk" mengarahkan ke halaman login. | Ditolak (409) dengan pesan tersebut; kolom email ditandai "Email sudah terdaftar". Tautan "Masuk" membuka halaman login. | Pass |
+| UC10-TC04 | KF21 | Alternatif 1: nomor telepon sudah terdaftar | 1. Isi data dengan nomor telepon terdaftar, klik "Daftar". | Email: uji.telepon@contoh.id; telepon: 081200000001 | Pendaftaran ditolak dengan pesan yang sama seperti UC10-TC03; akun tidak tersimpan. | Ditolak (409) dengan pesan yang sama; kolom telepon ditandai; email tersebut tidak dapat dipakai login. | Pass |
+| UC10-TC05 | KF21 | Alternatif 2: kata sandi 7 karakter (nilai batas) | 1. Isi data valid dengan kata sandi 7 karakter, klik "Daftar". | `abc1234` | Pendaftaran ditolak dengan pesan "Konfirmasi kata sandi tidak cocok atau kata sandi minimal 8 karakter". | Ditolak (400); kolom kata sandi memuat pesan tersebut. | Pass |
+| UC10-TC06 | KF21 | Alternatif 2: kata sandi tepat 8 karakter (nilai batas) | 1. Isi data valid dengan kata sandi 8 karakter, klik "Daftar". | `abcd1234` | Pendaftaran berhasil (8 karakter memenuhi syarat minimal). | Registrasi berhasil. | Pass |
+| UC10-TC07 | KF21 | Alternatif 2: konfirmasi kata sandi tidak cocok, lalu diperbaiki | 1. Isi konfirmasi kata sandi berbeda, klik "Daftar".<br>2. Perbaiki konfirmasi, klik "Daftar". | `rahasia123` dengan konfirmasi `rahasia124`, lalu `rahasia123` | Langkah 1: ditolak dengan pesan "Konfirmasi kata sandi tidak cocok atau kata sandi minimal 8 karakter". Langkah 2: pendaftaran berhasil. | Langkah 1 ditolak dengan pesan tersebut; langkah 2 berhasil. | Pass |
+
+Catatan UC10:
+
+- **C2.** SKPL Subbab 4.2 mencantumkan Admin sebagai aktor UC10, tetapi formulir registrasi hanya menyediakan peran Pelanggan dan Restoran; akun admin dibuat melalui data awal. Partisi peran Admin tidak dapat diuji melalui antarmuka. Hal ini perlu dikonfirmasi tim: revisi SKPL (admin tidak mendaftar sendiri) atau tambahkan mekanisme pembuatan akun admin.
+
+### 4.4.11 Use Case Login Akun
+
+**ID Use Case:** UC11  
+**Nama Use Case:** Login akun
+
+Tabel 4.4.11. Hasil Pengujian Use Case UC11
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC11-TC01 | KF21 | Normal: login pelanggan | 1. Buka halaman "Masuk".<br>2. Masukkan email dan kata sandi.<br>3. Klik "Masuk". | pelanggan@antri.in / pelanggan123 | Sesi terbentuk dan pengguna diarahkan ke Beranda pelanggan. | Sesi berperan Pelanggan terbentuk; antarmuka membuka Beranda. | Pass |
+| UC11-TC02 | KF21 | Normal: login restoran (partisi peran) | Sama dengan UC11-TC01. | bakso@antri.in / restoran123 | Sesi terbentuk dan pengguna diarahkan ke "Dashboard Antrean". | Sesi berperan Restoran dengan restoran tertaut; antarmuka membuka Dashboard Antrean. | Pass |
+| UC11-TC03 | KF21 | Normal: login admin (partisi peran) | Sama dengan UC11-TC01. | admin@antri.in / admin12345 | Sesi terbentuk dan pengguna diarahkan ke halaman admin ("Verifikasi Mitra"). | Sesi berperan Admin; antarmuka membuka Verifikasi Mitra. | Pass |
+| UC11-TC04 | KF21 | Alternatif 1: kata sandi salah, lalu diperbaiki | 1. Masukkan kata sandi salah, klik "Masuk".<br>2. Masukkan kata sandi benar, klik "Masuk". | pelanggan@antri.in / pelanggan124, lalu pelanggan123 | Langkah 1: akses ditolak dengan pesan "Email atau kata sandi yang Anda masukkan salah". Langkah 2: login berhasil. | Langkah 1 ditolak (401) tanpa token dan pesan tersebut tampil di formulir; langkah 2 berhasil. | Pass |
+| UC11-TC05 | KF21 | Alternatif 1: email tidak terdaftar | 1. Masukkan email tidak terdaftar, klik "Masuk". | tidakada@contoh.id / pelanggan123 | Akses ditolak dengan pesan yang sama seperti UC11-TC04. | Ditolak (401) dengan pesan yang sama. | Pass |
+
+### 4.4.12 Use Case Keluar Akun
+
+**ID Use Case:** UC12  
+**Nama Use Case:** Keluar akun
+
+Tabel 4.4.12. Hasil Pengujian Use Case UC12
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC12-TC01 | KF21 | Normal: pelanggan keluar akun | 1. Login `pelanggan@antri.in`, buka Profil.<br>2. Klik "Keluar dari akun".<br>3. Klik "Ya, keluar".<br>4. Buka `#/profil` lewat bilah alamat. | - | Langkah 2: muncul pesan konfirmasi keluar akun. Langkah 3: sesi dihapus dan pengguna diarahkan ke halaman login. Langkah 4: halaman profil tidak dapat dibuka dan pengguna diarahkan ke halaman login. | Dialog "Keluar dari akun?" tampil; setelah dikonfirmasi pengguna diarahkan ke halaman Masuk. Token lama ditolak (401), dan membuka Profil kembali diarahkan ke Masuk. | Pass |
+| UC12-TC02 | KF21 | Alternatif 1: membatalkan keluar akun | 1. Buka Profil, klik "Keluar dari akun".<br>2. Klik "Batal".<br>3. Buka "Antrean saya". | - | Pesan konfirmasi tertutup, pengguna tetap di halaman Profil, dan sesi tetap aktif. | Dialog tertutup dan halaman Profil tetap tampil. Sesi masih berlaku (`/auth/me` 200) dan Antrean saya dapat dibuka. | Pass |
+| UC12-TC03 | KF21 | Normal: restoran keluar akun (partisi peran) | 1. Login `bakso@antri.in`, buka "Akun".<br>2. Klik "Keluar dari akun", lalu "Ya, keluar". | - | Sesi dihapus dan pengguna diarahkan ke halaman login. | Logout berhasil; token lama ditolak (401) saat membuka dashboard restoran. | Pass |
+
+### 4.4.13 Use Case Penyampaian Keluhan Pelanggan
+
+**ID Use Case:** UC13  
+**Nama Use Case:** Penyampaian keluhan pelanggan
+
+Tabel 4.4.13. Hasil Pengujian Use Case UC13
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC13-TC01 | KF19 | Normal: mengirim keluhan | 1. Login `pelanggan@antri.in`, buka "Keluhan".<br>2. Pilih pesanan terkait dan kategori, isi keluhan.<br>3. Klik "Kirim keluhan". | Pesanan Bakso Mang Ujang; kategori Waktu tunggu; isi: "Estimasi 10 menit, tetapi saya menunggu 35 menit di lokasi." | Keluhan tersimpan, muncul pesan berhasil, dan keluhan tampil di "Keluhan saya" dengan status Baru sehingga dapat diperiksa admin. | Keluhan tersimpan berstatus Baru, tampil di "Keluhan saya" dan di daftar keluhan admin. | Pass |
+| UC13-TC02 | KF19 | Normal: formulir tidak lengkap (partisi tidak sah) | 1. Jangan pilih kategori, isi keluhan sangat singkat.<br>2. Klik "Kirim keluhan". | Kategori kosong; isi: "Lama" | Keluhan tidak tersimpan; kolom kategori dan isi ditandai. (SKPL tidak menyebut validasi; acuan: DPPL kelas C41.) | Ditolak (400); kolom kategori dan isi ditandai; jumlah keluhan tidak bertambah. | Pass |
+
+### 4.4.14 Use Case Penanggapan Keluhan Pelanggan
+
+**ID Use Case:** UC14  
+**Nama Use Case:** Penanggapan keluhan pelanggan
+
+Tabel 4.4.14. Hasil Pengujian Use Case UC14
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC14-TC01 | KF19 | Normal: menampilkan daftar keluhan | 1. Login `admin@antri.in`.<br>2. Buka menu "Keluhan". | - | Tampil daftar keluhan dari semua pelanggan. | Daftar memuat keluhan dari data awal dan keluhan baru dari pelanggan. | Pass |
+| UC14-TC02 | KF19 | Normal: membaca detail keluhan | 1. Klik salah satu keluhan berstatus Baru. | Keluhan baru | Detail keluhan tampil dan status berubah dari Baru menjadi Dibaca (acuan: aturan status keluhan pada DPPL kelas C30). | Detail tampil dan status menjadi Dibaca; status tersimpan (muncul pada filter Dibaca). | Pass |
+| UC14-TC03 | KF19 | Normal: menanggapi keluhan | 1. Isi tanggapan, klik "Kirim tanggapan".<br>2. Sebagai pelanggan, buka "Keluhan". | "Mohon maaf, kami sudah menindaklanjuti restoran terkait." | Status keluhan menjadi Ditanggapi dan pelanggan melihat tanggapan admin. (Acuan: KF19, "admin dapat memproses keluhan".) | Status Ditanggapi; pelanggan melihat tanggapan tersebut pada "Keluhan saya". | Pass |
+
+Catatan UC14:
+
+- **C3.** Skenario UC14 pada SKPL hanya memuat langkah menampilkan daftar keluhan, sedangkan KF19 menyebut admin dapat memproses keluhan. UC14-TC02 dan TC03 mengacu pada KF19. Usulan: tambahkan langkah membaca dan menanggapi keluhan ke skenario UC14 pada SKPL.
+
+### 4.4.15 Use Case Penghapusan Restoran
+
+**ID Use Case:** UC15  
+**Nama Use Case:** Penghapusan restoran
+
+Tabel 4.4.15. Hasil Pengujian Use Case UC15
+
+| ID Pengujian | ID KF | Skenario | Prosedur Pengujian | Masukan | Hasil yang Diharapkan | Hasil Pengujian | Kesimpulan |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| UC15-TC01 | KF20 | Normal: menghapus restoran | 1. Login `admin@antri.in`, buka "Kelola Restoran", pilih Seblak Teh Nining.<br>2. Klik "Hapus".<br>3. Klik "Hapus restoran" pada konfirmasi.<br>4. Sebagai pelanggan, cari "Seblak". | Restoran: Seblak Teh Nining | Langkah 1: tampil detail profil restoran beserta tombol "Hapus Restoran". Langkah 2: muncul pesan konfirmasi penghapusan. Langkah 3: muncul pesan "Restoran berhasil dihapus" dan status restoran menjadi nonaktif. Langkah 4: restoran tidak lagi tampil di daftar pelanggan. | Profil ringkas restoran (nama, area, kategori, rating, keluhan, tanggal bergabung, status) tampil dalam baris tabel beserta tombol "Hapus". Dialog konfirmasi tampil; setelah dikonfirmasi muncul "Restoran berhasil dihapus" dan status menjadi Nonaktif. Seblak Teh Nining tidak muncul di pencarian dan halaman detailnya tidak dapat dibuka (404). | Pass |
+| UC15-TC02 | KF20 | Alternatif 1: membatalkan penghapusan | 1. Buka "Kelola Restoran", klik "Hapus" pada Cilok Gang Senggol.<br>2. Klik "Batal". | Restoran: Cilok Gang Senggol | Pesan konfirmasi tertutup, penghapusan dibatalkan, dan restoran tetap aktif serta tampil bagi pelanggan. | Dialog "Hapus Cilok Gang Senggol?" tertutup; Cilok tetap berstatus Aktif dan tetap muncul di pencarian pelanggan. | Pass |
+| UC15-TC03 | KF20 | Normal: dampak pada antrean aktif | 1. Setelah UC15-TC01, login `seblak1@contoh.id` (sedang antre di Seblak Teh Nining).<br>2. Buka "Antrean saya" dan notifikasi. | Tiket aktif di Seblak Teh Nining | Antrean pelanggan dibatalkan dan pelanggan diberi tahu bahwa restoran dinonaktifkan. (SKPL tidak menyebut nasib antrean aktif; acuan: DPPL kelas C33.) | Tiket berstatus Dibatalkan dan hilang dari antrean aktif; notifikasi "Antrean di Seblak Teh Nining dibatalkan" diterima. | Pass |
+
+Catatan UC15:
+
+- **C4.** SKPL menyebut data restoran "dihapus dari database", sedangkan DPPL merancang penghapusan sebagai *soft delete* (`setSoftDelete()` pada kelas C02) agar riwayat pesanan tetap ada. Hasil UC15-TC01 karena itu diperiksa dari sisi yang terlihat pengguna: restoran nonaktif dan hilang dari daftar pelanggan. Usulan: selaraskan teks SKPL dengan rancangan DPPL.
+- **C5.** SKPL menyebut "detail profil restoran", sedangkan antarmuka menampilkan profil ringkas restoran dalam baris tabel Kelola Restoran (tanpa halaman detail tersendiri). Informasi dan tombol hapus tetap tersedia, sehingga UC15-TC01 dinyatakan Pass.
 
 <br>
 
@@ -1066,8 +1312,25 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C21-UT01 – C21-UT06 (PengaturanKuotaController) | ![Bukti 1](assets/image-38.png) ![Bukti 2](assets/image-39.png) |
 | Coverage | <img width="1515" height="432" alt="image" src="https://github.com/user-attachments/assets/f672d4e5-1499-482d-93b7-42f13cf89380" /> <img width="1487" height="503" alt="image" src="https://github.com/user-attachments/assets/eccf05c2-e27f-4587-bd31-672739e78509" /> |
 | *INT-TC01* | *[Sisipkan bukti pengujian integrasi]* |
-| *UC01-TC01* | *[Sisipkan tangkapan layar UC01-TC01 sesuai prosedur pengujian]* |
-| *UC01-TC02* | *[Sisipkan tangkapan layar UC01-TC02 sesuai prosedur pengujian]* |
+| UC01-TC01 – UC01-TC07 (Mencari dan filter resto, keluaran test otomatis) | ![Keluaran test UC01](assets/UC01-test.png) ![UI UC01-TC06](assets/UC01-TC06-ui.png) |
+| UC02-TC01 – UC02-TC10 (Pemesanan dan pembayaran digital, keluaran test otomatis) | ![Keluaran test UC02](assets/UC02-test.png) |
+| UC03-TC01 – UC03-TC04 (Menampilkan status antrean, keluaran test otomatis) | ![Keluaran test UC03](assets/UC03-test.png) |
+| UC04-TC01 – UC04-TC05 (Pendaftaran mitra restoran baru, keluaran test otomatis) | ![Keluaran test UC04](assets/UC04-test.png) |
+| UC05-TC01 – UC05-TC04 (Memverifikasi pendaftaran restoran, keluaran test otomatis) | ![Keluaran test UC05](assets/UC05-test.png) |
+| UC06-TC01 – UC06-TC03 (Mengelola antrean, keluaran test otomatis; kecuali UC06-TC02) | ![Keluaran test UC06](assets/UC06-test.png) |
+| UC06-TC02 (Batal dequeue, antarmuka) | ![Sebelum](assets/UC06-TC02-a-sebelum.png) ![Dialog](assets/UC06-TC02-b-dialog.png) ![Setelah Batal](assets/UC06-TC02-c-setelah-batal.png) |
+| UC07-TC01 – UC07-TC06 (Mengatur kuota antrean dan meja, keluaran test otomatis) | ![Keluaran test UC07](assets/UC07-test.png) |
+| UC08-TC01 – UC08-TC06 (Mengelola stok dan menu makanan, keluaran test otomatis) | ![Keluaran test UC08](assets/UC08-test.png) |
+| UC09-TC01 – UC09-TC03 (Dashboard antrean restoran, keluaran test otomatis) | ![Keluaran test UC09](assets/UC09-test.png) ![UI UC09-TC03](assets/UC09-TC03-ui.png) |
+| UC10-TC01 – UC10-TC07 (Registrasi akun, keluaran test otomatis) | ![Keluaran test UC10](assets/UC10-test.png) ![UI UC10-TC01 formulir](assets/UC10-TC01-a-formulir.png) ![UI UC10-TC01 berhasil](assets/UC10-TC01-b-berhasil.png) ![UI UC10-TC03 ditolak](assets/UC10-TC03-a-ditolak.png) ![UI UC10-TC03 tautan Masuk](assets/UC10-TC03-b-tautan-masuk.png) |
+| UC11-TC01 – UC11-TC05 (Login akun, keluaran test otomatis) | ![Keluaran test UC11](assets/UC11-test.png) ![UI UC11-TC01](assets/UC11-TC01-ui.png) ![UI UC11-TC02](assets/UC11-TC02-ui.png) ![UI UC11-TC03](assets/UC11-TC03-ui.png) ![UI UC11-TC04](assets/UC11-TC04-ui.png) |
+| UC12-TC01 – UC12-TC03 (Keluar akun, keluaran test otomatis; kecuali UC12-TC02) | ![Keluaran test UC12](assets/UC12-test.png) ![UI UC12-TC01 dialog](assets/UC12-TC01-a-dialog.png) ![UI UC12-TC01 halaman Masuk](assets/UC12-TC01-b-halaman-login.png) ![UI UC12-TC01 akses Profil](assets/UC12-TC01-c-akses-profil.png) |
+| UC12-TC02 (Batal keluar akun, antarmuka) | ![Dialog](assets/UC12-TC02-a-dialog.png) ![Setelah Batal](assets/UC12-TC02-b-setelah-batal.png) ![Antrean saya](assets/UC12-TC02-c-antrean-saya.png) |
+| UC13-TC01 – UC13-TC02 (Penyampaian keluhan pelanggan, keluaran test otomatis) | ![Keluaran test UC13](assets/UC13-test.png) |
+| UC14-TC01 – UC14-TC03 (Penanggapan keluhan pelanggan, keluaran test otomatis) | ![Keluaran test UC14](assets/UC14-test.png) |
+| UC15-TC01 – UC15-TC03 (Penghapusan restoran, keluaran test otomatis; kecuali UC15-TC02) | ![Keluaran test UC15](assets/UC15-test.png) ![UI UC15-TC01 dialog](assets/UC15-TC01-a-dialog.png) ![UI UC15-TC01 berhasil](assets/UC15-TC01-b-berhasil.png) |
+| UC15-TC02 (Batal hapus restoran, antarmuka) | ![Dialog](assets/UC15-TC02-a-dialog.png) ![Setelah Batal](assets/UC15-TC02-b-setelah-batal.png) |
+| Ringkasan pengujian use case dan rincian Fail (UC04-TC04, UC07-TC05) | ![Ringkasan dan Fail](assets/ringkasan-dan-fail-test.png) |
 | KNF01-TC01 (Availability — Ketersediaan Data Restoran) | ![Bukti KNF01](assets/image-40.png) |
 | KNF02-TC01 (Response Time — Waktu Muat Restoran ≤ 1 detik) | ![Bukti KNF02 Beranda](assets/image-40.png)<br>![Bukti KNF02 Detail](assets/image-41.png) |
 | KNF03-TC01 (Reliability — Nomor Antrean Unik) | ![Bukti KNF03](assets/image-42.png) |
