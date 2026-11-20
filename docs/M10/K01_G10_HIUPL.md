@@ -1500,7 +1500,6 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C16-UT01 – C16-UT08 (KelolaAntreanController) | ![Bukti 1](assets/image-34.png) ![Bukti 2](assets/image-35.png) ![Bukti 3](assets/c04_20.png) |
 | C20-UT01 – C20-UT07 (Kuota) | ![Bukti 1](assets/image-36.png) ![Bukti 2](assets/image-37.png) ![Bukti 3](assets/c04_20.png) |
 | C21-UT01 – C21-UT06 (PengaturanKuotaController) | ![Bukti 1](assets/image-38.png) ![Bukti 2](assets/image-39.png) |
-| Coverage | ![Coverage 1](assets/cover1.png) ![Coverage 2](assets/cover2.png) |
 | C24-UT01 – C24-UT08 (KelolaMenuController, 8 test case) | ![Bukti 1](assets/image-60.png) |
 | C25-UT01 – C25-UT07 (Pengguna, 7 test case) | ![Bukti 1](assets/image-59.png) |
 | C28-UT01 – C28-UT11 (AutentikasiController, 11 test case) | ![Bukti 1](assets/image-59.png) |
@@ -1509,7 +1508,7 @@ Tabel 4.6. Bukti Hasil Pengujian
 | C33-UT01 – C33-UT03 (KelolaDataRestoranController, 3 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | C35-UT01 – C35-UT09 (PencarianController, 9 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
 | C41-UT01 – C41-UT08 (KeluhanController, 8 test case) | ![Bukti 1](assets/image-57.png) ![Bukti 2](assets/image-58.png) |
-| Coverage | <img width="1515" height="432" alt="image" src="https://github.com/user-attachments/assets/f672d4e5-1499-482d-93b7-42f13cf89380" /> <img width="1487" height="503" alt="image" src="https://github.com/user-attachments/assets/eccf05c2-e27f-4587-bd31-672739e78509" /> |
+| Coverage | <img width="1022" height="572" alt="image" src="https://github.com/user-attachments/assets/52f5365e-bfd9-4ff5-81c9-673bbd9069bd" /> <img width="901" height="600" alt="image" src="https://github.com/user-attachments/assets/f490108c-e3f0-4096-aa5b-6f434712d171" /> <img width="1022" height="602" alt="image" src="https://github.com/user-attachments/assets/59b62d10-f897-4671-b15c-5100fa9cdfa4" />|
 | INT-TC01 – INT-TC03 (I-01 s.d. I-04, AutentikasiController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152143.png) |
 | INT-TC04 – INT-TC05 (I-05, I-06, PencarianController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152202.png) |
 | INT-TC06 – INT-TC10 (I-07, I-08, PemesananController) | ![Bukti 1](assets/Screenshot%202026-11-20%20152209.png) ![Bukti 2](assets/Screenshot%202026-11-20%20163157.png) ![Bukti 3](assets/Screenshot%202026-11-20%20163235.png) |
