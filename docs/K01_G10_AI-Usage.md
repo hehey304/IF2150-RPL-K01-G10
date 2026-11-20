@@ -92,7 +92,7 @@ Silakan catat penggunaan AI yang berdampak signifikan pada pengerjaan tugas (mis
 | *Claude* | *Mengetahui kebenaran kode yang sudah dibuat* | *"Dari kode yang sudah aku buat ini, apakah sudah sesuai dengan notasi fungsional"* | *Kami mengetahui salahnya dan memperbaikinya* |
 | | | | | |
 
-### Milestone 9
+### Milestone 10
 | Tool AI | Tujuan Penggunaan | Contoh Prompt Utama | Modifikasi & Validasi Manusia |
 | :--- | :--- | :--- | :--- |
 | *Claude* | *Mengecek Kelengkapan Testcase* | *"Kelas apa yang masih memerlukan pengujian pada kasus normal/batas/negatif pada operasi publicnya?"* | *Saya menambahkan algoritma-algortima testing yang masih kurang dan melengkapi dokumennya* |
