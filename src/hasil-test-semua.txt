@@ -1,0 +1,332 @@
+
+> antri-in@1.0.0 test
+> tsx --test tests/*.test.ts
+
+▶ UC03, UC06, UC09 antrean
+  ✔ [C04-UT04, C04-UT05, C10-UT03, C16-UT01, C16-UT02] dequeue memanggil pelanggan berikutnya dan memperbarui sisa antrean (323.5153ms)
+  ✔ [C16-UT03] dequeue dengan data layar usang ditolak (102.5939ms)
+  ✔ [C16-UT05] dequeue otomatis setelah 30 menit tidak hadir (Alt 2) (138.9116ms)
+  ✔ [C04-UT07, C16-UT04] restoran tanpa antrean tidak dapat dequeue (148.7811ms)
+✔ UC03, UC06, UC09 antrean (7552.8961ms)
+▶ UC07 kuota
+  ✔ [C20-UT03, C21-UT01, C21-UT02] kuota negatif ditolak; kuota 0 menutup antrean (148.0095ms)
+✔ UC07 kuota (148.5496ms)
+✔ [C04-UT01, C20-UT05] status antrean dari kuota (UC07) (0.3956ms)
+✔ [C04-UT02] estimasi waktu tunggu (0.3208ms)
+✔ [C21-UT03] input kuota: hanya bilangan bulat tidak negatif (0.2279ms)
+✔ [C09-UT04] format nomor antrean (0.1793ms)
+▶ Iterasi 2: antrean
+  ✔ [C20-UT04, C21-UT04] tutup sementara tidak menghapus nilai kuota (147.793ms)
+  ✔ [C10-UT04, C16-UT06] "Mulai siapkan" menandai tiket dan terlihat di status pelanggan (261.8143ms)
+  ✔ [C04-UT06] pelanggan yang dipanggil mendapat notifikasi "Giliranmu" (256.3185ms)
+✔ Iterasi 2: antrean (666.5777ms)
+✔ [C04-UT03] menit per antrean dari median jeda penyelesaian (0.3737ms)
+▶ C09 TiketAntrean
+  ✔ C09-UT01 nomor urut tiket unik dan bertambah per antrean pada hari yang sama (KNF03) (530.2914ms)
+  ✔ C09-UT02 generateNomorAntrean menghasilkan nomor berikutnya (maks + 1) (2.6602ms)
+  ✖ C09-UT03 tiket berstatus final tidak boleh diubah (DPPL C09) (5.8019ms) # updateStatusTiket belum menjaga status final
+✔ C09 TiketAntrean (539.2114ms)
+▶ C20 Kuota
+  ✔ C20-UT01 isAntreanTutup: toggle atau kuota 0 (0.2326ms)
+  ✔ C20-UT02 updateKapasitas menyimpan dan get membaca kembali (3.5803ms)
+✔ C20 Kuota (4.0759ms)
+▶ C10 PemantauAntreanController
+  ✔ C10-UT01 subscribe membuka kanal SSE, meneruskan event, dan berhenti saat koneksi ditutup (1.2066ms)
+  ✔ C10-UT02 tiket tidak ada -> 404, tiket milik orang lain -> 403 (233.8751ms)
+✔ C10 PemantauAntreanController (235.498ms)
+▶ Pelengkap C02, C04, C09, C16, C21
+  ✔ C16-UT07 autoDequeue: tiket dipanggil 29 menit 55 detik lalu belum dilewati (batas 30 menit) (4.8297ms)
+  ✔ C04-UT08 getDetailAntrean: hanya tiket MENUNGGU/DIPANGGIL beserta rincian; restoran tanpa antrean -> kosong (7.484ms)
+  ✔ C02-UT08 getAntrean: antrean restoran ada; ID tidak ada -> null (3.0953ms)
+  ✔ C09-UT07 generateNomorAntrean: nomor kembali ke 1 pada hari berikutnya (reset harian) (2.9443ms)
+  ✔ C21-UT05 onSaveSettings: meja negatif, kuota bukan angka, dan kuota 10001 ditolak; 10000 diterima (batas) (126.4936ms)
+  ✔ C21-UT06 displaySettings: pengaturan restoran terbaca; pelanggan ditolak (226.1412ms)
+✔ Pelengkap C02, C04, C09, C16, C21 (371.6721ms)
+▶ REST API
+  ✔ [C29-UT06, C35-UT08] endpoint terlindungi memerlukan login dan peran yang sesuai (282.3743ms)
+✔ REST API (9696.4353ms)
+▶ KNF02 waktu respons
+  ✔ KNF02-TC01 detail restoran tampil <= 1 detik dan header Server-Timing ada (56.6341ms)
+✔ KNF02 waktu respons (56.9202ms)
+▶ UC10-UC12 autentikasi
+  ✔ [C01-UT01, C25-UT02, C28-UT01, C28-UT05, C29-UT03, C29-UT04] registrasi, login, dan logout (199.4062ms)
+  ✔ [C01-UT02, C25-UT04, C28-UT02, C28-UT03] email/nomor duplikat dan kata sandi lemah ditolak (3.8339ms)
+  ✔ [C25-UT03, C28-UT04] kredensial salah memberi pesan umum (93.8534ms)
+✔ UC10-UC12 autentikasi (7547.5533ms)
+▶ Iterasi 2: profil & kata sandi
+  ✔ [C25-UT05] ubah profil memvalidasi nomor telepon dan menyimpan nama baru (109.2692ms)
+  ✔ [C25-UT06, C28-UT06, C29-UT05] ganti kata sandi mengakhiri sesi lain tetapi mempertahankan sesi saat ini (655.9766ms)
+  ✔ [C28-UT07] lupa kata sandi: token sekali pakai untuk atur ulang (221.9849ms)
+✔ Iterasi 2: profil & kata sandi (988.1512ms)
+▶ C29 SesiPengguna & C25 Pengguna
+  ✔ C29-UT01 sesi kedaluwarsa tidak valid lagi (111.0012ms)
+  ✔ C29-UT02 token acak tidak valid (1.3561ms)
+  ✔ C25-UT01 kata sandi tersimpan sebagai hash bcrypt, bukan plain-text (KNF08) (1.6485ms)
+✔ C29 SesiPengguna & C25 Pengguna (114.69ms)
+▶ Pelengkap C01, C14, C28
+  ✔ C28-UT08 createAccount: email, nomor, konfirmasi sandi, dan persetujuan tidak valid ditolak per kolom (1.5258ms)
+  ✔ C28-UT09 createAccount: sandi 7 karakter ditolak, tepat 8 karakter diterima (batas) (102.7973ms)
+  ✔ C01-UT03 getDetails/accountRegister: profil pelanggan tersimpan dan dapat dibaca; akun tidak ada -> null (106.0615ms)
+  ✔ C14-UT01 accountRegister: profil admin tersimpan; pendaftaran ganda untuk akun yang sama ditolak (105.7446ms)
+  ✔ C14-UT02 admin dapat login dengan peran ADMIN dan tidak terkait restoran (104.4644ms)
+✔ Pelengkap C01, C14, C28 (421.3424ms)
+▶ Pelengkap C28 (cabang validasi dan profil)
+  ✔ C28-UT10 gantiKataSandi: kata sandi baru < 8 karakter atau konfirmasi beda ditolak 400, sandi lama tetap berlaku (524.542ms)
+  ✔ C28-UT11 getProfil: akun restoran tanpa restoran memuat status pengajuan mitra, pelanggan tidak (307.5288ms)
+✔ Pelengkap C28 (cabang validasi dan profil) (832.4974ms)
+▶ UC13-UC15 keluhan & kelola restoran
+  ✔ [C30-UT02, C30-UT03, C30-UT04, C41-UT04, C41-UT05, C41-UT06] keluhan dikirim, dibaca, dan ditanggapi admin (116.9857ms)
+  ✔ [C02-UT02, C02-UT05, C33-UT01] hapus restoran menonaktifkan menu dan membatalkan antrean aktif (122.9417ms)
+✔ UC13-UC15 keluhan & kelola restoran (9914.7045ms)
+▶ Iterasi 2: keluhan & kelola restoran
+  ✔ [C41-UT07, C41-UT08] filter keluhan Ditanggapi dan notifikasi tanggapan ke pelanggan (105.2322ms)
+  ✔ [C33-UT02] filter Aktif/Nonaktif pada kelola restoran (4.8855ms)
+✔ Iterasi 2: keluhan & kelola restoran (110.5197ms)
+▶ C30/C41 Keluhan
+  ✔ C41-UT01 kategori tidak valid dan isi terlalu pendek ditolak per kolom (157.5698ms)
+  ✔ C41-UT02 batas isi tepat 500 karakter diterima, tanggapan kosong atau id tidak ada ditolak (165.2375ms)
+  ✔ C30-UT01 keluhan yang sudah ditanggapi tidak turun status saat dibaca ulang (169.3259ms)
+  ✔ C41-UT03 admin tidak boleh mengirim keluhan (hanya pelanggan) (132.7151ms)
+✔ C30/C41 Keluhan (626.3699ms)
+▶ Pelengkap C30, C33
+  ✔ C33-UT03 hapusDataRestoran: restoran tidak ada/sudah dihapus -> 404; pelanggan terdampak dan email dicatat (226.6938ms)
+  ✔ C30-UT05 daftar keluhan: pencarian kata kunci nama restoran (178.7473ms)
+✔ Pelengkap C30, C33 (406.2227ms)
+▶ Pelengkap C02 (purgeData) dan C33
+  ✔ C02-UT09 setSoftDelete/purgeData: menu, kuota, antrean, pesanan aktif, dan pembayaran menunggu ikut dinonaktifkan (481.7501ms)
+✔ Pelengkap C02 (purgeData) dan C33 (482.3432ms)
+▶ Pelengkap C02 (setSoftDelete langsung)
+  ✔ C02-UT10 Restoran.setSoftDelete: restoran aktif -> true dan tidak tampil; panggilan kedua dan ID tidak ada -> false (22.9542ms)
+✔ Pelengkap C02 (setSoftDelete langsung) (23.2486ms)
+✔ [C05-UT01, C05-UT02] tambahItem dan hitungTotal (1.9557ms)
+✔ [C05-UT05] menambah dari restoran lain mengosongkan keranjang (1.2286ms)
+✔ [C05-UT06] ubahJumlah ke 0 menghapus item; keranjang kosong melepas restoran (0.4081ms)
+✔ [C05-UT03, C05-UT04] jumlah per item dibatasi 50 dan jumlah tidak valid ditolak (0.4767ms)
+✔ [C05-UT07] keranjang tersimpan dan dimuat ulang dari penyimpanan (0.3825ms)
+✔ [C05-UT08] aturMode non-booking menghapus jadwal; data rusak di penyimpanan diabaikan (10.1712ms)
+✔ C05-UT09 kosongkanKeranjang menghapus item dan restoran, juga pada penyimpanan (0.3998ms)
+✔ C05-UT10 hitungTotal pada keranjang kosong = 0 (0.2037ms)
+✔ C05-UT11 hapusItem menghapus satu item dan menyisakan lainnya; ID tidak ada diabaikan (1.6884ms)
+▶ UC08 menu & stok
+  ✔ [C03-UT05, C03-UT06, C03-UT07, C24-UT01, C24-UT02, C24-UT03, C24-UT04] tambah, ubah stok, dan hapus menu (109.2912ms)
+  ✔ [C03-UT08, C24-UT05] restoran lain tidak bisa mengubah menu milik restoran lain (100.9151ms)
+✔ UC08 menu & stok (9977.9166ms)
+▶ C03 Menu
+  ✔ C03-UT01 kurangiStok berhasil bila stok cukup, tepat habis (batas) menjadi 0 (3.3327ms)
+  ✔ C03-UT02 kurangiStok gagal dan stok tidak negatif bila stok tidak cukup (2.4526ms)
+  ✔ C03-UT03 isTersedia: batas jumlah, nonaktif, dan jumlah tidak valid (0.1917ms)
+  ✔ C03-UT04 daftar menu restoran hanya memuat menu aktif (1.6502ms)
+✔ C03 Menu (7.9892ms)
+▶ Pelengkap C03, C24
+  ✔ C03-UT09 getInfoMenu: menu ada dikembalikan, ID tidak ada -> null (4.9016ms)
+  ✔ C03-UT10 updateInfoMenu: menyimpan perubahan; restoran lain mendapat null (3.5052ms)
+  ✔ C24-UT06 handleUpdateMenu: harga batas bawah Rp500 diterima dan tersimpan (144.0871ms)
+  ✔ C24-UT07 handleUpdateMenu: harga Rp499 ditolak (400), menu tidak ada -> 404 (153.8388ms)
+  ✖ C24-UT08 handleFetchMenuDetail ada pada kelas (DPPL C24) (5.6071ms) # handleFetchMenuDetail belum diimplementasikan pada KelolaMenuController
+  ✖ C03-UT11 cekStok ada pada kelas Menu (DPPL C03) (1.457ms) # cekStok belum diimplementasikan; hanya isTersedia
+✔ Pelengkap C03, C24 (314.3953ms)
+▶ UC04, UC05 kemitraan
+  ✔ [C12-UT03] pengajuan tidak lengkap ditolak per kolom (103.8184ms)
+  ✔ [C02-UT06, C12-UT04, C12-UT05, C12-UT06, C12-UT07, C12-UT08, C13-UT05, C15-UT04] ajukan -> tolak -> ajukan ulang -> setujui menjadikan restoran aktif (315.4985ms)
+✔ UC04, UC05 kemitraan (7786.5272ms)
+✔ [C13-UT01, C13-UT02, C13-UT03, C13-UT04] validasi format dokumen mitra (Algo-063) (0.5923ms)
+✔ [C12-UT09] akun pengaju mendapat notifikasi saat pengajuan disetujui (iterasi 2) (124.683ms)
+▶ C12 PengajuanMitraController
+  ✔ C12-UT01 setujui/tolak pada pengajuan yang sudah diproses ditolak 409 (5.2648ms)
+  ✔ C12-UT02 detail pengajuan tidak ada -> 404 (1.4751ms)
+✔ C12 PengajuanMitraController (7.3181ms)
+▶ C15 NotifikasiEmail
+  ✔ C15-UT01 email dicatat ke log_notifikasi berstatus TERKIRIM (2.1398ms)
+  ✔ C15-UT02 kegagalan pengiriman dicatat berstatus GAGAL (2.0682ms)
+  ✖ C15-UT03 format email tidak valid ditolak (HIUPL C15) (2.838ms) # kirimEmail belum memvalidasi format penerima
+✔ C15 NotifikasiEmail (7.6446ms)
+▶ Pelengkap C12, C13
+  ✔ C13-UT06 validasiFormat: ukuran tepat 5 MB diterima, 5 MB + 1 byte ditolak (batas) (0.3177ms)
+  ✔ C13-UT07 validasiFormat: foto JPG dan PNG diterima, PDF ditolak (0.1805ms)
+  ✔ C12-UT10 tolak: alasan 4 karakter ditolak, tepat 5 karakter diterima (batas) (204.2671ms)
+✔ Pelengkap C12, C13 (205.2336ms)
+▶ Notifikasi
+  ✔ restoran menerima notifikasi pesanan baru dan dapat menandainya dibaca (266.1301ms)
+  ✔ notifikasi hanya bisa ditandai oleh pemiliknya (303.5837ms)
+✔ Notifikasi (10335.7554ms)
+▶ Payment gateway sandbox (AntriPay)
+  ✔ [C07-UT01, C07-UT02, C08-UT01] e-wallet: setujui di aplikasi -> notifikasi -> tiket terbit tanpa pelanggan menekan apa pun di antri.in (279.7478ms)
+  ✔ [C07-UT03] virtual account: nominal harus tepat (248.6101ms)
+  ✔ [C07-UT04, C07-UT05] kartu: hanya kartu uji, OTP 3-D Secure, dan kartu ditolak (331.4247ms)
+  ✔ [C07-UT06] ganti metode membatalkan transaksi lama di gateway tanpa membatalkan pesanan (141.4158ms)
+[antripay] notifikasi gagal diproses merchant: Stok Es Teh Tawar habis saat pembayaran diproses. Dana akan dikembalikan
+  ✔ [C07-UT07] stok habis saat lunas -> dana dikembalikan dan pesanan dibatalkan (209.3912ms)
+  ✔ [C06-UT09] pembatalan pesanan oleh pelanggan ikut membatalkan transaksi di gateway (134.3003ms)
+✔ Payment gateway sandbox (AntriPay) (8669.1865ms)
+▶ Webhook notifikasi
+  ✔ [C07-UT10] tanda tangan HMAC diverifikasi (0.9796ms)
+  ✔ [C07-UT11] notifikasi palsu dengan tanda tangan sah tetapi nominal berbeda ditolak (121.3042ms)
+✔ Webhook notifikasi (122.7135ms)
+▶ UC02 pembayaran
+  ✔ [C06-UT10] pembayaran gagal membatalkan pesanan (137.4857ms)
+[antripay] notifikasi gagal diproses merchant: Batas waktu pembayaran habis. Transaksi dibatalkan
+  ✔ [C07-UT08] tagihan kedaluwarsa dibatalkan, dan pembayaran yang terlambat dikembalikan (Alt 4) (149.5408ms)
+  ✔ [C07-UT09] transaksi gateway yang lewat batas waktu menjadi kedaluwarsa (130.7185ms)
+✔ UC02 pembayaran (418.4093ms)
+✔ [C07-UT12] algoritma Luhn (0.313ms)
+▶ KNF07 batas waktu pembayaran
+  ✖ KNF07-TC01 batas waktu pembayaran 5 menit (SKPL KNF07) (2.7063ms) # config.paymentTimeoutMinutes bawaan 15, SKPL meminta 5
+✔ KNF07 batas waktu pembayaran (2.927ms)
+▶ Pelengkap C07, C08
+  ✔ C08-UT02 getBuktiPembayaran: belum dibayar -> null, setelah lunas memuat jumlah, status, dan metode (153.7269ms)
+  ✔ C08-UT03 catatLogTransaksi: pembayaran gagal tidak dicatat sebagai transaksi lunas (140.6374ms)
+  ✔ C07-UT13 cekTimeout: tagihan lewat batas dibatalkan dan hasil kedua kalinya 0 (idempoten) (126.133ms)
+✔ Pelengkap C07, C08 (421.0156ms)
+▶ UC02 pemesanan
+  ✔ [C06-UT04, C09-UT05] pesanan lunas menerbitkan tiket dan mengurangi stok (158.9743ms)
+  ✔ [C06-UT05] stok habis ditolak dengan daftar menu habis (Alt 3) (119.4335ms)
+  ✔ [C06-UT06] antrean ditutup menolak dine-in/takeaway tetapi booking tetap bisa (197.8475ms)
+  ✔ [C06-UT07] slot booking penuh ditolak (Alt 5) (257.2172ms)
+  ✔ [C06-UT08] pelanggan lain tidak dapat melihat pesanan (344.091ms)
+✔ UC02 pemesanan (10875.9393ms)
+✔ [C06-UT01] booking: maksimal 7 hari ke depan (KF09) (0.5801ms)
+✔ [C06-UT02, C06-UT03] booking: slot hari ini yang sudah lewat, slot tidak terdaftar, dan rombongan tidak valid ditolak (0.5949ms)
+▶ Pelengkap C06
+  ✔ C06-UT11 batalkanPesanan: pesanan yang sudah dibayar tidak dapat dibatalkan (409) (279.9864ms)
+  ✔ C06-UT12 batalkanPesanan: pesanan tidak ada atau milik orang lain ditolak (343.1592ms)
+✔ Pelengkap C06 (624.3289ms)
+▶ UC01 pencarian
+  ✔ [C02-UT04, C35-UT04, C35-UT05] cari berdasarkan kata kunci menu dan filter rating (20.1352ms)
+  ✔ [C35-UT06] hasil kosong memberi saran restoran viral (8.5473ms)
+✔ UC01 pencarian (7434.1413ms)
+✔ [C35-UT07] filter area/lokasi (iterasi 2) (5.4024ms)
+▶ C35 PencarianController
+  ✔ C35-UT01 filter kategori hanya mengembalikan kategori tersebut (10.0728ms)
+  ✔ C35-UT02 minRating tidak valid diabaikan, antreanPendek hanya antrean BUKA (15.6345ms)
+  ✔ C35-UT03 detail restoran tidak ditemukan -> 404 (2.4435ms)
+✔ C35 PencarianController (28.6325ms)
+▶ Pelengkap C35
+  ✔ C35-UT09 getDetailRestoran: status antrean dan pratinjau menu aktif tersedia (4.9716ms)
+✔ Pelengkap C35 (5.2324ms)
+▶ Profil restoran
+  ✔ [C02-UT01] ubah profil memvalidasi jam buka dan alamat (114.5134ms)
+  ✔ foto restoran dan foto menu tersimpan (289.8544ms)
+✔ Profil restoran (10020.568ms)
+▶ Simulator antrean dummy
+  ✔ pelanggan dummy memesan lewat alur normal dan mendapat tiket (1323.3618ms)
+  ✔ mode PENUH melayani antrean dan mengisi ulang stok; antrean ditutup tidak menerima dummy (101.0709ms)
+  ✔ restoran mengatur mode simulasinya sendiri (281.3622ms)
+✔ Simulator antrean dummy (8624.9783ms)
+▶ Ulasan pesanan
+  ✔ pesanan selesai dapat diulas sekali dan memperbarui rating restoran (122.8264ms)
+  ✔ pelanggan lain tidak dapat mengulas pesanan orang lain (221.6477ms)
+✔ Ulasan pesanan (9861.2754ms)
+✔ perhitungan rating rata-rata baru (0.2809ms)
+ℹ tests 131
+ℹ suites 41
+ℹ pass 126
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 5
+ℹ duration_ms 13922.8759
+
+✖ failing tests:
+
+test at tests\antrean.test.ts:182:3
+✖ C09-UT03 tiket berstatus final tidak boleh diubah (DPPL C09) (5.8019ms) # updateStatusTiket belum menjaga status final
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'MENUNGGU'
+  - 'SELESAI'
+  
+      at TestContext.<anonymous> (C:\Users\HP\OneDrive\Documents\RPL\IF2150-RPL-K01-G10\src\tests\antrean.test.ts:186:12)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'MENUNGGU',
+    expected: 'SELESAI',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\menu.test.ts:104:3
+✖ C24-UT08 handleFetchMenuDetail ada pada kelas (DPPL C24) (5.6071ms) # handleFetchMenuDetail belum diimplementasikan pada KelolaMenuController
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (C:\Users\HP\OneDrive\Documents\RPL\IF2150-RPL-K01-G10\src\tests\menu.test.ts:105:12)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\menu.test.ts:107:3
+✖ C03-UT11 cekStok ada pada kelas Menu (DPPL C03) (1.457ms) # cekStok belum diimplementasikan; hanya isTersedia
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (C:\Users\HP\OneDrive\Documents\RPL\IF2150-RPL-K01-G10\src\tests\menu.test.ts:108:12)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Suite.processPendingSubtests (node:internal/test_runner/test:788:18)
+      at Test.postRun (node:internal/test_runner/test:1235:19)
+      at Test.run (node:internal/test_runner/test:1163:12)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\mitra.test.ts:109:3
+✖ C15-UT03 format email tidak valid ditolak (HIUPL C15) (2.838ms) # kirimEmail belum memvalidasi format penerima
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (C:\Users\HP\OneDrive\Documents\RPL\IF2150-RPL-K01-G10\src\tests\mitra.test.ts:110:5)
+      at async Test.run (node:internal/test_runner/test:1113:7)
+      at async Suite.processPendingSubtests (node:internal/test_runner/test:788:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at tests\pembayaran.test.ts:165:3
+✖ KNF07-TC01 batas waktu pembayaran 5 menit (SKPL KNF07) (2.7063ms) # config.paymentTimeoutMinutes bawaan 15, SKPL meminta 5
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  15 !== 5
+  
+      at TestContext.<anonymous> (C:\Users\HP\OneDrive\Documents\RPL\IF2150-RPL-K01-G10\src\tests\pembayaran.test.ts:166:12)
+      at Test.runInAsyncScope (node:async_hooks:214:14)
+      at Test.run (node:internal/test_runner/test:1106:25)
+      at Test.start (node:internal/test_runner/test:1003:17)
+      at node:internal/test_runner/test:1514:71
+      at node:internal/per_context/primordials:464:82
+      at new Promise (<anonymous>)
+      at new SafePromise (node:internal/per_context/primordials:433:3)
+      at node:internal/per_context/primordials:464:9
+      at Array.map (<anonymous>) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 15,
+    expected: 5,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
