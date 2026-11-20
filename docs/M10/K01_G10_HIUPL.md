@@ -894,7 +894,7 @@ Tabel 4.2.18b. Ringkasan Cakupan Kelas C24
 | Daftar operasi public pada DPPL | `handleFetchMenu()`, `handleFetchMenuDetail()`, `handleAddMenu()`, `handleUpdateMenu()`, `handleDeleteMenu()` |
 | Operasi yang diuji | `handleFetchMenu()`, `handleAddMenu()`, `handleUpdateMenu()`, `handleDeleteMenu()` (4 dari 5 operasi DPPL), ditambah `handleUpdateStok()` |
 | ID Algoritma yang tercakup | Algo-092, Algo-094, Algo-096 |
-| Coverage (wajib ≥ 70%) | `kelolaMenuController.ts`: 88,89% / 86,67% |
+| Coverage (wajib ≥ 70%) | `kelolaMenuController.ts`: 97,89% / 87,50% |
 
 ### 4.2.19 Kelas Pengguna
 
@@ -945,7 +945,7 @@ Tabel 4.2.20. Hasil Pengujian Unit Kelas C28
 | C28-UT10 | `handleSessionDeletion()` (`gantiKataSandi`) | Negatif | Kata sandi baru `pendek`; konfirmasi berbeda; masukan kosong. | 400 pada ketiganya (kolom `baru` terisi); sandi lama tetap berlaku | Sesuai | Pass | `src/tests/autentikasi.test.ts:153` |
 | C28-UT11 | `getProfil()` | Normal | Akun RESTORAN baru tanpa restoran: sebelum dan sesudah mengajukan kemitraan; lalu akun pelanggan. | `pengajuan` `null`, lalu `MENUNGGU` bernama "Warung Calon"; pelanggan `null` | Sesuai | Pass | `src/tests/autentikasi.test.ts:165` |
 
-Semua baris `autentikasiController.ts` tercakup. *Branch* semula 69,86% (di bawah 70%) karena dua cabang belum diuji: penolakan kata sandi baru pada `gantiKataSandi` (baris 136-139) dan status pengajuan mitra pada `getProfil` (baris 89 dan 96-97). Keduanya kini diuji oleh C28-UT10 dan C28-UT11, sehingga *branch* naik menjadi 80,95%.
+Semua baris `autentikasiController.ts` tercakup. *Branch* semula 69,86% (di bawah 70%) karena dua cabang belum diuji: penolakan kata sandi baru pada `gantiKataSandi` (baris 136-139) dan status pengajuan mitra pada `getProfil` (baris 89 dan 96-97). Keduanya kini diuji oleh C28-UT10 dan C28-UT11, sehingga *branch* naik menjadi 82,61%.
 
 Tabel 4.2.20b. Ringkasan Cakupan Kelas C28
 
@@ -954,7 +954,7 @@ Tabel 4.2.20b. Ringkasan Cakupan Kelas C28
 | Daftar operasi public pada DPPL | `createAccount()`, `validation()`, `processLogout()`, `handleSessionDeletion()` |
 | Operasi yang diuji | Keempatnya |
 | ID Algoritma yang tercakup | Algo-104, Algo-105, Algo-106, Algo-107 |
-| Coverage (wajib ≥ 70%) | `autentikasiController.ts`: 100% baris / 80,95% *branch* / 100% fungsi |
+| Coverage (wajib ≥ 70%) | `autentikasiController.ts`: 100% baris / 82,61% *branch* / 100% fungsi |
 
 ### 4.2.21 Kelas SesiPengguna
 
@@ -980,7 +980,7 @@ Tabel 4.2.21b. Ringkasan Cakupan Kelas C29
 | Daftar operasi public pada DPPL | `validateSession()`, `hapusSesi()`, `validateToken()` |
 | Operasi yang diuji | Ketiganya |
 | ID Algoritma yang tercakup | Algo-108, Algo-109, Algo-110 |
-| Coverage (wajib ≥ 70%) | `models/akun.ts`: 98,51% / 96,67%; `middleware/auth.ts`: 85,71% / 86,67% |
+| Coverage (wajib ≥ 70%) | `models/akun.ts`: 98,51% / 96,67%; `middleware/auth.ts`: 85,71% / 90,00% |
 
 ### 4.2.22 Kelas Keluhan
 
@@ -998,7 +998,7 @@ Tabel 4.2.22. Hasil Pengujian Unit Kelas C30
 | C30-UT04 | `tanggapi()` | Normal | Admin mengirim tanggapan pada keluhan yang sama. | Tanggapan tersimpan, status `DITANGGAPI` | Sesuai | Pass | `src/tests/keluhan.test.ts:31` |
 | C30-UT05 | `daftar()` | Normal / Negatif | Cari keluhan dengan lima huruf awal nama restoran, lalu dengan kata kunci `zzz-tidak-ada-zzz`. | Keluhan ditemukan; kata kunci yang tidak cocok menghasilkan daftar kosong | Sesuai | Pass | `src/tests/keluhan.test.ts:123` |
 
-Tidak diuji secara unit: `daftarMilikPelanggan()` (baris 50-54), yang dipakai halaman riwayat keluhan pelanggan dan teruji lewat UC13.
+`daftarMilikPelanggan()` tidak memiliki ID pengujian unit tersendiri, tetapi seluruh barisnya tercakup oleh rangkaian pengujian lengkap (`npm test`).
 
 Tabel 4.2.22b. Ringkasan Cakupan Kelas C30
 
@@ -1007,7 +1007,7 @@ Tabel 4.2.22b. Ringkasan Cakupan Kelas C30
 | Daftar operasi public pada DPPL | `simpanKeluhan()`, `updateStatusKeluhan()` |
 | Operasi yang diuji | Keduanya, ditambah `tanggapi()` dan `daftar()` yang ditambahkan saat implementasi |
 | ID Algoritma yang tercakup | Algo-111, Algo-112 |
-| Coverage (wajib ≥ 70%) | `models/keluhan.ts`: 91,25% / 87,50% |
+| Coverage (wajib ≥ 70%) | `models/keluhan.ts`: 97,50% / 88,89% |
 
 ### 4.2.23 Kelas KelolaDataRestoranController
 
@@ -1023,7 +1023,7 @@ Tabel 4.2.23. Hasil Pengujian Unit Kelas C33
 | C33-UT02 | `daftarRestoran()` | Normal | Ambil daftar dengan filter `semua`, `aktif`, dan `nonaktif`. | Filter `aktif` hanya berisi restoran aktif, `nonaktif` hanya restoran nonaktif, dan jumlah `semua` = `aktif` + `nonaktif` | Sesuai | Pass | `src/tests/keluhan.test.ts:74` |
 | C33-UT03 | `hapusDataRestoran()` | Negatif / Normal | Hapus ID `RST-tidak-ada`; hapus "Bakso Mang Ujang" lalu hapus sekali lagi. | ID tidak ada dan penghapusan kedua ditolak 404; pelanggan terdampak menerima notifikasi "dibatalkan"; email `RESTORAN_DIHAPUS` tercatat di `log_notifikasi` | Sesuai | Pass | `src/tests/keluhan.test.ts:112` |
 
-`nonaktifkanRelasiMenu()` tidak berdiri sebagai method terpisah. Penonaktifan menu dijalankan di dalam `Restoran.setSoftDelete()` pada transaksi yang sama, sehingga teruji melalui C33-UT01. *Branch* yang belum tercakup adalah filter `banyak-keluhan` pada `daftarRestoran()` dan cabang kegagalan `setSoftDelete()` di dalam transaksi.
+`nonaktifkanRelasiMenu()` tidak berdiri sebagai method terpisah. Penonaktifan menu dijalankan di dalam `Restoran.setSoftDelete()` pada transaksi yang sama, sehingga teruji melalui C33-UT01. Seluruh baris tercakup, dengan sebagian kecil *branch* (sekitar 18%) belum dilalui.
 
 Tabel 4.2.23b. Ringkasan Cakupan Kelas C33
 
@@ -1032,7 +1032,7 @@ Tabel 4.2.23b. Ringkasan Cakupan Kelas C33
 | Daftar operasi public pada DPPL | `hapusDataRestoran()`, `nonaktifkanRelasiMenu()` |
 | Operasi yang diuji | Keduanya (`nonaktifkanRelasiMenu()` melalui `Restoran.setSoftDelete()`), ditambah `daftarRestoran()` |
 | ID Algoritma yang tercakup | Algo-117, Algo-118 |
-| Coverage (wajib ≥ 70%) | `kelolaDataRestoranController.ts`: 100% / 77,78% |
+| Coverage (wajib ≥ 70%) | `kelolaDataRestoranController.ts`: 100% / 82,35%% |
 
 ### 4.2.24 Kelas PencarianController
 
@@ -1084,7 +1084,7 @@ Tabel 4.2.25. Hasil Pengujian Unit Kelas C41
 | C41-UT07 | `tampilkanKeluhan()` | Normal | `keluhan.test.ts › filter keluhan Ditanggapi…`. Filter status `DITANGGAPI`. | Semua keluhan pada hasil berstatus `DITANGGAPI` dan keluhan yang baru ditanggapi ikut tampil | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
 | C41-UT08 | `tanggapiKeluhan()` | Normal | Daftar notifikasi pelanggan setelah keluhannya ditanggapi. | Ada notifikasi berjudul "…ditanggapi" untuk pelanggan | Sesuai | Pass | `src/tests/keluhan.test.ts:63` |
 
-Tidak diuji secara unit: `keluhanSaya()` (baris 39-41), yaitu daftar keluhan milik pelanggan yang teruji lewat UC13.
+`keluhanSaya()` tidak memiliki ID pengujian unit tersendiri, tetapi seluruh barisnya tercakup oleh rangkaian pengujian lengkap (`npm test`).
 
 Tabel 4.2.25b. Ringkasan Cakupan Kelas C41
 
@@ -1093,7 +1093,7 @@ Tabel 4.2.25b. Ringkasan Cakupan Kelas C41
 | Daftar operasi public pada DPPL | `kirimKeluhan()`, `tampilkanKeluhan()`, `tanggapiKeluhan()` |
 | Operasi yang diuji | Ketiganya, ditambah `detailKeluhan()` |
 | ID Algoritma yang tercakup | Algo-139, Algo-140, Algo-141 |
-| Coverage (wajib ≥ 70%) | `keluhanController.ts`: 95,77% / 94,44% |
+| Coverage (wajib ≥ 70%) | `keluhanController.ts`: 100% / 92,11% |
 
 <br>
 
